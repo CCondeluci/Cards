@@ -8,13 +8,13 @@ Trait1 Devil Hunter
 Trait2 Public Safety
 Combo A Devil's Daily Life
 *CannotSideAttack
-*GainPowerForEachOther(500,Devil Hunter|Demon|Animal)
+*GainPowerForEachOther(500,Devil Hunter|Devil|Animal)
 Auto: OnAttack
 {
-	If Climax A Devil's Daily Life && StageContains 2 Other && HasTrait Devil Hunter|Demon|Animal
+	If Climax A Devil's Daily Life && StageContains 2 Other && HasTrait Devil Hunter|Devil|Animal
 	{
 		RevealUpTo Deck 4
-		ChooseCardsFromTargets 0 1 HasTrait Devil Hunter|Demon|Animal
+		ChooseCardsFromTargets 0 1 HasTrait Devil Hunter|Devil|Animal
 		MoveCard Hand
 		PutTheRestIntoTheWaitingRoom
 		TargetBattleOpponent
@@ -25,11 +25,11 @@ Auto: OnAttack
 		}
 	}
 }
-Text Auto: CxCombo When this card attacks, it you have "Devil's Daily Life" in your climax area and you control 2 other characters with <Devil Hunter>, <Demon> or <Animal>, look up to 4 cards from the top of your deck and choose up to 1 character with <Devil Hunter>, <Demon> or <Animal> from them, show it to your opponent then ad it to your hand and suffle your deck. If this card's battle opponent is level 2 this card gains +6000 power until the end of turn.
+Text Auto: CX COMBO When this card attacks, if you have [魔人の日常] in your Climax Zone, if you have two or more other《Devil Hunter》or《Devil》or《Animal》Characters, look at up to four cards from the top of your Deck, choose up to one《Devil Hunter》or《Devil》or《Animal》Character, reveal it to your opponent, add it to Hand, send the remaining cards to Waiting Room, if the Character across from this card is Level 2 or higher, during this turn, this card gains +6000 Power.
 EndCard
 
 Character: CSM/S96-002
-Name Public Safety Anti-Demon Special 4th Division, Power
+Name Public Safety Anti-Devil Special 4th Division, Power
 Color Y  
 Level 3
 Cost 2
@@ -38,7 +38,7 @@ Soul 2
 Trigger Soul
 Trait1 Devil Hunter
 Trait2 Public Safety
-*EarlyPlay4OrMore(Devil Hunter|Demon|Animal)
+*EarlyPlay4OrMore(Devil Hunter|Devil|Animal)
 Cont: GiveSelf
 {
 	If MyTurn
@@ -59,12 +59,12 @@ Cont: GiveSelf
 		}
 	}
 }
-Text: During your turn, this card gains +2500 power and the following ability: [[(1)] When this card REVERSES its battle opponent and that card is level 2 or higher you may pay the cost, if you do choose a character from your waiting room and add it to your hand.
+Text Cont: During your turn, if you have another《Devil Hunter》or《Devil》or《Animal》Characters, this card gains +2500 Power and the following effect: [(1)] When this card’s Level 2 or higher battle opponent is REVERSE, you may pay the cost. If you did, choose one Character in your Waiting Room, add it to Hand.
 *Healer
 EndCard
 
 Character: CSM/S96-003
-Name Devil Hunter Feared By Demons, Chainsaw Man
+Name Devil Hunter Feared By Devils, Chainsaw Man
 Color Y  
 Level 3
 Cost 2
@@ -81,7 +81,7 @@ Cont: GiveSelf
 		GainPower 2000
 	}
 }
-Text Cont: If you control 3 other characters this gains +2000 power.
+Text Cont: If you have three or more other Characters, this card gains +2000 Power.
 *Healer
 Auto: OnAttack
 {
@@ -108,7 +108,7 @@ Auto: OnAttack
 		}
 	}
 }
-Text Auto: CxCombo When this cards attacks if you have "Bloody Declaration Of War" in your climax area and you control 3 or more other character, deal 1 damage to your opponent, and until end of your opponent's turn this card gains the following effect: "Auto: [(2) Discard 2 cards] When this card's battle opponent becomes reversed you may pay the cost, if you do, deal 2 damage to your opponent, then you may put that character on the top of your opponent's deck."
+Text Auto: {CX Combo} When this attacks, if you have the Choice CX (025) in your Climax Area, and you have 3 or more other characters, deal 1 damage to your opponent, then until the end of your opponent's next turn, this gains the following ability, "AUTO - [(2) Discard 2 cards] When this card's battle opponent is Reversed, you may pay cost. If you do, deal 2 damage to your opponent, then you may send that character to the top of your opponent's deck."
 EndCard
 
 Character: CSM/S96-004
@@ -117,7 +117,7 @@ Color Y
 Level 0
 Cost 0
 Power 1000
-Trait1 Demon
+Trait1 Devil
 Act: 1 Discard 1 NameEquals Combat Begins, Denji
 {
 	If Compare MyLevel 3 OrHigher
@@ -133,7 +133,7 @@ Act: 1 Discard 1 NameEquals Combat Begins, Denji
 		}
 	}
 }
-Text Act: [(1) Discard 1 Combat Begins, Denji] If you are level 3 or higher you can pay the cost, if you do, choose up to 1 character from your waiting room and return it to your hand, then choose a character with "Chainsaw Man" in its name and put it on the stage in the slot this card was, then put this card underneath as a market face up or send it to the waiting room.
+Text Act: [(1) Discard 1 {1/0 Denji - 007}] If you are Level 3 or higher, choose up to 1 character in your Waiting Room, add it to hand, then choose up to 1 character with "Chainsaw Man" in its name from your hand, place it on stage in this card's former slot. Afterwards, place this underneath that character face-up as a Marker or send this to Waiting Room.
 *Act1RestSelfSalvageBrainstorm(Any)
 EndCard
 
@@ -156,13 +156,13 @@ Auto: OnPlay
 		ShuffleLocation Deck
 	}
 }
-Text Auto: (1) When is card is placed to the stage from the hand you may pay the cost, if you do, search your deck for a climax card and add it to your hand, then reveal a climax card form your hand and suffle it back to your deck.
+Text Auto: (1) When this is placed on stage from hand, you may pay cost. If you do, search your deck for up to 1 Climax, show it to your opponent, then choose up to 1 Climax in your hand, show it to your opponent, swap them, and shuffle your deck afterwards.
 Auto: StartClimaxPhase
 {
-	ChooseCharacters 1 1 MyCard && HasTrait Devil Hunter|Demon
+	ChooseCharacters 1 1 MyCard && HasTrait Devil Hunter|Devil
 	GainPower 1000
 }
-Text Auto: At the start of your climax phase, choose a <Devil Hunter> or <Demon> character, it gains +1000 power until the end of turn.
+Text Auto: At the start of your Climax Phase, choose 1 of your <Devil Hunter> or <Devil> characters, this turn, it gets +1000 power.
 EndCard
 
 Character: CSM/S96-006
@@ -179,10 +179,10 @@ Auto: OnPlay
 	{
 		TargetTop Deck 2
 		Reorder
-		SearchWaitingRoom HasTrait Devil Hunter|Demon
+		SearchWaitingRoom HasTrait Devil Hunter|Devil
 	}
 }
-Text Auto: [(1) Discard one card] When this card is placed on the stage from your hand you may pay the cost, if you do look at the top 2 cards of your deck and reorder them, then choose a <Devil Hunter> or <Demon> character form your waiting room and add it to your hand.
+Text Auto: [(1) Discard 1 card] When this is placed on stage from hand, you may pay cost. If you do, look at up to 2 cards from the top of your deck, and put them back on top in any order, then choose 1 <Devil Hunter> or <Devil> or <Animal> character from your Waiting Room, add it to hand.
 EndCard
 
 Character: CSM/S96-007
@@ -201,7 +201,7 @@ Cont: GiveSelf
 		GainSpecialEffect CannotSideAttack
 	}
 }
-Text Cont: During your turn, this card gains +4000 power and cannot side attack.
+Text Cont: During your turn, this gets +4000 power, and this cannot Side Attack.
 Auto: OnCancel
 {
 	If InBattle && OnStage
@@ -215,7 +215,7 @@ Auto: OnCancel
 		}
 	}
 }
-Text Auto: When this card's battle damage is cancelled you may send this card to your waiting room, if you do, put the top card of your deck in your stock.
+Text Auto: During this card's battle, when the damage you take is cancelled, you may send this to Waiting Room. If you do, put the top card of your deck to Stock.
 EndCard
 
 Character: CSM/S96-008
@@ -231,7 +231,7 @@ Auto: OnPlay
 {
 	GainPower 1500
 }
-Text Auto: When this card is placed in the Stage from hand this card gains +1500 power untill the end of turn.
+Text Auto: When this is placed on stage from hand, this turn, this gets +1500 power.
 Auto: OnAttack
 {
 	TargetBattleOpponent
@@ -242,7 +242,7 @@ Auto: OnAttack
 		GainPower 4500
 	}
 }
-Text Auto: When this card attacks, if its battle opponent is level 3 or higher, until the end of your opponent's next turn, this card gains +4500 power.
+Text Auto: When this attacks, if the Level of the character across from this is 3 or higher, until the end of your opponent's next turn, this gets +4500 power.
 EndCard
 
 Character: CSM/S96-009
@@ -257,7 +257,7 @@ Trait1 Devil Hunter
 Trait2 Public Safety
 *2000Assist
 *StockHealer
-*Act1Rest2SearchBrainstorm(Devil Hunter|Demon)
+*Act1Rest2SearchBrainstorm(Devil Hunter|Devil)
 EndCard
 
 Character: CSM/S96-010
@@ -268,15 +268,15 @@ Cost 0
 Power 1500
 Trait1 Devil Hunter
 Trait2 Public Safety
-*OnPlayMill2GainPowerForEachCharacter(1000,Devil Hunter|Demon)
+*OnPlayMill2GainPowerForEachCharacter(1000,Devil Hunter|Devil)
 Auto: OnPlay|OnAttack
 {
-	PayCost Discard 1 HasTrait Devil Hunter|Demon
+	PayCost Discard 1 HasTrait Devil Hunter|Devil
 	{
 		DrawCard
 	}	
 }
-Text Auto: [Discard a <Devil Hunter> or <Demon> character] When this card is placed on the stage from your hand or it attacks, you may pay the cost, if you do draw a card.
+Text Auto: [Discard 1 <Devil Hunter> or <Devil> character] When this is placed on stage from hand or attacks, you may pay cost. If you do, draw 1 card.
 EndCard
 
 Character: CSM/S96-011
@@ -289,9 +289,9 @@ Trait1 Devil Hunter
 Trait2 Public Safety
 Auto: OnPlay
 {
-	PayCost Discard 2 HasTrait Devil Hunter|Demon
+	PayCost Discard 2 HasTrait Devil Hunter|Devil
 	{
-		PeekTop Deck 2
+		Peek Deck 2
 		SaveTargets
 		ChooseCardsFromTargets 0 1 Any
 		MoveCard Hand
@@ -300,16 +300,16 @@ Auto: OnPlay
 		MoveCard Stock
 	}
 }
-Text Auto: [Discard 2 <Devil Hunter> or <Demon> characters] When this card is placed on the stage from your hand you may pay the cost, then look up to the top 2 cards from your deck, then choose up to 1 of them and add it to your hand, then put the rest into your stock.
+Text Auto: [Discard 2 <Devil Hunter> or <Devil> characters] When this is placed on stage from hand, you may pay cost. If you do, look at up to 2 cards from the top of your deck, choose up to 1 card among them, add it to hand, and send the rest to Stock in any order.
 Auto: OnOtherAttacks
 {
-	IfOther HasTrait Devil Hunter|Demon
+	IfOther HasTrait Devil Hunter|Devil
 	{
 		GainPower 1500
 	}
 }
 Quick
-Text Auto: When your other <Devil Hunter> or <Demon> character attacks, this card gets +1500 power until end of turn.
+Text Auto: When your other <Devil Hunter> or <Devil> character attacks, this turn, this gets +1000 power.
 EndCard
 
 Character: CSM/S96-012
@@ -326,14 +326,14 @@ Auto: OnClimaxPlay
 	{
 		Mill 2
 		SetXValue TotalLevel
-		SearchWaitingRoom Compare ThatCardsLevel X OrLess && HasTrait Devil Hunter|Demon
+		SearchWaitingRoom Compare ThatCardsLevel X OrLess && HasTrait Devil Hunter|Devil
 	}
 }
-Text Auto: [(1)] When you activate a climax card you may pay the cost, if you do mill 2, then choose a <Devil Hunter> or <Demon> character form your waiting room with level x and add it to your hand. X is the sum of the levels of the milled cards by this effect.
+Text Auto: (1) When a Climax is placed in your Climax Area, you may pay cost. If you do, mill 2, then choose up to 1 Level X or lower <Devil Hunter> or <Devil> character from your Waiting Room, and add it to hand. X equals the sum of Levels of cards milled by this effect.
 Auto: OnOtherFrontalAttacked
 {
 	TargetOther
-	IfTarget HasTrait Devil Hunter|Demon
+	IfTarget HasTrait Devil Hunter|Devil
 	{
 		PayCost 1 SendSelf WaitingRoom
 		{
@@ -341,7 +341,7 @@ Auto: OnOtherFrontalAttacked
 		}
 	}
 }
-Text Auto: [Put this card into your waiting room] When one of your other <Devil Hunter> or <Demon> character is front attacked you may pay the cost, if you do return that card to your hand.
+Text Auto: [(1) Send this to Waiting Room] When your other <Devil Hunter> or <Devil> character is Front Attacked, you may pay cost. If you do, return that character to hand.
 EndCard
 
 Character: CSM/S96-013
@@ -356,20 +356,20 @@ Auto: OnPlay
 {
 	GainPower 1500
 }
-Text Auto: When this card is placed on the stage from your hand, until the end of turn this card gains +1500 power.
+Text Auto: When this is placed on stage from hand, this turn, this gets +1500 power.
 Auto: OnReverseOpponent
 {
 	TargetBattleOpponent
-	IfTarget InLocation Stage
+	IfTarget InLocation OpponentStage
 	{
 		MoveCard OpponentMemory
 	}
 }
-Text Auto: When this card reverses it's battle opponent send that card to memory.
+Text Auto: When this card's battle opponent is Reversed, send that character to Memory.
 EndCard
 
 Character: CSM/S96-014
-Name Fighting a Demon, Chainsaw Man
+Name Fighting a Devil, Chainsaw Man
 Color Y  
 Level 2
 Cost 1
@@ -400,13 +400,13 @@ Auto: OnPlay
 		ShuffleLocation OpponentDeck
 	}
 }
-Text Auto: [(1) Discard 1 card] When this card enters the stage from your hand you may pay the cost, if you do your opponent chooses a climax from his waiting room and shuffles every other card in his deck.
+Text Auto: [(1) Discard 1 card] When this is placed on stage from hand, you may pay the cost. If you do, your opponent chooses 1 Climaxes from their Waiting Room, and shuffles all other cards from their Waiting Room into their deck.
 Act: SendSelf WaitingRoom
 {
 	ChooseCharacters 1 1 Not MyCard
 	MoveCard OpponentHand
 }
-Text Act: [Send this card to the waiting room] Choose an opponent's character and return it to his hand.
+Text Act: [Send this to Waiting Room] Choose 1 of your opponent's characters, return it to hand.
 EndCard
 
 Character: CSM/S96-016
@@ -432,7 +432,7 @@ Auto: OnAttack
 		}
 	}
 }
-Text Auto: CxCombo [(3) Send a card from your hand to your clock and send "Devil's Rampage" from your climax area to your waiting room] When this card attacks if you have 5 or less cards in your clock you may pay the cost, if you do choose up to 3 cards in your opponent's waiting room and put them on the top of your opponent's deck, then deal 4 damage to your opponent.
+Text Auto: {CX Combo} [(3) Put 1 card from hand into Clock, Send the Choice CX (027) from your Climax Area to Waiting Room] When this attacks, if you have 5 or less Clock, you may pay cost. If you do, choose up to 3 cards in your opponent's Waiting Room, place them on top of their deck in any order, then deal 4 damage to your opponent.
 EndCard
 
 Character: CSM/S96-017
@@ -445,7 +445,7 @@ Trait1 Devil Hunter
 Trait2 Public Safety
 Auto: OnReversed
 {
-	PayCost SendFromWaitingRoomToBottom 1 Clock HasTrait Devil Hunter|Demon
+	PayCost SendFromWaitingRoomToBottom 1 Clock HasTrait Devil Hunter|Devil
 	{
 		TargetTop Deck 2
 		RevealTargets
@@ -454,7 +454,7 @@ Auto: OnReversed
 		PutTheRestIntoTheWaitingRoom
 	}
 }
-Text Auto: [Put 1 <Devil Hunter> or <Devil> character from your waiting room at the bottom of your clock] When this card becomes REVERSE in battle, you may pay the cost. Then, you reveal the top 2 cards of your deck, and your opponent chooses 1 "Devil Hunter" or "Devil" character or event from those cards, adds it to your hand, and adds the remaining Place the card in the waiting room.
+Text Auto: [Put 1 <Devil Hunter> or <Devil> character from your Waiting Room on the bottom of your Clock] When this is Reversed, you may pay cost. If you do, reveal the top 2 cards of your deck, your opponent choose 1 <Devil Hunter> or <Devil> character or an Event from among them, you add it to hand, and send the rest to Waiting Room.
 EndCard
 
 Character: CSM/S96-018
@@ -474,7 +474,7 @@ Auto: StartOpponentAttackPhase
 		PlaceOnRememberedSlot
 	}
 }
-Text Auto: [Place this card in your waiting room] At the beginning of your opponent's attack phase, you may pay the cost. Then, choose one of your characters and move it to the slot where this card was.
+Text Auto: [Send this to Waiting Room] At the start of your opponent's Attack Phase, you may pay cost. If you do, choose 1 of your characters, move it to this card's former slot.
 EndCard
 
 Character: CSM/S96-019
@@ -485,21 +485,17 @@ Cost 0
 Power 2000
 Trait1 Devil Hunter
 Trait2 Public Safety
-*BackupBonus1000(Devil Hunter|Demon)
+*BackupBonus1000(Devil Hunter|Devil)
 Backup 1000
 EndCard
 
 Character: CSM/S96-020
-Name Nyaako
+Name Nyako
 Color Y  
 Level 1
 Cost 0
 Power 5000
 Trait1 Animal
-Cont: GiveSelf
-{
-	GainName EL GATETE
-}
 Act: 1 SendSelf WaitingRoom
 {
 	SearchLocationForTargets WaitingRoom 1 1 NameEquals Blood Devil, Power
@@ -510,7 +506,7 @@ Act: 1 SendSelf WaitingRoom
 		*OnAttackPay1ToDoubleTrigger
 	}
 }
-Text Act: [(1) Send this card to the waiting room] Choose 1 character named "Blood Devil, Power" in your waiting room and put it on the slot this card was in, then until the end of turn that character gains +2000 power and the following effect. Auto: [(1)] When this card attacks you may pay the cost, if you do, perform 2 trigger checks.
+Text Act: [(1) Send this to Waiting Room] Choose 1 {RR 1/0 Power - 001} in your Waiting Room, place it on stage on this card's former slot, and this turn, it gets +2000 power and the following ability, "AUTO - (1) When this attacks, you may pay cost. If you do, during the Trigger Step of this attack, perform Trigger Check twice."
 EndCard
 
 Character: CSM/S96-021
@@ -524,10 +520,10 @@ Trait1 Devil Hunter
 Trait2 Public Safety
 Auto: StartClimaxPhase
 {
-	ChooseCharacters 1 1 HasTrait Devil Hunter|Demon|Animal && MyCard
+	ChooseCharacters 1 1 HasTrait Devil Hunter|Devil|Animal && MyCard
 	GainPower 2000
 }
-Text Auto: At the beginning of your climax phase, choose one of your <Devil Hunter>, <Devil> or <Animal> characters, and during that turn, it gets +2000 power.
+Text Auto: At the start of your Climax Phase, choose 1 of your <Devil Hunter> or <Devil> or <Animal> characters, this turn, it gets +2000 power.
 Act: RestSelf
 {
 	If Compare MarkersUnderThis 2 OrLower
@@ -549,7 +545,7 @@ Act: RestSelf
 		}
 	}
 }
-Text Act: [REST this card] If the number of markers under this card is 2 or less, choose 1 character in your waiting room and place it face up under this card as a marker. If you put 1 card, look at the top card of your opponent's deck and put it on the top or bottom of the deck.
+Text Act: [Rest this] If there is 2 or less Markers underneath this card, choose 1 character in your Waiting Room, put it underneath this card Face-up as a Marker. If you put 1 Marker, look at the top card of your opponent's deck, and put it on top or bottom of their deck.
 EndCard
 
 Character: CSM/S96-022
@@ -560,12 +556,12 @@ Cost 1
 Power 4500
 Trait1 Devil Hunter
 Trait2 Public Safety
-*OnAttackGivePowerForEachOther(1000,Devil Hunter|Demon|Animal)
-Auto: Encore SendFromWaitingRoomToBottom 1 Clock HasTrait Devil Hunter|Demon|Animal
+*OnAttackGivePowerForEachOther(1000,Devil Hunter|Devil|Animal)
+Auto: Encore SendFromWaitingRoomToBottom 1 Clock HasTrait Devil Hunter|Devil|Animal
 {
 	
 }
-Text Auto: ENCORE [Put one <Devil Hunter>, <Devil>, or <Animal> character in your waiting room on the bottom of your clock]
+Text Auto: ENCORE [Put 1 <Devil Hunter> or <Devil> or <Animal> character from your Waiting Room on the bottom of your Clock]
 EndCard
 
 Character: CSM/S96-023
@@ -583,7 +579,7 @@ Act: RestSelf
 	ChooseCharacters 1 1 MyCard
 	GainPower 2000
 }
-Text Act: [REST this card] Choose one of your characters, and during that turn, it gets +2000 power.
+Text Act: [Rest this] Choose 1 of your characters, this turn, it gets +2000 power.
 EndCard
 
 Event: CSM/S96-024
@@ -593,14 +589,14 @@ Level 1
 Cost 1
 Effect:
 {
-	PayCost Discard 2 HasTrait Devil Hunter|Demon
+	PayCost Discard 2 HasTrait Devil Hunter|Devil
 	{
 		SearchDeck NameContains Denji|Chainsaw Man
 		SearchDeck NameContains Hayakawa Aki
 		SearchDeck NameContains Power
 	}
 }
-Text: [Discard 2 <Devil Hunter> or <Demon> characters] You may pay the cost, if you do search your deck for up to 1 character card wich in it's name has "Denji" or "Chainsaw Man", up to 1 character card wich in it's name has "Hayakawa Aki" and up to 1 character card wich in it's name has "Power", show them to your opponent and add them to your hand.
+Text: [Discard 2 <Devil Hunter> or <Devil> characters] You may pay cost. If you do, search your deck for up to 1 character with "Denji" or "Chainsaw Man" in its name, and up to 1 character with "Hayakawa Aki" in its name, and up to 1 character with "Power" in its name, show them to your opponent, add them to hand, and shuffle your deck afterwards.
 EndCard
 
 Climax: CSM/S96-025
@@ -637,12 +633,12 @@ Act: 1 SendSelf Memory
 	}
 }
 ActivationRequirement CardPosition Stand
-Text Act: [(1) Send this standing card to memory] If you are level 2 or higher, search your deck for a level 2 or higher character and add it to your hand.
+Text Act: [(1) Send this Standing character to Memory] If you are Level 2 or higher, search your deck for up to 1 Level 2 or higher character, show it to your opponent, add it to hand, and shuffle your deck afterwards.
 *Act1RestSelfSalvageBrainstorm(Any)
 EndCard
 
 Character: CSM/S96-029
-Name Public Safety Anti-Demon Special 4th Division, Hayakawa Aki
+Name Public Safety Anti-Devil Special 4th Division, Hayakawa Aki
 Color G 
 Level 3
 Cost 2
@@ -659,16 +655,16 @@ Cont: GiveSelf
 		GainPower 4000
 		GainEffect
 		{
-			*HandEncoreTrait(Devil Hunter|Demon)
+			*HandEncoreTrait(Devil Hunter|Devil)
 		}
 	}
 }
-Text Cont: If you have "Devil Hunter, Himeno" in your memory, this card gains +4000 power and the following effect: [Auto: ENCORE [Discard one <Devil Hunter> or <Demon> character].
+Text Cont: MEMORY - If you have {0/0 Himeno - 028} in your Memory, this gets +4000 power and "AUTO - ENCORE [Discard 1 <Devil Hunter> or <Devil> character]"
 Auto: OnPlay
 {
-	SearchWaitingRoom HasTrait Devil Hunter|Demon
+	SearchWaitingRoom HasTrait Devil Hunter|Devil
 }
-Text Auto: When this card is summoned form the hand, search your waiting room for a <Devil Hunter> or <Demon> character and add it to your hand.
+Text Auto: When this is placed on stage from hand, choose 1 <Devil Hunter> or <Devil> character from your Waiting Room, you may add it to hand.
 Auto: OnAttack
 {
 	If Climax Unseathed Sword of Determination
@@ -686,7 +682,7 @@ Auto: OnAttack
 		}	
 	}
 }
-Text Auto: CxCombo When this card attacks, if "Unseathed Sword of Determination" is in your climax area, until the end of turn this card gains +1000 power, then mill 4 cards from the bottom of your opponent's deck, then deal x damage to him where x is the number of climax cards milled my this effect.
+Text Auto: {CX Combo} When this attacks, if you have the Bar CX (051) in your Climax Area, this turn, this gets +1000 power, then send the bottom 4 cards of your opponent's deck to Waiting Room, then deal 1 damage to your opponent X times. X equals the number of Climaxes sent to Waiting Room by this effect.
 EndCard
 
 Character: CSM/S96-030
@@ -707,7 +703,7 @@ Auto: OnPlay
 		SearchWaitingRoom IsCharacter && Compare ThatCardsLevel X OrLess
 	}
 }
-Text Auto: [Discard 1 card] When this card is summoned for the hand you can pay the cost, if you do, reveal the top card of your deck then search your waiting room for a character with level x and add it to your hand. X is the level of the card revealed by this effect.
+Text Auto: [Discard 1 card] When this is placed on stage from hand, you may pay cost. If you do, reveal the top card of your deck, then choose 1 Level X or lower character from your Waiting Room, and add it to hand. X equals the Level of the revealed card.
 EndCard
 
 Character: CSM/S96-031
@@ -720,15 +716,15 @@ Trait1 Devil Hunter
 Trait2 Public Safety
 Cont: GiveSelf
 {
-	If StageContains 1 Other && HasTrait Devil Hunter|Demon
+	If StageContains 1 Other && HasTrait Devil Hunter|Devil
 	{
 		GainPower 1500
 	}
 }
-Text Cont: If you control another <Devil Hunter> or <Demon> character, this card gains +1500 power.
+Text Cont: If you have another <Devil Hunter> or <Devil> character, this gets +1500 power.
 Auto: OnReverseOpponent
 {
-	If AllYourCharacters HasTrait Devil Hunter|Demon
+	If AllYourCharacters HasTrait Devil Hunter|Devil
 	{
 		Peek Deck 2
 		ChooseCardsFromTargets 0 1 Any
@@ -737,7 +733,7 @@ Auto: OnReverseOpponent
 		Discard 1 Any
 	}
 }
-Text Auto: When this card's battle opponent is REVERSED, if all your characters are <Devil Hunter> or <Demon>, look up to 2 cards fro mthe top of your deck then choose up to 1 of them and add it to your hand, then put the rest into your waiting room. Then discard a card.
+Text Auto: When this card's battle opponent is Reversed, if all of your characters are <Devil Hunter> or <Devil>, look at up to 2 cards from the top of your deck, choose up to 1 card from among them, add it to hand, and send the rest to Waiting Room, then discard 1 card.
 EndCard
 
 Character: CSM/S96-032
@@ -756,12 +752,12 @@ Auto: OnPlay
 		Mill 3
 	}
 }
-Text Auto: When this card is placed on stage from your hand, you may put the top 3 cards of your deck into your waiting room.
-*OnPlayTradeClimaxForCharacter(Devil Hunter|Demon)
+Text Auto: When this is placed on stage from hand, you may mill 3.
+*OnPlayTradeClimaxForCharacter(Devil Hunter|Devil)
 EndCard
 
 Character: CSM/S96-033
-Name Contract with the Fox Demon, Hayakawa Aki
+Name Contract with the Fox Devil, Hayakawa Aki
 Color G  
 Level 0
 Cost 0
@@ -775,7 +771,7 @@ Cont: GiveSelf
 		GainPower 1000
 	}
 }
-Text Cont: During your turn this card gets +1000 power.
+Text Cont: During your turn, this gets +1000 power.
 *MoveOtherToBackstageOnReverse
 EndCard
 
@@ -794,7 +790,7 @@ Auto: OnAttack
 	{
 		TargetTop Deck 1 
 		Reveal
-		IfTarget HasTrait Devil Hunter|Demon || NameEquals Easy Revenge!
+		IfTarget HasTrait Devil Hunter|Devil || NameEquals Easy Revenge!
 		{
 			TargetLocation Stage
 			GainPower 4000
@@ -802,23 +798,18 @@ Auto: OnAttack
 		}
 	}
 }
-Text Auto: MEMORY When this card attacks if you have "Easy Revenge!" in your memory reveal the top of your deck, if is a <Devil Hunter> or <Demon> character or "Easy Revenge!", all your characters gain +4000 power and +1 soul until the end of turn.
+Text Auto: MEMORY When this attacks, if you have {1/1 Easy Revenge Event - 097} in your Memory, reveal the top card of your deck. If that card is a <Devil Hunter> or <Devil> character or {1/1 Easy Revenge Event - 097}, this turn, all of your characters gets +4000 power and +1 Soul.
 EndCard
 
 Character: CSM/S96-035
-Name The one with the Heart of a Demon, Samurai Sword
+Name The one with the Heart of a Devil, Samurai Sword
 Color G 
 Level 2
 Cost 1
 Power 6000
-Trait1 Demon
+Trait1 Devil
 Combo Single Strike Blade
-Cont: GiveSelf
-{
-	GainName KATANA MAN
-}
-
-*EarlyPlay4OrMore(Devil Hunter|Demon)
+*EarlyPlay4OrMore(Devil Hunter|Devil)
 Auto: OnAttack
 {
 	TargetLocation OpponentStage
@@ -827,7 +818,7 @@ Auto: OnAttack
 	TargetSelf
 	GainPower X
 }
-Text Auto: When this card attacks, it gains x power until the end of turn where x is the amount of your opponent's characters x1000.
+Text Auto: When this attacks, this turn, this gets +X power. X is equal to the number of your opponent's characters times 1000.
 Auto: OnReverseOpponent
 {
 	If Climax Single Strike Blade
@@ -841,11 +832,11 @@ Auto: OnReverseOpponent
 			{
 				*HandEncore
 			}
-			*CheckAndAddAll(3, HasTrait Devil Hunter|Demon)
+			*CheckAndAddAll(3, HasTrait Devil Hunter|Devil)
 		}
 	}
 }
-Text Auto: CxCombo [Put "Single Strike Blade" form your climax area into your waiting room] When this card's battle opponent becomes reversed you may pay the cost, if you do, reveal up to the top 3 cards of your deck, then choose up to 3 <Devil Hunter> or <Demon> characters form them and add them to your hand, then until the end of your opponent's turn thi card gains +2000 power and the following effect: [Auto:ENCORE Discard one card form your hand].
+Text Auto: {CX COMBO} [Send the Bar CX (052) from your Climax Area to Waiting Room] When this card's battle opponent is Reversed, you may pay cost. If you do, look at up to 3 cards from the top of your deck, choose up to 3 <Devil Hunter> or <Devil> characters from among them, show them to your opponent, add them to hand, send the rest to Waiting Room, and until the end of your opponent's next turn, this gets +2000 power and "AUTO - ENCORE [Discard 1 character]".
 EndCard
 
 Character: CSM/S96-036
@@ -870,7 +861,7 @@ Auto: OnPlay
 		MoveCard OpponentHand
 	}
 }
-Text Auto: When this card is placed on the stage from your hand, choose up to 1 opponent character and return it to his hand. Then you may discard one card, choose an opponent character and return it to his hand.
+Text Auto: When this is placed on stage from hand, choose up to 1 of your opponent's characters, return it to hand, then you may discard 1 card. If you do, choose 1 of your opponent's characters, and return it to hand.
 Auto: StartClimaxPhase
 {
 	PayCost Discard 1 Any
@@ -882,7 +873,7 @@ Auto: StartClimaxPhase
 	}
 }
 Alarm
-Text Auto: ALARM [Discard 1 card] If this card is the top of your clock, at the start of your climax phase you may pay the cost, if you do, choose a level 1 or higher character from your opponent's stage and downgrade it.
+Text Auto: ALARM [Discard 1 card] If this is on top of your Clock, at the start of your Climax Phase, you may pay cost. If you do, choose 1 of your opponent's Level 1 or higher characters. If you do, your opponent chooses 1 Level X or lower character from their Waiting Room, and swap them. X equals the Level of the character chosen by you -1.
 EndCard
 
 Character: CSM/S96-037
@@ -896,7 +887,7 @@ Trait2 Public Safety
 Auto: OnClimaxPlay
 {
 	Peek Deck 1
-	MultipleChoiceQuestion Choose a destination. |Top of Deck|Bottom of Deck|Send to Waiting Room
+	MultipleChoiceQuestion Choose a destination for the card. |Top of Deck|Bottom of Deck|Waiting Room
 	If Answer 0
 	{
 		EndPeek
@@ -913,7 +904,7 @@ Auto: OnClimaxPlay
 	UntilEndOfOpponentsTurn
 	GainPower 1500
 }
-Text Auto: When you activate a climax card you may look at the top of your deck, then send that card back to the top, send it to the bottom or send it to the waiting room. Choose a character you control and until the end of your opponent's next turn that character gains +1500 power.
+Text Auto: When a Climax is placed in your Climax Area, look at the top card of your deck, and put it on top or bottom of your deck or into your Waiting Room, then choose 1 of your characters, this turn, it gets +1500 power.
 Auto: OnTriggerCheckClimax
 {
 	If LocationContains Memory 1 NameEquals Easy Revenge!
@@ -924,7 +915,7 @@ Auto: OnTriggerCheckClimax
 		}
 	}
 }
-Text Auto: MEMORY [Discard a climax card] When one of your attacks reveals a climax as a trigger and you have "Easy Revenge!" in your memory you may pay the cost, if you do choose a character in your waiting room and add it to your hand.
+Text Auto: MEMORY [Discard 1 Climax] When your character's Trigger Check reveals a Climax, if you have {1/1 Easy Revenge Event - 097} in your Memory, you may pay cost. If you do, choose 1 character in your Waiting Room, add it to hand.
 EndCard
 
 Character: CSM/S96-038
@@ -940,7 +931,7 @@ Auto: StartOpponentDrawPhase
 	If InLocation CenterStage
 	{
 		Mill 3
-		NarrowTargets Not HasTrait Devil Hunter|Demon
+		NarrowTargets Not HasTrait Devil Hunter|Devil
 		If Not HasTarget
 		{
 			TargetSelf
@@ -948,11 +939,11 @@ Auto: StartOpponentDrawPhase
 		}
 	}
 }
-Text Auto: At the start of your opponent's draw phase, if this card is in your center stage mill 3, if all 3 cards are <Devil Hunter> or <Demon> characters, return this card to your hand.
+Text Auto: At the start of your opponent's draw phase, if this is in your front row, mill 3. If all of those cards were <Devil Hunter> or <Devil> characters, you may return this to hand.
 EndCard
 
 Character: CSM/S96-039
-Name Contract with the Snake Demon, Sawatari
+Name Contract with the Snake Devil, Sawatari
 Color G  
 Level 1
 Cost 0
@@ -964,26 +955,26 @@ Cont: GiveSelf
 	If MyTurn
 	{
 		TargetLocation Stage
-		NarrowTargets HasTrait Devil Hunter|Demon && Other
+		NarrowTargets HasTrait Devil Hunter|Devil && Other
 		SetXValue TargetCount
 		MultiplyXValue 500
 		GainPower X
 	}
 }
-Text Cont: During your turn, this card gets +500 power for each other <Devil Hunter> or <Devil> character you have.
+Text Cont: During your turn, for each of your other <Devil Hunter> or <Devil> characters, this get +500 power.
 Auto: OnPlay
 {
-	PayCost Discard 1 HasTrait Devil Hunter|Demon
+	PayCost Discard 1 HasTrait Devil Hunter|Devil
 	{
 		SearchLocationForTargets WaitingRoom 1 1 Compare ThatCardsCost 0 OrLower
 		PlaceOnStage False True True False
 	}
 }
-Text Auto: [Put 1 <Devil Hunter> or <Devil> character from your hand into your waiting room] When this card is placed on the stage from your hand, you may pay the cost. If you do, choose a character with a cost of 0 or less in your waiting room, and place it in any slot on the stage.
+Text Auto: [Discard 1 <Devil Hunter> or <Devil> character] When this card is placed from your hand to the stage, you may pay cost, if you do, choose a Cost 0 or lower character in your Waiting Room, place it on stage in any slot.
 EndCard
 
 Character: CSM/S96-040
-Name Public Safety Anti-Demon Special 4th Division Captain, Kishibe
+Name Public Safety Anti-Devil Special 4th Division Captain, Kishibe
 Color G  
 Level 1
 Cost 0
@@ -995,14 +986,14 @@ Cont: GiveSelf
 	GainSpecialEffect CannotUseBackup
 	GainSpecialEffect CannotUseEvents
 }
-Text Cont: You cannot play event cards or backup from your hand.
+Text Cont: You cannot play Events or BACKUPs from hand.
 Cont: GiveSelf
 {
-	SetXToNumberOfCharacters InLocation CenterStage && NameEquals Public Safety Anti-Demon Special 4th Division Captain, Kishibe && Other
+	SetXToNumberOfCharacters InLocation CenterStage && NameEquals Public Safety Anti-Devil Special 4th Division Captain, Kishibe && Other
 	MultiplyXValue 2000
 	GainPower X
 }
-Text Cont: This card gets +2000 power for each of your other cards in the center stage named "Public Safety Anti-Demon Special 4th Division Captain, Kishibe".
+Text Cont: For each of your other front row {copies of this}, this gets +2000 power.
 EndCard
 
 Character: CSM/S96-041
@@ -1016,7 +1007,7 @@ Trait1 Devil Hunter
 Trait2 Public Safety
 Auto: OnUseThisCardsBackup
 {
-	If StageContains 1 HasTrait Devil Hunter|Demon
+	If StageContains 1 HasTrait Devil Hunter|Devil
 	{
 		Question Mill yourself?
 		If Yes
@@ -1029,7 +1020,7 @@ Auto: OnUseThisCardsBackup
 		}
 	}
 }
-Text Auto: If yo uuse this cards BACKUP effect and you control a <Devil Hunter> or <Demon> character mill 3 cards from yours or your opponent's deck.
+Text Auto: When you use this card's BACKUP, if you have a <Devil Hunter> or <Devil> character, choose whether you or your opponent mills 3.
 Backup 2000
 EndCard
 
@@ -1049,11 +1040,11 @@ Cont: GiveSelf
 		AddToOtherCardsTriggerIcon Choice NameEquals Dreamlike Daily Life, Denji
 	}
 }
-Text Cont: If there is a climax with a CHOICE trigger icon in your climax area, give a CHOICE icon to the trigger icons of "Dreamlike Daily Life, Denji" in all of your other areas.
-*LevelAssistTrait(Devil Hunter|Demon)
+Text Cont: If you have a Climax with a Choice Trigger in your Climax Area, all of your other {RR Red 0/0 Denji - 053} in any area gains Choice Trigger.
+*LevelAssistTrait(Devil Hunter|Devil)
 Auto: OnClimaxPlay
 {
-	IfOther HasTrigger Choice
+	If LocationContains Climax 1 HasTrigger Choice
 	{
 		ChooseCharacters 1 1 MyCard
 		GainPower 1000
@@ -1063,7 +1054,7 @@ Auto: OnClimaxPlay
 		}
 	}
 }
-Text Auto: When your CHOICE trigger icon climax is placed on your climax area, choose 1 of your characters, during that turn, it gets +1000 power and the following ability. "Auto: [(1)] When this card attacks, you may pay the cost. Then, during that attack, you perform a trigger check twice during the trigger step.
+Text Auto: When a Climax with a Choice Trigger is placed in your Climax Area, choose 1 of your characters, this turn, it gets +1000 power and the following ability, "AUTO - (1) When this attacks, you may pay cost. If you do, during the Trigger Step of this attack, perform Trigger Check twice."
 EndCard
 
 Character: CSM/S96-043
@@ -1074,7 +1065,7 @@ Cost 2
 Power 9500
 Soul 2
 Trigger Soul
-Trait1 Demon
+Trait1 Devil
 Cont: InHand
 {
 	If LocationContains WaitingRoom 2 NameEquals High-Speed Slash, Samurai Sword
@@ -1082,7 +1073,7 @@ Cont: InHand
 		GainLevel -1
 	}
 }
-Text Cont: If you have 2 or more "High-Speed Slash, Samurai Sword" in your waiting room, the level of this card in your hand is -1.
+Text Cont: If you have 2 or more {0/0 Katana Man - 044} in your Waiting Room, this gets -1 Level in hand.
 Auto: OnAttack
 {
 	GainPower 4000
@@ -1091,7 +1082,7 @@ Auto: OnAttack
 		MillOpponent 18
 	}
 }
-Text Auto: [Put 2 green cards from your hand into your waiting room] When this card attacks, for this turn, this card gets +4000 power and you may pay the cost. If you do, your opponent puts the top 18 cards of their deck into their waiting room.
+Text Auto: [Discard 2 Green cards] When this attacks, this turn, this gets +4000 power, and you may pay cost. If you do, your opponent mills 18.
 Auto: StartOpponentMainPhase
 {
 	PayCost 1 SendFromWaitingRoomToBottom 1 Deck NameEquals High-Speed Slash, Samurai Sword
@@ -1099,7 +1090,7 @@ Auto: StartOpponentMainPhase
 		GainSpecialEffect CannotBeReversed
 	}
 }
-Text Auto: [(1) Put 1 "High-Speed Slash, Samurai Sword" from your waiting room on the bottom of your deck] At the beginning of your opponent's main phase, you may pay the cost. If you do, this card cannot be REVERSED during that turn.
+Text Auto: [(1) Put 1 {0/0 Katana Man - 044} from your Waiting Room on the bottom of your Clock] At the start of your opponent's Main Phase, you may pay cost. If you do, this turn, this cannot be Reversed.
 EndCard
 
 Character: CSM/S96-044
@@ -1108,20 +1099,20 @@ Color G
 Level 0
 Cost 0
 Power 1500
-Trait1 Demon
+Trait1 Devil
 Auto: OnReversed
 {
 	*ClockSaboutage
 }
-Text Auto: When this card becomes REVERSED in battle, you may choose 1 card in your opponent's clock and put it in the waiting room. If you do, your opponent puts the top card of their deck into their clock area.
+Text Auto: When this is Reversed, choose 1 card in your opponent's Clock, you may send it to Waiting Room. If you do, your opponent puts the top card of their deck into Clock.
 Act: 1 SendSelf WaitingRoom
 {
-	RevealUpTo 4
+	RevealUpTo Deck 4
 	ChooseCardsFromTargets 0 1 Compare ThatCardsLevel 1 OrHigher
 	MoveCard Hand
 	PutTheRestIntoTheWaitingRoom
 }
-Text Act: [(1) Place this card in your waiting room] Look at up to 4 cards from the top of your deck, choose up to 1 card of level 1 or higher, show it to your opponent, add it to your hand, and place the rest of the cards in your waiting room.
+Text Act: [(1) Send this to Waiting Room] Look at up to 4 cards from the top of your deck, choose up to 1 Level 1 or higher card from among them, show it to your opponent, add it to hand, and send the rest to Waiting Room.
 EndCard
 
 Character: CSM/S96-045
@@ -1139,7 +1130,7 @@ Auto: OnPlay
 		SearchWaitingRoom IsClimax
 	}
 }
-Text Auto: [Put 1 climax from your hand into your waiting room & Put 1 other character from your stage into your waiting room] When this card is placed on the stage from your hand, you may pay the cost. If you do, choose 1 climax in your waiting room, and return it to your hand.
+Text Auto: [Discard 1 Climax, Send 1 of your other characters on stage to Waiting Room] When this is placed on stage from hand, you may pay cost. If you do, choose 1 Climax from your Waiting Room, and add it to hand.
 EndCard
 
 Character: CSM/S96-046
@@ -1152,12 +1143,12 @@ Trait1 Devil Hunter
 Trait2 Public Safety
 Cont: GiveSelf
 {
-	If AllYourCharacters HasTrait Devil Hunter|Demon
+	If AllYourCharacters HasTrait Devil Hunter|Devil
 	{
 		GainPower 2000
 	}
 }
-Text Cont: If all your characters are <Devil Hunter> or <Demon>, this card gains +2000 power.
+Text Cont: If all of your characters are <Devil Hunter> or <Devil>, this gets +2000 power.
 *ClimaxExchange
 EndCard
 
@@ -1171,7 +1162,7 @@ Trait1 Devil Hunter
 Trait2 Public Safety
 Cont: GiveSelf
 {
-	If MyTurn && LocationContains Memory NameEquals Easy Revenge!
+	If MyTurn && LocationContains Memory 1 NameEquals Easy Revenge!
 	{
 		GainPower 3500
 		GainEffect
@@ -1196,7 +1187,7 @@ Cont: GiveSelf
 		}
 	}
 }
-Text Cont: MEMORY During your turn, if "Easy revenge!" is in your memory, this card gets +3500 power and the following ability. "Auto: When this card's battle opponent becomes REVERSED, you may put the top card of your opponent's clock into the waiting room. If you do, put that character into your opponent's clock.
+Text Cont: MEMORY - During your turn, if you have {1/1 Easy Revenge Event - 097} in your Memory, this gets +3500 power and the following ability, "AUTO - When this card's battle opponent is Reversed, you may send the top card of your opponent's Clock to Waiting Room. If you do, send that character to Clock."
 EndCard
 
 Character: CSM/S96-048
@@ -1215,8 +1206,8 @@ Cont: GiveSelf
 		GainPower 10000
 	}
 }
-Text Cont: During your turn, this card gains +10000 power.
-*LevelAssistTrait(Devil Hunter|Demon)
+Text Cont: During your turn, this gets +10000 power.
+*LevelAssistTrait(Devil Hunter|Devil)
 EndCard
 
 Character: CSM/S96-049
@@ -1233,38 +1224,38 @@ Cont: GiveSelf
 	If MyTurn
 	{
 		TargetLocation Stage
-		NarrowTargets HasTrait Devil Hunter|Demon && Other
+		NarrowTargets HasTrait Devil Hunter|Devil && Other
 		SetXValue TargetCount
 		MultiplyXValue 1500
 		GainPower X
 	}
 }
-Text Cont: During your turn, this card gets +1500 power for each other <Devil Hunter> or <Demon> character you have.
-*HandEncoreTrait(Devil Hunter|Demon)
+Text Cont: During your turn for each of your other <Devil Hunter> or <Devil> characters, this gets +1500 power.
+*HandEncoreTrait(Devil Hunter|Devil)
 EndCard
 
 Event: CSM/S96-050
-Name Gun Demon's Flesh Fragment
+Name Gun Devil's Flesh Fragment
 Color G 
 Level 1
 Cost 0
 Effect:
 {
-	ChooseCharacters 1 1 MyCard && Not HasMarker && HasTrait Devil Hunter|Demon
+	ChooseCharacters 1 1 MyCard && Not HasMarker && HasTrait Devil Hunter|Devil
 	SaveTargets
 	GainPower 2000
 	TargetSelf
 	MarkerTargetsUnderSavedTarget_FaceUp
 }
-Text You choose 1 <Devil Hunter> or <Demon> character that doesn't have your own marker, put this card face up under that character as a marker, and that character gets +2000 power during that turn.
+Text Choose 1 of your <Devil Hunter> or <Devil> characters that does not have a Marker underneath it, put this card underneath that character Face-Up as a Marker, and this turn, that character gets +2000 power.
 Auto: OnSentFromAToB Marker WaitingRoom
 {
-	If StageContains 2 HasTrait Devil Hunter|Demon
+	If StageContains 2 HasTrait Devil Hunter|Devil
 	{
 		MoveCard Memory
 	}
 }
-Text Auto: When this card is moved from the marker area to your waiting room, if you have 2 or more <Devil Hunter> or <Demon> characters, remember this card.
+Text Auto:  When this card as a Marker is sent to your Waiting Room, if you have 2 or more <Devil Hunter> or <Devil> characters, send this to Memory.
 Auto: StartMainPhase
 {
 	If InLocation Memory
@@ -1273,7 +1264,7 @@ Auto: StartMainPhase
 	}
 }
 InMemory
-Text Auto: MEMORY If you have this card in your memory, return it to your hand at the beginning of your main phase.
+Text Auto: MEMORY - At the start of your Main Phase, if this is in Memory, add this to hand.
 EndCard
 
 Climax: CSM/S96-051
@@ -1303,21 +1294,21 @@ Cont: GiveSelf
 		GainPower 2000
 	}
 }
-Text Cont: If this card has a marker underneath, it gains +2000 power.
+Text Cont: If this card has a Marker underneath it, this gets +2000 power.
 Auto: OnPlay
 {
 	TargetTop Deck 1
 	Reveal
-	IfTarget HasTrait Devil Hunter|Demon ||| NameEquals First Indirect Kiss
+	IfTarget HasTrait Devil Hunter|Devil ||| NameEquals First Indirect Kiss
 	{
 		Question Put this card underneath this as a marker?
-		If Yes
-		{
-			Marker_FaceDown
-		}
+        If Yes
+        {
+            Marker_FaceUp
+        }
 	}
 }
-Text Auto: When this card is placed o nthe stage from your hand you may reveal the top of your deck, if it's a <Devil Hunter>, <Demon> character or a "First Indirect Kiss" put it undeneath this card face up as a marker.
+Text Auto: When this is placed on stage from hand, reveal the top card of your deck. If that card is an <Devil Hunter> or <Devil> character or "First Indirect Kiss", you may put it underneath this card Face-down as a Marker.
 *RunInFrontOfCharacter
 EndCard
 
@@ -1331,16 +1322,16 @@ Trait1 Devil Hunter
 Trait2 Public Safety
 Auto: OnPlay
 {
-	PayCost 1 SendFromWaitingRoomToBottom 1 Clock HasTrait Devil Hunter|Demon
+	PayCost 1 SendFromWaitingRoomToBottom 1 Clock HasTrait Devil Hunter|Devil
 	{
 		SearchDeck IsCharacter && Compare ThatCardsLevel 1 OrLower
 	}
 }
-Text Auto: [(1)Put a <Devil Hunter> or <Demon> character from your waiting room on the bottom of your clock.] When this card is placed on the stage from your hand you may pay the cost, if you do, Search your deck for a level 1 or lower character, show it to your opponent and add it to your hand. Then shuffle your deck.
+Text Auto: [(1) Put 1 <Devil Hunter> or <Devil> character from your Waiting Room on the bottom of your Clock] When this is placed on stage from hand, you may pay cost. If you do, search your deck for up to 1 Level 1 or lower character, show it to your opponent, add it to hand, and shuffle your deck afterwards.
 Auto: StartClimaxPhase
 {
 	TargetLocation Stage
-	NarrowTargets HasTrait Devil Hunter|Demon
+	NarrowTargets HasTrait Devil Hunter|Devil
 	ChooseCharacterFromTargets choose one
 	GainEffect
 	{
@@ -1352,11 +1343,11 @@ Auto: StartClimaxPhase
 	}
 }
 Alarm
-Text Auto: ALARM At the start of your climax phase, if this card is in your clock, choose a <Devil Hunter> or <Demon> character, it gains the following effect until the end of turn. "Auto: If this card attacks, look at the top 2 cards of your deck and put them back in any order.
+Text Auto: ALARM - If this is on top of your Clock, at the start of your Climax Phase, choose 1 of your <Devil Hunter> or <Devil> characters, this turn, it gains the following ability, "AUTO - When this attacks, look at up to 2 cards from the top of your deck, and put them back on top in any order."
 EndCard
 
 Character: CSM/S96-055
-Name Public Safety Anti-Demon Special 4th Division, Makima
+Name Public Safety Anti-Devil Special 4th Division, Makima
 Color R
 Level 3
 Cost 2
@@ -1380,14 +1371,14 @@ Auto: OnPlay
 		MoveCard Stock
 	}
 }
-Text Auto: When this card is summoned search your waiting room for a card named "Hidden Power" and add it to your hand or to your stock.
+Text Auto: {CX Combo} When this is placed on stage from hand, choose 1 {Door CX - 076} in your Waiting Room, you may add it to hand or send it to Stock.
 Auto: OnAttack
 {
 	If Climax Hidden Power
 	{
 		TargetTop Deck 1
 		Reveal
-		IfTarget HasTrait Devil Hunter|Demon ||| IfTarget IsEvent
+		IfTarget HasTrait Devil Hunter|Devil ||| IsEvent
 		{
 			TargetLocation OpponentStage
 			ChooseCharacterFromTargets 1 1 Any
@@ -1397,7 +1388,7 @@ Auto: OnAttack
 		}	
 	}	
 }
-Text Auto: CxCombo When this card attacks, if "Hidden Power" is in your climax area, reveal the top card of your deck, if it's a <Devil Hunter> or <Demon> character or an event, choose a character from your opponent's stage and send it to his waiting room. Then this card gains +2000 power until the end of turn.
+Text Auto: {CX Combo} When this attacks, if you have the Door CX (076) in your Climax area, reveal the top card of your deck. If that card is a <Devil Hunter> or <Devil> character or an Event, choose up to 1 of your opponent's characters, send it to Waiting Room, and this turn, this gets +2000 power.
 EndCard
 
 Character: CSM/S96-056
@@ -1410,34 +1401,35 @@ Trait1 Devil Hunter
 Trait2 Public Safety
 Auto: OnPlay
 {
-	ChooseCharacters 1 1 Other && MyCard && HasTrait Devil Hunter|Demon
+	ChooseCharacters 1 1 Other && MyCard && HasTrait Devil Hunter|Devil
 	GainPower 2000
 }
-Text Auto: When this card is placed on the stage form the hand, choose one of your other <Devil Hunter> or <Demon> characters and it gains +2000 power for the turn.
+Text Auto: When this is placed on stage from hand, choose 1 of your other <Devil Hunter> or <Devil> characters, this turn, it gets +2000 power.
 Auto: OnPlay
 {
 	ChooseCharacters 0 1 Not MyCard
 	Flicker
 }
-Text Auto: When this card is placed on the stage form the hand, choose up to one of your opponent's characters and send it to his memory zone, then put it back on the stage.
+Text Auto: When this is placed on stage from hand, choose up to 1 of your opponent's characters, send it to Memory, then your opponent places that character on stage in any slot.
 EndCard
 
 Character: CSM/S96-057
-Name Demon Bathed in Blood, Chainsaw Man
+Name Devil Bathed in Blood, Chainsaw Man
 Color R 
 Level 0
 Cost 0
 Power 1000
+Trigger Soul
 Trait1 Devil Hunter
 Trait2 Public Safety
 Cont: GiveSelf
 {
-	If MyTurn && Not StageContains && Not HasTrait Devil Hunter|Demon
+	If MyTurn && AllYourCharacters HasTrait Devil Hunter|Devil
 	{
 		GainPower 8000
 	}
 }
-Text Cont: During your turn, if your stage only contains <Devil Hunter> or <Demon> characters, this card gains +8000 power.
+Text Cont: During your turn, if all of your characters are <Devil Hunter> or <Devil>, this gets +8000 power.
 Auto: OnReversed
 {
 	TargetTop Deck 1
@@ -1445,7 +1437,7 @@ Auto: OnReversed
 	TargetSelf 
 	Rest
 }
-Text Auto: When this card is reversed on battle, put the top card of your deck into your clock, then rest this card.
+Text Auto: When this is Reversed, put the top card of your deck into Clock, Rest this.
 EndCard
 
 Character: CSM/S96-058
@@ -1459,28 +1451,29 @@ Trait2 Public Safety
 Combo An Ability You Must Not See
 Cont: GiveSelf
 {
-	If StageContains 2 Other && HasTrait Devil Hunter|Demon
+	If StageContains 2 Other && HasTrait Devil Hunter|Devil
 	{
 		GainPower 2000
 	}
 }
-Text Cont: If you have 2 or more other <Devil Hunter> or <Demon> characters, this card gains +2000 power.
+Text Cont: If you have 2 or more other <Devil Hunter> or <Devil> characters, this gets +2000 power.
 Auto: OnSpecificClimaxPlay An Ability You Must Not See
 {
-	If InLocation CenterStage &&& StageContains 2 Other && HasTrait Devil Hunter|Demon
+	If InLocation CenterStage &&& StageContains 2 Other && HasTrait Devil Hunter|Devil
 	{
 		TargetLocation Deck
-		NarrowTargets HasTrait Devil Hunter|Demon
-		ChooseCardsFromTargets 1 1 HasTrait Devil Hunter|Demon
+		NarrowTargets HasTrait Devil Hunter|Devil
+		ChooseCardsFromTargets 1 1 HasTrait Devil Hunter|Devil
 		MoveCard BottomOfStock
 		ShuffleLocation Deck
+		TargetSelf
 		GainEffect
 		{
 			*OnAttackPay1ToDoubleTrigger
 		}
 	}
 }
-Text Auto: CxCombo When your "An Ability You Must Not See" is placed on your climax zone, if this card is in your center stage and you control 2 other <Devil Hunter> or <Demon> characters, search your deck for a <Devil Hunter> or <Demon> character and put it on the bottom of your stock, then until the end of turn this card gains the folowing ability: "Auto: [(1)] When this card attacks, perform the trigger check twice.
+Text Auto: {CX Combo} When the Door CX (077) is placed in your Climax Area, if this is in your front row, and you have 2 or more other <Devil Hunter> or <Devil> characters, search your deck for up to 1 <Devil Hunter> or <Devil> character, show it to your opponent, send it to the bottom of your Stock, shuffle your deck afterwards, and this turn, this gains the following ability, "AUTO - (1) When this attacks, you may pay cost. If you do, during the Trigger Step of this attack, perform Trigger Check twice."
 EndCard
 
 Character: CSM/S96-059
@@ -1504,25 +1497,25 @@ Cont: Global
 		}
 	}
 }
-Text Cont: All of your opponent's characters get "Auto: ENCORE [(2)]".
+Text Cont: All of your opponent characters get "AUTO - ENCORE (2)".
 Auto: StartClimaxPhase
 {
 	If InLocation CenterStage
 	{
 		PayCost Clock
 		{
-			RevealUpTo 3
-			ChooseCardsFromTargets 0 1 HasTrait Devil Hunter|Demon|Animal
+			RevealUpTo Deck 3
+			ChooseCardsFromTargets 0 1 HasTrait Devil Hunter|Devil|Animal
 			MoveCard Hand
 			PutTheRestIntoTheWaitingRoom
 		}
 	}
 }
-Text Auto: ACCEL [Send the top card of your deck to your clock] At the start of your climax phase you may pay the cost, if you do look up to 3 cards of the top of your deck and choose one <Devil Hunter>, <Demon> or <Animal> character and add it to your hand, then put the rest into your waiting room.
+Text Auto: ACCELERATE [Put the top card of your deck into Clock] At the start of your Climax Phase, if this is in your front row, you may pay cost. If you do, look at up to 3 cards from the top of your deck, choose up to 1 <Devil Hunter> or <Devil> or <Animal> character from among them, show it to your opponent, add it to hand, send the rest to Waiting Room
 EndCard
 
 Character: CSM/S96-060
-Name The one with the Heart of a Demon, Chainsaw Man
+Name The one with the Heart of a Devil, Chainsaw Man
 Color R 
 Level 3
 Cost 2
@@ -1543,8 +1536,7 @@ Auto: OnDirectAttack
 		GainPower 2000
 	}
 }
-Text Auto: [Discard 3 cards] When this card performs a direct attack, you may pay the cost, if you do choose 2 cards from your opponent's waiting room and put them on the top of tour opponent's deck in any order. Until the end of your opponent's next turn this card gains +2000 power.
-EndCard
+Text Auto: [Discard 3 cards] When this Direct Attacks, you may pay cost. If you do, choose up to 2 cards in your Opponent's Waiting Room, place them on top of their deck in any order, and until the end of your opponent's next turn, this gets +2000 power.
 
 Character: CSM/S96-061
 Name Sudden Confession, Makima
@@ -1557,7 +1549,7 @@ Trait2 Public Safety
 Combo Special Request
 Auto: OnSpecificClimaxPlay Special Request
 {
-	If StageContains 2 Other && HasTrait Devil Hunter|Demon
+	If StageContains 2 Other && HasTrait Devil Hunter|Devil
 	{
 		MultipleChoiceQuestion Where are you looking? |Deck|WaitingRoom
 		If Answer 0 
@@ -1570,7 +1562,7 @@ Auto: OnSpecificClimaxPlay Special Request
 		}
 	}
 }
-Text Auto: CxCombo When "Special Request" is placed in your climax area and you control 2 or more other <Devil Hunter> or <Demon> characters oyu may declare 1 zone either deck or waiting room, then from the declared zone look for a card named "Unexpected Consequences, Denji" and add it to your hand. If the declared zone is your deck, shuffle it afterwards.
+Text Auto: {CX Combo} When the Standby CX (078) is placed in your Climax Area, if you have 2 or more other <Devil Hunter> or <Devil> characters, declare your deck or Waiting Room, choose up to 1 {0/0 Denji - 066} in your declared zone, show it to your opponent, and add it to hand. If you declared deck, shuffle your deck.
 Act: RestSelf Send 1 WaitingRoom Other
 {
 	Brainstorm 4
@@ -1582,7 +1574,7 @@ Act: RestSelf Send 1 WaitingRoom Other
 		PutTheRestIntoTheWaitingRoom
 	}
 }
-Text Act: BRAINSTORM [Put 1 other character from your stage into your waiting room & Rest this card] Flip over 4 cards from the top of your deck, and put them into your waiting room. For each climax revealed among those cards, perform the following action. "Look at up to 3 cards from the top of your deck, choose up to 1 card from among them, put it into your hand, and put the rest into your waiting room."
+Text Act: BRAINSTORM [Send 1 of your other characters on stage to Waiting Room, Rest this] Flip over the top 4 cards of your deck, then send them to Waiting Room. For each Climax among them repeat the following effect: "Look at up to 3 cards from the top of your deck, choose up to 1 card among them, add it to hand, and send the rest to Waiting Room."
 EndCard
 
 Character: CSM/S96-062
@@ -1621,7 +1613,7 @@ Auto: OnPlay|OnSentFromStageToWaitingRoom
 		}
 	}
 }
-Text Auto: When this card is placed on the stage from your hand or from the stage to the waiting room, choose 1 of your opponent's characters, it gets the following ability until the end of the next turn. "Cont: This card cannot move to another position of your stage." 
+Text Auto: When this is placed on stage from hand or sent from Stage to Waiting Room, choose 1 of your opponent's characters, until the end of the next turn, it gains the following ability, "CONT - This cannot move to other slots."
 EndCard
 
 Character: CSM/S96-063
@@ -1636,7 +1628,7 @@ Trait2 Public Safety
 Auto: OnPlay
 {
 	Mill 4
-	If HasTarget IsClimax
+	If TargetsContain 1 IsClimax
 	{
 		ChooseCharacters 1 1 Not MyCard
 		Question move to hand?
@@ -1646,7 +1638,7 @@ Auto: OnPlay
 		}
 	}
 }
-Text Auto: When this card is placed on the stage from your hand, put the top 4 cards of your deck into your waiting room. If those cards have a climax, you may choose one of your opponent's level 3 or lower characters and return it to your hand.
+Text Auto: When this is placed on stage from hand, mill 4. If there is a Climax(es) among them, choose 1 of your opponent's Level 3 or lower characters, you may return it to hand.
 Auto: OnReversed
 {
 	TargetBattleOpponent
@@ -1660,7 +1652,7 @@ Auto: OnReversed
 		}
 	}
 }
-Text Auto: When this card becomes REVERSED, if the level of this card's battle opponent is higher than your opponent's level, you REVERSE that card.
+Text Auto: When this is Reversed, if the battle opponent's Level is higher than your opponent's Level, you may Reverse that character.
 EndCard
 
 Character: CSM/S96-064
@@ -1678,11 +1670,11 @@ Cont: GiveSelf
 	{
 		Effect:
 		{
-			SearchWaitingRoom IsCharacter||NameEquals First Inderect Kiss
+			SearchWaitingRoom IsCharacter || NameEquals First Inderect Kiss
 		}
 	}
 }
-Text Cont: When you trigger a DOOR trigger you may choose a "First Inderect Kiss" in your waiting room instead.
+Text Cont: You may choose {2/2 Lollipop Event - 075} in your Waiting Room for the effects of Door Trigger.
 Auto: OnClimaxPlay
 {
 	TargetLocation Climax
@@ -1704,14 +1696,14 @@ Auto: OnClimaxPlay
 		}
 	}
 }
-Text Auto: When you activate a DOOR climax you may choose a character form your waiting room and return it to your hand, if you do, choose a climax in your climax area, that card gains the following ability until the end of turn: "Cont: All your characters gain -1000 power and -1 soul"
+Text Auto: When a Climax with a Door Trigger is placed in your Climax Area, choose 1 character in your Waiting Room, you may add it to hand. If you do, choose 1 Climax in your Climax Area, this turn, it gains the following ability, "CONT - All of your characters get -1000 power and -1 Soul."
 Act: RestSelf
 {
 	ChooseCharacters 1 1 MyCard
 	UntilEndOfOpponentsTurn
 	GainPower 1500
 }
-Text Act: [REST this card] Choose a character you control, it gains +1500 power until the end of your opponent's next turn.
+Text Act: [Rest this] Choose 1 of your <Devil Hunter> or <Devil> characters, until the end of your opponent's next turn, it gets +1500 power.
 EndCard
 
 Character: CSM/S96-065
@@ -1729,7 +1721,7 @@ Combo The Best Competition
 //{
 	//GainSpecialEffect DamageFromTheBottom
 //}
-//Text Cont: All the damage dealt by this card is taken from the bottom of the deck.
+//Text Cont: This card's damage is dealt from the bottom of your opponent's deck instead.
 Auto: StartAttackPhase
 {
 	If Climax The Best Competition
@@ -1757,7 +1749,7 @@ Auto: StartAttackPhase
 		}
 	}
 }
-Text Auto: CxCombo [Send "The Best Competition" from your climax area to your WaitingRoom] At the start if your attack phase, you may pay the cost, if you do, STAND this card and then choose up to 1 "Requiem to the Heavens, Hayakawa Aki" from your hand and place it on stage in any slot, then until the end of turn, that character and this one gain the following effect: "Auto: When the battle opponent of this card is REVERSED you may send that character to the bottom of your opponent's deck.
+Text Auto: {CX Combo} [(1) Send the Standby CX (079) from your Climax Area to Waiting Room] At the start of your Attack Phase, you may pay cost. If you do, Stand this, then choose up to 1 {3/2 Hayakawa Aki - 090} in your hand, place it on stage in any slot, and this turn, that card and this card gains the following ability, "AUTO - When this card's battle opponent is Reversed, you may send that character to the bottom of your opponent's deck."
 Auto: OnFrontalAttacked
 {
 	PeekTop Deck 1
@@ -1771,7 +1763,7 @@ Auto: OnFrontalAttacked
 		MoveCard WaitingRoom
 	}
 }
-Text Auto: When this card is frontal attacked look at the top of your deck, return it back or send it to the waiting room.
+Text Auto: When this is Front Attacked, look at the top card of your deck, and put it on top of your deck or into your Waiting Room.
 EndCard
 
 Character: CSM/S96-066
@@ -1783,7 +1775,7 @@ Power 1500
 Trait1 Devil Hunter
 Trait2 Public Safety
 *OnPlayScry
-*OnPlayCheckTopAddDiscard(Devil Hunter|Demon)
+*OnPlayCheckTopAddDiscard(Devil Hunter|Devil)
 EndCard
 
 Character: CSM/S96-067
@@ -1803,7 +1795,7 @@ Auto: OnAttack
 		MoveCard Stock
 	}
 }
-Text Auto: When this card attacks, you may choose 1 of your other characters and put it into your stock.
+Text Auto: When this attacks, choose 1 of your other characters, you may send it to Stock.
 EndCard
 
 Character: CSM/S96-068
@@ -1816,12 +1808,12 @@ Trait1 Devil Hunter
 Trait2 Public Safety
 Cont: GiveSelf
 {
-	If StageContains 2 Other && HasTrait Devil Hunter|Demon
+	If StageContains 2 Other && HasTrait Devil Hunter|Devil
 	{
 		GainPower 2000
 	}
 }
-Text Cont: If you control 2 other <Devil Hunter> or <Demon> characters, this card gains +2000 power.
+Text Cont: If you have 2 or more other <Devil Hunter> or <Devil> characters, this gets +2000 power.
 Auto: OnPlay
 {
 	If LocationContains Level 1 ColorIs Yellow 
@@ -1834,7 +1826,7 @@ Auto: OnPlay
 		}
 	}
 }
-Text Auto: EXPERIENCE [Discard 3 characters with "Denji", "Chainsaw Man" or "Makima" in their name] When this card is placed on the stage from your hand, and if you have a yellow card in your level zone you may pay the cost, if you do, draw 3 cards.
+Text Auto: EXPERIENCE [Discard 3 characters with "Denji", "Chainsaw Man" or "Makima" in their name] When this is placed on stage from hand, if you have a Yellow card in your Level Zone, you may pay cost. If you do, draw up to 3 cards.
 EndCard
 
 Character: CSM/S96-069
@@ -1847,12 +1839,12 @@ Trait1 Devil Hunter
 Trait2 Public Safety
 Cont: GiveSelf
 {
-	If StageContains 2 Other && HasTrait Devil Hunter|Demon
+	If StageContains 2 Other && HasTrait Devil Hunter|Devil
 	{
 		GainPower 2000
 	}
 }
-Text Cont: If you have 2 or more other <Devil Hunter> or <Demon> characters, this card gets +2000 power.
+Text Cont: If you have 2 or more other <Devil Hunter> or <Devil> characters, this gets +2000 power.
 *HandEncore
 EndCard
 
@@ -1868,11 +1860,12 @@ Trait1 Devil Hunter
 Trait2 Public Safety
 Cont: GiveAll
 {
-	TargetLocation Stage
-	NarrowTargets NameEquals Super Intelligent Strategy, Denji
-	GainPower 4000
+	If NameEquals Super Intelligent Strategy, Denji
+	{
+		GainPower 4000
+	}
 }
-Text Cont: All your other "Super Intelligent Strategy, Denji" gain +4000 power.
+Text Cont: All of your other {2/1 Denji - 071} gets +4000 power.
 Auto: OnPlay
 {
 	PayCost Clock
@@ -1881,7 +1874,8 @@ Auto: OnPlay
 		PlaceOnStage False True True False
 	}
 }
-Text Auto: [Put the top card of your deck into your clock] When this card is placed on the stage from your hand, you may pay the cost. If you do, choose 1 "Super Intelligent Strategy, Denji" in your waiting room, and place it in any slot on the stage.
+Text Auto: [Put the top card of your deck into Clock] When this is placed on stage from hand, you may pay cost. If you do, choose 1 {2/1 Denji - 071} in your Waiting Room, place it on stage in any slot.
+
 EndCard
 
 Character: CSM/S96-071
@@ -1896,25 +1890,26 @@ Trait1 Devil Hunter
 Trait2 Public Safety
 Cont: GiveAll
 {
-	TargetLocation Stage
-	NarrowTargets NameEquals Super Intelligent Strategy, Power
-	GainPower 4000
+	If NameEquals Super Intelligent Strategy, Power
+	{
+		GainPower 4000
+	}
 }
-Text Cont: All your other "Super Intelligent Strategy, Power" gain +4000 power.
+Text Cont: All of your other {2/1 Power - 070} gets +4000 power.
 Auto: OnReverseOpponent
 {
-	Question send to memory?
+	Question Send opponent's character to memory?
 	If Yes
 	{
 		TargetBattleOpponent
 		MoveCard Memory
 	}
 }
-Text Auto: When this card's battle opponent becomes REVERSED, you may send that character to memory.
+Text Auto: When this card's battle opponent is Reversed, you may send that character to Memory.
 EndCard
 
 Character: CSM/S96-072
-Name Inmortal Demon, Chainsaw Man
+Name Inmortal Devil, Chainsaw Man
 Color R 
 Level 2
 Cost 2
@@ -1923,8 +1918,8 @@ Soul 2
 Trigger Soul
 Trait1 Devil Hunter
 Trait2 Public Safety
-*GainPowerForEachOther(1000,Devil Hunter|Demon)
-*HandEncoreTrait(Devil Hunter|Demon)
+*GainPowerForEachOther(1000,Devil Hunter|Devil)
+*HandEncoreTrait(Devil Hunter|Devil)
 EndCard
 
 Character: CSM/S96-073
@@ -1944,12 +1939,12 @@ Cont: GiveSelf
 	MultiplyXValue 1000
 	GainPower X
 }
-Text Cont: This card gets +1000 power for each character in your opponent's back stage.
-Auto: Encore Send WaitingRoom 2 Other
+Text Cont: During your turn, for each of your opponent's back row characters, this gets +3000 power.
+Auto: Encore Send 2 WaitingRoom Other
 {
 
 } 
-Text Auto: ENCORE [Send 2 characters you control to your waiting room]
+Text Auto: ENCORE [Send 2 of your characters on stage to Waiting Room]	
 EndCard
 
 Character: CSM/S96-074
@@ -1966,19 +1961,19 @@ Auto: OnPlay
 {
 	PayCost Discard 3 Any
 	{
-		SearchLocationForTargets Deck 1 1 HasTrait Devil Hunter|Demon|Animal
+		SearchLocationForTargets Deck 1 1 HasTrait Devil Hunter|Devil|Animal
 		MoveCard Stock
-		SearchLocationForTargets Deck 0 3 HasTrait Devil Hunter|Demon|Animal
+		SearchLocationForTargets Deck 0 3 HasTrait Devil Hunter|Devil|Animal
 		MoveCard Hand
 		ShuffleLocation Deck
 	}
 }
-Text Auto: [Place 3 cards from your hand into your waiting room] When this card is placed on the stage from your hand, you may pay the cost. Then, look at your deck and choose up to 4 <Devil Hunter>, <Demon> or <Animal> characters, reveal them, choose one, put it in your stock, and put the rest of the cards in your hand.
+Text Auto: [Discard 3 cards] When this is placed on stage from hand, you may pay cost. If you do, search your deck for up to 4 <Devil Hunter> or <Devil> or <Animal> characters, show them to your opponent, choose 1 card from among them, send it to Stock, and add the rest to hand, and shuffle your deck afterwards.
 Auto: OnTriggerCheckClimax
 {
 	Burn 1
 }
-Text Auto: When this card's trigger check reveals a climax, you may deal 1 damage to your opponent.
+Text Auto: When this card's Trigger Check reveals a Climax Trigger, you may deal 1 damage to your opponent.
 EndCard
 
 Event: CSM/S96-075
@@ -2002,7 +1997,7 @@ Auto: StartOpponentAttackPhase
 }
 InMemory
 Text Send this card to memory.
-Text Auto: MEMORY [Turn this face-up card face-down] At the start of your opponent's attack phase you may pay the cost, if you do, choose an opponent's character, it gains -3 soul until the end of turn.
+Text Auto: MEMORY [Flip this face-up card face-down] If this is in your Memory, at the start of your Opponent's Attack Phase, you may pay cost. If you do, choose 1 of your opponent's characters, this turn, it gets -3 Soul.
 EndCard
 
 Climax: CSM/S96-076
@@ -2037,10 +2032,10 @@ Cost 0
 Power 3500
 Trait1 Devil Hunter
 Trait2 Public Safety
-Combo Reason for Demon Hunting
+Combo Reason for Devil Hunting
 Cont: GiveSelf
 {
-	If StageContains 2 Other && HasTrait Devil Hunter|Demon
+	If StageContains 2 Other && HasTrait Devil Hunter|Devil
 	{
 		If MyTurn 
 		{
@@ -2055,19 +2050,19 @@ Cont: GiveSelf
 		}
 	}
 }
-Text Cont: If you control 2 or more other <Devil Hunter> or <Demon> characters, this card gains the 2 following effects. "Cont: During your turn this card gains +3000 power." "Auto: Encore [Discard 1 climax or event]."
+Text Cont: If you control 2 or more other <Devil Hunter> or <Devil> characters, this card gains the 2 following effects. "Cont: During your turn this card gains +3000 power." "Auto: Encore [Discard 1 climax or event]."
 Auto: OnAttack
 {
-	If Climax Reason for Demon Hunting
+	If Climax Reason for Devil Hunting
 	{
 		SearchWaitingRoom IsCharacter
 	}
 }
-Text Auto: CxCombo If this card attacks and "Reason for Demon Hunting" is in your climax area you may choose a character from your waiting room and add it to your hand.
+Text Auto: {CX Combo} When this attacks, if you have the Pants CX (098) in your Climax Area, choose 1 character in your Waiting Room, you may add it to hand.
 EndCard
 
 Character: CSM/S96-081
-Name Public Safety Anti-Demon Special 4th Division, Himeno
+Name Public Safety Anti-Devil Special 4th Division, Himeno
 Color B 
 Level 2
 Cost 1
@@ -2081,13 +2076,13 @@ Auto: StartClimaxPhase
 	PayCost Discard 1 Any
 	{
 		RevealUpTo Deck 3
-		ChooseCardsFromTargets 0 1 HasTrait Devil Hunter|Demon
+		ChooseCardsFromTargets 0 1 HasTrait Devil Hunter|Devil
 		MoveCard Hand
 		PutTheRestIntoTheWaitingRoom
 	}
 }
 Alarm
-Text Auto: ALARM [Discard 1 card] At the start of your climax phase, if this card is in the top of your clock you may pay the cost, if you do look up to 3 cards from the top of your deck, then choose up to one <Devil Hunter> or <Demon> character and add it of your hand, then send the rest to the waiting room.
+Text Auto: ALARM [Discard 1 card] If this is on top of your Clock, at the start of your Climax Phase, you may pay cost. If you do, look at up to 3 cards from the top of your deck, choose up to 1 <Devil Hunter> or <Devil> character from among them, show it to your opponent, add it to hand, send the rest to Waiting Room
 EndCard
 
 Character: CSM/S96-082
@@ -2128,7 +2123,7 @@ Cont: InHand
 		GainLevel -1
 	}
 }
-Text Cont: MEMORY If you have 2 or more "Easy Revenge!" in your memory, this hard has -1 level in your hand.
+Text Cont: MEMORY If you have 2 or more {1/1 Easy Revenge Event - 097} in Memory, this gets -1 Level in hand.
 *Healer
 Auto: OnPlay
 {
@@ -2148,7 +2143,7 @@ Auto: OnReverseOpponent
 		}
 	}
 }
-Text Auto: MEMORY When this card's battle opponent is reversed, if you have a card in your memory, reveal the top card of your deck, if its a level 1 or higher card, put it into your stock.
+Text Auto: MEMORY When this card's battle opponent is Reversed, if you have a card in Memory, reveal the top card of your deck. If that card is Level 1 or higher, send it to Stock.
 EndCard
 
 Character: CSM/S96-084
@@ -2181,7 +2176,7 @@ Auto: OnAttack
 		}
 	}
 }
-Text Auto: CxCombo [(1) Discard 1 card] When this card attacks, if "Ghost's Right Hand" is in your climax area and your memory contains 2 or more cards named "Easy Revenge!" you can pay the cost, if you do, deal 2 or 3 damage to your opponent.
+Text Auto: {CX Combo} [(1) Discard 1 card] When this attacks, if you have the Pants CX (099) in your Climax Area, and you have 2 or more {1/1 Easy Revenge Event - 097} in Memory, you may pay cost. If you do, deal 2 or 3 damage to your opponent.
 EndCard
 
 Character: CSM/S96-085
@@ -2194,12 +2189,12 @@ Trait1 Devil Hunter
 Trait2 Public Safety
 Auto: OnPlay
 {
-	PayCost Discard 1 HasTrait Devil Hunter|Demon
+	PayCost Discard 1 HasTrait Devil Hunter|Devil
 	{
 		SearchDeck NameEquals Easy Revenge!
 	}
 }
-Text Auto: [Discard 1 <Devil Hunter> or <Demon> character] When this card is placed on the stage from your hand you may pay the cost, if you do search your deck for a card named "Easy Revenge!" and add it to your hand.
+Text Auto: [Discard 1 <Devil Hunter> or <Devil> character] When this is placed on stage from hand, you may pay cost. If you do, search your deck for up to 1 {1/1 Easy Revenge Event - 097}, show it to your opponent, add it to hand, and shuffle your deck afterwards.
 *BlueLevel0Bomb
 EndCard
 
@@ -2214,18 +2209,18 @@ Trait2 Public Safety
 Combo Top Secret Alliance
 Auto: StartAttackPhase
 {
-	If Climax Top Secret Alliance && StageContains 2 Other && HasTrait Devil Hunter|Demon
+	If Climax Top Secret Alliance && StageContains 2 Other && HasTrait Devil Hunter|Devil
 	{
 		PayCost SendClimax WaitingRoom
 		{
 			RevealUpTo Deck 3
-			ChooseCardsFromTargets 0 2 HasTrait Devil Hunter|Demon || NameEquals Easy Revenge!
+			ChooseCardsFromTargets 0 2 HasTrait Devil Hunter|Devil || NameEquals Easy Revenge!
 			MoveCard Hand
 			PutTheRestIntoTheWaitingRoom
 		}
 	}
 }
-Text Auto: CxCombo [Send "Top Secret Alliance" from your climax area to your waiting room] At the start of your attack phase, if you control 2 or more <Devil Hunter> or <Demon> characters you may pay the cost, if you do look up to 3 cards fro mthe top of your deck and add up to 2 <Devil Hunter> or <Demon> characters or "Easy Revenge!".
+Text Auto: {CX Combo} [Send 1 {Level 1 or lower Stock Soul CX - 100} in your Climax Area to Waiting Room] At the start of your Attack Phase, if you have 2 or more other <Devil Hunter> or <Devil> characters, you may pay cost. If you do, look at up to 3 cards from the top of your deck, choose up to 2 <Devil Hunter> or <Devil> character or {1/1 Easy Revenge Event - 097} from among them, show them to your opponent, add them to hand, send the rest to Waiting Room.
 Act: 1
 {
 	Brainstorm 4
@@ -2238,36 +2233,36 @@ Act: 1
 		Discard 1 Any
 	}
 }
-Text Act: BRAINSTORM [(1)] Mill 4 cards, then for each climax look at the top 3 cards of your deck and add one to your hand, then discard a card
+Text Act: BRAINSTORM (1) Flip over the top 4 cards of your deck, then send them to Waiting Room. For each Climax among them, resolve the following effect: "Look at up to 3 cards from the top of your deck, choose up to 1 card among them, add it to hand, and send the rest to Waiting Room, and discard 1 card."
 EndCard
 
 Character: CSM/S96-087
-Name The Future Demon
+Name The Future Devil
 Color B 
 Level 0
 Cost 0
 Power 1500
 Trait1 Devil Hunter
 Trait2 Public Safety
-*GlobalPower(500,Devil Hunter|Demon)
+*GlobalPower(500,Devil Hunter|Devil)
 Auto: OnOtherPlayedNormally
 {
 	IfOther NameEquals Career Consultation, Hayakawa Aki &&& Compare MarkersUnderThis 0 OrLower
 	{
-		Question put this card as marker?
+		Question Put "The Future Devil" underneath "Career Consultation, Hayakawa Aki" as a marker?
 		If Yes
 		{
 			TargetOther
 			SaveTargets
 			TargetSelf
 			MarkerTargetsUnderSavedTarget_FaceUp
-			SearchLocationForTargets Deck 0 1 HasTrait Devil Hunter|Demon
+			SearchLocationForTargets Deck 0 1 HasTrait Devil Hunter|Devil
 			MoveCard BottomOfStock
 			ShuffleLocation Deck
 		}
 	}
 }
-Text Auto: When another of your "Career Consultation, Hayakawa Aki" is placed on the stage from your hand, if there is no marker under that character, you may put this card face up under that character as a marker. If you do, search your deck for up to 1 <Devil Hunter> or <Demon> character, reveal it to your opponent, put it on the bottom of your stock, and shuffle your deck.
+Text Auto: When your other {2/1 Hayakawa Aki - 096} is placed on stage from hand, if that character does not have a Marker underneath it, you may place this underneath that character face-up as a Marker. If you do, search your deck for up to 1 <Devil Hunter> or <Devil> character, show it to your opponent, send it to the bottom of your Stock, and shuffle your deck afterwards.
 EndCard
 
 Character: CSM/S96-088
@@ -2291,7 +2286,7 @@ Cont: Global
 		}
 	}
 }
-Text Cont: All of your opponent's characters get "Auto: ENCORE [(2)]".
+Text Cont: All of your opponent characters gets "AUTO - ENCORE (2)".
 Auto: OnSentFromStageToWaitingRoom
 {
 	PayCost 1 Discard 1 IsClimax
@@ -2299,7 +2294,7 @@ Auto: OnSentFromStageToWaitingRoom
 		SearchWaitingRoom IsClimax
 	}
 }
-Text Auto: [(1) Place 1 climax card from your hand into your waiting room] When this card is placed from the stage into your waiting room, you may pay the cost. If you do, choose 1 climax in your waiting room and return it to your hand.
+Text Auto: [(1) Discard 1 Climax] When this is sent from Stage to Waiting Room, you may pay cost. If you do, choose 1 Climax from your Waiting Room, and add it to hand.
 EndCard
 
 Character: CSM/S96-089
@@ -2318,7 +2313,7 @@ Auto: OnUseThisCardsBackup
 		Refresh
 	}
 }
-Text Auto: [(2)] When you use this card's "BACKUP", you may pay the cost. If you do, return all cards from your waiting room to your deck, and shuffle your deck.
+Text Auto: (2) When you use this card's BACKUP, you may pay cost. If you do, shuffle all cards from your Waiting Room into your deck.
 Backup 2500
 EndCard
 
@@ -2336,15 +2331,15 @@ Trait2 Public Safety
 //{
 	//GainSpecialEffect DamageFromTheBottom
 //}
-//Text Cont: All the damage dealt by this card is taken from the bottom of the deck.
+//Text Cont: This card's damage is dealt from the bottom of your opponent's deck instead.
 Cont: GiveAll
 {
-	If Other && HasTrait Devil Hunter|Demon
+	If Other && HasTrait Devil Hunter|Devil
 	{
 		GainPower 1500
 	}
 }
-Text Cont: All of your other <Devil Hunter> or <Demon> characters get +1500 power.
+Text Cont: All of your other <Devil Hunter> or <Devil> characters get +1500 power.
 Auto: OnReverseOpponent
 {
 	If MyTurn
@@ -2355,7 +2350,7 @@ Auto: OnReverseOpponent
 		}
 	}
 }
-Text Auto: [(1) Discard 1 card] When this card's battle opponent becomes REVERSED, if it's your turn  you may pay the cost, if you do deal 1 damage to your opponent.
+Text Auto: [(1) Discard 1 card] During your turn, when this card's battle opponent is Reversed, you may pay cost. If you do, deal 1 damage to your opponent.
 EndCard
 
 Character: CSM/S96-091
@@ -2373,18 +2368,24 @@ Cont: GiveSelf
 		GainPower 2000
 	}
 }
-Text Cont: If this card is in the middle position of your center stage, this card gets +2000 power.
+Text Cont: If this is in the Front Row Center Slot, this gets +2000 power.
 Auto: OnAttack
 {
 	GainSpecialEffect DoubleTrigger
-	TargetTop Stock 1
-	MoveCard WaitingRoom
+	ScheduleEffect StartMyCounterStep
+	{
+		Effect:
+		{
+			TargetTop Stock 1
+			MoveCard WaitingRoom
+		}
+	}
 }
-Text Auto: When this card attacks, during the attack, you perform a trigger check twice during the trigger step. Then, put the top card of your stock into your waiting room.
+Text Auto: When this attacks, during the Trigger Step of this attack, perform Trigger Check twice. If you triggered twice, put the top card of your Stock to Waiting Room.
 EndCard
 
 Character: CSM/S96-092
-Name Demon Extermination Request, Himeno
+Name Devil Extermination Request, Himeno
 Color B 
 Level 0
 Cost 0
@@ -2398,8 +2399,8 @@ Auto: OnPlay
 	ChooseCharacterFromTargets Choose a Character
 	DontStand
 }
-Text Auto: When this card is placed on the stage from your hand, choose 1 character in your opponent's back row whose level is higher than your opponent's. That character does not STAND during the opponent's next stand phase.
-*DropSearch(Devil Hunter|Demon)
+Text Auto: When this is placed on stage from hand, choose 1 of your opponent's Back Row characters whose Level is higher than your opponent's Level, during your opponent's next Stand Phase, that character does not Stand.
+*DropSearch(Devil Hunter|Devil)
 EndCard
 
 Character: CSM/S96-093
@@ -2421,7 +2422,7 @@ Auto: OnUseThisCardsBackup
 			MoveCard BottomOfOpponentDeck
 	}		
 }
-Text: Auto [Discard 2 cards] When you use this card's BACKUP effect you may pay the cost, if you do choose an opponent's character wich level is higher then your opponent's level and move it to the bottom of their deck.
+Text Auto: [Discard 2 cards] When you use this card's BACKUP, you may pay cost. If you do, choose 1 of your opponent's characters whose Level is higher than your opponent's Level, and send it to the bottom of your opponent's deck.
 EndCard
 
 Character: CSM/S96-094
@@ -2443,7 +2444,7 @@ Cont: GiveSelf
 		}
 	}
 }
-Text Cont: MEMORY During your turn, if you have a card in your memory, this card gets +2500 power and the following ability: "[Auto: If this card battles a level 2 character this card gains +6000 power.]"
+Text Cont: MEMORY - During your turn, if you have a card in Memory, this gets +2500 power, and gains the following ability: "AUTO - When this attacks, if the Level of the character across from this is 2, this turn, this gets +6000 power."
 EndCard
 
 Character: CSM/S96-095
@@ -2456,28 +2457,28 @@ Trait1 Devil Hunter
 Trait2 Public Safety
 Cont: GiveSelf
 {
-	If MyTurn && StageContains 2 Other && HasTrait Devil Hunter|Demon
+	If MyTurn && StageContains 2 Other && HasTrait Devil Hunter|Devil
 	{
 		GainPower 2000
 	}
 }
-Text Cont: During your turn, if you have 2 or more other <Devil Hunter> or <Demon> characters, this card gets +2000 power.
+Text Cont: During your turn, if you have 2 or more other <Devil Hunter> or <Devil> characters, this gets +2000 power.
 Auto: OnPlay
 {
 	GainEffect
 	{
 		Auto: OnReverseOpponent
 		{
-			PayCost 1 Discard 1 Any Rest 1 Other && HasTrait Devil Hunter|Demon
+			PayCost 1 Discard 1 Any Rest 1 Other && HasTrait Devil Hunter|Devil
 			{
-				SearchLocationForTargets WaitingRoom 0 2 HasTrait Devil Hunter|Demon
+				SearchLocationForTargets WaitingRoom 0 2 HasTrait Devil Hunter|Devil
 				MoveCard Hand
 			}
 		}
 	}
 }
 Quick
-Text Auto: [(1) Place one card in your hand in the waiting room, and REST one of your other STAND <Devil Hunter> or <Demon> characters] This card is placed on the stage from your hand. During this turn, when this card's battle opponent becomes REVERSED, you may pay the cost. If you do, choose up to 2 <Devil Hunter> or <Demon> characters in your waiting room, and return them to your hand.
+Text Auto: [(1) Discard 1 card, Rest 1 of your other Standing Devil Hunter> or <Devil> characters] During the turn this is placed on stage from hand, when this card's battle opponent is Reversed, you may pay cost. If you do, choose up to 2 <Devil Hunter> or <Devil> characters in your Waiting Room, add them to hand.
 EndCard
 
 Character: CSM/S96-096
@@ -2492,22 +2493,22 @@ Trait2 Public Safety
 *Level3Assist
 Auto: StartDrawPhase
 {
-	If LocationContains Marker 1 NameEquals The Future Demon
+	If LocationContains Marker 1 NameEquals The Future Devil
 	{
 		TargetTop Deck 4
 		View
 	}
 }
-Text Auto: Filler effect to emulate clock phase check 3
+EffectText Auto: Filler effect to emulate clock phase check 3.
 Auto: StartAttackPhase
 {
-	If LocationContains Marker 1 NameEquals The Future Demon
+	If LocationContains Marker 1 NameEquals The Future Devil
 	{
 		TargetTop Deck 3
 		View
 	}
 }
-Text Auto: At the beginning of your clock phase or the beginning of your attack phase, if this card has "The Future Demon" in its markers, look at up to 3 cards from the top of your deck, and place the original cards on top of your deck. put in order.
+Text Auto: At the start of your Clock Phase or Attack Phase, if you have {0/0 Future Devil - 087} underneath this card as a Marker, look at up to 3 cards from the top of your deck, and put them back on top in the same order.
 Auto: OnTriggerCheckClimax
 {
 	PayCost Discard 1 IsClimax
@@ -2516,7 +2517,7 @@ Auto: OnTriggerCheckClimax
 		MoveCard WaitingRoom
 	}
 }
-Text Auto: [Put 1 climax card from your hand into your waiting room] When you trigger a climax card, you may pay the cost. Then, put the top card of your clock into your waiting room.
+Text Auto: [Discard 1 Climax] When you Trigger a Climax, you may pay cost. If you do, Heal 1.
 EndCard
 
 Event: CSM/S96-097
@@ -2528,17 +2529,17 @@ Effect:
 {
 	Mill 2
 	SetXValue TotalLevel
-	SearchWaitingRoom HasTrait Devil Hunter|Demon && Compare ThatCardsLevel X OrLess
+	SearchWaitingRoom HasTrait Devil Hunter|Devil && Compare ThatCardsLevel X OrLess
 	TargetSelf
 	MoveCard Memory
 }
-Text: Mill 2 cards, then choose a character form your waiting room with level x, where x is equal to the combined levels of the cards you milled by this effect.
+Text: Mill 2, then choose up to 1 Level X or lower <Devil Hunter> or <Devil> character from your Waiting Room, and add it to hand. X equals the sum of Levels of cards milled by this effect. Send this to Memory.
 Auto: OnOtherAttacks
 {
-	IfOther NameEquals Public Safety Anti-Demon Special 4th Division, Hayakawa Aki
+	IfOther NameEquals Public Safety Anti-Devil Special 4th Division, Hayakawa Aki
 	{
 		Peek BottomOfOpponentDeck 1
-		Question Send to waiting room?
+		Question send to waiting room?
 		If Yes
 		{
 			MoveCard OpponentWaitingRoom
@@ -2550,11 +2551,11 @@ Auto: OnOtherAttacks
 	}
 }
 InMemory
-Text Auto: MEMORY If this card is in your memory and your "Supervisor of Special 4th Division, Hayakawa Aki" attacks, look at the bottom of your opponent's deck and leave it there or send it to the waiting room.
+Text Auto: MEMORY - If this is in your Memory, when your {3/2 Aki - 029} attacks, look at the bottom card of your opponent's deck, and put it on the bottom of your opponent's deck or into their Waiting Room.
 EndCard
 
 Climax: CSM/S96-098
-Name Reason for Demon Hunting
+Name Reason for Devil Hunting
 Color B
 *GateClimax
 EndCard
@@ -2605,17 +2606,17 @@ Auto: OnPlay
 {
 	*ScryToBottom
 }
-Text Auto: When this card is placed on stage from your hand, look at the top card of your deck, and put it on the top or the bottom of your deck.
-Act: Discard 1 SendSelf WaitingRoom
+Text Auto: When this is placed on stage from hand, look at the top card of your deck, and put it on top or bottom of your deck.
+Act: Discard 1 Any SendSelf WaitingRoom
 {
-	If StageContains 1 Other && HasTrait Devil Hunter|Demon
+	If StageContains 1 Other && HasTrait Devil Hunter|Devil
 	{
 		TargetLocation OpponentStage
 		NarrowTargets CanMove
 		MoveToOpenPosition True True
 	}
 }
-Text Act: [Put 1 card from your hand into your waiting room, then put this card into your waiting room] If you have another <Devil Hunter> or <Demon> character, choose one of your opponent's characters, move it to an open position of your opponent's stage.
+Text Act: [Discard 1 card, Send this to Waiting Room] If you have another <Devil Hunter> or <Devil> character, choose 1 of your opponent's characters, move it to an opponent's empty slot.
 EndCard
 
 Character: CSM/S96-103
@@ -2668,7 +2669,7 @@ Trait1 Devil Hunter
 Trait2 Public Safety
 Auto: OnPlay|OnSentFromStageToWaitingRoom
 {
-	PayCost 1 Discard 1 HasTrait Devil Hunter|Demon
+	PayCost 1 Discard 1 HasTrait Devil Hunter|Devil
 	{
 		Peek Deck 3
 		ChooseCard Choose a card to add to your hand (Will not be revealed)
@@ -2676,11 +2677,11 @@ Auto: OnPlay|OnSentFromStageToWaitingRoom
 		PutTheRestIntoTheWaitingRoom
 	}
 }
-Text Auto: [(1) Put one <Devil Hunter> or <Demon> character from your hand into the waiting room] When this card is placed on the stage from your hand or placed from the stage to the waiting room, you pay the cost. you can Then, look at up to 3 cards from the top of your deck, choose up to 1 card, add it to your hand, and put the rest into your waiting room.
+Text Auto: [(1) Discard 1 <Devil Hunter> or <Devil> character] When this is placed on stage from hand or sent from Stage to Waiting Room, you may pay cost. If you do, look at up to 3 cards from the top of your deck, choose up to 1 card among them, add it to hand, and send the rest to Waiting Room.
 EndCard
 
 Character: CSM/S96-P01
-Name Public Safety Anti-Demon Special 4th Division, Denji
+Name Public Safety Anti-Devil Special 4th Division, Denji
 Color Y 
 Level 1
 Cost 0
@@ -2689,19 +2690,25 @@ Trait1 Devil Hunter
 Trait2 Public Safety
 Cont: GiveSelf
 {
-	If StageContains 2 Other && HasTrait Devil Hunter|Demon
+	If StageContains 2 Other && HasTrait Devil Hunter|Devil
 	{
 		GainPower 3000
 	}
 }
-Text Cont: If you have 2 or more other <Devil Hunter> or <Demon> characters, this card gets +3000 power.
+Text Cont: If you have 2 or more other <Devil Hunter> or <Devil> characters, this gets +3000 power.
 Auto: OnAttack
 {
 	GainSpecialEffect DoubleTrigger
-	TargetTop Stock 1
-	MoveCard WaitingRoom
+	ScheduleEffect StartMyCounterStep
+	{
+		Effect:
+		{
+			TargetTop Stock 1
+			MoveCard WaitingRoom
+		}
+	}
 }
-Text Auto: When this card attacks, during the attack, you perform a trigger check twice during the trigger step. Then, put the top card of your stock into your waiting room.
+Text Auto: When this attacks, during the Trigger Step of this attack, perform Trigger Check twice. If you triggered twice, put the top card of your Stock to Waiting Room.
 EndCard
 
 Character: CSM/S96-T01
@@ -2714,12 +2721,12 @@ Trait1 Devil Hunter
 Trait2 Public Safety
 Cont: GiveAll
 {
-	If MyTurn && Other && HasTrait Devil Hunter|Demon
+	If MyTurn && Other && HasTrait Devil Hunter|Devil
 	{
 		GainPower 500
 	}
 }
-Text Cont: During your turn, all your <Devil Hunter> or <Demon> characters gain +500 power.
+Text Cont: During your turn, all your <Devil Hunter> or <Devil> characters gain +500 power.
 *Act1RestSelfDrawBrainstorm5
 EndCard
 
@@ -2734,27 +2741,27 @@ Trait2 Public Safety
 *YellowLevel0Bomb
 Auto: OnSentFromStageToWaitingRoom
 {
-	PayCost 1 SendFromWaitingRoomToBottom 1 Clock HasTrait Devil Hunter|Demon
+	PayCost 1 SendFromWaitingRoomToBottom 1 Clock HasTrait Devil Hunter|Devil
 	{
-		SearchWaitingRoom HasTrait Devil Hunter|Demon
+		SearchWaitingRoom HasTrait Devil Hunter|Devil
 	}
 }
-Text Auto: [(1) Put 1 <Devil Hunter> or <Demon> character from your waiting room at the bottom of your clock] When this card is put into the waiting room from the stage, you may pay the cost. If you do, choose up to 1 <Devil Hunter> or <Demon> character in your waiting room, and add it to your hand.
+Text Auto: [(1) Put 1 <Devil Hunter> or <Devil> character from your Waiting Room on the bottom of your Clock] When this is sent from stage to Waiting Room, you may pay cost. If you do, choose 1 <Devil Hunter> or <Devil> character from your Waiting Room, and add it to hand.
 EndCard
 
 Character: CSM/S96-T03
-Name Chainsaw Demon, Pochita
+Name Chainsaw Devil, Pochita
 Color Y 
 Level 0
 Cost 0
 Power 500
-Trait1 Demon
-*GlobalPower(500,Devil Hunter|Demon)
+Trait1 Devil
+*GlobalPower(500,Devil Hunter|Devil)
 Act: 2 RestSelf 
 {
-	SearchDeck HasTrait Devil Hunter|Demon
+	SearchDeck HasTrait Devil Hunter|Devil
 }
-Text Act: [(2) Rest this.] Search your deck for 1 <Devil Hunter> or <Demon> character and add it to your hand.
+Text Act: [(2) Rest this] Search your deck for up to 1 <Devil Hunter> or <Devil> character, show it to your opponent, add it to hand, and shuffle your deck afterwards.
 EndCard
 
 Character: CSM/S96-T04
@@ -2767,12 +2774,12 @@ Trait1 Devil Hunter
 Trait2 Public Safety
 Auto: OnAttack
 {
-	If StageContains 1 Other && HasTrait Devil Hunter|Demon
+	If StageContains 1 Other && HasTrait Devil Hunter|Devil
 	{
 		GainPower 3000
 	}
 }
-Text Auto: When this card attacks, if you control another <Devil Hunter> or <Demon> character this gains +3000 power until the end of turn.
+Text Auto: When this attacks, if you have another <Devil Hunter> or <Devil> characters, this turn, this gets +3000 power.
 EndCard
 
 Character: CSM/S96-T05
@@ -2788,7 +2795,7 @@ Backup 3000
 EndCard
 
 Character: CSM/S96-T06
-Name A Demon's Name, Makima
+Name A Devil's Name, Makima
 Color Y  
 Level 2
 Cost 1
@@ -2799,13 +2806,13 @@ Trait2 Public Safety
 *LevelAssist
 Auto: OnPlay
 {
-	If StageContains 4 Other && HasTrait Devil Hunter|Demon
+	If StageContains 4 Other && HasTrait Devil Hunter|Devil
 	{
-		SearchLocationForTargets WaitingRoom 0 1 HasTrait Devil Hunter|Demon
+		SearchLocationForTargets WaitingRoom 0 1 HasTrait Devil Hunter|Devil
 		MoveCard Stock
 	}
 }
-Text Auto: When this card is put on the stage from your hand, if you ocntrol 4 other <Devil Hunter> or <Demon> characters, you may put one <Devil Hunter> or <Demon> character from your waiting room on your stock
+Text Auto: When this is placed on stage from hand, if you have 4 or more other <Devil Hunter> or <Devil> characters, choose 1 <Devil Hunter> or <Devil> character in your Waiting Room, you may send it to Stock.	
 EndCard
 
 Character: CSM/S96-T07
@@ -2819,18 +2826,18 @@ Trait1 Devil Hunter
 Trait2 Public Safety
 Auto: OnPlay
 {
-	ChooseCharacters 1 1 HasTrait Devil Hunter|Demon
+	ChooseCharacters 1 1 HasTrait Devil Hunter|Devil
 	GainPower 1500
 }
-Text Auto: When this card is summoned, choose a <Devil Hunter> or <Demon> character, it gains +1500 power until the end of turn.
+Text Auto: When this is placed on stage from hand, choose 1 of your <Devil Hunter> or <Devil> characters, this turn, it gets +1500 power.
 Auto: OnAttack
 {
-	If StageContains 2 Other && HasTrait Devil Hunter|Demon
+	If StageContains 2 Other && HasTrait Devil Hunter|Devil
 	{
 		GainPower 4000
 	}
 }
-Text Auto: When this card attacks, if you control 2 other <Devil Hunter> or <Demon> characters, it gains +4000 until the end if turn.
+Text Auto: When this attacks, if you have 2 or more other <Devil Hunter> or <Devil> characters, this turn, this gets +4000 power.
 EndCard
 
 Event: CSM/S96-T08
@@ -2879,7 +2886,7 @@ Effect:
 		TriggerCustomEvent Toast
     }
 }
-Text: When you play this card form your hand you can discard a card, if you do, perform these 3 effects once each: [Look at the top 3 cards of your deck and reorder them. Choose an opponent's character and return it to your opponent's hand.] [Deal 1 damage to your opponent, then choose a card in your opponent's waiting room and return it to his deck. Choose one of your characters, it gains +1000 until the end of the turn.] [Choose up to 2 of your characters, they gain +1 soul until the end of turn.]
+Text: You may discard 1 card. If you do, perform the following 3 effects once each, - "Look at up to 3 cards from the top of your deck, and put them back on top in any order, then choose up to 1 of your opponent's characters, return it to hand." - "Deal 1 damage to your opponent, then choose up to 1 card in your opponent's Waiting Room, place it on top of their deck, and choose 1 of your characters, this turn, it gets +1000 power." - "Choose up to 2 of your characters, this turn, they get +1 Soul."
 EndCard
 
 Climax: CSM/S96-T09
@@ -2898,9 +2905,9 @@ Trait2 Public Safety
 *2OptionBondDiscard(The Secret of His Heart\, Denji,Aiming for the Weak Point\, Denji)
 Act: Discard 1 Any SendSelf WaitingRoom
 {
-	SearchWaitingRoom HasTrait Devil Hunter|Demon
+	SearchWaitingRoom HasTrait Devil Hunter|Devil
 }
-Text Act: [Discard a card, put this card into the waiting room] Choose a <Devil Hunter> or <Demon> character in your waiting room, and return it to your hand.
+Text Act: [Discard 1 card, Send this to Waiting Room] Choose 1 <Devil Hunter> or <Devil> character from your Waiting Room, add it to hand.
 EndCard
 
 Character: CSM/S96-T11
@@ -2935,7 +2942,7 @@ Cont: Global
 		}
 	}
 }
-Text Cont: All of your opponent's characters get "Auto: ENCORE [(2)]".
+Text Cont: All of your opponent’s characters get “AUTO - ENCORE (2)”.
 EndCard
 
 Character: CSM/S96-T13
@@ -2949,23 +2956,23 @@ Trait2 Public Safety
 Combo Contract Inside the Trash
 Auto: OnAttack
 {
-	If StageContains 2 Other && HasTrait Devil Hunter|Demon
+	If StageContains 2 Other && HasTrait Devil Hunter|Devil
 	{
 		GainPower 2000
 	}
 }
 Quick
-Text Auto: When this card attacks, if you control 2 or more other <Devil Hunter> or <Demon> characters, this card gains +2000 power until the end of turn.
+Text Auto: When this attacks, if you have 2 or more other <Devil Hunter> or <Devil> characters, this turn, this gets +2000 power.
 Auto: OnAttack
 {
-	If Climax Contract Inside the Trash && StageContains 1 Other && HasTrait Devil Hunter|Demon
+	If Climax Contract Inside the Trash && StageContains 1 Other && HasTrait Devil Hunter|Devil
 	{
 		Mill 2
 		SetXValue TotalLevel
-		SearchWaitingRoom Compare ThatCardsLevel X OrLess && HasTrait Devil Hunter|Demon
+		SearchWaitingRoom Compare ThatCardsLevel X OrLess && HasTrait Devil Hunter|Devil
 	}
 }
-Text Auto: CxCombo When this attacks, if you control "Contract Inside the Trash" mill 2 cards then, choose a character from your waiting room with level x and return it to your hand.(X is equal to the levels of the cards you milled.)
+Text Auto: {CX COMBO} When this attacks, if you have the Door CX (T19) in the Climax Area, and you have another <Devil Hunter> or <Devil> character, mill 2, then choose up to 1 Level X or lower <Devil Hunter> or <Devil> character from your Waiting Room, and add it to hand. X equals the sum of Levels of cards milled by this effect.
 EndCard
 
 Character: CSM/S96-T14
@@ -2988,17 +2995,17 @@ Trait1 Devil Hunter
 Trait2 Public Safety
 Auto: OnOtherAttacks
 {
-	If Other HasTrait Devil Hunter|Demon
+	IfOther HasTrait Devil Hunter|Devil
 	{
 		TargetLocation Stage
-		NarrowTargets HasTrait Devil Hunter|Demon
+		NarrowTargets HasTrait Devil Hunter|Devil
 		SetXValue TargetCount
 		MultiplyXValue 500
 		TargetSelf
 		GainPower X
 	}
 }
-Text Auto: When other <Devil Hunter> or <Demon> character attacks, this card gains x power for the turn where x is the number of <Devil Hunter> or <Demon> characters you control.
+Text Auto: When your other <Devil Hunter> or <Devil> characters attack, this turn, this gets +X power. X equals the number of your other <Devil Hunter> or <Devil> characters times 500.
 *ClockEncore
 EndCard
 
@@ -3016,24 +3023,24 @@ Auto: OnPlay
 	DrawCard
 	Discard 1
 }
-Text Auto: When you summon this character, draw 1 card then discard a card.
+Text Auto: When this is placed on stage from hand, draw 1 card, discard 1 card.
 Act: SendSelf WaitingRoom
 {
 	TargetLocation Stage
-	NarrowTargets NameEquals Chainsaw Demon, Pochita
+	NarrowTargets NameEquals Chainsaw Devil, Pochita
 	ChooseCharacterFromTargets choose a pochita on the stage
 	RememberSlot
-	SearchLocationForTargets WaitingRoom 1 1 NameEquals Demon Hunting Demons, Chainsaw Man
+	SearchLocationForTargets WaitingRoom 1 1 NameEquals Devil Hunting Devils, Chainsaw Man
 	PlaceOnRememberedSlot
 	SaveTargets
-	SearchLocationForTargets WaitingRoom 1 1 NameEquals Chainsaw Demon, Pochita
+	SearchLocationForTargets WaitingRoom 1 1 NameEquals Chainsaw Devil, Pochita
 	MarkerTargetsUnderSavedTarget_FaceUp
 }
-Text Act: [Tribute this card] Search your waiting room for a "Demon Hunting Demons, Chainsaw Man" and place it on the stage on the same location as 1 of your "Chainsaw Demon, Pochita" then put it as a marker face up under the first one.
+Text Act: [Send this to Waiting Room] Choose 1 {3/2 Chainsaw Man - T17} in your Waiting Room, place it on stage where your {0/0 Pochita - T03} is, then place the {0/0 Pochita - T03} underneath that {3/2 Chainsaw Man - T17} face-up as a Marker.
 EndCard
 
 Character: CSM/S96-T17
-Name Demon Hunting Demons, Chainsaw Man
+Name Devil Hunting Devils, Chainsaw Man
 Color R  
 Level 3
 Cost 2
@@ -3046,7 +3053,7 @@ Auto: OnPlay|PlacedBy The Secret of His Heart, Denji
 {
 	*CheckAndAdd(3)
 }
-Text Auto: When this caracter is summoned from hand or with the effect of "The Secret of His Heart, Denji", look at the top 3 cards of your deck, choose one and add it to your hand, then send the rest to your waiting room.
+Text Auto: When this is placed on stage from hand or by the ACT effect of {2/1 Denji - T16}, look at up to 3 cards from the top of your deck, choose up to 1 card among them, add it to hand, and send the rest to Waiting Room.
 Auto: OnReverseOpponent
 {
 	PayCost 1 Discard 1 Any
@@ -3057,7 +3064,7 @@ Auto: OnReverseOpponent
 		Burn X
 	}
 }
-Text Auto: [(1) Discard 1] When this card's battle opponent is reversed you can pay the cost. If you do, mill the bottom 4 cards of your opponent's deck, then deal x damage to your opponent where x is the number of climax cards you milled by this effect.
+Text Auto: [(1) Discard 1 card] When this card's battle opponent is Reversed, you may pay cost. If you do, send the bottom 4 cards of your opponent's deck to Waiting Room, then deal X damage to your opponent. X equals the number of Climaxes sent to Waiting Room by this effect.
 EndCard
 
 Character: CSM/S96-T18
@@ -3073,7 +3080,7 @@ Trait2 Public Safety
 *Healer
 Auto: OnAttack
 {
-	PayCost 1 Send 1 WaitingRoom Other && HasTrait Devil Hunter|Demon
+	PayCost 1 Send 1 WaitingRoom Other && HasTrait Devil Hunter|Devil
 	{
 		SearchLocationForTargets OpponentWaitingRoom 0 2 Any
 		MoveCard OpponentDeck
@@ -3082,7 +3089,7 @@ Auto: OnAttack
 		GainPower 1000
 	}
 }
-Text Auto: [(1) Sacrifice another <Devil Hunter> or <Demon> character you control] When this card attacks you can pay the cost, if you do, shuffle up to two cards fro myour oponent's waiting room into his deck. Until the end of turn this gains +1000 power.
+Text Auto: [(1) Send 1 of your other <Devil Hunter> or <Devil> characters on stage to Waiting Room] When this attacks, you may pay cost. if you do, choose up to 2 cards in your Opponent’s Waiting Room, your opponent shuffles them into their deck, and this turn, this gets +1000 power.
 EndCard
 
 Climax: CSM/S96-T19
