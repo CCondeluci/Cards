@@ -1,5 +1,6 @@
 {
     "files.exclude": {
-        "**/*.jpg": true
+        "**/*.jpg": true,
+        "**/*.png": true
     }
 }
