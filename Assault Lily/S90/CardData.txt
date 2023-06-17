@@ -1,0 +1,1375 @@
+Character: ALL/S90-001
+Image ALL_S90_001
+Name "Pajama Party" Kanaho
+Color Y
+Level 0
+Cost 0
+Power 1500
+Trait1 Lily
+Trait2 Gran Eple
+Auto: OnPlay
+{
+	PayCost Discard 1 HasTrait Lily
+	{
+		DrawCard
+	}
+}
+Text Auto: [Put 1 <Lily> character from your hand into your waiting room] When this card is placed on the stage from your hand, you may pay the cost. If you do, draw 1 card.
+Auto: OnPlay
+{
+	PayCost 1 Clock
+	{
+		SearchDeck IsCharacter && Compare ThatCardsLevel 1 OrLess
+	}
+}
+Text Auto: [(1) Put the top card of your deck into your clock] When this card is placed on the stage from your hand, you may pay the cost. If you do, search your deck for up to 1 level 1 or lower character, reveal it to your opponent, put it into your hand, and shuffle your deck.
+EndCard 
+
+Character: ALL/S90-002
+Image ALL_S90_002
+Name "The Flower Smiles Gently" Himeka
+Color Y
+Level 1
+Cost 0
+Trigger Soul
+Power 3000
+Trait1 Lily
+Trait2 Gran Eple
+Combo Billboard, Advertisement, Operation
+Auto: OnSpecificClimaxPlay Billboard, Advertisement, Operation
+{
+	ChooseMultipleCharacters 0 2 InLocation Stage
+	GainEffect
+	{
+		*OnAttackPay1ToDoubleTrigger
+	}
+}
+Text Auto: CxCombo When "Billboard, Advertisement, Operation" is placed on your climax area, choose up to 2 of your characters, they get the following ability until end of turn, "Auto: [(1)] When this card attacks, you may pay the cost. If you do, perform the trigger check twice during this attack."
+Act: 1 RestSelf
+{
+	Brainstorm 4
+	If Compare BrainstormedClimax 1 OrMore
+	{
+		SetXValue BrainstormedClimax
+		SearchLocationForMultipleTargets WaitingRoom 0 X IsCharacter
+		RevealTargets
+		MoveCards Hand
+	}
+}
+Text Act: BRAINSTORM [(1) Rest this card] Flip over 4 cards from the top of your deck, and put them into your waiting room. For each climax revealed among those cards, choose up to 1 character in your waiting room, and return it to your hand.
+EndCard 
+
+Character: ALL/S90-003
+Image ALL_S90_003
+Name "Aerial Shooter" Akari
+Color Y
+Level 1
+Cost 0
+Power 4500
+Trait1 Lily
+Trait2 Gran Eple
+Combo Billboard, Advertisement, Operation
+Cont: GiveSelf
+{
+	SetXToNumberOfCharacters InLocation Backstage && HasTrait Lily
+	MultiplyXValue 500
+	GainPower X
+}
+Text Cont: This card gets +500 power for each other <Lily> character on your backstage.
+Auto: OnAttack
+{
+	If Climax Billboard, Advertisement, Operation && StageContains 2 Other && HasTrait Lily
+	{
+		Peek Deck 4
+		ChooseCardsFromTargets 0 1 Compare ThatCardsLevel 1 OrMore
+		RevealTargets
+		MoveCard Hand
+		PutTheRestIntoTheWaitingRoom
+		TargetSelf
+		GainPower 1000
+	}
+}
+Text Auto: CxCombo When this card attacks, if "Billboard, Advertisement, Operation" is in your climax area, if you have 2 or more other <Lily> characters, look at up to 4 cards from the top of your deck, choose up to 1 level 1 or higher card from among them, reveal it to your opponent, put it into your hand, and put the rest into your waiting room. This card gets +1000 power until end of turn. (Climax are regarded as level 0)
+EndCard 
+
+Character: ALL/S90-005
+Image ALL_S90_005
+Name "Gran Eple's Winning Strategy" Takane
+Color Y
+Level 3
+Cost 2
+Trigger Soul
+Soul 2
+Power 10000
+Trait1 Lily
+Trait2 Gran Eple
+Combo Kind Twilight
+Tag Healer
+Auto: OnPlay
+{
+	Heal
+}
+Text Auto: When this card is placed on the stage from your hand, you may put the top card of your clock into your waiting room.
+Auto: OnAttack
+{
+	If Climax Kind Twilight && StageContains 2 Other && HasTrait Lily
+	{
+		PayCost 1 Discard 1 Any Resonate "To Protect That Smile" Kanaho
+		{
+			Burn 2
+			GainPower 5000
+		}
+	}
+}
+Text Auto: CxCombo RESONATE [(1)] Put 1 card from your hand into your waiting room, reveal 1 ""To Protect That Smile" Kanaho" in your hand] When this card attacks, if "Kind Twilight" is in your climax area, if you have 2 or more other <Lily> characters, you may pay the cost. If you do, deal 2 damage to your opponent, and this card gets +5000 Power until end of turn. (Damage may be cancelled)
+EndCard 
+
+Character: ALL/S90-007
+Image ALL_S90_007
+Name "Gran Eple" Kanaho
+Color Y
+Level 0
+Cost 0
+Power 2000
+Trait1 Lily
+Trait2 Gran Eple
+Auto: StartClimaxPhase
+{
+	PayCost Resonate "Gran Eple's Winning Strategy" Takane
+	{	
+		TargetLocation Stage
+		NarrowTargets HasTrait Lily
+		AIChoice GainPower 2000
+		ChooseCharacterFromTargets Choose a character to give +2000 power
+		GainPower 2000
+	}
+}
+Text Auto: Resonate [Reveal 1 ""Gran Eple's Winning Strategy" Takane" in your hand] At the beginning of your climax phase, you may pay the cost. If you do, choose 1 of your <Lily> characters and it gets +2000 Power until end of turn.
+Act: 1 RestSelf Resonate "To Protect That Smile" Kanaho
+{
+	Peek Deck 3
+	AIChoice AddToHand
+	ChooseCardsFromTargets 0 1 HasTrait Lily
+	RevealTargets
+	MoveCard Hand
+	PutTheRestIntoTheWaitingRoom
+}
+Text Act: Resonate [(1) Reveal 1 ""To Protect That Smile" Kanaho" and rest this card] Look at up to 3 cards from the top of your deck, choose up to 1 <Lily> character among them, reveal it to your opponent, add it to your hand, put the remaining cards into your waiting room.
+EndCard 
+
+Character: ALL/S90-008
+Image ALL_S90_008
+Name "To Protect That Smile" Kanaho
+Color Y
+Level 3
+Cost 2
+Trigger Soul
+Soul 2
+Power 9500
+Trait1 Lily
+Trait2 Gran Eple
+Combo Kind Twilight
+Auto: OnPlay
+{
+	TargetLocation Stage
+	SetXToNumberOfCharacters
+	Peek Deck X
+	ChooseCard Choose a card to add to your hand.
+	MoveCard Hand
+	PutTheRestIntoTheWaitingRoom
+}
+Text Auto: When this card is placed on the stage from your hand, look at up to X cards from the top of your deck. Choose up to 1 card to add to your hand and put the rest into the waiting room. This card gets +1500 Power until end of turn. X is equal to the number of <Lily> characters you have.
+Auto: OnEndOfAttack
+{
+	If Climax Kind Twilight
+	{
+		PayCost 2 Discard 2 Any SendSelf Hand
+		{
+			TargetLocation Hand
+			NarrowTargets NameEquals "Gran Eple's Winning Strategy" Takane
+			AIChoice Random
+			ChooseCard Choose a "Gran Eple's Winning Strategy" Takane to place on stage.
+			If HasTarget
+			{
+				Change
+			}
+		}
+	}
+}
+Text Auto: CxCombo [(2)] Put 2 cards from your hand into your waiting room, return this card to your hand] At the end of this card's attack, if "Kind Twilight" is in your climax area, you may pay the cost. If you do, choose 1 ""Gran Eple's Winning Strategy" Takane" in your hand, put it in this card's previous position. 
+EndCard 
+
+Character: ALL/S90-010
+Image ALL_S90_010
+Name "Gran Eple" Akari
+Color Y
+Level 3
+Cost 2
+Trigger Soul
+Soul 2
+Power 10000
+Trait1 Lily
+Trait2 Gran Eple
+Cont: GiveSelf
+{
+	If StageContains 2 Other && HasTrait Lily
+	{
+		GainPower 1000
+	}
+}
+Text Cont: If you have 2 or more other <Lily> characters, this card gets +1000 power.
+Auto: OnPlay
+{
+	TargetTop Deck 1
+	Reveal
+	IfThatCard HasTrait Lily
+	{
+		Burn 1
+	}
+}
+Text Auto: When this card is placed on the stage from your hand, reveal the top card of your deck, if it is a <Lily> character, deal 1 damage to your opponent. (Damage may be cancelled. Otherwise, return the revealed card to its original place) 
+*ClockShift(0,yellow)
+EndCard
+
+Character: ALL/S90-011
+Image ALL_S90_011
+Name "Gran Eple" Himeka
+Color Y
+Level 3
+Cost 2
+Trigger Soul
+Soul 2
+Power 10000
+Trait1 Lily
+Trait2 Gran Eple
+*EarlyPlay2OrLessClimax
+*StockHealer
+EndCard
+
+Character: ALL/S90-012
+Image ALL_S90_012
+Name "Lily of the Season" Akari
+Color Y
+Level 0
+Cost 0
+Power 2000
+Trait1 Lily
+Trait2 Gran Eple
+Auto: OnPlay
+{
+	PayCost 1 Discard 1 Any
+	{
+		SearchWaitingRoom NameEquals World for Two
+	}
+}
+Text Auto: [(1) Put 1 card from your hand into your waiting room] When this card is placed on the stage from your hand, you may pay the cost. If you do, choose 1 "World for Two" in your waiting room and return it to your hand.
+*ClockShift(0,yellow)
+EndCard
+
+Character: ALL/S90-013
+Image ALL_S90_013
+Name "Can't Stop Fruity!" Kanaho & Takane & Kureha
+Color Y
+Level 0
+Cost 0
+Power 2500
+Trait1 Lily
+Trait2 Gran Eple
+Auto: OnReversed
+{
+	TargetTop Deck 1
+	Reveal
+	IfThatCard HasTrait Lily || NameEquals World for Two
+	{
+		Question Put this card into your memory?
+		If Yes
+		{
+			TargetSelf
+			MoveCard Memory
+		}
+	}
+}
+Text Auto: When this card becomes reversed in battle, reveal the top card of your deck. If that card is a <Lily> character or "World for Two", you may put this card into your memory. (Otherwise, return the revealed card to its original place)
+EndCard
+
+Character: ALL/S90-018
+Image ALL_S90_018
+Name "It's Because of Me......" Kureha
+Color Y
+Level 0
+Cost 0
+Power 1000
+Trait1 Lily
+Trait2 Gran Eple
+*BondDiscard("To Protect That Smile" Kanaho)
+*BondDiscard("Gran Eple's Winning Strategy" Takane)
+EndCard
+
+Character: ALL/S90-019
+Image ALL_S90_019
+Name "Lily of the Season" Takane
+Color Y
+Level 0
+Cost 0
+Power 1500
+Trait1 Lily
+Trait2 Gran Eple
+Cont: GiveSelf
+{
+	If StageContains 1 Other && NameContains Kanaho
+	{
+		GainPower 1500
+	}
+}
+Text Cont: If you have another character with "Kanaho" in its card name, this card gets +1500 power.
+Auto: OnPlay
+{
+	PayCost 1 Discard 1 Any
+	{
+		SearchDeck HasTrait Lily
+	}
+}
+Text Auto: [(1) Put 1 card from your hand into your waiting room] When this card is placed on the stage from your hand, you may pay the cost. If you do, search your deck for up to 1 <Lily> character, reveal it to your opponent, put it into your hand, and shuffle your deck.
+EndCard
+
+Character: ALL/S90-022
+Image ALL_S90_022
+Name "Kanaho's Determinaton" Kanaho
+Color Y
+Level 0
+Cost 0
+Power 3000
+Trait1 Lily
+Trait2 Gran Eple
+EndCard
+
+Character: ALL/S90-025
+Image ALL_S90_025
+Name "I Can't Have Enough~~!" Kureha
+Color Y
+Level 1
+Cost 0
+Power 5000
+Trait1 Lily
+Trait2 Gran Eple
+Cont: GiveSelf
+{
+	If LocationContains Memory 1 NameEquals World for Two
+	{
+		GainEffect
+		{
+			Auto: OnOpponentReverse
+			{
+				Question Put the top card of your deck into your stock?
+				If Yes
+				{
+					BlindStock
+				}
+			}
+			Text Auto: When this card's battle opponent becomes reversed, you may put the top card of your deck into your stock.
+		}
+	}
+}
+Text Cont: MEMORY If "World for Two" is in your memory, this card gets the following ability. "Auto: When this card's battle opponent becomes reversed, you may put the top card of your deck into your stock."
+EndCard
+
+Character: ALL/S90-026
+Image ALL_S90_026
+Name "Can't Stop Fruity!" Akari & Himeka
+Color Y
+Level 1
+Cost 1
+Trigger Soul
+Power 1000
+Trait1 Lily
+Trait2 Gran Eple
+Auto: OnUseThisCardsBackup
+{
+	If Not StageContains 1 Not HasTrait Lily
+	{
+		Question Put the top card of your deck into your stock?
+		If Yes
+		{
+			BlindStock
+		}
+	}
+}
+Text Auto: When you use this card's "<b>Backup</b>", if all of your characters are <Lily>, you may put the top card of your deck into your stock.
+Backup 2000
+EndCard
+
+Event: ALL/S90-029
+Image ALL_S90_029
+Name World for Two
+Color Y
+Level 1
+Cost 1
+Effect:
+{
+	AIChoice GainPower 1500
+	ChooseMultipleCharacters 1 2 InLocation Stage && HasTrait Lily
+	GainPower 1500
+	PayCost Resonate "To Protect That Smile" Kanaho &&& Resonate "Gran Eple's Winning Strategy" Takane
+	{
+		SearchDeck IsClimax
+	}
+}
+Text Choose up to 2 of your <Lily> characters, they get +1500 power until end of turn.
+Text RESONATE You may reveal a ""To Protect That Smile" Kanaho" and a ""Gran Eple's Winning Strategy" Takane" from your hand. If you reveal 1 of each this way, search your deck for up to 1 climax, reveal it to your opponent, put it into your hand, and shuffle your deck.
+Cont: Memory
+{
+	If MyTurn
+	{
+		GainPower 500
+	}
+}
+InMemory
+Text Cont: MEMORY During your turn, if this card is in your memory, all your <Lily> characters get +500 power.
+EndCard
+
+Climax: ALL/S90-030
+Image ALL_S90_030
+Name Kind Twilight
+*ChoiceClimax
+EndCard
+
+Climax: ALL/S90-031
+Image ALL_S90_031
+Name Lightning-Speed Matchup
+*WindClimax
+EndCard
+
+Climax: ALL/S90-032
+Image ALL_S90_032
+Name Oath of Soul Friend
+*WindClimax
+EndCard
+
+Climax: ALL/S90-033
+Image ALL_S90_033
+Name Billboard, Advertisement, Operation
+*ChoiceClimax
+EndCard
+
+Character: ALL/S90-039
+Image ALL_S90_039
+Name "Connected Future, Changing Now" Tazusa
+Color G
+Level 1
+Cost 0
+Power 4500
+Trait1 Lily
+Trait2 Hitotsuyanagi Corps
+Auto: OnPlay
+{
+	GainPower 1500
+}
+Text Auto: When this card is placed on the stage from your hand, this card gets +1500 power until end of turn.
+Auto: OnOpponentReverse
+{
+	If LocationContains Climax 1 Any
+	{
+		Question Put the top card of your deck into your stock?
+		If Yes
+		{
+			BlindStock
+		}
+	}
+}
+Text Auto: When this card's battle opponent becomes reversed, if there is a climax in your climax area, you may put the top card of your deck into your stock.
+EndCard 
+
+Climax: ALL/S90-048
+Image ALL_S90_048
+Name Sweet Memories
+*BarClimax
+EndCard
+
+Climax: ALL/S90-049
+Image ALL_S90_049
+Name Maybe You Would... Cuddle With Me?
+*BarClimax
+EndCard
+
+Character: ALL/S90-050
+Image ALL_S90_050
+Name "Pajama Party" Riri
+Color R
+Level 1
+Cost 0
+Power 4000
+Trait1 Lily
+Trait2 Hitotsuyanagi Corps
+Combo Endless Fighting Days
+Cont: GiveSelf
+{
+	If Not StageContains 1 Not HasTrait Lily
+	{
+		GainPower 1000
+	}
+}
+Text Cont: If all of your characters are <Lily>, this card gets +1000 power.
+Auto: OnSpecificClimaxPlay Endless Fighting Days
+{
+	If InLocation CenterStage && StageContains 1 Other && HasTrait Lily
+	{
+		SearchWaitingRoom HasTrait Lily
+		TargetLocation Stage
+		NarrowTargets Other
+		GainPower 1000
+	}
+}
+Text Auto: CxCombo When "Endless Fighting Days" is placed on your climax area, if this card is in your center stage and you have another <Lily> character, choose up to 1 <Lily> character in your waiting room, return it to your hand, and all your other characters get +1000 power until end of turn.
+EndCard
+
+Character: ALL/S90-052
+Image ALL_S90_052
+Name "Lily of the Season" Yuyu
+Color R
+Level 0
+Cost 0
+Power 500
+Trait1 Lily
+Trait2 Hitotsuyanagi Corps
+Auto: OnPlay
+{
+	PayCost Discard 1 Any
+	{
+		TargetTop Deck 1
+		Reveal
+		SetXValue TotalLevel
+		SearchWaitingRoom IsCharacter && Compare ThatCardsLevel X OrLess
+	}
+}	
+Text Auto: [Put 1 card from your hand into your waiting room] When this card is placed on the stage from your hand, you may pay the cost. If you do, reveal the top card of your deck, choose 1 level X or lower character in your waiting room, and return it to your hand. X is equal to the level of the revealed card. (Climax are regarded as level 0. Return the revealed card to its original place)
+*OnAttackPay1ToDoubleTrigger
+EndCard
+
+Character: ALL/S90-053
+Image ALL_S90_053
+Name "Something She Wants to Protect" Riri
+Color R
+Level 0
+Cost 0
+Power 2000
+Trait1 Lily
+Trait2 Hitotsuyanagi Corps
+Auto: OnPlay
+{
+	TargetTop Deck 1
+	Reveal
+	IfThatCard HasTrait Lily
+	{
+		TargetLocation Stage
+		AIChoice GainPower 1000
+		ChooseCharacterFromTargets Choose a character to give +1000 power
+		GainPower 1000
+	}
+}
+Text Auto: When this card is placed on the stage from your hand, reveal the top card of your deck. If that card is a <Lily> character, choose 1 of your characters, and that character gets +1000 power until end of turn. {Return the revealed card to its original place)
+Auto: OnPlay
+{
+	PayCost 1 Discard 1 Any
+	{
+		SearchDeck HasTrait Lily
+	}
+}
+Text Auto: [(1) Put 1 card from your hand into your waiting room] When this card is placed on the stage from your hand, you may pay the cost. If you do, search your deck for up to 1 <Lily> character, reveal it to your opponent, put it into your hand, and shuffle your deck.
+EndCard
+
+Character: ALL/S90-055
+Image ALL_S90_055
+Name "Senpai, Kouhai, And Allies" Miriam
+Color R
+Level 1
+Cost 0
+Power 3000
+Trait1 Lily
+Trait2 Hitotsuyanagi Corps
+Auto: OnOpponentReverse
+{
+	If PlayedThisTurn
+	{
+		PayCost 1 Rest 1 Other && HasTrait Lily
+		{
+			SearchDeck HasTrait Lily
+		}
+	}
+}
+Text Auto: [(1) Rest 1 of your other standing <Lily> characters] During the turn that this card is placed on the stage from your hand, When this card's battle opponent becomes reversed, you may pay the cost. If you do, search your deck for up to 1 <Lily> character, reveal it to your opponent, put it into your hand, and shuffle your deck. 
+Tag Level1Bomb
+Auto: OnReversed
+{
+	TargetBattleOpponent
+	IfThatCard Compare ThatCardsLevel 1 OrLess && OnStage && Not CardPosition Reverse
+	{
+		Question Reverse the battle opponent?
+		If Yes
+		{
+			Reverse
+		}
+	}
+}
+Quick
+Text Auto: When this card becomes reversed, if this card's battle opponent is level 1 or lower, you may reverse that character.
+EndCard
+
+Character: ALL/S90-057
+Image ALL_S90_057
+Name "Things Passed Down Through Generations" Yuyu
+Color R
+Level 3
+Cost 2
+Trigger Soul
+Soul 2
+Power 8000
+Trait1 Lily
+Trait2 Hitotsuyanagi Corps
+Combo Endless Fighting Days
+Cont: GiveSelf
+{
+	If MyTurn
+	{
+		GainPower 4000
+	}
+}
+Text Cont: During your turn, this card gets +4000 power.
+Tag Healer
+Auto: OnPlay
+{
+	Heal
+}
+Text Auto: When this card is placed on the stage from your hand, you may put the top card of your clock into your waiting room.
+Auto: OnOpponentReverse
+{
+	If Climax Endless Fighting Days
+	{
+		PayCost 2 Discard 4 Any SendClimax WaitingRoom
+		{
+			TargetLocation OpponentWaitingRoom
+			AIChoice Random
+			ChooseCard Choose up to 1 card to put on the top of your opponent's deck.
+			If HasTarget
+			{
+				MoveCard OpponentDeck
+				Burn 4
+			}
+			TargetLocation OpponentWaitingRoom
+			AIChoice Random
+			ChooseCard Choose up to 1 card to put on the top of your opponent's deck.
+			If HasTarget
+			{
+				MoveCard OpponentDeck
+				Burn 4
+			}
+		}
+	}
+}
+Text Auto: CxCombo [(2) Put 4 cards from your hand into your waiting room, Send 1 "Endless Fighting Days" from your climax area into your waiting room] When this card's battle opponent becomes reversed, you may pay the cost. If you do, perform the following action 2 times. "Choose up to 1 card in your opponent's waiting room and put it on top of your opponent's deck, and deal 4 damage to your opponent." (Damage may be cancelled)
+EndCard
+
+Character: ALL/S90-062
+Image ALL_S90_062
+Name "Lily of the Season" Fumi
+Color R
+Level 0
+Cost 0
+Power 2000
+Trait1 Lily
+Trait2 Hitotsuyanagi Corps
+Cont: GiveSelf
+{
+	If OpponentsTurn && Compare CardsInHand 5 OrMore
+	{
+		GainLevel 1
+		GainPower 1500
+	}
+}
+Text Cont: During your opponent's turn, if your hand has 5 or more cards, this card gets +1 level and +1500 power.
+Auto: StartOpponentAttackPhase
+{
+	TargetLocation CenterStage
+	If Compare TargetCount 2 OrLess
+	{
+		TargetSelf
+		Question Move this card to an open position of your center stage with a character facing it?
+		If Yes
+		{
+			MoveToOpenPositionWithOpponent
+		}
+	}
+}
+Text Auto: At the beginning of your opponent's attack phase, you may move this card to an open position of your center stage with a character facing this card.
+EndCard
+
+Character: ALL/S90-068
+Image ALL_S90_068
+Name "Excited for Reunion" Riri
+Color R
+Level 0
+Cost 0
+Power 1000
+Trait1 Lily
+Trait2 Hitotsuyanagi Corps
+Auto: StartOpponentAttackPhase
+{
+	PayCost 1
+	{
+		MoveToOpenPosition False True
+	}
+}
+Text Auto: [(1) At the beginning of your opponent's attack phase, you may pay the cost. If you do, move this card to an open position of your back stage.
+Act: Discard 1 Any SendSelf WaitingRoom
+{
+	SearchWaitingRoom HasTrait Lily
+}
+Text Act: [Put 1 card from your hand into your waiting room, put this card into your waiting room] Choose 1 <Lily> character in your waiting room, and return it to your hand. 
+EndCard 
+
+Climax: ALL/S90-076
+Image ALL_S90_076
+Name Endless Fighting Days
+*DoorClimax
+EndCard
+
+Climax: ALL/S90-077
+Image ALL_S90_077
+Name Angsty Age
+*StandbyClimax
+EndCard
+
+Character: ALL/S90-078
+Image ALL_S90_078
+Name "Fierce Silence" Yo
+Color B
+Level 0
+Cost 0
+Power 1500
+Trait1 Lily
+Trait2 Hervor
+*GlobalPower(500,Lily)
+Act: 1 Discard 1 IsClimax &&& RestSelf
+{
+	SearchWaitingRoom IsClimax
+}
+Text Act: [(1) Put 1 climax from your hand into your waiting room & Rest this card.] Choose 1 climax in your waiting room, and return it to your hand.
+EndCard
+
+Character: ALL/S90-079
+Image ALL_S90_079
+Name "Bearing the Name Hervor" Renka
+Color B
+Level 0
+Cost 0
+Power 2000
+Trait1 Lily
+Trait2 Hervor
+Act: Rest 2 HasTrait Lily
+{
+	ChooseCharacter InLocation Stage
+	GainEffect
+	{
+		Auto: OnOpponentReverse
+		{
+			Question Put the top card of your deck into your stock?
+			If Yes
+			{
+				BlindStock
+			}
+		}
+		Text Auto: When this card's battle opponent becomes reversed, you may put the top card of your deck into your stock.
+	}
+}
+Text Act: [Rest 2 of your <Lily> characters] Choose 1 of your characters and it gets the following ability until end of turn. "Auto: When this card's battle opponent becomes reversed, you may put the top card of your deck into your stock."
+*Act1Rest2SearchBrainstorm(Lily)
+EndCard 
+
+Character: ALL/S90-080
+Image ALL_S90_080
+Name "Method to Chant the Secret Spell" Chikaru
+Color B
+Level 1
+Cost 0
+Power 4500
+Trait1 Lily
+Trait2 Hervor
+Cont: GiveSelf
+{
+	If MyTurn && Compare Experience 2 OrMore
+	{
+		GainPower 2000
+	}
+}
+Text Cont: EXPERIENCE During your turn, if the total level of the cards in your level is 2 or higher, this card gets +2000 Power.
+Auto: OnOtherFrontalAttacked
+{
+	If StageContains 2 Other && HasTrait Lily
+	{
+		PayCost Discard 1 Any SendSelf WaitingRoom
+		{
+			TargetMyCharacterInBattle
+			GainSpecialEffect CannotBeReversed
+		}
+	}
+}
+Text Auto: [Put 1 card from your hand into your waiting room, put this card into your waiting room] When your other <Lily> character is frontal attacked, if you have 2 or more other <Lily> characters, you may pay the cost. If you do, that character cannot be reversed until end of turn.
+EndCard 
+
+Character: ALL/S90-081
+Image ALL_S90_081
+Name "Ran's Longest Day" Ran
+Color B
+Level 3
+Cost 2
+Trigger Soul
+Soul 2
+Power 8500
+Trait1 Lily
+Trait2 Hervor
+Cont: InHand
+{
+	If StageContains 4 Other && HasTrait Lily
+	{
+		LoseLevel 1
+	}
+}
+Text Cont: If you have 4 or more <Lily> characters, this card gets -1 level while in your hand.
+Cont: GiveSelf
+{
+	If Compare Experience 4 OrMore
+	{
+		GainPower 1500
+		GainEffect
+		{
+			Auto: OnOpponentReverse
+			{
+				PayCost 2
+				{
+					Burn 1
+				}
+			}
+			Text Auto: [(2)] When this card's battle opponent becomes reversed, you may pay the cost. If you do, deal 1 damage to your opponent. (Damage may be cancelled) 
+		}
+	}
+}
+Text Cont: EXPERIENCE if the total level of the cards in your level is 4 or higher, this card gets +1500 Power and the following ability, "Auto: [(2)] When this card's battle opponent becomes reversed, you may pay the cost. If you do, deal 1 damage to your opponent." (Damage may be cancelled)
+Tag Healer
+Auto: OnPlay
+{
+	Heal
+}
+Text Auto: When this card is placed on the stage from your hand, you may put the top card of your clock into your waiting room.
+EndCard 
+
+Character: ALL/S90-082
+Image ALL_S90_082
+Name "Pajama Party" Kazuha
+Color B
+Level 3
+Cost 2
+Trigger Soul
+Soul 2
+Power 10000
+Trait1 Lily
+Trait2 Hervor
+Combo Goodbye to Sleep
+Tag Healer
+Auto: OnPlay|PlacedBy "Hervor" Renka
+{
+	*OptionalHeal
+}
+Text Auto: When this card is placed on the stage from your hand, or by the effect of ""Hervor" Renka", you may put the top card of your clock into your waiting room.
+Auto: OnSpecificClimaxPlay Goodbye to Sleep
+{
+	If InLocation CenterStage && Compare Experience 6 OrMore && StageContains 1 Other && HasTrait Lily
+	{
+		ChooseCharacter InLocation Stage
+		GainEffect
+		{
+			Auto: OnAttack
+			{
+				PayCost 1 Discard 1 Any
+				{
+					TargetSelf
+					SetXValue TotalLevel
+					Burn X
+				}
+			}
+			Text Auto: Auto: [(1) Put 1 card from your hand into your waiting room] When this card attacks, you may pay the cost. If you do, deal X damage to your opponent. X is this card's level." (Damage may be cancelled)
+		}
+	}
+}
+Text Auto: CxCombo EXPERIENCE When "Goodbye to Sleep" is placed on your climax area, if this card is in your center stage, if the total level of the cards in your level is 6 or higher, and if you have another <Lily> character, choose 1 of your characters, and that character gets the following ability until end of turn. "Auto: [(1) Put 1 card from your hand into your waiting room] When this card attacks, you may pay the cost. If you do, deal X damage to your opponent. X is this card's level." (Damage may be cancelled)
+EndCard 
+
+Character: ALL/S90-085
+Image ALL_S90_085
+Name "Hervor" Ran
+Color B
+Level 1
+Cost 0
+Power 4000
+Trait1 Lily
+Trait2 Hervor
+Combo Girl Dancing in the Sky
+Cont: GiveSelf
+{
+	If Compare Experience 2 OrMore
+	{
+		GainPower 2000
+	}
+}
+Text Cont: EXPERIENCE If the total level of the cards in your level is 2 or higher, this card gets +2000 power.
+Auto: OnSpecificClimaxPlay Girl Dancing in the Sky
+{
+	If InLocation CenterStage && StageContains 1 Other && HasTrait Lily
+	{
+		SearchWaitingRoom NameEquals Mascot Battle
+		TargetSelf
+		GainPower 1000
+	}
+}
+Text Auto: CxCombo When "Girl Dancing in the Sky" is placed on your climax area, if this card is in your center stage, and you have another <Lily> character, choose up to 1 "Mascot Battle" in your waiting room, return it to your hand, and this card gets +1000 power until end of turn.
+EndCard
+
+Character: ALL/S90-087
+Image ALL_S90_087
+Name "Hervor" Yo
+Color B
+Level 3
+Cost 2
+Trigger Soul
+Soul 2
+Power 4000
+Trait1 Lily
+Trait2 Hervor
+Cont: InHand
+{
+	If LocationContains Level 1 NameEquals "Ran's Longest Day" Ran
+	{
+		LoseLevel 1
+	}
+}
+Text Cont: EXPERIENCE If ""Ran's Longest Day" Ran" is in your level, this card gets -1 level while in your hand.
+Cont: Assist
+{
+	GainPower 2000
+}
+Text Cont: ASSIST All of your characters in front of this card get +2000 power.
+Auto: OnOtherPlacedOnStageFromHand|OnOtherPlacedBy "Hervor" Renka
+{
+    IfOther NameEquals "Pajama Party" Kazuha
+    {
+        Question Put the top card of your deck into your stock?
+        If Yes
+        {
+            BlindStock
+        }
+    }
+	Else
+	{
+	RefundTimesPerTurn
+	}
+}
+TimesPerTurn 1
+Text Auto: This ability activates up to 1 time per turn. When ""Pajama Party" Kazuha" is placed on the stage from your hand or by the effect of ""Hervor" Renka", you may put the top card of your deck into your stock.
+Auto: OnOtherPlacedOnStageFromHand
+{
+    IfOther NameEquals "Ran's Longest Day" Ran
+    {
+        Question Put the top card of your deck into your stock?
+        If Yes
+        {
+            BlindStock
+        }
+    }
+	Else
+	{
+	RefundTimesPerTurn
+	}
+}
+TimesPerTurn 1
+Text Auto: This ability activates up to 1 time per turn. When ""Ran's Longest Day" Ran" is placed on the stage from your hand, you may put the top card of your deck into your stock.
+EndCard 
+
+Character: ALL/S90-088
+Image ALL_S90_088
+Name "Hervor" Renka
+Color B
+Level 3
+Cost 2
+Trigger Soul
+Soul 2
+Power 8500
+Trait1 Lily
+Trait2 Hervor
+Cont: InHand
+{
+	If StageContains 1 NameEquals "Hervor" Yo
+	{
+		LoseLevel 1
+	}
+}
+Text Cont: If you have ""Hervor" Yo", this card gets -1 level while in your hand.
+Cont: GiveSelf
+{
+	If Compare Experience 3 OrMore
+	{
+		GainPower 1500
+	}
+}
+Text Cont: EXPERIENCE if the total level of the cards in your level is 3 or higher, this card gets +1500 Power.
+Auto: OnPlay
+{
+	PayCost 1
+	{
+		SearchLocationForTargets WaitingRoom 1 1 NameEquals "Pajama Party" Kazuha
+		PlaceOnStage False True True False
+	}
+}
+Text Auto: [(1)] When this card is placed on the stage from your hand, you may pay the cost. If you do, choose 1 ""Pajama Party" Kazuha" in your waiting room, put it on any position of your stage.
+EndCard 
+
+Character: ALL/S90-089
+Image ALL_S90_089
+Name "Feelings Filled in the Bullet" Renka
+Color B
+Level 0
+Cost 0
+Power 1500
+Trait1 Lily
+Trait2 Hervor
+Auto: OnPlay
+{
+	TargetLocation OpponentBackstage
+	NarrowTargets Compare ThatCardsLevel OpponentsLevel GreaterThan
+	ChooseCharacterFromTargets Choose a character to make unable to stand.
+	UntilEndOfOpponentsTurn
+	GainSpecialEffect CannotStand
+}
+Text Auto: When this card is placed on the stage from your hand, choose 1 of your opponent's characters whose level is higher than your opponent's level on your opponent's back stage, it cannot stand during your opponent's next stand phase.
+Auto: OnPlay
+{
+	PayCost 1 Discard 1 Any
+	{
+		SearchWaitingRoom HasTrait Lily
+		TargetLocation Stage
+		NarrowTargets Other && HasTrait Lily
+		AIChoice GainPower 1000
+		ChooseCharacterFromTargets Choose a character to give +1000 power
+		GainPower 1000
+	}
+}
+Text Auto: [(1) Put 1 card from your hand into your waiting room] When this card is placed on the stage from your hand, you may pay the cost. If you do, choose 1 <Lily> character in your waiting room and return it to your hand. Choose 1 of your other <Lily> characters and it gets +1000 power until end of turn. 
+EndCard 
+
+Character: ALL/S90-090
+Image ALL_S90_090
+Name "Shopping Date for Two" Yo
+Color B
+Level 1
+Cost 0
+Power 1500
+Trait1 Lily
+Trait2 Hervor
+Cont: GiveAll
+{
+	If Other && HasTrait Lily
+	{
+		GainPower 500
+	}
+}
+Text Cont: All of your other <Lily> characters get +500 power.
+Auto: OnTriggerCheckClimax
+{
+	IfOther HasTrigger Gate
+	{
+		PayCost 1
+		{
+			BlindStock
+			*OptionalDrawDiscard
+		}
+	}
+}			
+Text Auto: [(1)] When your character's trigger check reveals a climax, if that card's trigger icon is Gate, you may pay the cost. If you do, put up to 1 card from the top of your deck into your stock, draw up to 1 card. If you drew a card, choose 1 card from your hand and put it into your waiting room.
+Auto: OnTriggerCheckClimax
+{
+	IfOther HasTrigger Book
+	{
+		PayCost Discard 1 Any
+		{
+			SearchWaitingRoom IsCharacter
+		}
+	}
+}
+Text Auto: [Put 1 card from your hand into your waiting room] When your character's trigger check reveals a climax, if that card's trigger icon is Book, you may pay the cost. If you do, choose 1 character in your waiting room, and return it to your hand.
+EndCard 
+
+Character: ALL/S90-091
+Image ALL_S90_091
+Name "Ran Is Strong!" Ran
+Color B
+Level 1
+Cost 0
+Power 4000
+Trait1 Lily
+Trait2 Hervor
+Combo Goodbye to Sleep
+Cont: GiveSelf
+{
+	If Compare Experience 2 OrMore
+	{
+		GainPower 2000
+		GainEffect
+		{
+			Auto: OnAttack
+			{
+				TargetFacing
+				If Compare TargetCardsLevel 2 Exactly
+				{
+					TargetSelf
+					GainPower 6000
+				}
+			}
+			Text Auto: When this card attacks, if the character facing this card is level 2, this card gets +6000 power until end of turn.
+		}
+	}
+}
+Quick
+Text Cont: EXPERIENCE During your turn, if the total level of the cards in your level is 2 or higher, this card gets +2000 Power and the following ability, "Auto: When this card attacks, if the character facing this card is level 2, this card gets +6000 power until end of turn."
+Auto: OnAttack
+{
+	If Climax Goodbye to Sleep
+	{
+		TargetTop Deck 1
+		Reveal
+		IfThatCard HasTrait Lily || NameEquals Mascot Battle
+		{
+			MoveCard Hand
+		}
+	}
+}
+Text Auto: CxCombo When this card attacks, if "Goodbye to Sleep" is in your climax area, reveal the top card of your deck. If that card is a <Lily> character or "Mascot Battle", add it to your hand. (Otherwise, return the revealed card to its original place) 
+EndCard 
+
+Character: ALL/S90-098
+Image ALL_S90_098
+Name "Lily of the Season" Ran
+Color B
+Level 0
+Cost 0
+Power 3000
+Trait1 Lily
+Trait2 Hervor
+EndCard
+
+Character: ALL/S90-103
+Image ALL_S90_103
+Name "Hervor's Moodmaker" Renka
+Color B
+Level 1
+Cost 1
+Trigger Soul
+Power 3500
+Trait1 Lily
+Trait2 Hervor
+Tag EarlyPlayBomb
+Auto: OnReversed
+{
+	TargetBattleOpponent
+	SetXValue OpponentsLevel
+	AddToXValue 1
+	IfThatCard Compare ThatCardsLevel X OrMore && OnStage
+	{
+		Question Put the battle opponent on the bottom of the deck?
+		If Yes
+		{
+			MoveCardToBottom OpponentDeck
+		}
+	}
+}
+Quick
+Text Auto: When this card becomes reversed, if the level of this card's battle opponent is higher than your opponent's level, you may put that character at the bottom of your opponent's deck.
+Auto: OnSentFromStageToWaitingRoom
+{
+	PayCost Discard 1 Any
+	{
+		SearchWaitingRoom NameEquals Mascot Battle
+	}
+}
+Text Auto: [Put 1 card from your hand into your waiting room] When this card is put into the waiting room from the stage, you may pay the cost. If you do, choose 1 "Mascot Battle" in your waiting room, and return it to your hand.
+EndCard
+
+Event: ALL/S90-106
+Image ALL_S90_106
+Name Mascot Battle
+Color B
+Level 1
+Cost 0
+Effect:
+{
+	Mill 3
+	SetXToNumberOfCharacters
+	SearchWaitingRoom HasTrait Lily && Compare ThatCardsLevel X OrLess
+}			
+Text BRAINSTORM Flip over 3 cards from the top of your deck into your waiting room, choose up to 1 level X or lower <Lily> character in your waiting room, and return it to your hand. X is equal to the number of <Lily> characters put into your waiting room by this effect.
+EndCard
+
+Climax: ALL/S90-107
+Image ALL_S90_107
+Name Goodbye to Sleep
+*GateClimax
+EndCard
+
+Climax: ALL/S90-108
+Image ALL_S90_108
+Name Scenery Seen From the Skies
+*BookClimax
+EndCard
+
+Climax: ALL/S90-109
+Image ALL_S90_109
+Name Girl Dancing in the Sky
+*GateClimax
+EndCard
+
+Climax: ALL/S90-110
+Image ALL_S90_110
+Name Feelings That Should Be Expressed
+*BookClimax
+EndCard
+
+Character: ALL/S90-P01S
+Image ALL_S90_P01S
+Name "A Blow That Connects Feelings" Yuyu & Riri
+Color B
+Level 2
+Cost 1
+Trigger Soul
+Power 2500
+Trait1 Lily
+Trait2 Hitotsuyanagi Corps
+Auto: OnUseThisCardsBackup
+{
+	PayCost 2
+	{
+		TargetLocation WaitingRoom
+		MoveCard Deck
+		ShuffleLocation Deck
+	}
+}
+Text Auto: [(2)] When you use this card's "<b>Backup</b>", you may pay the cost. If you do, return all cards from your waiting room to your deck, and shuffle your deck.
+Backup 2500
+EndCard
+
+Character: ALL/S90-P02S
+Image ALL_S90_P02S
+Name "Convict in Flame" Shirai Yuyu
+Color B
+Level 3
+Cost 2
+Trigger Soul
+Soul 2
+Power 11000
+Trait1 Lily
+Trait2 Hitotsuyanagi Corps
+Auto: OnAttack
+{
+	If Not StageContains 1 Other && NameContains Riri
+	{
+		TargetTop Deck 1
+		MoveCard Clock
+	}
+}
+Text Auto: When this card attacks, if you have no other character with "Riri" in its card name, put the top card of your deck into your clock.
+Auto: OnEndOfAttack
+{
+	If PlayedThisTurn
+	{
+		PayCost 3 Discard 1 Any Send 1 WaitingRoom Other
+		{
+			Stand
+		}
+	}
+}
+TimesPerTurn 1
+Text Auto: [(3) Put 1 card from your hand into your waiting room, Send 1 of your other characters from the stage into your waiting room] This ability activates up to 1 time per turn. During the turn this card is placed on the stage from your hand, at the end of this card's attack, you may pay the cost. If you do, stand this card.
+EndCard
+
+Character: ALL/S90-P03S
+Image ALL_S90_P03S
+Name "Lily Buds That Flutter on the Lens" Yujia & Shenlin
+Color G
+Level 2
+Cost 1
+Trigger Soul
+Power 1000
+Trait1 Lily
+Trait2 Hitotsuyanagi Corps
+Auto: OnPlay
+{
+	Mill 3
+	NarrowTargets IsClimax
+	If HasTarget
+	{
+		Question Choose 1 of your opponent's level 3 or lower characters and send it into your opponent's waiting room?
+		If Yes 
+		{
+			TargetLocation OpponentCenterStage
+			NarrowTargets Compare ThatCardsLevel 3 OrLess
+			NarrowTargets CanBeChosen
+			AIChoice RemoveCard
+			ChooseCharacterFromTargets Choose a character to send to the waiting room.
+			MoveCard OpponentWaitingRoom
+		}
+	}
+}
+Text Auto: When this card is placed on the stage from your hand, put top the 3 cards from your deck into your waiting room. If there is a climax among those cards, you may choose 1 of your opponent's level 3 or lower characters at the center stage, and put it into the waiting room.
+Tag EarlyPlayBomb
+Auto: OnReversed
+{
+	TargetLocation OpponentClock
+	If HasTarget
+	{
+		TargetBattleOpponent
+		SetXValue OpponentsLevel
+		AddToXValue 1
+		IfThatCard Compare ThatCardsLevel X OrMore && OnStage
+		{
+			Question Put the top card of the opponent's clock into the waiting room to put the battle opponent into clock?
+			If Yes
+			{
+				TargetTop OpponentClock 1
+				MoveCard OpponentWaitingRoom
+				TargetBattleOpponent
+				MoveCard OpponentClock
+			}
+		}
+	}
+}
+Quick
+Text Auto: When this card becomes reversed, if the level of this card's battle opponent is higher than your opponent's level, you may put the top card of your opponent's clock into their waiting room. If you do, put that character into your opponent's clock.
+EndCard
+
+Character: ALL/S90-P07
+Image ALL_S90_P07
+Name "The Road of 3 Intersecting Schools" Kanaho
+Color Y
+Level 2
+Cost 1
+Trigger Soul
+Power 2500
+Trait1 Lily
+Trait2 Gran Eple
+Auto: OnUseThisCardsBackup
+{
+	PayCost 2
+	{
+		TargetLocation WaitingRoom
+		MoveCard Deck
+		ShuffleLocation Deck
+	}
+}
+Text Auto: [(2)] When you use this card's "<b>Backup</b>", you may pay the cost. If you do, return all cards from your waiting room to your deck, and shuffle your deck.
+Backup 2500
+EndCard

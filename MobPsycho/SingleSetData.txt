@@ -1,0 +1,4 @@
+Series: Mob Psycho 100
+Folder: MobPsycho/SX02
+Prefix: MOB/SX02
+SetName: Mob Psycho 100

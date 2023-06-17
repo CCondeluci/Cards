@@ -1,0 +1,838 @@
+Character: NJ/WE11-01
+Image card5637-large
+Name "Simple Idiot" Yukko
+Color Y
+Level 0
+Cost 0
+Power 500
+Cont: GiveAll
+{
+	If Other && MyTurn
+	{
+		GainPower 500
+	}
+}
+Text Cont: During your turn, your other characters get +500 power.
+Act: 2 RestSelf
+{
+	SearchDeck HasTrait Manga | Buddah Statue
+}
+Text Act: [(2) Rest this card] Search your deck for up to 1 <Manga> or <Buddah Statue> character and add it to your hand.
+EndCard
+
+Character: NJ/WE11-01S
+Clone NJ/WE11-01
+Image card5687-large
+EndCard
+
+Character: NJ/WE11-02
+Image card5638-large
+Name Mai Minakami
+Color Y
+Level 1
+Cost 0
+Power 2500
+Trait1 Glasses
+Trait2 Buddah Statue
+Cont: GiveSelf
+{
+	If StageContains 1 NameEquals Mio Naganohara
+	{
+		GainEffect
+		{
+			Act: 1 RestSelf
+			{
+				TargetLocation Stage
+				AIChoice GainPower 1500
+				ChooseCharacterFromTargets
+				GainPower 1500
+				GainLevel 1
+			}
+		}
+	}
+}
+Text Cont: If you have another "Mio Naganohara" this gets "Act: [(1) Rest this card] Choose 1 of your characters, it gets +1 level and +1500 power for the turn."
+*500Assist
+EndCard
+
+Character: NJ/WE11-02S
+Clone NJ/WE11-02
+Image card5688-large
+EndCard
+
+
+Character: NJ/WE11-03
+Image card5639-large
+Name Mio Naganohara
+Color Y
+Level 1
+Cost 0
+Power 4500
+Trait1 Manga
+Cont: GiveSelf
+{
+	If StageContains 1 NameEquals Yuuko Aioi
+	{
+		GainPower 2000
+	}
+}
+Text Cont: If you have another "Yuuko Aioi" this gets +2000 power.
+EndCard
+
+Character: NJ/WE11-03S
+Clone NJ/WE11-03
+Image card5689-large
+EndCard
+
+Character: NJ/WE11-04
+Image card5640-large
+Name Yuuko Aioi
+Color Y
+Level 1
+Cost 1
+Power 6000
+Auto: OnReverseOpponent
+{
+	If StageContains 1 NameEquals Mai Minakami
+	{
+		If MyTurn
+		{
+			TargetLocation Stage
+			NarrowTargets Other
+			AIChoice GainSoul 1
+			ChooseCharacterFromTargets Choose a character to give +1 soul.
+			GainSoul 1
+		}
+	}
+}
+Text Auto: When this card's battle opponent becomes reversed, if you have another "Mai Minakami" choose 1 of your other characters, it gets +1 soul for the turn.
+*HandEncore
+EndCard
+
+Character: NJ/WE11-04S
+Clone NJ/WE11-04
+Image card5690-large
+EndCard
+
+Character: NJ/WE11-05
+Image card5641-large
+Name Heartbreak, Mio
+Color Y
+Level 2
+Cost 1
+Trigger Soul
+Power 8000
+Trait1 Manga
+Auto: OnAttack
+{
+	If Climax Mio's Berserking
+	{
+		PayCost 1
+		{
+			//Choose 1 of 2 effects
+			Question Use +6000 power +1 soul effect?  (Press No to use "When this card's battle opponent becomes reverse choose an opponent's cost 1 or lower character and put it into stock" instead.)
+			If Yes
+			{
+				GainEffect
+				{
+					Cont: GiveSelf
+					{
+						GainPower 6000
+						GainSoul 1
+					}
+					Text Cont: This gets +6000 power and +1 soul.
+				}
+			}
+			Else
+			{
+				GainEffect
+				{
+					Auto: OnReverseOpponent
+					{
+						TargetLocation OpponentStage
+						NarrowTargets Compare ThatCardsCost 1 OrLess
+						AIChoice RemoveCard
+						ChooseCharacterFromTargets_Optional Choose up to 1 character to put into opponent's stock
+					}
+					Text Auto: When this card's battle opponent becomes reversed, choose up to 1 of your opponent's cost 1 or lower characters and put it into your opponent's stock.
+				}
+			}
+		}
+	}
+}
+Text Auto: CxCombo [1] When this card attacks, if "Mio's Berserking is in your climax area, you may pay the cost, choose 1 of the following abilities for this card to gain until end of turn: "Cont: This gets +6000 power and +1 soul" OR "Auto: When this card's battle opponent becomes reversed, choose up to 1 of your opponent's cost 1 or lower characters and put it into your opponent's stock."
+Combo Mio's Berserking
+EndCard
+
+Character: NJ/WE11-06
+Image card5642-large
+Name Frivolous, Yukko
+Color Y
+Level 3
+Cost 2
+Trigger Soul
+Soul 2
+Power 10000
+*Healer
+Auto: OnClimaxPlay
+{
+	If Climax Ordinary Life at Tokisadame High
+	{
+		PayCost 1
+		{
+			TargetLocation OpponentStage
+			AIChoice Bounce
+			ChooseCharacterFromTargets Choose an opponent's character to return to the hand.
+			Bounce
+			TargetLocation Stage
+			GainPower 2000
+		}
+	}
+}
+Text Auto: CxCombo [(1)] When "Ordinary Life at Tokisadame High" is placed in your climax area, you may pay the cost, choose 1 of your opponent's characters and return it to the hand, and all your characters get +2000 power for the turn.
+Combo Ordinary Life at Tokisadame High
+EndCard
+
+Character: NJ/WE11-07
+Image card5643-large
+Name Sakurai Sensei
+Color Y
+Level 0
+Cost 0
+Power 1000
+Trait1 Teacher
+*500Assist
+EndCard
+
+Character: NJ/WE11-07S
+Clone NJ/WE11-07
+Image card5693-large
+EndCard
+
+Character: NJ/WE11-08
+Image card5644-large
+Name "Spell of Resurrection" Mai
+Color Y
+Level 0
+Cost 0
+Power 2000
+Trait1 Glasses
+Trait2 Buddah Statue
+Act: 1 RestSelf
+{
+	Brainstorm 4
+	
+	//PerClimax
+	//{
+	//	SearchDeck Compare ThatCardsLevel 1 OrLess
+	//}
+	If Compare BrainstormedClimax 1 OrMore
+	{
+		SearchLocationForMultipleTargets Deck 0 BrainstormedClimax IsCharacter && Compare ThatCardsLevel 1 OrLess
+		RevealTargets
+		MoveCard Hand
+	}
+}
+Text Act: Brainstorm [(1) Rest this card] Flip over 4 cards from the top of your deck and put them into the waiting room. For each climax revealed, search your deck for a level 1 or lower character and add it to your hand.
+EndCard
+
+Character: NJ/WE11-09
+Image card5663-large
+Name Tsuyosi Nakanojou
+Color Y
+Level 0
+Cost 0
+Power 2500
+Trait1 Mohawk
+Act: Rest 2 Any
+{
+	GainPower 2000
+}
+Text Act: [Rest 2 of your characters] This gets +2000 power for the turn.
+EndCard
+
+Character: NJ/WE11-09S
+Clone NJ/WE11-09
+Image card5695-large
+EndCard
+
+Character: NJ/WE11-10
+Image card5645-large
+Name "Go-Soccer Club" Daiku & Sekiguchi
+Color Y
+Level 0
+Cost 0
+Power 2500
+Trait1 Go-Soccer
+Cont: GiveSelf
+{
+	If MyTurn
+	{
+		GainPower 1000
+	}
+}
+Text Cont: During your turn, this card gets +1000 power.
+EndCard
+
+Character: NJ/WE11-11
+Image card5646-large
+Name Princess Starla
+Color Y
+Level 0
+Cost 0
+Power 3000
+Trait1 Royalty
+EndCard
+
+Character: NJ/WE11-12
+Image card5647-large
+Name Angry, Mio
+Color Y
+Level 0
+Cost 0
+Power 3500
+Trait1 Manga
+Cont: GiveFacing
+{
+	GainSoul 1
+}
+Text Cont: The character facing this gets +1 soul.
+EndCard
+
+Character: NJ/WE11-12S
+Clone NJ/WE11-12
+Image card5698-large
+EndCard
+
+Character: NJ/WE11-13
+Image card5664-large
+Name Koujirou Sasahara
+Color Y
+Level 1
+Cost 1
+Trigger Soul
+Power 2000
+Trait1 Glasses
+Trait2 Play
+Backup 2000
+EndCard
+
+Character: NJ/WE11-14
+Image card5648-large
+Name Misato Tachibana
+Color Y
+Level 1
+Cost 1
+Power 7000
+Trait1 Weapon
+Trait2 Sports
+EndCard
+
+Character: NJ/WE11-14S
+Clone NJ/WE11-14
+Image card5700-large
+EndCard
+
+Character: NJ/WE11-15
+Image card5649-large
+Name Haruna Annaka
+Color Y
+Level 2
+Cost 1
+Trigger Soul
+Power 4500
+*1000Assist
+EndCard
+
+Character: NJ/WE11-15S
+Clone NJ/WE11-15
+Image card5701-large
+EndCard
+
+Character: NJ/WE11-16
+Image card5650-large
+Name Takasaki Sensei
+Color Y
+Level 2
+Cost 1
+Trigger Soul
+Power 8000
+Trait1 Teacher
+Trait2 Go-Soccer
+Cont: GiveSelf
+{
+	SetXToNumberOfCharacters NameEquals Sakurai Sensei
+	MultiplyXValue 1000
+	GainPower X
+}
+Text Cont: This gets +1000 power for each of your other "Sakurai Sensei"
+EndCard
+
+Character: NJ/WE11-16S
+Clone NJ/WE11-16
+Image card5702-large
+EndCard
+
+Character: NJ/WE11-17
+Image card5651-large
+Name Buddah Statue Lover, Mai
+Color Y
+Level 2
+Cost 2
+Power 8500
+Trigger Soul
+Soul 2
+Trait1 Glasses
+Trait2 Buddah Statue
+Auto: OnSideAttack
+{
+	GainSoul 1
+}
+Text Auto: When this card side attacks, it gets +1 soul for the turn.
+EndCard
+
+Climax: NJ/WE11-18a
+Image card5652-large
+Name Ordinary Life at Tokisadame High
+Color Y
+*DrawClimax
+Combo Frivolous, Yukko
+EndCard
+
+Climax: NJ/WE11-18b
+Clone NJ/WE11-18a
+Image card5684-large
+EndCard
+
+Climax: NJ/WE11-18c
+Clone NJ/WE11-18a
+Image card5685-large
+EndCard
+
+Climax: NJ/WE11-18d
+Clone NJ/WE11-18a
+Image card5686-large
+EndCard
+
+Climax: NJ/WE11-18e
+Clone NJ/WE11-18a
+Image card5705-large
+EndCard
+
+Climax: NJ/WE11-18f
+Clone NJ/WE11-18a
+Image card5706-large
+EndCard
+
+Climax: NJ/WE11-18g
+Clone NJ/WE11-18a
+Image card5707-large
+EndCard
+
+Climax: NJ/WE11-18h
+Clone NJ/WE11-18a
+Image card5708-large
+EndCard
+
+Climax: NJ/WE11-19
+Image card5653-large
+Name Mio's Berserking
+*WindClimax
+Combo Heartbreak, Mio
+EndCard
+
+Climax: NJ/WE11-19S
+Clone NJ/WE11-19
+Image card5704-large
+EndCard
+
+Character: NJ/WE11-20
+Image card5665-large
+Name Ponytail, Hakase
+Color B
+Level 0
+Cost 0
+Power 2000
+Trait1 Science
+Trait2 Sweets
+Auto: OnPlay
+{
+	PayCost HandClock Any
+	{
+		SearchDeck NameContains Nano | Sakamoto
+	}
+}
+Text Auto: [Put a card from your hand into your clock] When this card is placed on the stage from your hand, you may pay the cost, search your deck for a character with "Nano" or "Sakamoto" in its name and add it to your hand.
+EndCard
+
+Character: NJ/WE11-20S
+Clone NJ/WE11-20
+Image card5709-large
+EndCard
+
+Character: NJ/WE11-21
+Image card5654-large
+Name Cosplay, Hakase
+Color B
+Level 1
+Cost 0
+Power 3000
+Trait1 Science
+Trait2 Sweets
+*500Assist
+Act: 2 Clock
+{
+	TargetLocation Stage
+	NarrowTargets NameContains Nano
+	AIChoice AttackBackstage
+	ChooseCharacterFromTargets Choose a character to give the ability to.
+	GainEffect
+	{
+		Cont: GiveSelf
+		{
+			GainTrait Weapon
+			GainSpecialEffect CanAttackBackstage
+		}
+	}
+}
+Text Act: [(2) Put the top card of your deck into your clock] Choose 1 of your characters with "Nano" in its name, until end of turn, it gets <Weapon> and "Cont: When this card attacks, you may instead choose a character on your opponent's backstage and frontal attack that character."
+EndCard
+
+Character: NJ/WE11-21S
+Clone NJ/WE11-21
+Image card5710-large
+EndCard
+
+Character: NJ/WE11-22
+Image card5666-large
+Name Hakase's Invention, Nano
+Color B
+Level 1
+Cost 0
+Power 5000
+Trait1 Mecha
+Auto: OnClimaxPlay
+{
+	If Climax Nano's Gimmicks
+	{
+		If InLocation CenterStage
+		{
+			SearchDeckForTarget NameEquals Raincoat, Hakase
+			If HasTarget
+			{
+				PlaceOnStage False True True False
+			}
+		}
+	}
+}
+Text Auto: CxCombo When "Nano's Gimmicks" is placed in your climax area, if this is on your center stage, search your deck for up to 1 "Raincoat, Hakase" and put it on any position of your stage.
+Combo Nano's Gimmicks
+EndCard
+
+Character: NJ/WE11-23
+Image card5655-large
+Name Birthday, Nano
+Color B
+Level 2
+Cost 1
+Trigger Soul
+Power 9000
+Trait1 Mecha
+Cont: GiveSelf
+{
+	If Not StageContains 1 NameContains Hakase
+	{
+		GainSpecialEffect CannotFrontalAttack
+	}
+}
+Text Cont: If you do not have a character with "Hakase" in its name, this gets "Cont: This card cannot frontal attack"
+EndCard
+
+Character: NJ/WE11-24
+Image card5657-large
+Name Hakase
+Color B
+Level 2
+Cost 2
+Trigger Soul
+Soul 2
+Power 8500
+Trait1 Science
+Trait2 Sweets
+Auto: OnSpecificClimaxPlay Ordinary Life at Shinonome Lab
+{
+	If InLocation CenterStage
+	{
+		PayCost 2 Discard 1 Any
+		{
+			SearchDeckForTarget NameEquals Nano Shinonome
+			If HasTarget
+			{
+				PlaceOnStage False True True False
+			}
+		}
+	}
+}
+Text Auto: CxCombo [(2) Discard a card] When "Ordinary Life at Shinonome Lab" is placed in your climax area, if this is on your center stage, you may pay the cost, search your deck for up to 1 "Nano Shinonome" and put it on any position of your stage.
+Combo Ordinary Life at Shinonome Lab
+EndCard
+
+Character NJ/WE11-24S
+Clone NJ/WE11-24
+Image card5713-large
+EndCard
+
+Character: NJ/WE11-25
+Image card5656-large
+Name Nano Shinonome
+Color B
+Level 3
+Cost 2
+Trigger Soul
+Power 10000
+Soul 2
+Trait1 Mecha
+Auto: OnPlay|OnPlacedOnStageFromDeck
+{
+	If StageContains 1 NameEquals Hakase
+	{
+		If StageContains 1 NameEquals Sakamoto-san
+		{
+			TargetTop Clock 1
+			MoveCards Hand
+		}
+	}
+}
+Text Auto: When this card is placed on the stage from your hand or deck, if you have "Hakase" and "Sakamoto-san" return the top card of your clock to your hand.
+Auto: OnTriggerCheckClimax
+{
+	UntilEndOfOpponentsTurn
+	GainPower 1000
+}
+Text Auto: When your character's trigger check reveals a climax card, this gets +1000 power until the end of your opponent's turn.
+EndCard
+
+Character: NJ/WE11-26
+Image card5658-large
+Name Clockwork, Nano
+Color B
+Level 0
+Cost 0
+Power 500
+Trait1 Mecha
+*ScryToBottomOnPlay
+*Bond1(Hakase)
+EndCard
+
+Character: NJ/WE11-27
+Image card5659-large
+Name Sakamoto-san
+Color B
+Level 0
+Cost 0
+Power 1000
+Trait1 Animal
+Trait2 Scarf
+Cont: GiveAll
+{
+	If NameContains Nano | Hakase
+	{
+		GainPower 500
+	}
+}
+Text Cont: Your other characters with "Nano" or "Hakase" in its name get +500 power.
+EndCard
+
+Character: NJ/WE11-27S
+Clone NJ/WE11-27
+Image card5722-large
+EndCard
+
+Character: NJ/WE11-28
+Image card5667-large
+Name Waking Up, Hakase
+Color B
+Level 0
+Cost 0
+Power 2500
+Trait1 Science
+Trait2 Sweets
+Cont: GiveAll
+{
+	If OpponentsTurn
+	{
+		If NameEquals School Debut, Nano
+		{
+			GainPower 2000
+		}
+	}
+}
+Text Cont: During your opponent's turn, your other "School Debut, Nano" get +2000 power.
+EndCard
+
+Character: NJ/WE11-28S
+Clone NJ/WE11-28
+Image card5723-large
+EndCard
+
+Character: NJ/WE11-29
+Image card5660-large
+Name School Debut, Nano
+Color B
+Level 0
+Cost 0 
+Power 3000
+Trait1 Mecha
+EndCard
+
+Character: NJ/WE11-29S
+Clone NJ/WE11-29
+Image card5719-large
+EndCard
+
+Character: NJ/WE11-30
+Image card5661-large
+Name "Da-Nyan" Hakase
+Color B
+Level 0
+Cost 0
+Power 3500
+Trait1 Science
+Trait2 Sweets
+Auto: StartClimaxPhase
+{
+	TargetLocation Stage
+	NarrowTargets CardPosition Stand
+	AIChoice If InLocation Backstage
+	ChooseCharacterFromTargets Choose a character to rest.
+	Rest
+}
+Text Auto: At the start of your climax phase, rest 1 of your standing characters.
+EndCard
+
+Character: NJ/WE11-31
+Image card5668-large
+Name Raincoat, Hakase
+Color B
+Level 1
+Cost 0
+Power 5500
+Trait1 Science
+Trait2 Sweets
+Auto: OnPlay
+{
+	LosePower 1500
+}
+Text Auto: When this card is placed on the stage from your hand, it gets -1500 power until end of turn.
+*HandEncore
+EndCard
+
+Character: NJ/WE11-32
+Image card5669-large
+Name Summer Festival, Nano
+Color B
+Level 1
+Cost 1
+Power 6500
+Trait1 Mecha
+Cont: GiveSelf
+{
+	If MyTurn
+	{
+		GainPower 1000
+	}
+}
+Text Cont: During your turn, this gets +1000 power.
+EndCard
+
+Character: NJ/WE11-33
+Image card5670-large
+Name Summer Festival, Hakase
+Color B
+Level 2
+Cost 1
+Trigger Soul
+Power 2500
+Trait1 Science
+Trait2 Sweets
+Backup 3000
+EndCard
+
+Character: NJ/WE11-34
+Image card5671-large
+Name Black Cat, Nano
+Color B
+Level 2
+Cost 2
+Power 9000
+Trigger Soul
+Soul 2
+Trait1 Mecha
+EndCard
+
+Character: NJ/WE11-34S
+Clone NJ/WE11-34
+Image card5714-large
+EndCard
+
+Climax: NJ/WE11-35a
+Image card5681-large
+Name Ordinary Life at Shinonome Lab
+Color B
+*DrawClimax
+Combo Hakase
+EndCard
+
+Climax: NJ/WE11-35b
+Clone NJ/WE11-35a
+Image card5682-large
+EndCard
+
+Climax: NJ/WE11-35c
+Clone NJ/WE11-35a
+Image card5683-large
+EndCard
+
+Climax: NJ/WE11-35d
+Clone NJ/WE11-35a
+Image card5715-large
+EndCard
+
+Climax: NJ/WE11-35e
+Clone NJ/WE11-35a
+Image card5716-large
+EndCard
+
+Climax: NJ/WE11-35f
+Clone NJ/WE11-35a
+Image card5717-large
+EndCard
+
+Climax: NJ/WE11-35g
+Clone NJ/WE11-35a
+Image card5718-large
+EndCard
+
+Climax: NJ/WE11-36
+Image card5733-large
+Name Nano's Gimmicks
+*BookClimax
+Combo Hakase's Invention, Nano
+EndCard
+
+Climax: NJ/WE11-36S
+Clone NJ/WE11-36
+Image card5734-large
+EndCard
+
+Character: NJ/WE11-37
+Image card5672-large
+Name Goodnight, Nano & Hakase
+Color B
+Level 1
+Cost 0
+Power 1500
+Trait1 Sweets
+Trait2 Mecha
+Backup 1500
+EndCard

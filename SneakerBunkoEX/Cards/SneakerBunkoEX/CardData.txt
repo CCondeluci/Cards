@@ -1,0 +1,613 @@
+﻿
+Character: SHH/W62-T12
+Image T12
+Name Cat Ears, Hayoru
+Color B
+Level 0
+Cost 0
+Power 1000
+Trait1 Sneaker Bunko
+Trait2 Heart Hybrid Gear
+Trait3 Amaterasu
+*500Assist
+Act: 1 SendSelf WaitingRoom
+{
+	*Check4Add1(Sneaker Bunko|Heart Hybrid Gear)
+}
+Text Act: [(1) Put this card into the waiting roon] Look at up to 4 cards from the top of your deck, choose 1 <Sneaker Bunko> or <Heart Hybrid Gear> character, add it to your hand, and put the rest into the waiting room.
+EndCard
+
+Character: SHH/W62-T16
+Image T16
+Name Aine & Kizuna, -HEART HYBRID-
+Color B
+Level 2
+Cost 1
+Trigger Soul
+Power 7000
+Trait1 Sneaker Bunko
+Trait2 Heart Hybrid Gear
+Trait3 Amaterasu
+*OnAttackGainPowerForEachOther(1000,Sneaker Bunko|Heart Hybrid Gear)
+Auto: OnReversed
+{
+	If OpponentsTurn
+	{
+		PayCost Discard 1 HasTrait Sneaker Bunko|Heart Hybrid Gear
+		{
+			Rest
+			ScheduleEffectForTargets StartMyEncoreStep
+			{
+				Effect:
+				{
+					If OnStage
+					{
+						MoveCard Memory
+					}
+				}
+				Text At the beginning of your next encore step, put this card into your memory.
+			}
+		}
+	}
+}
+Text Auto: [Discard a <Sneaker Bunko> or <Heart Hybrid> character] During your opponent's turn, when this card becomes reversed in battle, you may pay the cost, rest this card, and at the start of your next encore step, put this card into your memory.
+EndCard
+
+
+Character: SST/W62-T01
+Image T01
+Name Stepsister, Mio
+Color R
+Level 0
+Cost 0
+Power 2500
+Trait1 Sneaker Bunko
+Trait2 Magic
+Trait3 Sister
+*DropSearch(Sneaker Bunko|Magic)
+EndCard
+
+Character: SST/W62-T06
+Image T06
+Name Family of Heroes, Yuki
+Color R
+Level 1
+Cost 0
+Power 5000
+Trait1 Sneaker Bunko
+Trait2 Magic
+Trait3 Childhood Friend
+Combo Yuki's Manservant Anniversary
+Auto: OnAttack
+{
+	If Climax Yuki's Manservant Anniversary && Compare CardsInStock 5 OrLess
+	{
+		*Check4Add1(Sneaker Bunko|Magic)
+	}
+}
+Text Auto: CxCombo When this card attacks, if "Yuki's Manservant Anniversary" is in your climax area, and there are 5 or less card in your stock, look at up to 4 cards from the top of your deck, choose up to 1 <Sneaker Bunko> or <Magic> character, add it to your hand, and put the rest into the waiting room.
+EndCard
+
+Climax: SST/W62-T09
+Name Yuki's Manservant Anniversary
+Image T09
+*DoorClimax
+EndCard
+
+
+Character: SHH/W62-073
+Image 073
+Name Embarassing Appearance, Aine
+Color B
+Level 0
+Cost 0
+Power 2000
+Trait1 Sneaker Bunko
+Trait2 Heart Hybrid Gear
+Trait3 Amaterasu
+*OnAttackGivePower(500,Any)
+*MillRunner(Sneaker Bunko|Heart Hybrid Gear)
+EndCard
+
+Character: SHH/W62-076
+Image 076
+Name Grace and Heart Hybrid
+Color B
+Level 0
+Cost 0
+Power 500
+Trait1 Sneaker Bunko
+Trait2 Heart Hybrid Gear
+Trait3 Sister
+Auto: OnReversed
+{
+	Mill 2
+	NarrowTargets Compare ThatCardsLevel 2 OrHigher
+	If HasTarget
+	{
+		If OnStage
+		{
+			Question Put this card into your stock?
+			If Yes
+			{
+				TargetSelf
+				MoveCard Stock
+			}
+		}
+	}
+}
+Text Auto: When this card becomes reversed in battle, put the top 2 cards of your deck into the waiting room, if a level 2 or higher card was sent, you may put this card into your stock.
+*BondDiscard(Kizuna & Aine\, Ecstasy Hybrid)
+EndCard
+
+Character: SHH/W62-078
+Image 078
+Name Kizuna & Aine, Ecstasy Hybrid
+Color B
+Level 1
+Cost 0
+Power 4500
+Trait1 Sneaker Bunko
+Trait2 Heart Hybrid Gear
+Trait3 Amaterasu
+Combo Heart Hybrid ON!!
+Auto: OnPlay
+{
+	If StageContains 1 Other && HasTrait Sneaker Bunko|Heart Hybrid Gear
+	{
+		GainPower 2000
+	}
+}
+Quick
+Text Auto: When this card is placed on the stage from your hand, if you have another <Sneaker Bunko> or <Heart Hybrid> character, this card gets +2000 power until end of turn.
+Auto: OnAttack
+{
+	If Climax Heart Hybrid ON!!
+	{
+		TargetTop Deck 1
+		Reveal
+		IfTarget HasTrait Sneaker Bunko|Heart Hybrid Gear
+		{
+			MoveCard Hand
+		}	
+	}
+}	
+Text Auto: CxCombo When this card attacks, if "Heart Hybrid ON!!" is in your climax area, reveal the top card of your deck, if it is a <Sneaker Bunko> or <Heart Hybrid Gear> character, add it to your hand.
+EndCard
+
+Character: SHH/W62-080
+Image 080
+Name Hayuru and Heart Hybrid
+Color B
+Level 2
+Cost 1
+Trigger Soul
+Power 5000
+Trait1 Sneaker Bunko
+Trait2 Heart Hybrid Gear
+Trait3 Amaterasu
+Auto: OnPlay
+{
+	TargetLocation OpponentCenterStage
+	ChooseCharacterFromTargets Choose a character to give -1000 power.
+	LosePower 1000
+}
+Text Auto: When this card is placed on the stage from your hand, choose a character on your opponent's center stage, it gets -1000 power until end of turn.
+*BlueEarlyPlayBomb
+EndCard
+
+Character: SHH/W62-082
+Image 082
+Name Aine and Climax Hybrid
+Color B
+Level 3
+Cost 2
+Trigger Soul
+Power 7000
+Soul 2
+Trait1 Sneaker Bunko
+Trait2 Heart Hybrid Gear
+Trait3 Amaterasu
+Cont: InHand
+{
+	If LocationContains WaitingRoom 6 IsClimax
+	{
+		LoseLevel 1
+	}
+}
+Text Cont: If there are 6 or more climax in your waiting room, this card gets -1 level in your hand.
+Cont: GiveSelf
+{
+	If HasMarker
+	{
+		GainPower 4500
+		GainTrait Immoral Weapon
+	}
+}
+Text Cont: If this card has a marker, it gets +4500 power and <Immoral Weapon>.
+*Healer
+*OnPlayChooseMarker(Kizuna & Aine\, Ecstasy Hybrid)
+EndCard
+
+Character: SHH/W62-093
+Image 093
+Name Reiri and Heart Hybrid
+Color B
+Level 0
+Cost 0
+Power 1500
+Trait1 Sneaker Bunko
+Trait2 Heart Hybrid Gear
+Trait3 Teacher
+Act: RestSelf
+{
+	TargetTop Deck 1
+	Reveal
+	If Compare TargetCardsLevel 2 OrMore
+	{
+		MoveCard Stock
+	}
+}
+Text Act: [Rest this card] Reveal the top card of your deck, if it is level 2 or higher, put it into your stock.
+EndCard
+
+Character: SHH/W62-096
+Image 096
+Name Yurishia and Heart Hybrid
+Color B
+Level 1
+Cost 0
+Power 7000
+Trait1 Sneaker Bunko
+Trait2 Heart Hybrid Gear
+Trait3 Amaterasu
+Cont: GiveSelf
+{
+	If Compare CardsInStock 2 OrLess
+	{
+		GainSpecialEffect CannotAttack
+	}
+}
+Text Cont: If there are 2 or less cards in your stock, this card cannot attack.
+*OthersCannotSideAttack
+EndCard
+
+Character: SHH/W62-098
+Image 098
+Name Silvia and Climax Hybrid
+Color B
+Level 2
+Cost 1
+Trigger Soul
+Power 2500
+Trait1 Sneaker Bunko
+Trait2 Heart Hybrid Gear
+Trait3 Amaterasu
+Auto: OnUseThisCardsBackup
+{
+	PayCost Discard 2 Any
+	{
+		*SendEarlyPlayToWaitingRoom
+	}
+}
+Text Auto: [Discard 2 cards] When you use this card's "BACKUP" you may pay the cost, choose one of your opponent's characters whose level is higher than your opponent's level, and put it into the waiting room.
+Backup 2500
+EndCard
+
+Event: SHH/W62-101
+Image 101
+Name Aine and Grace and Connective Hybrid
+Color B
+Level 1
+Cost 2
+Effect:
+{
+	ForcePayCost Rest 1 HasTrait Sneaker Bunko|Heart Hybrid Gear
+	{
+		SearchLocationForTargets Deck 0 2 HasTrait Sneaker Bunko|Heart Hybrid Gear
+		RevealTargets
+		MoveCard Hand
+		ShuffleLocation Deck
+	}
+}
+Text Rest 1 of your standing <Sneaker Bunko> or <Heart Hybrid Gear> characters, if you do, search your deck for up to 2 <Sneaker Bunko> or <Heart Hybrid Gear> characters, and add them to your hand.
+EndCard
+
+Climax: SHH/W62-103
+Image 103
+Name Heart Hybrid ON!!
+*BookClimax
+EndCard
+
+Character: SHH/W62-110
+Image 110
+Name Hayuru & Aine & Yurishia
+Color B
+Level 0
+Cost 0
+Power 1500
+Trait1 Sneaker Bunko
+Trait2 Heart Hybrid Gear
+Trait3 Amaterasu
+Cont: GiveSelf
+{
+	If Compare CardsInStock 2 OrLess
+	{
+		GainPower 1000
+		GainLevel 1
+	}
+}
+Text Cont: If there are 2 or less cards in your stock, this card gets +1 level and +1000 power.
+*GlobalPower(500,Sneaker Bunko|Heart Hybrid Gear)
+EndCard
+
+Character: SKY/W62-069
+Image 069
+Name Freya, First Royal Princess of Jioral
+Color R
+Level 1
+Cost 1
+Power 6000
+Trait1 Sneaker Bunko
+Trait2 Royalty
+Trait3 Hero
+Auto: OnUseAct
+{
+	SetXToNumberOfCharacters HasTrait Sneaker Bunko
+	MultiplyXValue 500
+	GainPower X
+}
+Quick
+TimesPerTurn 1
+Text Auto: Once per turn, when you use an "ACT" ability, this card gets +X power until end of turn. X is 500 times the number of <Sneaker Bunko> characters you have.
+*HandEncore
+EndCard
+
+Character: SST/W62-051
+Image 051
+Name Mio and the Master-Servant Contract
+Color R
+Level 3
+Cost 2
+Trigger Soul
+Power 9500
+Soul 2
+Trait1 Sneaker Bunko
+Trait2 Magic
+Trait3 Sister
+Combo Mio's Joy
+Cont: GiveSelf
+{
+	SetXToNumberOfCharacters InLocation Backstage && HasTrait Sneaker Bunko|Magic
+	MultiplyXValue 500
+	GainPower X
+}
+Text Cont: For each <Sneaker Bunko> or <Magic> character on your backstage, this card gets +500 power.
+*Healer
+Auto: OnReverseOpponent
+{
+	If Climax Mio's Joy
+	{
+		TargetLocation OpponentStage
+		NarrowTargets CardPosition Reversed
+		SetXValue TargetCount
+		Burn X
+	}
+}
+Text Auto: CxCombo When this card's battle opponent becomes reversed, if "Mio's Joy" is in your cliimax area, deal X damage to your opponent. X is the number of your opponent's reversed characters.
+EndCard
+
+Character: SST/W62-056
+Image 056
+Name Yuki and the Master-Servant Contract
+Color R
+Level 2
+Cost 1
+Trigger Soul
+Power 7500
+Trait1 Sneaker Bunko
+Trait2 Magic
+Trait3 Childhood Friend
+*OnPlayGainPowerForEach(500,Sneaker Bunko|Magic)
+*OnOtherAttackedSacrificeToGivePower(3000,Sneaker Bunko|Magic)
+EndCard
+
+Character: SST/W62-057
+Image 057
+Name Mio, Daughter of the Ex-Devil King Wilbert
+Color R
+Level 0
+Cost 0
+Power 500
+Trait1 Sneaker Bunko
+Trait2 Magic
+Trait3 Sister
+Act: 1
+{
+	TargetLocation OpponentCenterStage
+	NarrowTargets Compare ThatCardsLevel 0 OrLower
+	ChooseCharacterFromTargets Choose a character to put into the waiting room.
+	MoveCard OpponentWaitingRoom
+}
+Text Act: [(1)] Choose a level 0 character on your opponent's center stage, and put it into the waiting room.
+*Act1RestSelfDraw2Discard1Brainstorm
+EndCard
+
+Character: SST/W62-058
+Image 058
+Name Kurumi and the Master-Servant Contract
+Color R
+Level 0
+Cost 0
+Power 1500
+Trait1 Sneaker Bunko
+Trait2 Magic
+Trait3 Sister
+Auto: OnPlay
+{
+	PayCost 1 Clock
+	{
+		SearchWaitingRoom HasTrait Sneaker Bunko|Magic
+	}
+}
+Text Auto: [(1) Put the top card of your deck into your clock] When this card is placed on the stage from your hand, you may pay the cost, choose a <Sneaker Bunko> or <Magic> character in your waiting room and return it to your hand.
+Auto: OnPlay
+{
+	PayCost 2
+	{
+		TargetLocation OpponentStage
+		ChooseCharacterFromTargets Choose a character to return to opponent's hand.
+		Bounce
+	}
+}
+Text Auto: [(2)] When this card is placed on the stage from your hand, you may pay the cost, choose 1 of your opponent's characters, and return it to your opponent's hand.
+EndCard
+
+Character: SST/W62-059
+Image 059
+Name Secret Relationship, Chisato
+Color R
+Level 1
+Cost 0
+Power 2000
+Trait1 Sneaker Bunko
+Trait2 Magic
+Trait3 Teacher
+*RedLevel1Bomb
+Auto: OnPlay
+{
+	PayCost 2
+	{
+		SearchWaitingRoom IsCharacter
+	}
+}
+Text Auto: [(2)] When this card is placed on the stage from your hand, you may pay the cost, choose a character in your waiting room, and return it to your hand.
+EndCard
+
+Character: SST/W62-061
+Image 061
+Name Loli Erotic Succubus, Maria
+Color R
+Level 1
+Cost 0
+Power 5500
+Trait1 Sneaker Bunko
+Trait2 Magic
+Trait3 Sister
+Auto: OnOtherAttacks
+{
+	IfOther HasTrait Sneaker Bunko|Magic
+	{
+		GainPower 1000
+	}
+}
+Quick
+Text Auto: When your other <Sneaker Bunko> or <Magic> character attacks, this card gets +1000 power until end of turn.
+*NoEncoreIfReversed
+EndCard
+
+Character: SST/W62-063
+Image 063
+Name Triple-Red, Basara
+Color R
+Level 2
+Cost 1
+Trigger Soul
+Power 5000
+Trait1 Sneaker Bunko
+Trait2 Magic
+Trait3 Hero
+*LevelAssist
+Act: RestSelf
+{
+	TargetLocation Stage
+	NarrowTargets NameEquals Yuki and the Master-Servant Contract|Mio and the Master-Servant Contract
+	ChooseCharacterFromTargets Choose a character to give +2000 power.
+	GainPower 2000
+}
+Text Act: [Rest this card] Choose 1 of your "Mio and the Master-Servant Contract" or "Yuki and the Master-Servant Contract", it gets +2000 power until end of turn. 
+EndCard
+
+Character: SST/W62-068
+Image 068
+Name Zesuto and the Master-Servant Contract
+Color R
+Level 0
+Cost 0
+Power 4000
+Trait1 Sneaker Bunko
+Trait2 Magic
+Trait3 Maid
+Cont: Global
+{
+	If InLocation OpponentStage
+	{
+		GainEffect
+		{
+			*HandEncore
+		}
+	}
+}
+Text Cont: All of your opponent's characters get "Auto: ENCORE [Discard a character]"
+EndCard
+
+Event: SST/W62-070
+Image 070
+Name Toujo Family Gathering
+Color R
+Level 2
+Cost 1
+Counter
+Effect:
+{
+	SetXToNumberOfCharacters HasTrait Magic|Sneaker Bunko
+	MultiplyXValue 1000
+	*GiveCharacterPower(X,Any)
+}
+Text Counter: Choose 1 of your characters, it gets +X power until end of turn. X is 1000 times the number of <Sneaker Bunko> or <Magic> characters you have.
+EndCard
+
+Climax: SST/W62-071
+Image 071
+Name Mio's Joy
+*DoorClimax
+EndCard
+
+
+
+Character: SST/W62-051SP
+Clone SST/W62-051
+Image 051SP
+EndCard
+
+Character: SST/W62-056SP
+Clone SST/W62-056
+Image 056SP
+EndCard
+
+Character: SST/W62-058S
+Clone SST/W62-058
+Image 058S
+EndCard
+
+Character: SHH/W62-073SP
+Clone SHH/W62-073
+Image 073SP
+EndCard
+
+Character: SHH/W62-076S
+Clone SHH/W62-076
+Image 076S
+EndCard
+
+Character: SHH/W62-078SP
+Clone SHH/W62-078
+Image 078SP
+EndCard
+
+Character: SHH/W62-080S
+Clone SHH/W62-080
+Image 080S
+EndCard
+
+

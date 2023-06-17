@@ -1,0 +1,4 @@
+Series: Sword Art Online
+Folder: SwordArtOnline/S100
+Prefix: SAO/S100
+SetName: Anime 10th Anniversary (S100)

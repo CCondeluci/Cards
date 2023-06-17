@@ -1,0 +1,4 @@
+Series: Psycho-Pass
+Folder: Psycho-Pass/SE14
+Prefix: PP/SE14
+SetName: SE14

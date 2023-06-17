@@ -1,0 +1,2891 @@
+Character: LRC/W105-001
+Name Mizuki, Drunk? Staff
+Image 001
+Color Y
+Level 0
+Cost 0
+Power 500
+Trait1 LycoReco
+Trait2 Glasses
+Auto: OnPlay
+{
+	TargetLocation OpponentCenterStage
+	ChooseCharacterFromTargets Choose a character to get -1000 power.
+	LosePower 1000
+}
+Text Auto: When this card is placed on the stage from your hand, choose one of your opponent's characters in the center stage, it gets -1000 power until end of turn.
+Auto: OnSentFromStageToWaitingRoom
+{
+    PayCost Discard 1 Any
+    {
+        *Check4Add1Level1OrHigher
+    }
+}
+Text Auto: [Discard 1 card] When this is sent from Stage to Waiting Room, you may pay cost. If you do, look at up to 4 cards from the top of your deck, choose up to 1 Level 1 or higher card among them, show it to your opponent, add it to hand, and send the rest to Waiting Room.
+EndCard
+
+Character: LRC/W105-002
+Name Kurumi, Person Behind Walnut
+Image 002
+Color Y
+Level 0
+Cost 0 
+Power 2000
+Trait1 LycoReco
+Trait2 Net
+Auto: OnClimaxPlay
+{
+    Peek OpponentDeck 2
+    EndPeek
+    Reorder
+}
+Text Auto: When a Climax is placed in your Climax Area, look at up to 2 cards from the top of your opponent's deck, and put them back on top in any order.
+*Act1RestSelfSalvageBrainstorm(LycoReco|Weapon)
+EndCard
+
+Character: LRC/W105-003
+Name Chisato & Takina, Open for Business
+Image 003
+Color Y
+Level 3
+Cost 2
+Trigger Soul
+Power 8500
+Soul 2
+Trait1 LycoReco
+Trait2 Weapon
+Combo We'll Take Any Order
+*GainPowerWithEnoughCharacters(3000,2,LycoReco|Weapon)
+*Healer
+Auto: OnEndOfAttack
+{
+    If Climax We'll Take Any Order
+    {
+        If StageContains 2 Other && HasTrait LycoReco|Weapon
+        {
+            PayCost 2
+            {
+                UntilEndOfOpponentsTurn
+                GainPower 2000
+                UntilEndOfOpponentsTurn
+                GainEffect
+                {
+                    Cont: GiveFacing
+                    {
+                        LoseSoul 3
+                    }
+                    Text Auto: Character Opposite this gets -3 Soul 
+                }
+            }
+        }
+    }
+}
+Text Auto: CX Combo (2) At the end of this card's attack, if you have "We'll Take Any Order" in your Climax Area, and you have 2 or more other <LycoReco> or <Weapon> characters, you may pay cost. If you do, until the end of your opponent's next turn, this gets +2000 power and the following ability, "CONT - The character across from this gets -3 Soul."
+EndCard
+
+Character: LRC/W105-004
+Name Takina in Casual Wear
+Image 004
+Color Y
+Level 0
+Cost 0
+Power 500
+Trait1 LycoReco
+Trait2 Weapon
+*YellowLevel0Bomb
+Auto: OnReversed
+{
+    PayCost SendSelf Clock
+    {
+        TargetTop Deck 1
+        Reveal
+        IfTarget HasTrait LycoReco|Weapon || NameEquals Trending New Menu
+        {
+            MoveCard Hand
+        }
+    }
+}
+Text Auto: [Send this card to Clock] When this card is reversed in battle, you may pay the cost. If you do, reveal the top card of your Deck. If that card is a {LycoReco} or {Weapon} Character or [1/0 Yellow Event - 028], add it to your Hand.
+EndCard
+
+Character: LRC/W105-005
+Name Chisato in Casual Wear
+Image 005
+Color Y
+Level 0
+Cost 0 
+Power 1500
+Trait1 LycoReco
+Trait2 Weapon
+Auto: OnPlay
+{
+	PayCost Discard 1 HasTrait LycoReco|Weapon
+	{
+		DrawCard
+	}
+}
+Text Auto: [Discard 1 <LycoReco> or <Weapon> character] When this is placed on stage from hand, you may pay cost. If you do, draw 1 card.
+*OnPlayTradeClimaxForCharacter(LycoReco|Weapon)
+EndCard
+
+Character: LRC/W105-006
+Name Chisato, Cafe LycoReco
+Image 006
+Color Y
+Level 1
+Cost 0
+Power 3000
+Trait1 LycoReco
+Trait2 Weapon
+*PowerOnMyTurn(3000)
+*OnAttackPay1ToDoubleTrigger
+EndCard
+
+Character: LRC/W105-007
+Name Takina, Skilled Manager
+Image 007
+Color Y
+Level 1
+Cost 0
+Trigger Soul
+Power 3000
+Trait1 LycoReco
+Trait2 Weapon
+Combo Cafe LycoReco's Operating Crisis
+Cont: GiveSelf
+{
+	If MyTurn
+	{
+		TargetLocation Stage
+		NarrowTargets Other && HasTrait LycoReco|Weapon
+		SetXValue TargetCount
+		MultiplyXValue 1000
+		GainPower X
+	}
+}
+Text Cont: During your turn, for each of your other <LycoReco> or <Weapon> characters, this gets +1000 power.
+Cont: GiveSelf
+{
+    If Climax Cafe LycoReco's Operating Crisis &&& LocationContains Level 1 NameEquals Chisato & Takina, Open for Business &&& StageContains 1 Other && HasTrait LycoReco|Weapon
+    {
+        AddToOtherCardsTriggerIcon Choice NameEquals Mizuki, Drunk? Staff|Kurumi, Person Behind Walnut|Chisato, Cafe LycoReco|Mika, Cafe LycoReco
+    }
+}
+Text Cont: CX Combo EXPERIENCE - While you have the Choice CX (030) in your Climax Area, and this is in front row, and you have {Yellow RR 3/2 Chisato & Takina - 003} in your Level Zone, and you have another <LycoReco> or <Weapon> character, all of your other {RR 0/0 Mizuki - 001} and {RR 0/0 Kurumi - 002} and {1/0 Chisato - 006} and {0/0 U Mika - 015} in any area gains Choice Trigger.
+EndCard
+
+Character: LRC/W105-008
+Name Mizuki, Famous Stunt
+Image 008
+Color Y
+Level 1
+Cost 0
+Power 3000
+Trait1 LycoReco
+Trait2 Glasses
+*500Assist
+*SacrificeToSave(Any)
+Text Auto: [Send this to Waiting Room] When your other <LycoReco> or <Weapon> character is sent from stage to Waiting Room, if this is in your Back Row, you may pay cost. If you do, return that character to stage in its former slot Rested.
+Auto: OnSentFromStageToWaitingRoom
+{
+    PayCost 1 Discard 1 Any
+    {
+        SearchLocationForTargets WaitingRoom 1 1 NameEquals Mizuki, Cafe LycoReco
+        PlaceOnStage False True True True
+    }
+}
+Text Auto: [(1) Discard 1 card] When this is sent from Stage to Waiting Room, you may pay cost. If you do, choose 1 {2/1 Mizuki - 021} in your Waiting Room, place it on stage in any slot as REST.
+EndCard
+
+Character: LRC/W105-009
+Name Takina, Cafe LycoReco
+Image 009
+Color Y
+Level 2
+Cost 1
+Trigger Soul
+Power 1500
+Trait1 LycoReco
+Trait2 Weapon
+Cont: GiveAll
+{
+    If Other && NameEquals Chisato & Takina, Open for Business
+    {
+        GainPower 500
+        GainEffect
+        {
+            *HexProof
+        }
+    }
+}
+Text Cont: All of your other {3/2 Chisato & Takina - 003} gets +500 power and the following ability, "CONT - This cannot be targeted by your opponent's effects."
+*1500Assist
+Act: 3 RestSelf
+{
+    SearchLocationForTargets Hand 0 1 NameEquals Chisato & Takina, Open for Business
+    PlaceOnStage False True True False
+}
+Text Act: [(3) Rest this] Choose up to 1 {3/2 Chisato & Takina - 003} in your hand, place it on stage in any slot.
+EndCard
+
+Character: LRC/W105-010
+Name Chisato, Mascot Girl
+Image 010
+Color Y
+Level 3
+Cost 2
+Trigger Soul
+Power 9500
+Soul 2
+Trait1 LycoReco
+Trait2 Weapon
+*EarlyPlay2OrLessClimax
+*GainPowerWithEnoughCharacters(2000,2,LycoReco|Weapon)
+Cont: GiveSelf
+{
+	GainSpecialEffect DoubleTrigger
+}
+Text Cont: During this card's attack, perform a trigger check 2 times on the trigger step.
+EndCard
+
+Character: LRC/W105-011
+Name Kurumi & Chisato, Let's Game!
+Image 011
+Color Y
+Level 3
+Cost 2
+Trigger Soul
+Power 10000
+Soul 2
+Trait1 LycoReco
+Trait2 Net
+Auto: OnPlay
+{
+	If StageContains 4 Other && HasTrait LycoReco|Weapon
+	{
+		*PutCardFromWaitingRoomIntoStock(HasTrait LycoReco|Weapon)
+	}
+}
+Text Auto: When this is placed on stage from hand, if you have 4 or more other <LycoReco> or <Weapon> characters, choose 1 <LycoReco> or <Weapon> character in your Waiting Room, you may send it to Stock.
+*MusashiEffect
+EndCard
+
+Character: LRC/W105-012
+Name Kurumi, Cafe LycoReco
+Image 012
+Color Y
+Level 3
+Cost 2
+Trigger Soul
+Power 11000
+Soul 2
+Trait1 LycoReco
+Trait2 Net
+Auto: OnPlay
+{
+    MultipleChoiceQuestion Choose an effect: \nYour opponent sends all of their Stock to their deck and shuffles their deck, then puts an equal number of cards from the top of their deck into Stock.\n2 Choose 1 of your opponent's characters, return it to hand.|Effect1|Effect2
+    If Answer 0
+    {
+        TargetTop OpponentStock 99
+        SetXValue TargetCount
+        MoveCard OpponentDeck
+        ShuffleLocation OpponentDeck
+        TargetTop OpponentDeck X
+        MoveCard OpponentStock
+    }
+    Else
+    {
+        TargetLocation OpponentStage
+        AIChoice Bounce
+        ChooseCharacterFromTargets Choose an opponent's character to return to their hand.
+        Bounce
+    }
+}
+Text Auto: When this is placed on stage from hand, choose 1 of the following 2 effects and resolve it, A - "Your opponent sends all of their Stock to their deck and shuffles their deck, then puts an equal number of cards from the top of their deck into Stock." B - "Choose 1 of your opponent's characters, return it to hand."
+EndCard
+
+Character: LRC/W105-013
+Name Mizuki, Something She's Unwilling to Yield
+Image 013
+Color Y
+Level 0
+Cost 0
+Power 500
+Trait1 LycoReco
+Trait2 Glasses
+Combo Proudly Lying
+Auto: OnSpecificClimaxPlay Proudly Lying
+{
+    If StageContains 4 Other && HasTrait LycoReco|Weapon
+    {
+        *OptionalDraw
+        TargetLocation Hand
+        ChooseCardFromTargets 1 1 Any
+        MoveCard Stock
+    }
+}
+Text Auto: CX Combo When the Choice CX (031) is placed in your Climax Area, if you have 4 or more other <LycoReco> or <Weapon> characters, draw up to 1 card, then choose 1 card in your hand, send it to Stock.
+Act: 1 RestSelf
+{
+    TargetTop Deck 1
+    Reveal
+    IfTarget IsCharacter && HasTrait LycoReco|Weapon || IsEvent
+    {
+        MoveCard Hand
+    }
+}
+Text Act: [(1) Rest this] Reveal the top card of your deck. If that card is a <LycoReco> or <Weapon> character or an Event, add it to hand.
+EndCard
+
+Character: LRC/W105-014
+Name Kurumi, Smiling
+Image 014
+Color Y
+Level 0
+Cost 0
+Power 500
+Trait1 LycoReco
+Trait2 Net
+*OnAttackGivePowerTimesSoul
+Auto: StartOpponentAttackPhase
+{
+    PayCost Send 1 WaitingRoom Other
+	{
+		MoveToOpenPosition False True
+	}
+}
+Text Auto: [Send 1 of your other characters on stage to Waiting Room] At the start of your opponent's Attack Phase, you may pay cost. If you do, move this to an open position in your back row.
+EndCard
+
+Character: LRC/W105-015
+Name Mika, Cafe LycoReco
+Image 015
+Color Y
+Level 0
+Cost 0
+Power 500
+Trait1 LycoReco
+Trait2 Weapon
+Auto: OnPlay
+{
+	OpponentMultipleChoiceQuestion Declare a level.|0|1|2|3
+	TargetTop Deck 1
+    Reveal
+	IfTarget IsCharacter && Compare TargetCardsLevel Answer Exactly
+	{
+		PlaceOnStage False True True False
+	}
+}
+Text Auto: When this is placed on stage from hand, your opponent declares 0, 1, 2, or 3. Reveal the top card of your deck, and if that card is a character with the same level as the number declared by your opponent, place it on stage in any slot.
+Auto: OnCancel
+{
+	If InBattle
+	{
+		Question Send card to stock?
+		If Yes
+		{
+			TargetSelf
+			MoveCard Stock
+		}
+	}
+}
+Text Auto: During this card's battle, when the damage you take is cancelled, you may send this to Stock.
+EndCard
+
+Character: LRC/W105-016
+Name Takina, Depressed
+Image 016
+Color Y
+Level 0
+Cost 0
+Power 1000
+Trait1 LycoReco
+Trait2 Weapon
+*GlobalPower(500,LycoReco|Weapon)
+Auto: OnClimaxPlay
+{
+    IfOther HasTrigger Choice
+	{
+		TargetLocation OpponentStage
+		NarrowTargets InLocation OpponentCenterStage
+		ChooseCharacterFromTargets Choose a character to give -2000 power.
+		LosePower 2000
+	}
+}
+Text Auto: When your Climax with the Choice Trigger Icon is placed in your climax area, choose one of your opponent's Characters in Front Row, and that character gets -2000 Power till the end of the turn.
+EndCard
+
+Character: LRC/W105-017
+Name Chisato, Opinion of the New Menu
+Image 017
+Color Y
+Level 0
+Cost 0
+Power 2000
+Trait1 LycoReco
+Trait2 Weapon
+Cont: GiveSelf
+{
+	If StageContainsOrLess 1 Other
+	{
+		GainPower 2500
+		GainLevel 1
+	}
+}
+Text Cont: If you have 1 or less other characters, this card gets +1 level and +2500 power.
+EndCard
+
+Character: LRC/W105-018
+Name Kurumi, Genius Hacker
+Image 018
+Color Y
+Level 1
+Cost 0
+Power 2000
+Trait1 LycoReco
+Trait2 Net
+*BackupBonus1000(LycoReco|Weapon)
+Backup 1000
+EndCard
+
+Character: LRC/W105-019	
+Name Mizuki, Drink After Work
+Image 019
+Color Y
+Level 1
+Cost 0
+Trigger Soul
+Power 2500
+Trait1 LycoReco
+Trait2 Glasses
+*OnPlayGainPower(3000)
+*GainPowerWhenAttackingLevel2(6000)
+EndCard
+
+Character: LRC/W105-020
+Name Chisato & Takina, Rhetorics
+Image 020
+Color Y
+Level 2
+Cost 1
+Trigger Soul
+Power 2500
+Trait1 LycoReco
+Trait2 Weapon
+Auto: OnUseThisCardsBackup
+{
+	PayCost 1 Send 1 WaitingRoom HasTrait LycoReco|Weapon
+	{
+		TargetLocation OpponentStage
+		NarrowTargets CanBeChosen
+		ChooseCharacterFromTargets
+		LoseSoul 1
+	}
+}
+Text Auto: [(1) Send 1 of your <LycoReco> or <Weapon> characters from stage to Waiting Room] When you use this card's BACKUP, you may pay cost. If you do, choose 1 of your opponent's characters, this turn, it gets -1 Soul.
+Backup 2500
+EndCard
+
+Character: LRC/W105-021	
+Name Mizuki, Cafe LycoReco
+Image 021
+Color Y
+Level 2
+Cost 1
+Trigger Soul
+Power 5000
+Trait1 LycoReco
+Trait2 Glasses
+Cont: Assist
+{
+    If HasTrait LycoReco|Weapon
+    {
+        GainPower 500
+        GainSoul 1
+    }
+}
+Text Cont: ASSIST +500 and +1 Soul to <LycoReco> or <Weapon> characters.
+Auto: OnUseAct
+{
+    TargetLocation Stage
+    AIChoice GainPower 1000
+    ChooseCharacterFromTargets Choose a character to give +1000 power.
+    GainPower 1000
+}
+TimesPerTurn 1
+Text Auto: This ability can only be activated up to once per turn. When you use an ACT effect, choose 1 of your characters, this turn, it gets +1000 power.
+EndCard
+
+Character: LRC/W105-022
+Name Takina, Happy Halloween
+Image 022
+Color Y
+Level 0
+Cost 0
+Power 4500
+Trait1 LycoReco
+Trait2 Weapon
+Auto: OnPlay
+{
+	TargetLocation OpponentCenterStage
+	ChooseCharacterFromTargets Choose a character to give +3000 power.
+	GainPower 3000
+}
+Text Auto: When this is placed on stage from hand, choose 1 of your opponent's front row characters, this turn, it gets +3000 power.
+EndCard
+
+Character: LRC/W105-023	
+Name Chisato, Trick or Treat
+Image 023
+Color Y
+Level 1
+Cost 0
+Power 6000
+Trait1 LycoReco
+Trait2 Weapon
+Auto: OnPlay
+{
+    TargetTop Deck 1
+    Reveal
+    IfTarget HasTrait LycoReco|Weapon
+    {
+        TargetSelf
+        GainSoul 1
+    }
+}
+Text Auto: When this is placed on stage from hand, reveal the top card of your deck. If that card is a <LycoReco> or <Weapon> character, this turn, this gets +1 Soul.
+*OpponentMayPay2ToPreventFrontalAttack
+EndCard
+
+Character: LRC/W105-024
+Name Takina, Unexpected Strike
+Image 024
+Color Y
+Level 1
+Cost 1
+Trigger Soul
+Power 4500
+Trait1 LycoReco
+Trait2 Weapon
+*YellowEarlyPlayBomb
+EndCard
+
+Character: LRC/W105-025
+Name Kurumi, Covering with Drone
+Image 025
+Color Y
+Level 2
+Cost 1
+Trigger Soul
+Power 5500
+Trait1 LycoReco
+Trait2 Net
+Combo Great Exploit
+Cont: GiveSelf
+{
+    TargetLocation Backstage
+	NarrowTargets Other && HasTrait LycoReco|Weapon
+	SetXValue TargetCount
+	MultiplyXValue 2500
+	GainPower X
+}
+Text Cont: For each of your other back row <LycoReco> or <Weapon> characters, this gets +2500 power.
+Auto: OnAttack
+{
+    If Climax Great Exploit
+    {
+        TargetLocation Stage
+        NarrowTargets HasTrait LycoReco|Weapon
+        SetXValue TargetCount
+        MultiplyXValue 500
+        UntilEndOfOpponentsTurn
+        TargetSelf
+        GainPower X
+        *PutCardFromWaitingRoomIntoStock(HasTrait LycoReco|Weapon)
+    }
+}
+Text Auto: CX Combo When this attacks, if you have the Choice CX (032) in your Climax Area, choose up to 1 <LycoReco> or <Weapon> character in your Waiting Room, send it to Stock, and until the end of your opponent's next turn, this gets +X power. X equals the number of your <LycoReco> or <Weapon> characters times 500.
+EndCard
+
+Character: LRC/W105-026
+Name Chisato, Chasing the Truth Behind the Mail
+Image 026
+Color Y
+Level 2
+Cost 1
+Trigger Soul
+Power 7000
+Trait1 LycoReco
+Trait2 Weapon
+Auto: OnPlay
+{
+	If StageContains 4 Other && HasTrait LycoReco|Weapon
+	{
+		Question_Obvious Put the top card of you deck into your stock?
+		If Yes
+		{
+			*OptionalBlindStock
+		}
+	}
+}
+Text Auto: When this is placed on stage from hand, if you have 4 or more other <LycoReco> or <Weapon> characters, you may put the top card of your deck to Stock.
+*OnPlayGainPowerForEach(1000,LycoReco|Weapon)
+EndCard
+
+Character: LRC/W105-027
+Name Mizuki, Ex-DA
+Image 027
+Color Y
+Level 3
+Cost 2
+Trigger Soul
+Power 10000
+Soul 2
+Trait1 LycoReco
+Trait2 Glasses
+*OnPlayGainPowerForEach(1000,LycoReco|Weapon)
+Auto: OnPlay
+{
+	PayCost 1
+	{
+		SearchWaitingRoom IsClimax
+	}
+}
+Text Auto: [(1)] When this card is placed on the stage from your hand, you may pay the cost, choose 1 climax in your waiting room, and return it to your hand.
+EndCard
+
+Event: LRC/W105-028
+Name Trending New Menu
+Image 028
+Color Y
+Level 1
+Cost 0
+Effect:
+{
+    TargetLocation Stage
+    AIChoice GainPower 2000
+    ChooseCharacterFromTargets Choose a character to give +2000 power  and the following effect: "AUTO - This effect activates up to once per turn. When this card attacks, perform Trigger Check twice during Trigger Step".
+    GainPower 2000
+    GainSpecialEffect DoubleTrigger
+}
+Text Choose one of your {LycoReco} or {Weapon} Characters, during this turn, it gains +2000 Power and the following effect: "AUTO - This effect activates up to once per turn. When this card attacks, perform Trigger Check twice during Trigger Step."
+EndCard
+
+Climax: LRC/W105-029
+Name We'll Take Any Order
+Color Y
+Combo Chisato & Takina, Open for Business
+*ChoiceClimax
+EndCard
+
+Climax: LRC/W105-030
+Name Cafe LycoReco's Operating Crisis
+Color Y
+Combo Takina, Skilled Manager
+*ChoiceClimax
+EndCard
+
+Climax: LRC/W105-031
+Name Proudly Lying
+Color Y
+Combo Mizuki, Something She's Unwilling to Yield
+*ChoiceClimax
+EndCard
+
+Climax: LRC/W105-032
+Name Great Exploit
+Color Y
+Combo Kurumi, Covering with Drone
+*ChoiceClimax
+EndCard
+
+Character: LRC/W105-033
+Name Majima, His Kind of Justice
+Image 033
+Color R
+Level 0
+Cost 0
+Power 1500
+Trait1 Terrorist
+Trait2 Weapon
+Auto: OnPlay
+{
+    If StageContains 1 Other HasTrait LycoReco|Weapon
+    {
+        GainPower 2000
+    }
+}
+Text Auto: When this is placed on stage from hand, if you have another <LycoReco> or <Weapon> character, this turn, this gets +2000 power.
+Auto: OnReversed
+{
+    PayCost Discard 1 Any
+    {
+        *Check4Add1(LycoReco|Weapon)
+    }
+}
+Text Auto: [Discard 1 card] When this is Reversed, you may pay cost. If you do, look at up to 4 cards from the top of your deck, choose up to 1 <LycoReco> or <Weapon> character among them, show it to your opponent, add it to hand, and send the rest to Waiting Room.
+EndCard
+
+Character: LRC/W105-034
+Name Takina & Chisato, Those Who Protect the Normal Lives
+Image 034
+Color R
+Level 1
+Cost 0
+Power 4500
+Trait1 LycoReco
+Trait2 Weapon
+Combo Welcome to LycoReco
+Cont: GiveSelf
+{
+	If AllYourCharactersHaveTrait LycoReco|Weapon
+	{
+		GainPower 1000
+	}
+}
+Text Cont: If all of your characters are <LycoReco> or <Weapon>, this gets +1000 power.
+Auto: OnAttack
+{
+    If Climax Welcome to LycoReco && StageContains 2 Other && HasTrait LycoReco|Weapon
+    {
+        RevealUpTo Deck 4
+        AIChoice AddToHand
+        ChooseCardsFromTargets 0 1 HasTrait LycoReco|Weapon || NameEquals Time Between the Two, the Future Chosen
+        RevealTargets
+        MoveCard Hand
+        PutTheRestIntoTheWaitingRoom
+        TargetLocation OpponentStage
+        ChooseCharacterFromTargets Choose a character to give the effect to.
+        UntilEndOfOpponentsTurn
+        GainEffect
+        {
+            Cont: GiveSelf
+            {
+                GainSpecialEffect CannotMove
+            }
+            Text Cont: This card cannot move to another position of the stage.
+        }
+    }
+}
+Text Auto: CX Combo When this attacks, if you have the Door CX (062) in your Climax Area, and you have 2 or more other <LycoReco> or <Weapon>, look at up to 4 cards from the top of your deck, choose up to 1 <LycoReco> or <Weapon> character or {2/2 Event - 096} from among them, show it to your opponent, add it to hand, send the rest to Waiting Room, then choose 1 of your opponent's characters, until the end of your opponent's next turn, it gains the following ability, "CONT - This cannot move to other slots."
+EndCard
+
+Character: LRC/W105-035	
+Name Chisato, A Place to Return to
+Image 035
+Color R
+Level 3
+Cost 2
+Trigger Soul
+Power 8000
+Soul 2
+Trait1 LycoReco
+Trait2 Weapon
+*EarlyPlay4OrMore(LycoReco|Weapon)
+*Healer
+Auto: OnPlay
+{
+    If LocationContains WaitingRoom 1 NameEquals Takina, Her Chosen Place
+    {
+        UntilEndOfOpponentsTurn
+        GainPower 3000
+    }
+}
+Text Auto: When this is placed on stage from hand, if you have a {0/0 Takina - 066} in your Waiting Room, until the end of your opponent's next turn, this gets +3000 power.
+EndCard
+
+Character: LRC/W105-036
+Name Chisato, These Days Will Continue
+Image 036
+Color R
+Level 3
+Cost 2
+Trigger Soul
+Power 10000
+Soul 2
+Trait1 LycoReco
+Trait2 Weapon
+Combo Days Together Between the Two
+Auto: OnPlay
+{
+	SearchWaitingRoom HasTrait LycoReco|Weapon
+}
+Text Auto: When this is placed on stage from hand, choose 1 <LycoReco> or <Weapon> character from your Waiting Room, you may add it to hand.
+Auto: OnEndOfAttack
+{
+    If Climax Days Together Between the Two && StageContains 2 HasTrait LycoReco|Weapon
+    {
+        PayCost 3 Discard 1 Any
+        {
+            Stand
+        }
+    }
+}
+TimesPerTurn 1
+Text Auto: CX Combo [(3) Discard 1 card] This ability can only be activated up to once per turn. At the end of this card's attack, if the Door CX (063) is in your Climax Area, and you have 2 or more other <LycoReco> or <Weapon> characters, you may pay cost. If you do, Stand this.
+EndCard
+
+Character: LRC/W105-037
+Name Mizuki in a Pinch
+Image 037
+Color R
+Level 0
+Cost 0
+Power 500
+Trait1 LycoReco
+Trait2 Glasses
+Auto: StartOpponentAttackPhase
+{
+	PayCost 1
+	{
+		MoveToOpenPosition False True
+	}
+}
+Text Auto: [(1)] At the beginning of your opponent's attack phase, you may pay the cost. If you do, move this card to an open position of your back stage.
+Auto: StartOpponentAttackPhase
+{
+    PayCost Discard 1 Any
+	{
+		TargetLocation Stage
+		NarrowTargets Other
+		ChooseCharacterFromTargets
+		Marker_FaceUp
+		TargetSelf
+		ScheduleEffectForTargets StartDrawPhase
+		{
+			Effect:
+			{
+				If OnStage
+				{
+					TargetLocation Marker
+					If HasTarget
+					{
+						Message Choose a character to place on stage.
+						ChooseCardsFromTargets 1 1 IsCharacter
+						PlaceOnStage False True True False
+					}
+				}
+			}
+		}
+	}
+}
+Text Auto: [Discard 1 card] At the start of your opponent's Attack Phase, you may pay cost. If you do, choose 1 of your other characters, put it underneath this card Face-Up as a Marker, and at the start of your next Draw Phase, choose 1 character underneath this card as a Marker, place it on stage in any slot.
+EndCard
+
+Character: LRC/W105-038	
+Name Chisato, Natural-born Talent
+Image 038
+Color R
+Level 0
+Cost 0
+Power 1500
+Trait1 LycoReco
+Trait2 Weapon
+Cont: GiveSelf
+{
+    If HasMarker && MyTurn
+	{
+		GainPower 2000
+	}
+}
+Text Cont: During your turn, if this card has a Marker underneath it, this gets +2000 power.
+Auto: OnPlay
+{
+	TargetTop Deck 1
+	Reveal
+	IfThatCard HasTrait LycoReco|Weapon
+	{
+		Question Put the revealed card under "Chisato, Natural-born Talent" as a marker?
+		If Yes
+		{
+			Marker_FaceDown
+		}
+	}
+}
+Text Auto: When this is placed on stage from hand, reveal the top card of your deck. If that card is an <LycoReco> or <Weapon> character or, you may put it underneath this card Face-down as a Marker.
+Auto: StartOpponentAttackPhase
+{
+    Mill 2
+    If TargetsContain 1 Compare TargetCardsLevel 2 OrMore
+    {
+        TargetSelf
+        Bounce
+    }
+}
+Text Auto:  At the start of your opponent's Draw Phase, mill 2. If there is a Level 2 or higher card among those cards, you may return this card to hand.
+EndCard
+
+Character: LRC/W105-039
+Name Chisato Captured 
+Image 039
+Color R
+Level 1
+Cost 0 
+Power 4000
+Trait1 LycoReco
+Trait2 Weapon
+Cont: GiveSelf
+{
+    GainSpecialEffect CannotMove
+}
+Text Cont: This cannot move to other slots.
+*GainPowerWithEnoughCharacters(3000,2,LycoReco|Weapon)
+Auto: OnCancel
+{
+    If InBattle
+	{
+		Question Return card to your hand?
+		If Yes
+		{
+			TargetSelf
+			MoveCard Hand
+		}
+	}
+}
+Text Auto: During this card's battle, when the damage you take is cancelled, you may return this to your hand.
+EndCard
+
+Character: LRC/W105-040
+Name Chisato, Safety in Mind
+Image 040
+Color R
+Level 1
+Cost 0 
+Power 5500
+Trait1 LycoReco
+Trait2 Weapon
+Cont: GiveFacing
+{
+	GainEffect
+	{
+		Auto: Encore 2
+		{
+		}
+		Text Auto: ENCORE [(2)]
+	}
+}
+Text Cont: The character facing this card gets "Auto: ENCORE [(2)]".
+Auto: OnAttack
+{
+    If LocationContains Climax 1 Any
+    {
+        TargetTop Deck 1
+        Reveal
+        If Compare TargetCardsLevel 1 OrMore
+        {
+            MoveCard Stock
+        }
+    }
+}
+Text Auto: When this attacks, if you have a Climax in your Climax Area, reveal the top card of your deck. If that card is Level 1 or higher, send it to Stock.
+EndCard
+
+Character: LRC/W105-041
+Name Chisato, Before the End
+Image 041
+Color R
+Level 2
+Cost 1
+Trigger Soul 
+Power 5000
+Soul 2
+Trait1 LycoReco
+Trait2 Weapon
+Combo Perseverance
+Auto: OnPlay
+{
+    PayCost Discard 1 Any
+    {
+        SearchWaitingRoom HasTrait LycoReco|Weapon
+    }
+}
+Text Auto: [Discard 1 card] When this is placed on stage from hand, you may pay cost. If you do, choose 1 <LycoReco> or <Weapon> in your Waiting Room, add it to hand.
+Auto: OnSpecificClimaxPlay Perseverance
+{
+    PayCost SendSelf WaitingRoom
+    {
+        SearchLocationForTargets Hand 0 1 NameEquals Chisato, Chosen Path
+        RevealTargets
+        Change
+    }
+}
+Text Auto: {CX Combo} [Send this to Waiting Room] During your Climax Phase, when the Door CX (064) is placed in your Climax Area, you may pay cost. If you do, choose up to 1 {3/2 Chisato - 042} in your hand, place it on stage in this card's former slot.
+EndCard
+
+Character: LRC/W105-042
+Name Chisato, Chosen Path
+Image 042
+Color R
+Level 3
+Cost 2
+Trigger Soul 
+Power 9500
+Soul 2
+Trait1 LycoReco
+Trait2 Weapon
+*GainPowerForEachOther(500,LycoReco|Weapon)
+Auto: OnAttack
+{
+    TargetLocation OpponentWaitingRoom
+    Message Choose a card in your opponent's waiting room to place on the top or on the bottom of their deck.
+    AIChoice If Not IsClimax
+    ChooseCard
+    MultipleChoiceQuestion Choose an effect.\n1. Put the chosen card on the top of your opponent's deck.\n2. Put the chosen card on the bottom of your opponent's deck. |Top|Bottom
+    If Answer 0
+    {
+        MoveCard OpponentDeck
+    }
+    If Answer 1
+    {
+        MoveCardToBottom OpponentDeck
+    }
+    
+}
+Text Auto: When this attacks, choose up to 1 card in your opponent's Waiting Room, place it on the top or on the bottom of their deck.
+*HandEncoreTrait(LycoReco|Weapon)
+EndCard
+
+Character: LRC/W105-043
+Name Chisato in the Senior Position
+Image 043
+Color R
+Level 0
+Cost 0 
+Power 500
+Trait1 LycoReco
+Trait2 Weapon
+*500Assist
+*Act1RestSelfReviveBrainstorm
+EndCard
+
+Character: LRC/W105-044
+Name Chisato, Tokyo Sightseeing
+Image 044
+Color R
+Level 0
+Cost 0 
+Power 500
+Trait1 LycoReco
+Trait2 Weapon
+Auto: OnTriggerCheckClimax
+{
+    IfOther HasTrigger Door
+    {
+        MillOpponent 4
+    }
+}
+Text Auto: When your character's Trigger Check reveals a Climax with a Door Trigger Icon, your opponent mills 4.
+*Act1RestSelfCheck3Add1Brainstorm
+EndCard
+
+Character: LRC/W105-045
+Name Chisato, Inviting to "Go Out"
+Image 045
+Color R
+Level 0
+Cost 0 
+Power 1500
+Trait1 LycoReco
+Trait2 Weapon
+*RedLevel0Bomb
+Act: 1 SendSelf WaitingRoom
+{
+	*Check4Add1(LycoReco|Weapon)
+}
+Text Act: [(1) Send this to Waiting Room] Look at up to 4 cards from the top of your deck, choose up to 1 <LycoReco> or <Weapon> character or {2/2 Event - } from among them, show it to your opponent, add it to hand, and send the rest to Waiting Room.
+EndCard
+
+Character: LRC/W105-046
+Name Mizuki, Reunited with Daughter(?)
+Image 046
+Color R
+Level 1
+Cost 0 
+Power 3000
+Trait1 LycoReco
+Trait2 Weapon
+*RedLevel1Bomb
+Act: Discard 1 Any SendSelf BottomOfDeck
+{
+    SearchWaitingRoom HasTrait LycoReco|Weapon
+}
+EndCard
+
+Character: LRC/W105-047	
+Name Majima, Alan Children
+Image 047
+Color Red
+Level 1
+Cost 1
+Trigger Soul 
+Power 2000
+Trait1 Terrorist
+Trait2 Weapon
+Cont: Assist
+{
+    GainEffect
+    {
+        Auto: OnReversed
+        {
+            If Compare CardsInStock CardsInOpponentsStock LessThan 
+            {
+                Question Put this card into your stock?
+                If Yes
+                {
+                    TargetSelf
+                    MoveCard Stock
+                }
+            }
+        }
+        Text Auto: AUTO - When this is Reversed, if you have less Stock than your opponent, you may send this to Stock.
+    }
+}
+Text Cont: ASSIST All of your characters in front of this gains the following ability, "AUTO - When this is Reversed, if you have less Stock than your opponent, you may send this to Stock."
+Act: 2 RestSelf
+{
+    SearchWaitingRoom IsCharacter
+}
+Text Act: Choose 1 character in your Waiting Room, add it to hand.
+EndCard
+
+Character: LRC/W105-048
+Name Chisato, Unexpected Attack
+Image 048
+Color R
+Level 1
+Cost 1 
+Power 4500
+Trait1 LycoReco
+Trait2 Weapon
+Combo Last-Ditch Resistance
+ConditionalTrigger LoneStandby Climax Last-Ditch Resistance
+Text If the Standby CX (065) is in your Climax Area, this card in any area gains Standby Trigger.
+*GainPowerWithEnoughCharacters(3000,3,LycoReco|Weapon)
+*HandEncore
+EndCard
+
+Character: LRC/W105-049
+Name Chisato, To the Land Yet to be Seen
+Image 049
+Color R
+Level 2
+Cost 1
+Trigger Soul 
+Power 2500
+Trait1 LycoReco
+Trait2 Weapon
+*MemoryBackup
+Backup 3000
+EndCard
+
+Character: LRC/W105-050	
+Name Mizuki, Place of Encounters
+Image 050
+Color R
+Level 2
+Cost 1
+Trigger Soul 
+Power 4500
+Trait1 LycoReco
+Trait2 Glasses
+Auto: OnPlay
+{
+	PayCost 1 Discard 1 Any
+	{
+		OpponentMessage Choose a climax to keep in your waiting room.
+		OpponentSearchLocationForTargets WaitingRoom 1 1 IsClimax
+		ReverseTargets OpponentWaitingRoom
+		MoveCard OpponentDeck
+		ShuffleLocation OpponentDeck
+	}
+}
+Text Auto: [(1) Discard 1 card] When this is placed on stage from hand, you may pay the cost. If you do, your opponent chooses 1 Climaxes from their Waiting Room, and shuffles all other cards from their Waiting Room into their deck.
+*RedLevel2Bomb
+EndCard
+
+Character: LRC/W105-051	
+Name Chisato, Cheering Words
+Image 051
+Color R
+Level 0
+Cost 0 
+Power 500
+Trait1 LycoReco
+Trait2 Weapon
+Cont: GiveAll
+{
+    If Other && NameEquals Takina, Her Determination
+    {
+        GainPower 1000
+    }
+}
+Text Cont: All of your other {1/0 Takina - 073} gets +1000 power
+Auto: OnCardSentFromAToB Stage Clock
+{
+    PayCost 1 RestSelf
+    {
+        *OptionalHeal
+    }
+}
+Text Auto:  [(1) Rest this Standing card] When you other character is sent from Stage to Clock, you may pay cost. If you do, Heal 1.
+EndCard
+
+Character: LRC/W105-052
+Name Shinji, Replacement Father Figure
+Image 052
+Color Red
+Level 0
+Cost 0 
+Power 500
+Trait1 Alan Institute
+Trait2 Weapon
+Cont: GiveAll
+{
+    If StageContains 1 NameEquals Mika, Replacement Father Figure &&& NameContains Chisato
+    {
+        GainEffect
+        {
+            *EncoreStepIfNoneRestedPayToRest
+        }
+    }
+}
+Text Cont: If you have another {0/0 Mika - 055}, all of your other characters with "Chisato" in its name gains the following ability, "AUTO - (1) At the start of Encore Step, if you do not have any other Rested characters in your Front Row, you may pay cost. If you do, Rest this."
+*RestGivePower(2000,LycoReco|Weapon)
+EndCard
+
+Character: LRC/W105-053
+Name Chisato, Encounter with Her Savior
+Image 053
+Color Red
+Level 0
+Cost 0 
+Power 1000
+Trait1 LycoReco
+Trait2 Weapon
+Cont: GiveSelf
+{
+    If StageContains 1 NameEquals Mika, Replacement Father Figure &&& StageContains 1 NameEquals Shinji, Replacement Father Figure
+    {
+        GainPower 2000
+    }
+}
+Text Cont: If you have another {0/0 Shinji - 052} and {0/0 Mika - 055}, this gets +2000 power.
+Auto: OnPlay
+{
+    PayCost Discard 1 HasTrait LycoReco|Weapon
+    {
+        SearchLocationForTargets Deck 0 1 NameEquals Mika, Replacement Father Figure || NameEquals Shinji, Replacement Father Figure
+        RevealTargets
+        MoveCard Hand
+        ShuffleLocation Deck
+    }
+}
+Text Auto: [Discard 1 <LycoReco> or <Weapon> character] When this is placed on stage from hand, you may pay cost. If you do, search your deck for up to 1 {0/0 Shinji - 052} or {0/0 Mika - 053}, show it to your opponent, add it to hand, and shuffle your deck afterwards.
+EndCard
+
+Character: LRC/W105-054
+Name Chisato, Again at the Old Communication Tower
+Image 054
+Color R
+Level 0
+Cost 0 
+Power 1000
+Trait1 LycoReco
+Trait2 Weapon
+*OnPlayCheckTopTraitOrEventAddDiscard(LycoReco|Weapon)
+Auto: OnPlay
+{
+    PayCost ShuffleFromWaitingRoom 2 IsCharacter
+    {
+        GainSoul 1
+    }
+}
+Text Auto: [Shuffle 2 characters from your Waiting Room into your deck] When this is placed on stage from hand, you may pay cost. If you do, this turn, this gets +1 Soul. 
+EndCard
+
+Character: LRC/W105-055
+Name Mika, Replacement Father Figure
+Image 055
+Color R
+Level 0
+Cost 0 
+Power 2000
+Trait1 LycoReco
+Trait2 Weapon
+Cont: GiveAll
+{
+    If StageContains 1 NameEquals Shinji, Replacement Father Figure &&& NameContains Chisato
+    {
+        GainPower 500
+    }
+}
+Text Cont: If you have another {0/0 Shinji - 052}, all of your other character with "Chisato" in its name gets +500 power.
+Auto: OnClimaxPlay
+{
+    PayCost 1
+	{
+		Peek Deck 4
+		AIChoice AddToHand
+		Message Choose a card to add to your hand.
+		ChooseCardsFromTargets 0 1 IsCharacter && HasTrait LycoReco|Weapon
+		RevealTargets
+		MoveCard Hand
+		PutTheRestIntoTheWaitingRoom
+	}
+}
+Text Auto: (1) When your Climax is placed on the Climax Area, you may pay cost. If you do, look at up to 4 cards from the top of your deck, choose up to 1 <LycoReco> or <Weapon> character from among them, show it to your opponent, add it to hand, and send the rest to Waiting Room.
+EndCard
+
+Character: LRC/W105-056
+Name Chisato, Fun Times
+Image 056
+Color R
+Level 1
+Cost 0 
+Power 3000
+Trait1 LycoReco
+Trait2 Weapon
+Cont: GiveSelf
+{
+    If LocationContainsOrLess CenterStage 1 Other
+    {
+        GainPower 4000
+    }
+}
+Text Cont: If you have 1 or less other characters in your Front Row, this gets +4000 power.
+Auto: StartAttackPhase
+{
+    If CardPosition Stand && LocationContainsOrLess CenterStage 1 Other
+    {
+        *OptionalBlindStock
+        TargetTop Deck 1
+        Reveal
+        IfTarget HasTrait LycoReco|Weapon
+        {
+            Question Would you like to add this card to your hand?
+            If Yes
+            {
+                MoveCard Hand
+            }
+            Else
+            {
+                MoveCard WaitingRoom
+            }
+        }
+        Else
+        {
+            MoveCard WaitingRoom
+        }
+    }
+}
+Text Auto: At the start of your Attack Phase, if this is Standing, and you have 1 or less other characters in your front row, put up to 1 card from the top of your deck to Stock, then look at 1 card from the top of your deck, choose up to 1 <LycoReco> or <Weapon> character from among them, show it to your opponent, add it to hand, send the rest to Waiting Room.
+EndCard
+
+Character: LRC/W105-057
+Name Chisato, Vacation Program
+Image 057
+Color R
+Level 1
+Cost 0
+Trigger Soul 
+Power 4500
+Trait1 LycoReco
+Trait2 Weapon
+EndCard
+
+Character: LRC/W105-058
+Name Chisato, Expected Life Remaining Told by Doctor
+Image 058
+Color R
+Level 1
+Cost 0 
+Power 5000
+Trait1 LycoReco
+Trait2 Weapon
+Auto: StartEncorePhase
+{
+    MoveCard WaitingRoom
+    TargetTop Deck 1
+    Reveal
+    IfTarget Compare ThatCardsLevel 2 OrMore
+    {
+        MoveCard Hand
+    }
+}
+Text Auto: At the start of your Encore Step, send this to Waiting Room, then reveal the top card of your deck. If that card is Level 2 or higher, add it to hand.
+Auto: OnSentFromStageToWaitingRoom
+{
+    PayCost Discard 1 Any
+    {
+        SearchLocationForTargets WaitingRoom 1 1 NameEquals Chisato, Before the End
+        RevealTargets
+        MoveCard Hand
+    }
+}
+Text Auto: [Discard 1 card] When this is sent from Stage to Waiting Room, you may pay cost. If you do, choose 1 {2/1 Chisato - 021} in your Waiting Room, add it to hand.
+EndCard
+
+Character: LRC/W105-059
+Name Chisato, Panties Check
+Image 059
+Color R
+Level 2
+Cost 1
+Trigger Soul 
+Power 1500
+Trait1 LycoReco
+Trait2 Weapon
+Cont: GiveSelf
+{
+    If HasMarker
+    {
+        GainPower 10500
+    }
+}
+Text Cont: If this card has a Marker underneath it, this gets +10500 power.
+*OnPlayChooseMarker_FaceUp(Takina\, Panties Check)
+Text Auto: When this is placed on stage from hand, choose 1 {1/0 Takina - 086} in your Waiting Room, you may put it underneath this card Face-up as a Marker.
+EndCard
+
+Character: LRC/W105-060
+Name Chisato, Infiltration Mission
+Image 060
+Color R
+Level 2
+Cost 1
+Trigger Soul 
+Power 6500
+Trait1 LycoReco
+Trait2 Weapon
+*Level3Assist
+Auto: OnPlay
+{
+    If StageContains 4 Other && HasTrait LycoReco|Weapon
+    {
+        AIChoice RemoveFromWaitingRoom
+		Message Choose a card in your waiting room to put into your stock.
+		SearchLocationForTargets WaitingRoom 0 1 HasTrait LycoReco|WaitingRoom
+		RevealTargets 
+		MoveCard Stock
+    }
+}
+Text Auto: When this is placed on stage from hand, if you have 4 or more other <LycoReco> or <Weapon> characters, choose 1 <LycoReco> or <Weapon> character in your Waiting Room, you may send it to Stock.
+EndCard
+
+Event: LRC/W105-061
+Name Battle Between Equal Strengths
+Image 061
+Color R
+Level 2
+Cost 2
+Counter
+Requirement StageContains 1 NameContains Chisato
+Effect
+{
+    *Scry
+    *Scry
+    *Scry
+    *Scry
+    TargetSelf
+	MoveCard Memory
+}
+EndCard
+
+Climax: LRC/W105-062
+Name Welcome to LycoReco
+Color R
+Combo Takina & Chisato, Those Who Protect the Normal Lives
+*DoorClimax
+EndCard
+
+Climax: LRC/W105-063
+Name Days Together Between the Two
+Color R
+Combo Chisato, These Days Will Continue
+*DoorClimax
+EndCard
+
+Climax: LRC/W105-064
+Name Perseverance
+Color R
+Combo Chisato, Before the End
+*DoorClimax
+EndCard
+
+Climax: LRC/W105-065
+Name Last-Ditch Resistance
+Color R
+Combo Chisato, Unexpected Attack
+*StandbyClimax
+EndCard
+
+Character: LRC/W105-066
+Name Takina, Her Chosen Place
+Image 066
+Color B
+Level 0
+Cost 0 
+Power 2000
+Trait1 LycoReco
+Trait2 Weapon
+Cont: GiveSelf
+{
+    If MyTurn && AllYourCharactersHaveTrait LycoReco|Weapon
+    {
+        GainPower 2000
+    }
+}
+Text Cont: During your turn, if all of your characters are <LycoReco> or <Weapon>, this gets +2000 power.
+Auto: OnOtherFrontalAttacked
+{
+    PayCost 1 SendSelf WaitingRoom
+    {
+        TargetMyCharacterInBattle
+        Bounce
+    }
+}
+Text Auto: [(1) Send this to Waiting Room] When your other <LycoReco> or <Weapon> character is Front Attacked, you may pay cost. If you do, return that character to hand.
+EndCard
+
+Character: LRC/W105-067
+Name Chisato & Takina, Partners
+Image 067
+Color B
+Level 1
+Cost 0 
+Power 4500
+Trait1 LycoReco
+Trait2 Weapon
+Combo Uneven Famed Duo
+Auto: OnPlay
+{
+    If StageContains 1 Other && HasTrait LycoReco|Weapon
+    {
+        GainPower 2000
+    }
+}
+Text Auto: When this is placed on stage from hand, if you have another <LycoReco> or <Weapon> character, this turn, this gets +2000 power.
+Auto: OnAttack
+{
+    If Climax Uneven Famed Duo
+    {
+        Mill 2
+        SetXValue TotalLevel
+        SearchWaitingRoom HasTrait LycoReco|Weapon && Compare ThatCardsLevel X OrLower
+        TargetTop Deck 2
+	    Reorder
+    }
+}
+Text Auto: {CX Combo} When this attacks, if you have the Pants CX (097) in your Climax area, and you have 2 or more other <LycoReco> or <Weapon> characters, mill 2, then choose up to 1 Level X or lower <LycoReco> or <Weapon> character from your Waiting Room, and add it to hand, then look at up to 2 cards from the top of your deck, and put them back on top in any order. X equals the sum of Levels of cards milled by this effect.
+EndCard
+
+Character: LRC/W105-068
+Name Takina, These Days Will Continue
+Image 068
+Color B
+Level 3
+Cost 2
+Trigger Soul
+Power 10000
+Soul 2
+Trait1 LycoReco
+Trait2 Weapon
+Combo Days Together Between the Two
+*Healer
+Auto: OnSpecificClimaxPlay Days Together Between the Two
+{
+    If InLocation CenterStage
+    {
+        PayCost SendFromHand 1 Revealed NameEquals Chisato, These Days Will Continue
+        {
+            TargetSentToPayCost
+            Marker_FaceUp
+            If Compare MarkersUnderThis 1 OrMore
+            {
+                TargetLocation Stage
+                NarrowTargets Other
+                GainPower 3000
+                GainEffect
+                {
+                    Auto: OnAttack
+                    {
+                        MillOpponent 1
+                        IfTarget Compare ThatCardsLevel 0 OrLower
+                        {
+                            Burn 1
+                        }
+                    }
+                    Text Auto: When this attacks, your opponent mills 1. If that card is Level 0 or lower, deal 1 damage to your opponent.
+                }
+            }
+        }
+    }
+}
+Text Auto: {CX Combo} [Put 1 {3/2 Chisato - 036} in your hand underneath this card face-up as a Marker] When the Door CX (063) is placed in your Climax Area, if this is in the front row, you may pay cost. If you do, this turn, all of your other characters get +3000 power and the following ability, "AUTO - When this attacks, your opponent mills 1. If that card is Level 0 or lower, deal 1 damage to your opponent."
+EndCard
+
+Character: LRC/W105-069
+Name Takina, Machinegun Spread Fire
+Image 069
+Color B
+Level 0
+Cost 0 
+Power 500
+Trait1 DA Direct Attack
+Trait2 Weapon
+Auto: OnDirectAttack
+{
+    GainSoul 1
+}
+Text Auto: When this direct attacks, this turn, this gets +1 Soul.
+Auto: OnReversed
+{
+    PayCost SendSelf Clock
+    {
+        SearchLocationForTargets Deck 0 1 NameEquals Takina, Her Determination
+        ChangeRested
+        ShuffleLocation Deck
+    }
+}
+Text Auto: [Send this to Clock] When this is Reversed, you may pay cost. If you do, search your deck for up to 1 {1/0 Takina CXC - 073}, place it on stage in this card's former slot Rested, then shuffle your deck afterwards.
+EndCard
+
+Character: LRC/W105-070
+Name Takina, Cheering
+Image 070
+Color B
+Level 0
+Cost 0 
+Power 1500
+Trait1 LycoReco
+Trait2 Weapon
+Auto: OnPlay
+{
+	TargetLocation OpponentCenterStage
+	SetXValue TargetCount
+	If Compare X 1 OrLess
+	{
+		NarrowTargets Compare ThatCardsCost 0 OrLess
+		ChooseCharacterFromTargets
+		MoveCardToBottom OpponentDeck
+	}
+}
+Text Auto: When this is placed on stage from hand, if your opponent has 1 or less characters in their Front Row, choose 1 Cost 0 or lower character in your opponent's Front Row, you may send it to the bottom of your opponent's deck.
+*ClimaxExchange
+EndCard
+
+Character: LRC/W105-071
+Name Chisato & Takina, If We're Together
+Image 071
+Color B
+Level 0
+Cost 0
+Power 2000
+Trait1 LycoReco
+Trait2 Weapon
+Auto: OnPlay
+{
+    If StageContains 2 Other && HasTrait LycoReco|Weapon
+    {
+        GainLevel 1
+        GainPower 500
+    }
+}
+Text Auto: If you have 2 or more other <LycoReco> or <Weapon> characters, this gets +1 Level and +500 power.
+*MoveOtherWithTraitToBackstageOnReverse(LycoReco|Weapon)
+EndCard
+
+Character: LRC/W105-072
+Name Takina, Marksmanship Expert
+Image 072
+Color B
+Level 1
+Cost 0 
+Power 4500
+Trait1 LycoReco
+Trait2 Weapon
+Auto: OnReversed
+{
+    PayCost Discard 1 Any
+    {
+        Mill 4  
+        *CountSoulTriggers
+        SearchWaitingRoom Compare ThatCardsLevel X OrLess && HasTrait LycoReco|Weapon
+    }
+}
+Text Auto: [Discard 1 card] When this is Reversed, you may pay cost. If you do, mill 4, choose up to 1 Level X or lower <LycoReco> or <Weapon> character from your Waiting Room, add it to hand. X equals the sum of Soul Triggers milled.
+EndCard
+
+Character: LRC/W105-073
+Name Takina, Her Determination
+Image 073
+Color B
+Level 1
+Cost 0 
+Power 5500
+Trait1 LycoReco
+Trait2 Weapon
+Combo Each's Path
+Cont: GiveFacing
+{
+	GainEffect
+	{
+		Auto: Encore 2
+		{
+		}
+		Text Auto: ENCORE [(2)]
+	}
+}
+Text Cont: The character facing this card gets "Auto: ENCORE [(2)]".
+Auto: OnAttack
+{
+    If Climax Each's Path
+    {
+        If Compare CardsInStock 5 OrLess
+        {
+            PayCost Discard 1 Compare ThatCardsLevel 0 OrLower
+            {
+                Peek Deck 5
+                ChooseCardsFromTargets 0 2 HasTrait LycoReco|Weapon
+                RevealTargets
+                MoveCard Hand
+                PutTheRestIntoTheWaitingRoom
+            }
+        }
+    }
+}
+Text Auto: [Discard 1 Level 0 or lower card] When this attacks, if the Pants CX (098) is in your Climax Area, and you have 5 or less Stock, you may pay cost. If you do, look at up top 5 cards from the top of your deck, choose up to 2 <LycoReco> or <Weapon> character from among them, show them to your opponent, add them to hand, send the rest to Waiting Room
+EndCard
+
+Character: LRC/W105-074
+Name Takina, Precise Personality
+Image 074
+Color B
+Level 2
+Cost 1
+Trigger Soul 
+Power 2500
+Trait1 LycoReco
+Trait2 Weapon
+Auto: OnClimaxPlay
+{
+    TargetLocation Stage
+    ChooseCharacterFromTargets Choose a character to give 4000 power until the end of your opponent's next turn.
+    UntilEndOfOpponentsTurn
+    GainPower 4000
+}
+Text Auto: When a Climax is placed in your Climax Area, choose 1 of your characters, until the end of your opponent's next turn, it gets +4000 power.
+Act: 1 Discard 1 Any RestSelf
+{
+	*CheckAndAdd(3)
+}
+Text Act: [(1) Discard 1 card, Rest this] Look at up to 3 cards from the top of your deck, choose up to 1 card among them, add it to hand, and send the rest to Waiting Room.
+EndCard
+
+Character: LRC/W105-075
+Name Takina, Where to Go
+Image 075
+Color B
+Level 3
+Cost 2
+Trigger Soul 
+Power 9500
+Soul 2
+Trait1 LycoReco
+Trait2 Weapon
+Auto: OnPlay|OnPlacedOnStageFromMemory
+{
+    TargetLocation Stage
+    GainPower 3000
+}
+Text Auto: When this is placed on stage from hand or Memory, this turn, all of your characters gets +3000 power.
+Auto: OnReversed
+{
+    MoveCard Memory
+}
+Text Auto: When this is Reversed, send this to Memory.
+Auto: StartClimaxPhase
+{
+    If LocationContains Level 2 NameEquals Chisato, Let's Go Have Fun|Takina, 3 Rings
+    {
+        If LocationContainsOrLess Stage 4 Any
+        {
+            PayCost Discard 2 Any
+            {
+                TargetSelf
+                PlaceOnStage True True True False
+            }
+        }
+    }
+}
+InMemory
+Text Auto: MEMORY EXPERIENCE [Discard 2 cards] While this is in your Memory, at the start of your Climax Phase, if you have 2 or more {TD 0/0 Chisato Riki - T01} or {U 0/0 Takina - 078} in your Level Zone, you may pay cost. If you do, place this on an empty slot on your stage.
+EndCard
+
+Character: LRC/W105-076
+Name Takina, Inviting to "Go Out"
+Image 076
+Color B
+Level 0
+Cost 0 
+Power 500
+Trait1 LycoReco
+Trait2 Weapon
+Cont: GiveAll
+{
+	If Other
+	{
+		If InLocation MiddleCenterStage
+		{
+			GainPower 500
+		}
+	}
+}
+Text Cont: Your other character in the front row center slot gets +500 power.
+Auto: OnPlay
+{
+    PayCost Discard 1 Any
+    {
+        SearchLocationForTargets Deck 0 1 NameEquals Takina, Her Determination
+        RevealTargets
+        MoveCard Hand
+        ShuffleLocation Deck
+    }
+}
+Text Auto: [Discard 1 card] When this is placed on stage from hand, you may pay cost. If you do, search your deck for up to 1 {R 1/0 Takina CXC}, show it to your opponent, add it to hand, and shuffle your deck afterwards.
+EndCard
+
+Character: LRC/W105-077
+Name Takina, Cafe LycoReco in Hawaii
+Image 077
+Color B
+Level 0
+Cost 0 
+Power 500
+Trait1 LycoReco
+Trait2 Weapon
+Auto: StartClimaxPhase
+{
+    TargetLocation Stage
+    ChooseCharacterFromTargets Choose a character to give 1000 power.
+    IfTarget HasTrait LycoReco|Weapon
+    {  
+        GainPower 1000
+    }
+}
+Text Auto: At the start of your Climax Phase, choose 1 of your <LycoReco> or <Weapon> characters, this turn, it gets +1000 power.
+Auto: OnTriggerCheckClimax
+{
+    IfOther HasTrigger Gate
+	{
+		PayCost Discard 1 Any
+		{
+			Peek Deck 2
+			ChooseCardsFromTargets 0 1 Any
+			MoveCard Hand
+			PutTheRestIntoTheWaitingRoom
+		}
+	}
+}
+Text Auto: [Discard 1 card] When your character's Trigger Check reveals a Climax with a Pants Trigger Icon, you may pay cost. If you do, look at up to 2 cards from the top of your deck, choose up to 1 card from among them, add it to hand, and send the rest to Waiting Room
+EndCard
+
+Character: LRC/W105-078
+Name Takina, 3 Rings
+Image 078
+Color B
+Level 0
+Cost 0
+Power 1500
+Trait1 LycoReco
+Trait2 Weapon
+Auto: OnPlay
+{
+	RevealUpTo Deck 3
+	AIChoice AddToHand
+	ChooseCardsFromTargets 0 1 IsEvent
+	If HasTarget
+	{
+		RevealTargets
+		MoveCard Hand
+		PutTheRestIntoTheWaitingRoom
+		CheckForEmptyDeck
+		Discard 1 Any
+	}
+	PutTheRestIntoTheWaitingRoom
+}
+Text Auto: When this is placed on stage from hand, look at up to 3 cards from the top of your deck, choose up to 1 Event from among them, show it to your opponent, add it to hand, and send the rest to Waiting Room. If you added a card to hand, discard 1 card.
+Auto: OnPlay
+{
+    If Compare CardsInMemory 2 OrLess
+	{
+		SearchLocationForTargets WaitingRoom 0 1 NameEquals Takina, Where to Go
+		MoveCard Memory
+	}
+}
+Text Auto: When this is placed on stage from hand, if you 2 or less cards in Memory, choose 1 {3/2 Takina - 075} in your Waiting Room, you may send it to Memory.
+EndCard
+
+Character: LRC/W105-079
+Name Majima, Truth of the World
+Image 079
+Color B
+Level 0
+Cost 0 
+Power 2000
+Trait1 Terrorist
+Trait2 Weapon
+Combo End of the Fated Encounter
+Cont: GiveHand
+{
+	If IsClimax
+	{
+		GainSpecialEffect IgnoreColorRequirement
+	}
+}
+Text Cont: Your climax can be played from your hand without fulfilling color requirements.
+Auto: OnSpecificClimaxPlay End of the Fated Encounter
+{
+    If StageContains 2 Other && HasTrait LycoReco|Weapon
+    {
+        TargetLocation Stage
+        ChooseCharacterFromTargets Choose a character to gain the ability.
+        GainEffect
+        {
+            Auto: OnReverseOpponent
+            {
+                SearchLocationForTargets Deck 0 1 HasTrait LycoReco|Weapon
+                RevealTargets
+                MoveCard Hand
+                ShuffleLocation Deck
+            }
+            Text Auto: When this card's battle opponent is Reversed, search your deck for up to 1 <LycoReco> or <Weapon> character, show it to your opponent, add it to hand, and shuffle your deck afterwards.
+        }
+    }
+}
+Text Auto: {CX Combo} When the Pants CX (099) is placed in your Climax Area, if you have 2 or more other <LycoReco> or <Weapon> characters, choose 1 of your characters, this turn, it gains the following ability, "AUTO - When this card's battle opponent is Reversed, search your deck for up to 1 <LycoReco> or <Weapon> character, show it to your opponent, add it to hand, and shuffle your deck afterwards."
+EndCard
+
+Character: LRC/W105-080
+Name Takina, Transferred Against Her Wish
+Image 080
+Color B
+Level 1
+Cost 0
+Power 2500
+Trait1 LycoReco
+Trait2 Weapon
+Auto: OnUseThisCardsBackup
+{
+    PayCost Discard 2 Any
+    {
+        *SendEarlyPlayToWaitingRoom
+    }
+}
+Text Auto: [Discard 2 cards] When you use this card's BACKUP, you may pay cost. If you do, choose 1 of your opponent's characters whose Level is higher than your opponent's Level, and send it to Waiting Room.
+Backup 1000
+EndCard
+
+Character: LRC/W105-081
+Name Takina, Sharing Chores
+Image 081
+Color B
+Level 1
+Cost 0 
+Power 2500
+Trait1 LycoReco
+Trait2 Weapon
+Cont: GiveAll
+{
+    If Other && OpponentsTurn
+	{
+		GainPower 500
+	}
+}
+Text Cont: During your opponent's turn, all of your other characters get +500 power.
+Act: 1 RestSelf
+{
+    Brainstorm 5
+	TargetBrainstormed
+	NarrowTargets HasTrigger Gate
+	If HasTarget
+	{
+		SearchWaitingRoom IsCharacter
+	}
+}
+Text Act: BRAINSTORM [(1) Rest this] Flip over the top 5 cards of your deck, then send them to Waiting Room. For each Climax with a Pants Trigger among them, choose up to 1 character from your Waiting Room, and add it to hand.
+EndCard
+
+Character: LRC/W105-082
+Name Takina, Spilling Killing Intent
+Image 082
+Color B
+Level 3
+Cost 2
+Trigger Soul 
+Power 10000
+Soul 2
+Trait1 LycoReco
+Trait2 Weapon
+Combo In Order to Save Her
+Auto: OnAttack
+{
+    If Climax In Order to Save Her
+    {
+        PayCost 3 Discard 2 HasTrait LycoReco|Weapon
+        {
+            Burn 3
+            Burn 3
+        }
+    }
+}
+Text Auto: {CX Combo} [(3) DIscard 2 <LycoReco> or <Weapon> characters] When this attacks, if you have the Level 1 or Lower Stock Soul CX (100) in your Climax Area, you may pay cost. If you do, deal 3 damage to your opponent twice.
+EndCard
+
+Character: LRC/W105-083
+Name Takina, Vacation Program
+Image 083
+Color B
+Level 0
+Cost 0 
+Power 500
+Trait1 LycoReco
+Trait2 Weapon
+Cont: GiveAll
+{
+    If NameEquals Chisato, Vacation Program
+    {
+        GainPower 3000
+    }
+}
+Text Cont: All of your other {1/0 Vanilla Chisato - 057} gets +3000 power.
+*BondDiscard(Chisato\, Vacation Program)
+EndCard
+
+Character: LRC/W105-084
+Name Kurumi, In Charge of the Menu
+Image 084
+Color B
+Level 0
+Cost 0
+Power 1000
+Trait1 LycoReco
+Trait2 Net
+*OnPlayReorderTop2
+Auto: OnPlay
+{
+	PayCost 1 Discard 1 HasTrait LycoReco|Weapon
+	{
+		Peek Deck 3
+		ChooseCard Choose a card to add to your hand (Will not be revealed)
+		MoveCard Hand
+		PutTheRestIntoTheWaitingRoom
+	}
+}
+Text Auto: [(1) Discard 1 <LycoReco> or <Weapon> character] When this is placed on stage from hand, you may pay cost. If you do, look at up to 3 cards from the top of your deck, choose up to 1 card among them, add it to hand, and send the rest to Waiting Room.
+EndCard
+
+Character: LRC/W105-085
+Name Fuki, First Lycoris
+Image 085
+Color B
+Level 0
+Cost 0
+Power 1000
+Trait1 DA Direct Attack
+Trait2 Weapon
+Auto: OnDirectAttack|OnOtherAttacks
+{
+    If DirectAttacking
+	{
+        TargetLocation OpponentStage
+        NarrowTargets InLocation OpponentCenterStage
+        ChooseCharacterFromTargets Choose a character to give -1000 power.
+        LosePower 1000
+    }
+}
+Text Auto: When your characters Direct Attacks, choose 1 of your opponent's front row characters, this turn, it gets -1000 power.
+Act: SendSelf Clock
+{
+	*Check4Add1(LycoReco|Weapon)
+}
+Text Auto: [Send this to Clock] Look at up to 4 cards from the top of your deck, choose up to 1 <LycoReco> or <Weapon> character from among them, show it to your opponent, add it to hand, send the rest to Waiting Room.
+EndCard
+
+Character: LRC/W105-086
+Name Takina, Panties Check
+Image 086
+Color B
+Level 1
+Cost 0 
+Power 1500
+Trait1 LycoReco
+Trait2 Weapon
+Cont: GiveSelf
+{
+    If HasMarker
+    {
+        GainPower 6000
+    }
+}
+Text Cont: If this card has a Marker underneath it, this gets +6000 power.
+*OnPlayChooseMarker_FaceUp(Chisato\, Panties Check)
+EndCard
+
+Character: LRC/W105-087
+Name Majima, Crash
+Image 087
+Color B
+Level 1
+Cost 0
+Power 3000
+Trait1 Terrorist
+Trait2 Weapon
+Cont: GiveSelf
+{
+    If Compare CardsInHand CardsInOpponentsHand LessThan
+    {
+        GainPower 4000
+    }
+}
+Text Cont: If you have less cards in hand than your opponent, this gets +4000 power.
+Auto: OnPlay
+{
+    PayCost 1 Discard 2 Any
+    {
+        AIChoice PlaceOnStageStanding
+        SearchLocationForMultipleTargets WaitingRoom 0 3 IsCharacter && HasTrait Weapon && Compare ThatCardsLevel 0 OrLess
+        PlaceOnStage False True True False
+    }
+}
+Text Auto: [(1) Discard 2 cards] When this is placed on stage from hand, you may pay cost. If you do, choose up to 3 Level 0 or lower <Weapon> characters in your Waiting Room, place them on stage in separate slots.
+EndCard
+
+Character: LRC/W105-088
+Name Takina, One-Shot Deal
+Image 088
+Color B
+Level 1
+Cost 0 
+Power 4500
+Trait1 LycoReco
+Trait2 Weapon
+Auto: OnPlay
+{
+    *RockPaperScissors
+    If Compare X 0 Exactly then //You played rock
+	{
+		If Compare Answer 2 Exactly//Opponent played scissors
+		{
+			GainPower 9000
+		}
+	}
+	If Compare X 1 Exactly then //You played paper
+	{
+		If Compare Answer 0 Exactly //Opponent played rock
+		{
+			GainPower 9000
+		}
+	}
+	If Compare X 2 Exactly then //You played scissors
+	{
+		If Compare Answer 1 Exactly//Opponent played paper
+		{
+			GainPower 9000
+		}
+	}
+}
+Text Auto: When this is placed on stage from hand, play Rock-Paper-Scissor with your opponent once, and if you win, this turn, this gets +9000 power.
+EndCard
+
+Character: LRC/W105-089
+Name Kurumi, Infiltration Mission
+Image 089
+Color B
+Level 1
+Cost 1 
+Power 7500
+Trait1 LycoReco
+Trait2 Net
+Cont: GiveSelf
+{
+    If Compare CardsInStock 2 OrLess
+    {
+        GainSpecialEffect CannotAttack
+    }
+}
+Text Cont: If you have 2 or less Stock, this cannot attack.
+Auto: OnPlay
+{
+    If StageContains 4 Other && HasTrait LycoReco|Weapon
+    {
+        AIChoice RemoveFromWaitingRoom
+		Message Choose a card in your waiting room to put into your stock.
+		SearchLocationForTargets WaitingRoom 0 1 HasTrait LycoReco|WaitingRoom
+		RevealTargets 
+		MoveCard Stock
+    }
+}
+Text Auto: When this is placed on stage from hand, if you have 4 or more other <LycoReco> or <Weapon> characters, choose 1 <LycoReco> or <Weapon> character in your Waiting Room, you may send it to Stock.
+EndCard
+
+Character: LRC/W105-090
+Name Takina, Farewell to the Past
+Image 090
+Color B
+Level 2
+Cost 0
+Power 8000
+Trait1 LycoReco
+Trait2 Weapon
+EndCard
+
+Character: LRC/W105-091
+Name Takina, First Time Casual Wear
+Image 091
+Color B
+Level 2
+Cost 1
+Trigger Soul 
+Power 5500
+Trait1 LycoReco
+Trait2 Weapon
+*EarlyPlay4OrMore(LycoReco|Weapon)
+Cont: GiveAll
+{
+    If Other && HasTrait LycoReco|Weapon
+    {
+        GainPower 1000
+    }
+}
+Text Auto: All of your other <LycoReco> or <Weapon> characters get +1000 power.
+EndCard
+
+Character: LRC/W105-092
+Name Takina, The Last Time
+Image 092
+Color B
+Level 2
+Cost 1
+Trigger Soul 
+Power 6000
+Trait1 LycoReco
+Trait2 Weapon
+Cont: GiveSelf
+{
+    If LocationContainsOrLess CenterStage 1 Other
+    {
+        GainPower 4000
+    }
+}
+Text Cont: If you have 1 or less other characters in your Front Row, this gets +4000 power.
+Auto: StartAttackPhase
+{
+    If CardPosition Stand && LocationContainsOrLess CenterStage 1 Other
+    {
+        *OptionalBlindStock
+        *OptionalBlindStock
+        *OptionalBlindStock
+    }
+}
+Text Auto: At the start of your Attack Phase, if this is Standing, and you have 1 or less other characters in your front row, put up to 3 cards from the top of your deck to Stock.
+EndCard
+
+Character: LRC/W105-093
+Name Takina, Changing
+Image 093
+Color B
+Level 2
+Cost 1
+Trigger Soul 
+Power 6000
+Soul 2
+Trait1 LycoReco
+Trait2 Weapon
+Cont: GiveAll
+{
+    If Other && NameEquals Takina, Changing
+    {
+        GainPower 3000
+    }
+}
+Text Cont: All of your other {copies of this} gets +3000 power.
+EndCard
+
+Character: LRC/W105-094
+Name Kurumi, Hand of Rescue
+Image 094
+Color B
+Level 2
+Cost 1
+Trigger Soul 
+Power 7000
+Trait1 LycoReco
+Trait2 Weapon
+*GainPowerWhenAttackingLevel3(6000)
+*OnAttackGivePowerForEachOther(500,LycoReco|Weapon)
+EndCard
+
+Event: LRC/W105-095 
+Name Interest in the Unknown
+Image 095
+Color B
+Level 1
+Cost 0
+Requirement StageContains 1 HasTrait LycoReco|Weapon
+Effect:
+{
+    *Check4Add1(LycoReco|Weapon)
+    If Compare MyLevel 1 OrMore && Compare CardsInWaitingRoom 1 OrMore
+	{
+		Question Do you want to Exchange a Card in your level with a card in your Waiting Room?
+		If Yes
+		{
+			Message Choose a card in your level to exchange.
+			SearchLocationForTargets Level 1 1 Any
+			SaveTargets
+			Message Choose a card in your waiting room to exchange.
+			SearchLocationForTargets WaitingRoom 1 1 Any
+			AddSavedToCurrentTargets
+			Exchange
+		}
+	}
+}
+Text If you don't have a <LycoReco> or <Weapon> character, this cannot be played from hand. Look at up to 4 cards from the top of your deck, choose up to 1 <LycoReco> or <Weapon> character from among them, show it to your opponent, add it to hand, and send the rest to Waiting Room. Choose 1 card from your Level Zone and 1 card from your Waiting Room, you may swap them.
+EndCard
+
+Event: LRC/W105-096
+Name Time Between the Two, the Future Chosen
+Image 096
+Color B
+Level 2
+Cost 2
+Effect:
+{
+    SearchWaitingRoom NameContains Chisato
+    SearchWaitingRoom NameContains Takina
+    TargetLocation Stage
+    ChooseCharacterFromTargets Choose a character to give 3000 power.
+    GainPower 3000
+    TargetTop Deck 1
+    Reveal
+    IfTarget Compare ThatCardsLevel 0 OrLess && IsCharacter
+    {
+        MoveCard Stock
+    }
+}
+Text Choose up to 1 character with "Chisato" in its name and up to 1 character with "Takina" in its name in your Waiting Room, add them to hand, then choose 1 of your <LycoReco> or <Weapon> characters, this turn, it gets +3000 power. Reveal the top card of your deck. If that card is a Level 0 or lower character, send it to Stock.
+EndCard
+
+Climax: LRC/W105-097
+Name Uneven Famed Duo
+Color B
+Combo Chisato & Takina, Partners
+*GateClimax
+EndCard
+
+Climax: LRC/W105-098
+Name Each's Path
+Color B
+Combo Takina, Her Determination
+*GateClimax
+EndCard
+
+Climax: LRC/W105-099
+Name End of the Fated Encounter
+Color B
+Combo Majima, Truth of the World
+*GateClimax
+EndCard
+
+Climax: LRC/W105-100
+Name In Order to Save Her
+Color B
+Combo Takina, Spilling Killing Intent
+Trigger DoubleSoul
+Auto: OnPlay
+{
+	Message Choose a level 1 or lower character to put into stock
+	SearchLocationForTargets WaitingRoom 0 1 IsCharacter && Compare ThatCardsLevel 1 OrLess
+	RevealTargets
+	MoveCard Stock
+	TargetLocation Stage
+	GainSoul 1
+}
+Text Auto: When this card is placed on your climax area from your hand, choose up to 1 level 1 or lower character in your waiting room, put it into your stock, and all of your characters get +1 soul until end of turn.
+EndCard
+
+Character: LRC/W105-101
+Name Photography, Kurumi
+Image 101
+Color Y
+Level 0
+Cost 0 
+Power 2000
+Trait1 LycoReco
+Trait2 Net
+Auto: OnPlay
+{
+	PayCost 2
+	{
+		TargetLocation WaitingRoom
+		MoveCard Deck
+		ShuffleLocation Deck
+	}
+}
+Text Auto: [(2)] When this card is placed on the stage from your hand, you may pay the cost, return all cards from your waiting room to your deck and shuffle your deck.
+EndCard
+
+Character: LRC/W105-102
+Name LycoReco Member, Kurumi
+Image 102
+Color Y
+Level 1
+Cost 1 
+Power 5500
+Trait1 LycoReco
+Trait2 Net
+*GainPowerForEachOther(500,LycoReco|Weapon)
+*EncoreStepIfNoneRestedPayToRest
+EndCard
+
+Character: LRC/W105-103
+Name Photo Shoot, Chisato
+Image 103
+Color R
+Level 0
+Cost 0 
+Power 1000
+Trait1 LycoReco
+Trait2 Weapon
+Auto: OnPlay
+{
+    PayCost 1 Clock
+    {
+        SearchDeck IsCharacter && Compare ThatCardsLevel 2 OrHigher
+    }
+}
+Text Auto:  [(1) Put the top card of your deck into Clock] When this is placed on stage from hand, you may pay cost. If you do, search your deck for up to 1 Level 2 or higher character, show it to your opponent, add it to hand, and shuffle your deck afterwards.
+EndCard
+
+Climax: LRC/W105-104
+Name Pleasant Present
+Color R
+*StandbyClimax
+EndCard
+
+Character: LRC/W105-105
+Name In a Sailor Uniform, Takina
+Image 105
+Color B
+Level 1
+Cost 0
+Power 2500
+Trait1 LycoReco
+Trait2 Weapon
+Auto: OnAttack
+{
+    PayCost Discard 1 Any
+    {
+        TargetLocation Stage
+        ChooseCharacterFromTargets Choose a character to return to your hand.
+        Bounce
+    }
+}
+Text Auto: [Discard 1 card] When this attacks, you may pay cost. If you do, choose 1 of your other <LycoReco> or <Weapon> characters, and return it to hand.
+*BlueCost0Bomb
+EndCard
+
+Character: LRC/W105-106
+Name Guitarist, Takina
+Image 106
+Color B
+Level 2
+Cost 1
+Trigger Soul 
+Power 3500
+Trait1 LycoReco
+Trait2 Weapon
+*LevelAssist
+Act: 2 RestSelf
+{
+    Peek 2
+    Message Choose up to 1 card to add to your hand
+    ChooseCardsFromTargets 0 1 Any
+    MoveCard Hand
+    PutTheRestIntoTheWaitingRoom
+}
+Text Act: [(2) Rest this] Look at up to 2 cards from the top of your deck, choose up to 1 card among them, add it to hand, and send the rest to Waiting Room.
+EndCard
+
+Character: LRC/W105-P01
+Name Guitarist, Chisato
+Image P01
+Color R
+Level 0
+Cost 0 
+Power 1500
+Trait1 LycoReco
+Trait2 Weapon
+Auto: OnPlay
+{
+    TargetLocation OpponentStage
+    ChooseCharacterFromTargets Choose a character to give the ability.
+    GainEffect
+    {
+        Cont: GiveSelf
+        {
+            GainSpecialEffect CannotMove
+        }
+        Text Cont: This cannot move to other slots.
+    }
+}
+Text Auto: When this is placed on stage from hand, choose 1 of your opponent's characters, until the end of your opponent's next turn, it gains the following ability, "CONT - This cannot move to other slots."
+*OnAttackGivePowerForEachOther(500,LycoReco|Weapon)
+EndCard
+
+Character: LRC/W105-T01
+Name Chisato, Let's Go Have Fun
+Image T01
+Color R
+Level 0
+Cost 0 
+Power 1500
+Trait1 LycoReco
+Trait2 Weapon
+*FreeRunner
+Auto: OnSentFromStageToWaitingRoom
+{
+    PayCost 1 Clock
+    {
+        SearchWaitingRoom HasTrait LycoReco|Weapon
+    }
+}
+Text Auto: [(1) Put the top card of your deck into Clock] When this is sent from Stage to Waiting Room, you may pay cost. If you do, choose 1 <LycoReco> or <Weapon> character from your Waiting Room, and add it to hand.
+EndCard
+
+Character: LRC/W105-T02
+Name Mizuki, Driver
+Image T02
+Color R
+Level 0
+Cost 0 
+Power 2000
+Trait1 LycoReco
+Trait2 Glasses
+Auto: OnPlay|OnSentFromStageToWaitingRoom
+{   
+    PayCost 1 Discard 1 Any
+    {
+        SearchDeck IsCharacter && HasTrait LycoReco|Weapon
+    }
+}
+Text Auto: [(1) Discard 1 card] When this is placed on stage from hand or sent from Stage to Waiting Room, you may pay cost. If you do, search your deck for up to 1 <LycoReco> or <Weapon> character, show it to your opponent, add it to hand, and shuffle your deck afterwards.
+EndCard
+
+Character: LRC/W105-T03
+Name Mizuki, Cafe LycoReco in Hawaii
+Image T03
+Color R
+Level 0
+Cost 0
+Power 2500
+Trait1 LycoReco
+Trait2 Glasses
+Auto: OnPlay
+{
+	PayCost Discard 1 IsClimax &&& Send 1 WaitingRoom Other
+	{
+		SearchWaitingRoom IsClimax
+	}
+}
+Text Auto: [Put 1 climax from your hand into your waiting room & Put 1 other character from your stage into your waiting room] When this card is placed on the stage from your hand, you may pay the cost. If you do, choose 1 climax in your waiting room, and return it to your hand.
+EndCard
+
+Character: LRC/W105-T04
+Name Chisato, Her Way of Living
+Image T04
+Color R
+Level 1
+Cost 0 
+Power 4500
+Trait1 LycoReco
+Trait2 Weapon
+Combo Unsound Beatings
+Auto: OnClimaxPlay
+{
+    TargetLocation Stage
+    NarrowTargets HasTrait LycoReco|Weapon
+    ChooseCharacterFromTargets Choose a character to get +1500 power.
+    GainPower 1500
+}
+Text Auto: When a Climax is placed in your Climax Area, choose 1 of your <LycoReco> or <Weapon> characters, this turn, it gets +1500 power.
+Auto: OnSpecificClimaxPlay Unsound Beatings
+{
+    If Compare CardsInStock 4 OrLess
+    {
+        SearchWaitingRoom HasTrait LycoReco|Weapon
+    }
+}
+Text Auto: {CX Combo} When the Door CX (T10) is placed in your Climax Area, if this is in your front row, and you have 4 or less Stock, choose 1 <LycoReco> or <Weapon> character in your Waiting Room, you may add it to hand.
+EndCard
+
+Character: LRC/W105-T05
+Name Mika, Picky About Coffee
+Image T05
+Color R
+Level 1
+Cost 1 
+Power 1000
+Trait1 LycoReco
+Trait2 Weapon
+Auto: OnUseThisCardsBackup
+{
+	MoveCard Memory
+}
+Text Auto: When you use this card's "BACKUP", Put this card into your memory. 
+Backup 2500
+EndCard
+
+Character: LRC/W105-T06
+Name Chisato, Living Together
+Image T06
+Color R
+Level 1
+Cost 1 
+Power 6000
+Soul 2
+Trait1 LycoReco
+Trait2 Weapon
+EndCard
+
+Character: LRC/W105-T07
+Name Chisato, Enjoying the Delicious Situation
+Image T07
+Color R
+Level 2
+Cost 2
+Trigger Soul 
+Power 6000
+Soul 2
+Trait1 LycoReco
+Trait2 Weapon
+*GainPowerForEachOther(1000,LycoReco|Weapon)
+*HandEncore
+EndCard
+
+Character: LRC/W105-T08
+Name Chisato, Waiiha Camo
+Image T08
+Color R
+Level 3
+Cost 2
+Trigger Soul
+Power 10000
+Soul 2
+Trait1 LycoReco
+Trait2 Weapon
+*OnPlayRevealBurnIfTrait(LycoReco|Weapon)
+Auto: OnAttack
+{
+    PayCost SendFromMemoryToWaitingRoom 1 NameEquals Symbol of Alan Children
+    {
+        *Saboutage
+    }
+}
+Text Auto: [Send 1 {1/1 Event - T09} from your Memory to Waiting Room] When this attacks, you may pay cost. If you do, choose 1 card in your opponent's Waiting Room, place it on top of their deck.
+EndCard
+
+Event: LRC/W105-T09
+Name Symbol of Alan Children
+Image T09
+Color R
+Level 1
+Cost 1
+Requirement StageContains 1 HasTrait LycoReco|Weapon
+Effect:
+{
+    SearchDeck IsClimax
+    TargetSelf
+    MoveCard Memory
+}
+Text If you don't have a <LycoReco> or <Weapon> character, this cannot be played from hand. Search your deck for up to 1 Climax, show it to your opponent, add it to hand, and shuffle your deck afterwards. Send this to Memory.
+EndCard
+
+Climax: LRC/W105-T10
+Name Unsound Beatings
+Color R
+Combo Chisato, Her Way of Living
+*DoorClimax
+EndCard
+
+Character: LRC/W105-T11
+Name Takina, Good Change
+Image T11
+Color B
+Level 0
+Cost 0 
+Power 500
+Trait1 LycoReco
+Trait2 Weapon
+*SacrificeToSave(Any)
+Text Auto: [Send this to Waiting Room] When your other <LycoReco> or <Weapon> character is sent from stage to Waiting Room, if this is in your Back Row, you may pay cost. If you do, return that character to stage in its former slot Rested.
+*Act1RestSelfDrawBrainstorm5
+EndCard
+
+Character: LRC/W105-T12
+Name Takina, Cohabitation
+Image T12
+Color B
+Level 0
+Cost 0 
+Power 1000
+Trait1 LycoReco
+Trait2 Weapon
+Cont: GiveAll
+{
+    If NameEquals Chisato, Living Together
+    {
+        GainPower 1500
+        GainEffect
+        {
+            *HandEncore
+        }
+    }
+}
+Text Cont: All of your other {1/1 Chisato - T06} gets +1500 power and "AUTO - ENCORE [Discard 1 character]".
+*BondDiscard(Chisato\, Living Together)
+EndCard
+
+Character: LRC/W105-T13
+Name Kurumi, Mysterious Hacker
+Image T13
+Color B
+Level 0
+Cost 0 
+Power 2500
+Trait1 LycoReco
+Trait2 Weapon
+Cont: GiveSelf
+{
+    If Compare CardsInStock 2 OrLess
+    {
+        GainPower 1500
+    }
+}
+Text Cont: If you have 2 or less Stock, this gets +1500 power.
+EndCard
+
+Character: LRC/W105-T14
+Name Takina, Let's Go Have Fun
+Image T14
+Color B
+Level 1
+Cost 0 
+Power 4000
+Trait1 LycoReco
+Trait2 Weapon
+*OnPlayGainPowerForEach(500,LycoReco|Weapon)
+*GainPowerWhenAttackingLevel2(6000)
+EndCard
+
+Character: LRC/W105-T15
+Name Kurumi, To Save Her Allies
+Image T15
+Color B
+Level 2
+Cost 1
+Trigger Soul 
+Power 3500
+Trait1 LycoReco
+Trait2 Net
+*LevelAssist
+Act: RestSelf
+{
+    *ScryToBottom
+}
+Text Act: [Rest this] Look at the top card of your deck, and put it on top or bottom of your deck.
+EndCard
+
+Character: LRC/W105-T16
+Name Takina, To Save Her Allies
+Image T16
+Color B
+Level 2
+Cost 1
+Trigger Soul 
+Power 4500
+Trait1 LycoReco
+Trait2 Weapon
+Auto: OnAttack
+{
+    TargetLocation OpponentStage
+    SetXValue TargetCount
+    MultiplyXValue 2000
+    TargetSelf
+    GainPower X
+}
+Text Auto: When this attacks, this turn, this gets +X power. X equals the number of your opponent's characters times 2000.
+EndCard
+
+Character: LRC/W105-T17
+Name Takina & Chisato, Lycoris
+Image T17
+Color B
+Level 3
+Cost 2
+Trigger Soul 
+Power 10000
+Soul 2
+Trait1 LycoReco
+Trait2 Weapon
+Combo Our Powers Combined
+*StockHealer
+Auto: OnAttack
+{
+    If Climax Our Powers Combined
+    {
+        PayCost 2
+        {
+            Burn 2
+        }
+    }
+}
+Text Auto: {CX Combo} (2) When this attacks, if you have the Pants CX (T19) in your Climax Area, you may pay cost. If you do, deal 2 damage to your opponent.
+EndCard
+
+Character: LRC/W105-T18
+Name Takina, Reunited After a Long Time
+Image T18
+Color B
+Level 3
+Cost 2
+Trigger Soul 
+Power 10000
+Soul 2
+Trait1 LycoReco
+Trait2 Weapon
+*OnPlayCheckX(LycoReco|Weapons)
+Auto: OnAttack
+{
+    PayCost Discard 2 Any
+    {
+        Burn 1
+    }
+}
+Text Auto: [Discard 2 cards] When this attacks, you may pay cost. If you do, deal 1 damage to your opponent.
+EndCard
+
+Climax: LRC/W105-T19
+Name Our Powers Combined
+Color B
+Combo Takina & Chisato, Lycoris
+*GateClimax
+EndCard
+
+Climax: LRC/W105-T20
+Name Job to Help Those Troubled
+Color B
+*2SoulClimax
+EndCard
+

@@ -1,0 +1,4 @@
+Series: Lycoris Recoil
+Folder: LycorisRecoil/W105
+Prefix: LRC/W105
+SetName: Volume 1 (W105)

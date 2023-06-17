@@ -1,0 +1,4 @@
+Series: RWBY
+Folder: RWBY/WX03
+Prefix: RWBY/WX03
+SetName: RWBY Volume 1

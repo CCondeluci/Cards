@@ -1,0 +1,4 @@
+Series: Vivid Strike!
+Folder: Vivid Strike/W50
+Prefix: VS/W50
+SetName: Vivid Strike!

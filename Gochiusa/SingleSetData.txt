@@ -1,0 +1,17 @@
+Series: Is the Order a Rabbit (Gochiusa)
+Folder: Gochiusa/W44
+Prefix: GU/W44
+SetName: W44
+
+Folder: Gochiusa/WE26
+Prefix: GU/WE26
+SetName: WE26
+
+Folder: Gochiusa/W57
+Prefix: GU/W57
+SetName: Dear My Sister (W57)
+
+Folder: Gochiusa/W88
+Prefix: GU/W88
+SetName: BLOOM (W88)
+

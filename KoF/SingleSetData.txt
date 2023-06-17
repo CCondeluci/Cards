@@ -1,0 +1,4 @@
+Series: The King of Fighters
+Folder: KoF/S05
+Prefix: KF/S05
+SetName: S05

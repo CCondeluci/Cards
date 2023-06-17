@@ -1,0 +1,7 @@
+Series: Kadokawa Sneaker Bunko
+Folder: SneakerBunkoEX
+Prefix: SST/W62
+Prefix: SKY/W62
+Prefix: SHH/W62
+SetName: Sneaker Bunko DLC
+DLC: Sneaker Bunko X

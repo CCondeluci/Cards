@@ -1,0 +1,2828 @@
+//Arifureta Booster
+
+Character: ari/s103-001
+Name Healing Talent, Kaori
+Color Y
+Level 0
+Cost 0
+Power 1000
+Trait1 Tortus
+Trait2 Classmate
+Act: 2 RestSelf
+{
+	Heal
+}
+Text Act: [(2) Rest this] Heal 1
+*Act1RestSelfSalvageBrainstorm(Any)
+EndCard
+
+Character: ari/s103-002
+Name Great Power, Yue
+Color Y
+Level 3
+Cost 2
+Soul 2
+Power 7500
+Trigger Soul
+Trait1 Tortus
+Trait2 Vampire Tribe
+Combo Golden Vampire Princess
+Cont: GiveSelf
+{
+	If StageContains 2 Other && HasTrait Tortus
+	{
+		GainPower 1500
+		GainEffect
+		{
+			*HexProof
+		}
+	}
+}
+Text Cont: If you have 2 or more other <Tortus> characters, this gets +1500 power and this cannot be targeted by your opponent's effects.
+Auto: OnPlay
+{
+	If Compare CardsInClock 1 OrMore
+	{
+		Question_Obvious Put the top card of your clock into the waiting room?
+		If Yes
+		{
+			Heal
+		}
+	}
+}
+Text Auto: When this is placed on stage from hand, you may Heal 1.
+Auto: OnAttack
+{
+	If Climax Golden Vampire Princess
+	{
+		PayCost 1 Discard 1 Any
+		{
+			GainEffect
+			{
+				Auto: OnDamageCancel|OnDamageDealtByCharacterFacingThisCanceled
+				{
+					Question_Obvious Deal 2 damage to your opponent?
+					If Yes
+					{
+						Burn 2
+					}
+				}
+				TimesPerTurn 1
+				Text "Auto: This ability activates up to once per turn. When the character across from this or this card's damage is cancelled, you may deal 2 damage to your opponent."
+			}
+		}
+	}
+}
+Text Auto: CxCombo [(1) Discard 1 <Tortus> character] When this attacks, if "Golden Vampire Princess" in your Climax Area, you may pay cost. If you do, until the end of your opponent's next turn, this gains the following effect, "Auto: This ability activates up to once per turn. When the character across from this or this card's damage is cancelled, you may deal 2 damage to your opponent."
+EndCard
+
+Character: ari/s103-003
+Name Cute Maids Yue & Myu & Kaori
+Color Y
+Level 0
+Cost 0
+Power 2000
+Trait1 Tortus
+Trait2 Vampire Tribe
+Cont: GiveSelf
+{
+	If OpponentsTurn
+	{
+		TargetLocation Stage
+		SetXValue TargetCount
+		NarrowTargets HasTrait Tortus
+		If Compare TargetCount X OrMore
+		{
+			GainPower 2000
+		}
+	}
+}
+Text Cont: During your opponent's turn, if all of your characters are <Tortus>, this gets +2000 power.
+*MillRunner(Tortus)
+EndCard
+
+Character: ari/s103-004
+Name Summer Beach Yue
+Color Y
+Level 0
+Cost 0
+Power 2500
+Trait1 Tortus
+Trait2 Vampire Tribe
+Auto: OnPlay
+{
+	PayCost Discard 1 IsClimax &&& Send 1 WaitingRoom Other
+	{
+		SearchWaitingRoom IsClimax
+	}
+}
+Text Auto: [Discard 1 Climax, Send 1 of your other characters on stage to Waiting Room] When this is placed on stage from hand, you may pay cost. If you do, choose 1 Climax from your Waiting Room, and add it to hand.
+EndCard
+
+Character: ari/s103-005
+Name Married Wife, Yue
+Color Y
+Level 1
+Cost 0
+Power 3000
+Trigger Soul
+Trait1 Tortus
+Trait2 Vampire Tribe
+Combo Lingering Kiss
+Auto: OnDamageCancel
+{
+	Question Return the attacker to hand?
+	If Yes
+	{
+		MoveCard Hand
+	}
+}
+Text Auto: When this card's damage is cancelled, you may return this to hand.
+Auto: OnDamageCancel
+{
+	If Climax Lingering Kiss && LocationContains Memory 1 NameEquals Special Lover, Yue
+	{
+		Message Choose a card in your waiting room to put into your stock.
+		SearchLocationForTargets WaitingRoom 0 2 HasTrait Tortus
+		MoveCard Stock
+		
+		Peek Deck 4
+		ChooseCardsFromTargets 0 1 HasTrait Tortus
+		RevealTargets
+		MoveCard Hand
+		PutTheRestIntoTheWaitingRoom
+	}
+}
+TimesPerTurn 1
+Text Auto: CxCombo MEMORY This ability can only be activated up to once per turn. When this card's damage is cancelled, if "Lingering Kiss" in your Climax Area, and you have "Special Lover, Yue" in your Memory, choose up to 2 <Tortus> characters in your Waiting Room, placed them in Stock in any order, then look at up to 4 cards from the top of your deck, choose up to 1 <Tortus> character from among them, show it to your opponent, add it to hand, send the rest to Waiting Room.
+EndCard
+
+Character: ari/s103-006
+Name How I Fell in Love, Kaori
+Color Y
+Level 0
+Cost 0
+Power 1000
+Trait1 Tortus
+Trait2 Classmate
+Auto: OnReverse
+{
+	TargetTop Deck 1
+	Reveal
+	SetXValue ThatCardsLevel
+	If Compare BattleOpponentsLevel X OrLess
+	{
+		Question Send battle opponent into your opponent's stock?
+		If Yes
+		{
+			TargetBattleOpponent
+			MoveCard OpponentStock
+			TargetBottom OpponentStock 1
+			MoveCard OpponentWaitingRoom
+		}
+	}
+}
+Text Auto: When this is Reversed, reveal the top card of your deck, if the battle opponent's Level is X or lower, you may send that character to Stock. If you do, put the bottom card of your opponent's Stock into Waiting Room. X is equal to the reveal card's level.
+EndCard
+
+Character: ari/s103-007
+Name Calm Morning, Kaori
+Color Y
+Level 1
+Cost 0
+Power 4000
+Trait1 Tortus
+Trait2 Classmate
+Auto: OnPlay
+{
+	If TargetLocation Stage HasTrait Tortus
+	{
+		GainPower 2000
+	}
+}
+Text Auto: When this is placed on stage from hand, if you have another <Tortus> character, this turn, this gets +2000 power.
+Auto: OnAttack
+{
+	If Compare BattleOpponentsLevel 2
+	{
+		GainPower 6000
+	}
+}
+Text Auto: When this attacks, if the Level of the character across from this is 2, this turn, this gets +6000 power.
+EndCard
+
+Character: ari/s103-008
+Name Swimsuit Yue
+Color Y
+Level 1
+Cost 0
+Power 5000
+Trait1 Tortus
+Trait2 Vampire Tribe
+Cont: GiveSelf
+{
+	TargetLocation Stage
+	NarrowTargets Swimsuit Yue
+	SetXValue TargetCount
+	GainSoul X
+}
+Text Cont: For each of your other {copy of this}, this gets +1 Soul.
+EndCard
+
+Character: ari/s103-009
+Name Begging Yue
+Color Y
+Level 2
+Cost 1
+Power 6500
+Trigger Soul
+Trait1 Tortus
+Trait2 Vampire Tribe
+*GainPowerForEachOther(1500,Tortus)
+*HandEncoreTrait(Tortus)
+EndCard
+
+Character: ari/s103-010
+Name New Power Kaori
+Color Y
+Level 3
+Cost 2
+Soul 2
+Power 10000
+Trigger Soul
+Trait1 Tortus
+Trait2 Classmate
+*GainPowerWithEnoughCharacters(1000,2,Tortus)
+Auto: OnPlay|PlacedBy Fusion
+{
+	If StageContains 2 Other && HasTrait Tortus
+	{
+		GainEffect
+		{
+			Cont: GiveSelf
+			{
+				TargetFacing
+				LoseSoul 2
+			}
+		}
+		UntilEndOfOpponentsTurn
+		Text "Cont: The character across from this gets -2 Soul."
+	}
+}
+Text Auto: When this is placed on stage from hand or by FUSION, if you have 2 or more other <Tortus> characters, until the end of your opponent's next turn, this gains the following ability: "Cont: The character across from this gets -2 Soul."
+EndCard
+
+Character: ari/s103-011
+Name Late Night Visit, Kaori
+Color Y
+Level 0
+Cost 0
+Power 1500
+Trait1 Tortus
+Trait2 Classmate
+Auto: OnPlay
+{
+	TargetLocation OpponentCenterStage
+	ChooseCharactersFromTargets Choose a character to gain the following effect: "Cont: This cannot move to other slots."
+	GainEffect
+	{
+		Cont: GiveSelf
+		{
+			GainSpecialEffect CannotMove
+		}
+		Text "Cont: This cannot move to other slots."
+	}
+}
+Text Auto: When this is placed on stage from hand, choose 1 of your opponent's characters, until the end of your opponent's next turn, it gains the following ability: "Cont: This cannot move to other slots."
+Auto: OnAttack
+{
+	TargetLocation Stage
+	NarrowTargets Other && HasTrait Torus
+	SetXValue TargetCount
+	MultiplyXValue 500
+	ChooseCharacterFromTargets Choose a character to give X power
+	GainPower X
+}
+Text Auto: When this attacks, choose 1 of your other <Tortus> characters, this turn, it gets +X power. X equals the number of your other <Tortus> characters times 500.
+EndCard 
+
+Character: ari/s103-012
+Name The Woman Who Never Dies, Yue
+Color Y
+Level 0
+Cost 0
+Power 2000
+Trait1 Tortus
+Trait2 Vampire Tribe
+*GainPowerWhenOtherAttacks(1000,Torus)
+Auto: Encore
+{
+	Question Would you like to send a character from stage to clock to encore?
+	If Yes
+	{
+		SearchLocationForTargets 1 1 HasTrait Tortus
+		MoveCard Clock
+	}
+}
+Text Auto: ENCORE [Send 1 of your <Tortus> characters on stage to Clock]
+EndCard
+
+Character: ari/s103-013
+Name Soul Magic, Yue
+Color Y
+Level 1
+Cost 0
+Power 500
+Trigger Soul
+Trait1 Tortus
+Trait2 Vampire Tribe
+Auto: OnPlay
+{
+	PayCost Discard 1 Any
+	{
+		SearchLocationForTargets WaitingRoom 1 1 Compare ThatCardsLevel 1 OrLess
+		PlaceOnStage False True True False
+	}
+}
+Text Auto: [Discard 1 Card] When this card is placed from your hand to the stage, you may pay the cost, if you do, choose 1 Level 0 or lower character in your waiting room, place it on the stage in any slot. 
+Act: RestSelf
+{
+	SearchLocationForTargets OpponentCenterStage 1 1 Any
+	LosePower 2000
+}
+Text Act: [Rest this] Choose 1 of your opponent's front row characters, this turn, it gets -2000 power.
+EndCard
+
+Character: ari/s103-014
+Name Apostle of God, Noint
+Color Y
+Level 2
+Cost 1
+Soul 2
+Power 500
+Trigger Soul
+Trait1 Tortus
+Trait2 Apostle of God
+Auto OnPlay
+{
+	PayCost SendFromWaitingRoom 2 Deck HasTrait Tortus
+	{
+		ShuffleLocation Deck
+		TargetLocation OpponentCenterStage
+		ChooseCharacterFromTargets Choose a character to give -1000 power until end of turn
+		LosePower 1000
+	}
+}
+Text Auto: [Shuffle 2 characters from your Waiting Room into your deck] When this is placed on stage from hand, you may pay cost. If you do, choose 1 of your opponent's front row characters, this turn, it gets -1000 power.
+Act: MarkerOtherUnderThis 1 NameEquals Healing Talent, Kaori
+{
+	SearchDeckForTarget New Power Kaori
+	Fusion
+}
+Text Act: FUSION [Put 1 {RR 0/0 Kaori - 001} underneath this card Face-up as a Marker] Search your deck for up to 1 {3/2 Kaori - 010}, place it on stage in this card's slot, then put this card and all Markers underneath it underneath that card Face-up as Markers in any order, then shuffle your deck afterwards.
+EndCard
+
+Character: ari/s103-015
+Name Combat Training, Yue
+Color Y
+Level 2
+Cost 1
+Power 6500
+Trigger Soul
+Trait1 Tortus
+Trait2 Vampire Tribe
+*Level3Assist
+Auto OnPlay
+{
+	TargetLocation Stage
+	NarrowTargets Other
+	SetXValue TargetCount
+	If Compare X 4 OrMore
+	{
+		SearchLocationForTargets WaitingRoom 0 1 HasTrait Tortus
+		MoveCard Stock
+	}
+}
+Text Auto: When this is placed on stage from hand, if you have 4 or more other <Tortus> characters, choose 1 <Tortus> character in your Waiting Room, you may send it to Stock.
+EndCard
+
+Event: ari/s103-016
+Name Gravity Magic
+Color Y
+Level 2
+Cost 0
+Counter
+Effect:
+{
+	GainSpecialEffect IgnoreColorRequirement
+	TargetLocation Stage
+	If NameContains Yue
+	{
+		GainSpecialEffect IgnoreColorRequirement
+		*Scry
+		*Scry
+	}
+}
+Text COUNTER - If you don't have a character with "Yue" in its name, this cannot be played from hand.
+Text This card can be played without meeting Color requirement. Perform the following effect twice, "look at the top card of your deck, and put it on top of your deck or into your Waiting Room."
+EndCard
+
+Climax: ari/s103-017
+Name Golden Vampire Princess
+*ChoiceClimax
+EndCard
+
+Climax: ari/s103-018
+Name Lingering Kiss
+Color Y
+*2SoulClimax
+EndCard
+
+Character: ari/s103-019
+Name Lovely Girl, Myu
+Color G
+Level 0
+Cost 0
+Power 500
+Trait1 Tortus
+Trait2 Atlantic Tribe
+Auto: OnPlay
+{
+	PayCost Discard 1 Any
+	{
+		TargetTop Deck 1
+		Reveal
+		SetXValue TotalLevel
+		SearchWaitingRoom IsCharacter && Compare ThatCardsLevel X OrLess
+	}
+}
+Text Auto: [Discard 1 card] When this is placed on stage from hand, you may pay cost. If you do, reveal the top card of your deck, then choose 1 Level X or lower character from your Waiting Room, and add it to hand. X equals the Level of the revealed card.
+*OnAttackGiveOtherPower(1000,Tortus)
+EndCard
+
+Character: ari/s103-020
+Name Full Power, Shea
+Color G
+Level 1
+Cost 0
+Power 4500
+Trait1 Tortus
+Trait2 Rabbitman
+Combo I'm Just a Rabbit-Eared Girl!
+*OnPlayGainPower(1500)
+Auto: OnAttack
+{
+	If Climax I'm Just a Rabbit-Eared Girl! && StageContains 1 Other && HasTrait hololive
+	{
+		Mill 2
+		SetXValue TotalLevel
+		SearchWaitingRoom HasTrait Tortus && Compare ThatCardsLevel X OrLess
+		
+		SetXValue ThatCardsLevel
+		If Compare X 3 OrMore
+		{
+			GainPower 3000
+		}
+	}
+}
+Text Auto: CxCombo When this attacks, if "I'm Just a Rabbit-Eared Girl!" in your Climax Area, and you have 2 or more other <Tortus> characters, mill 2, then choose up to 1 Level X or lower <Tortus> character from your Waiting Room, and add it to hand. If you added a Level 3 or higher character, this turn, this gets +3000 power. X equals the sum of Levels of cards milled by this effect. 
+EndCard
+
+Character: ari/s103-021
+Name To the New World, Tio
+Color G
+Level 3
+Cost 2
+Soul 2
+Power 8500
+Trigger Soul
+Trait1 Tortus
+Trait2 Dragonkin
+*EarlyPlay2OrLessClimax
+Auto: OnPlay
+{
+	If Compare CardsInClock 1 OrMore
+	{
+		Question Put the top card of your clock into the waiting room?
+		If Yes
+		{
+			Heal
+		}
+	}
+}
+Text Auto: When this is placed on stage from hand, you may Heal 1.
+Auto: OnAttack
+{
+	If StageContains 4 Other && HasTrait Tortus
+	{
+		GainPower 3000
+	}
+}
+Text Auto: When this attacks, if you have 4 or more other <Tortus> characters, this turn, this gets +3000 power
+Auto: OnDamageDealtByCharacterFacingThisNotCanceled
+{
+	GainPower 4000
+}
+Text Auto: During this card's battle, when damage you take is not cancelled, this turn, this gets +4000 power.
+EndCard
+
+Character: ari/s103-022
+Name Puri Puri, Shea
+Color G
+Level 0
+Cost 0
+Power 500
+Trait1 Tortus
+Trait2 Rabbitman
+Auto: OnTriggerCheckClimax
+{
+	Question Discard a climax?
+	If Yes
+	{
+		PayCost Discard 1 IsClimax
+		{
+			Peek 2
+			Message Choose a card to add to your hand.
+			ChooseCardsFromTargets 0 1 Any
+			PutTheRestIntoTheWaitingRoom
+		}
+	}
+}
+Text Auto: [Discard 1 Climax] When your character's Trigger Check reveals a Climax, you may pay cost. If you do, look at up to 2 cards from the top of your deck, choose up to 1 card from among them, add it to hand, and send the rest to Waiting Room
+Act: 2 Discard 1 Any
+{
+	SearchLocationForTargets WaitingRoom 1 1 IsCharacter
+	SaveTargets
+	SearchLocationForTargets WaitingRoom 0 1 SameNameAsSavedTarget
+}
+Text Act: [(2) Discard 1 <Tortus> character, Rest this] Choose 1 character from your Waiting Room, add it to hand, then choose 1 character from your Waiting Room with the same name as the added card, and add it to hand.
+EndCard
+
+Character: ari/s103-023
+Name Physical Enhancement, Shea
+Color G
+Level 0
+Cost 0
+Power 1500
+Trait1 Tortus
+Trait2 Rabbitman
+Cont: GiveSelf
+{
+	If MyTurn
+	{
+		GainPower 2000
+	}
+}
+Text Cont: During your turn, this gets +2000 power.
+Auto: StartOpponentAttackPhase
+{
+	If Facing IsCharacter
+	{
+		If Compare TargetCount 2 OrLess
+		{
+			TargetSelf
+			Question Move this card to an open position of your stage?
+			If Yes
+			{
+				MoveToOpenPosition True False
+			}
+		}
+	}
+}
+Text Auto: At the start of your opponent's Attack Phase, if there is a character in the slot across from this, you may move this to an empty Front Row slot.
+EndCard
+
+Character: ari/s103-024
+Name [Guardian] Tio
+Color G
+Level 0
+Cost 0
+Power 1500
+Trait1 Tortus
+Trait2 Dragonkin
+Combo Black Dragon's True Identity
+Auto: OnClimaxPlay
+{
+	If Climax Black Dragon's True Identity && StageContains 2 Other && HasTrait Tortus
+	{
+		TargetLocation Stage
+		ChooseCharacterFromTargets Choose a character to give the following effect: "Auto: When this is Front Attacked, you may return this hand".
+		
+		UntilEndOfOpponentsTurn
+		GainEffect
+		{
+			Auto: OnFrontalAttacked
+			{
+				Question Return the attack target to your hand?
+				If Yes
+				{
+					MoveCard Hand
+				}
+			}
+			Text Auto: When this card is frontal attacked, you may return this card to your hand.
+		}
+	}
+}
+Text Auto: CxCombo When "Black Dragon's True Identity" is placed in your Climax Area, if you have 2 or more other <Tortus> characters, choose 1 of your characters, until the end of your opponent's next turn, it gains the following ability, "Auto: When this is Front Attacked, you may return this hand."
+Act: RestSelf
+{
+	TargetLocation Stage
+	NarrowTargets HasTrait Tortus
+	ChooseCharacterFromTargets Choose a character to give +1500 power.
+	GainPower 1500
+}
+Text Act: [Rest this] Choose 1 of your <Tortus> characters, this turn, it gets +1500 power.
+//If anyone is reading through this for whatever reason I didn't shortcut this with the common effect because I trouble shooting and it was a different issue entirely and I'm too lazy to change it back so instead I wrote this
+EndCard
+
+Character: ari/s103-025
+Name Pain Conversion, Tio
+Color G
+Level 1
+Cost 0
+Power 4000
+Trait1 Tortus
+Trait2 Dragonkin
+Cont: GiveSelf
+{
+	If Compare CardsInClock 3 OrMore
+	{
+		GainPower 2000
+	}
+}
+Text Cont: If you have 3 or more card in your Clock, this gets +2000 power.
+Auto: StartClimaxPhase
+{
+	Question Clock yourself to look at up to 3 cards and choose a character?
+	If Yes
+	{
+		PayCost SendFromWaitingRoomToBottom 1 Clock HasTrait Torus
+		{
+			RevealUpTo Deck 3
+			ChooseCardsFromTargets 0 1 HasTrait Tortus
+			MoveCard Hand
+			PutTheRestIntoTheWaitingRoom
+		}
+	}
+}
+Text Auto: ACCELERATE [Put 1 <Tortus> character from your Waiting Room on the bottom of your Clock] At the start of your Climax Phase, you may pay cost. If you do, look at up to 3 cards from the top of your deck, choose up to 1 <Tortus> character or {Unknown Event} from among them, show it to your opponent, add it to hand, send the rest to Waiting Room.
+EndCard
+
+Character: ari/s103-026
+Name To Be Recognized, Shea
+Color G
+Level 3
+Cost 2
+Soul 2
+Power 9500
+Trigger Soul
+Trait1 Tortus
+Trait2 Rabbitman
+Auto: OnPlay
+{
+	TargetLocation OpponentCenterStage
+	LosePower 2000
+}
+Text Auto: When this is placed on stage from hand, this turn, all of your opponent's Front Row characters get -2000 power.
+Auto: OnPlay
+{
+	PayCost Discard 2 Any
+	{
+		StockSwap
+	}
+}
+Text Auto: [Discard 2 cards] When this is placed on stage from hand, you may pay cost. If you do, your opponent sends all of their Stock to Waiting Room, then puts an equal number of cards from the top of their deck into Stock
+EndCard
+
+Character: ari/s103-027
+Name Reward Date, Shea
+Color G
+Level 0
+Cost 0
+Power 500
+Trait1 Tortus
+Trait2 Rabbitman
+Auto: OnReverse
+{
+	TargetLocation WaitingRoom
+	NarrowTargets NameEquals Reward Date, Shea
+	SetXValue TargetCount
+	TargetLocation OpponentClock
+	If HasTarget
+	{
+		TargetBattleOpponent
+		IfThatCard Compare ThatCardsLevel X OrLess && OnStage
+		{
+			Question Put the top card of the opponent's clock into waiting room to put the battle opponent into clock?
+			If Yes
+			{
+				TargetTop OpponentClock 1
+				MoveCard OpponentWaitingRoom
+				TargetBattleOpponent
+				MoveCard OpponentClock
+			}
+		}
+	}
+}
+Text Auto: When this is Reversed, if the battle opponent's Level is X or lower, you may send the top card of your opponent's Clock to Waiting Room. If you do, send that character to Clock. X is equal to the number of "Reward Date, Shea" in your Waiting Room.
+EndCard
+
+Character: ari/s103-028
+Name Swimsuit, Tio
+Color G
+Level 0
+Cost 0
+Power 2000
+Trait1 Tortus
+Trait2 Dragonkin
+Auto: OnDamageDealtByCharacterFacingThisNotCanceled
+{
+	GainPower 3000
+}
+Text Auto: During this card's battle, when damage you take is not cancelled, this turn, this gets +3000 power.
+EndCard
+
+Character: ari/s103-029
+Name Swimsuiy, Myu
+Color G
+Level 1
+Cost 0
+Power 2500
+Trait1 Tortus
+Trait2 Atlantic Tribe
+Cont: GiveSelf
+{
+	If StageContains 1 NameEquals Gentle Beauty, Remia
+	{
+		GainPower 6000
+	}
+}
+Text Cont: If you have another "Gentle Beauty, Remia", this gets +6000 power.
+EndCard
+
+Character: ari/s103-030
+Name Gentle Beauty, Remia
+Color G
+Level 1
+Cost 0
+Power 3500
+Trait1 Tortus
+Trait2 Atlantic Tribe
+*500Assist
+Auto: OnClimaxPlay
+{
+	PayCost 1
+	{
+		RevealUpTo Deck 4
+		ChooseCardsFromTargets 0 1 HasTrait Tortus
+		MoveCard Hand
+		PutTheRestIntoTheWaitingRoom
+	}
+}
+Text Auto: (1) When your Climax is placed on the Climax Area, you may pay cost. If you do, look at up to 4 cards from the top of your deck, choose up to 1 <Tortus> character from among them, show it to your opponent, add it to hand, and send the rest to Waiting Room.
+EndCard
+
+Character: ari/s103-031
+Name Guryuuen Great Volcano Raid Tio
+Color G
+Level 1
+Cost 0
+Power 5500
+Trait1 Tortus
+Trait2 Dragonkin
+*GainPowerForEachOther(500,Tortus)
+Auto: OnPlay
+{
+	If StageContains 4 Other && HasTrait Tortus
+	{
+		TargetLocation WaitingRoom
+		ChooseCardsFromTargets 0 1 HasTrait Tortus
+		MoveCard Stock
+	}
+}
+Text Auto: When this is placed on stage from hand, if you have 4 or more other <Tortus> characters, choose 1 <Tortus> character in your Waiting Room, you may send it to Stock.
+EndCard
+
+Character: ari/s103-032 
+Name Curious Myu
+Color G
+Level 2
+Cost 1
+Power 2500
+Trigger Soul
+Trait1 Tortus
+Trait2 Atlantic Tribe
+*MemoryBackup
+Backup 3000
+EndCard
+
+Character: ari/s103-033
+Name Pervert Tio
+Color G
+Level 2
+Cost 1
+Power 6000
+Trigger Soul
+Trait1 Tortus
+Trait2 Dragonkin
+Combo First Pleasure
+*GainPowerForEachOther(1000,Tortus)
+Auto: OnReverseOpponent
+{
+	If Climax First Pleasure
+	{
+		RevealUpTo Deck 2
+		NarrowTargets HasTrait Tortus
+		MoveCard Stock
+		PutTheRestIntoTheWaitingRoom
+		
+		SearchLocationForTargets WaitingRoom 0 1 IsCharacter
+		MoveCard Hand
+	}
+}
+Text Auto: CxCombo When this card's battle opponent is Reversed, if "First Pleasure" in your Climax Area, look at up to 2 cards from the top of your deck, choose up to 2 <Tortus> characters from among them, show them to your opponent, send them to Stock in any order, send the rest to Waiting Room, then choose up to 1 character in your Waiting Room, add it to hand.
+EndCard
+
+Character: ari/s103-034
+Name Magic Practice Myu
+Color G
+Level 0
+Cost 0
+Power 500
+Trait1 Tortus
+Trait2 Atlantic Tribe
+Auto: OnPlay
+{
+	Mill 2
+	NarrowTargets IsClimax
+	If Compare TargetCount 1 OrMore
+	{
+		SearchLocationForTargets WaitingRoom 0 1 IsCharacter
+	}
+}
+Text Auto: When this is placed on stage from hand, mill 2 cards, if you milled a Climax, choose 1 <Tortus> character from your Waiting Room, you may add it to hand.
+*OnAttackCheck2ChooseTrigger
+EndCard
+
+Character: ari/s103-035
+Name Promise with the Hauria Tribe, Hajime
+Color G
+Level 0
+Cost 0
+Power 1500
+Trait1 Tortus
+Trait2 Classmate
+Cont: Assist
+{
+	If Compare ThatCardsLevel 0 OrLess
+	{
+		GainPower 1500
+		GainSpecialEffect CannotSideAttack
+	}
+}
+Text Cont: ASSIST All of your Level 0 or lower characters in front of this gets +1500 power and the following ability, "Cont: This cannot side attack."
+Act: 1 SendSelf WaitingRoom
+{
+	Peek Deck 4
+	ChooseCardsFromTargets 0 1 Compare ThatCardsLevel 1 OrMore
+	RevealTargets
+	MoveCard Hand
+	PutTheRestIntoTheWaitingRoom
+}
+Text Act: [(1) Send this to Waiting Room] Look at up to 4 cards from the top of your deck, choose up to 1 Level 1 or higher card from among them, show it to your opponent, add it to hand, and send the rest to Waiting Room.
+EndCard
+
+Character: ari/s103-036
+Name [Transmuter] Hajime
+Color G
+Level 0
+Cost 0
+Power 2500
+Trait1 Tortus
+Trait2 Classmate
+Auto: OnPlay
+{
+	TargetLocation Stage
+	PayCost 2 Send 1 Clock Any
+	{
+		SearchWaitingRoom IsClimax || IsEvent
+	}
+}
+Text Auto: [(2) Send 1 of your other characters on stage to Clock] When this is placed on stage from hand, you may pay cost. If you do, choose 1 Event or Climax in your Waiting Room, add it to hand.
+EndCard
+
+Character: ari/s103-037
+Name Raisen Great Labyrinth Raid, Hajime
+Color G
+Level 1
+Cost 0
+Power 3000
+Trait1 Tortus
+Trait2 Classmate
+Cont: GiveSelf
+{
+	TargetLocation Stage
+	NarrowTargets Raisen Great Labyrinth Raid, Shea
+	SetXValue MyLevel
+	MultiplyXValue 1000
+	GainPower X
+	
+	GainTrait Doryukken
+}
+Text Cont: All of your other {Vanilla 1/0 Shea - 038} gets +X power and <Doryukken>. X is equal to your Level times 1000.
+Act: 1 Rest 2 Any
+{
+	Mill 2
+	SetXValue TotalLevel
+	SearchWaitingRoom  HasTrait Tortus && Compare ThatCardsLevel X OrLess
+}
+Text Act: [(1) Rest 2 of your characters] Mill 2, then choose up to 1 Level X or lower <Tortus> character from your Waiting Room, and add it to hand. X equals the sum of Levels of cards milled by this effect.
+EndCard
+
+Character: ari/s103-038
+Name Raisen Great Labyrinth Raid, Shea
+Color G
+Level 1
+Cost 0
+Power 5500
+Trait1 Tortus
+Trait2 Rabbitman
+EndCard
+
+Character: ari/s103-039
+Name [Fortune Teller] Shea
+Color G
+Level 2
+Cost 1
+Power 2500
+Trigger Soul
+Trait1 Tortus
+Trait2 Rabbitman
+Auto: OnPlay
+{
+	TargetTop OpponentStage 2
+	ChooseCardsFromTargets 0 1 Any
+	MoveCardtoBottom OpponentDeck
+} //Probably not correct
+EndCard
+
+Character: ari/s103-040
+Name Swimsuit Shea
+Color G
+Level 2
+Cost 1
+Power 4000
+Trigger Soul
+Trait1 Tortus
+Trait2 Rabbitman
+Act: Rest 2 Any
+{
+	TargetLocation Stage
+	GainSoul 1
+}
+Text Act: [Rest 2 of your characters] This turn, all of your characters get +1 Soul
+EndCard
+
+Character: ari/s103-041
+Name Orcus Great Labyrinth Capture, Hajime
+Color G
+Level 2
+Cost 1
+Power 7500
+Trigger Soul
+Trait1 Tortus
+Trait2 Classmate
+*OnPlayGainPowerAndNoBackups(0)
+//It gains 0 power cuz I was too lazy to code it and there was a short cut where it has to gain power
+*OnPlayGainPowerForEach(1000,Tortus)
+EndCard
+
+Event: ari/s103-042
+Name Kicking the Dragon's Ass
+Color G
+Level 2
+Cost 2
+Counter
+Effect:
+{
+	TargetLocation Stage
+	NarrowTargets NameContains Tio
+	ChooseCharacterFromTargets Choose a character to give the effect to.
+	GainEffect
+	{
+		Auto: OnRecieveDamage
+		{
+			If Compare CardsInClock 1 OrMore
+			{
+				Question_Obvious Put the top card of your clock into the waiting room?
+				If Yes
+				{
+					Heal
+				}
+			}
+			If Compare CardsInClock 1 OrMore
+			{
+				Question_Obvious Put the top card of your clock into the waiting room?
+				If Yes
+				{
+					Heal
+				}
+			}
+		}
+	}
+}
+Text COUNTER - Choose 1 of your characters with "Tio" in its name, this turn, it gains the following ability, "Auto: This ability can only be activated up to once per turn. When the damage you take is not cancelled, heal up to 2."
+EndCard
+
+Climax: ari/s103-043
+Name I'm Just a Rabbit-Eared Girl!
+*BarClimax
+EndCard
+
+Climax: ari/s103-044
+Name Black Dragon's True Identity
+*BarClimax
+EndCard
+
+Climax: ari/s103-045
+Name First Pleasure
+Color G
+Trigger DoubleSoul
+Auto: OnPlay
+{
+	TargetLocation WaitingRoom
+	NarrowTargets Compare ThatCardsLevel 1 OrLess
+	ChooseCardsFromTargets 0 1 Choose a level 1 or lower card to be put into your stock.
+	MoveCard Stock
+	GainSoul 1
+}
+Text Auto: When this is placed in your climax area, choose up to 1 level 1 or lower card in your waiting room and put it into your stock, and all of your characters get +1 soul for the turn.
+EndCard
+
+Character: ari/s103-046
+Name Unwavering Faith, Hajime
+Color R
+Level 0
+Cost 0
+Power 1500
+Trait1 Tortus
+Trait2 Classmate
+Auto: OnPlay
+{
+	GainPower 1500
+}
+Text Auto: When this is placed on stage from hand, this turn this gets +1500 power.
+Auto: OnPlay|OnSentFromStageToWaitingRoom
+{
+	PayCost 1 Clock
+	{
+		SearchWaitingRoom HasTrait Tortus
+	}
+}
+Text Auto: [(1) Put the top card of your deck into Clock] When this is placed on stage from hand or sent from Stage to Waiting Room, you may pay cost. If you do, choose 1 <Tortus> character from your Waiting Room, and add it to hand.
+EndCard
+
+Character: ari/s103-047
+Name Always Together, Yue
+Color R
+Level 3
+Cost 2
+Soul 2
+Power 8500
+Trigger Soul
+Trait1 Tortus
+Trait2 Vampire Tribe
+*EarlyPlay4OrMore(Tortus)
+*GainPowerForEachOther(500,Tortus)
+Auto: OnPlay
+{
+	PayCost MarkerFromWaitingRoom 1 NameEquals Unwavering Faith, Hajime
+	{
+		Burn 1
+	}
+}
+Text Auto: [Put an "Unwavering Faith, Hajime" from your Waiting Room underneath this card Face-up as a Marker] When this is placed on the stage from hand,you may pay cost. If you do, deal 1 damage to your opponent.
+EndCard
+
+Character: ari/s103-048
+Name Intelligent Side, Tio
+Color R
+Level 0
+Cost 0
+Power 500
+Trait1 Tortus
+Trait2 Dragonkin
+*OnAttackGivePower(2000,Tortus)
+*MoveOtherWithTraitToBackstageOnReverse(Tortus)
+EndCard
+
+Character: ari/s103-049
+Name Artifact, Hajime
+Color R
+Level 0
+Cost 0
+Power 1500
+Trait1 Tortus
+Trait2 Classmate
+Auto: OnPlay
+{
+	RevealUpTo Deck 3
+	ChooseCardsFromTargets 0 1 IsEvent
+	IfThatCard IsEvent
+	{
+		MoveCard Hand
+		Discard 1 Any
+	}
+}
+Text Auto: When this is placed on stage from hand, look at up to 3 cards from the top of your deck, choose up to 1 Event from among them, show it to your opponent, add it to hand, and send the rest to Waiting Room. If you added a card to hand, discard 1 card.
+*RedLevel0Bomb
+EndCard
+
+Character: ari/s103-050
+Name Personal Story, Yue
+Color R
+Level 0
+Cost 0
+Power 1500
+Trait1 Tortus
+Trait2 Vampire Tribe
+*OnPlayFlicker
+Auto: OnPlay
+{
+	PayCost Discard 1 Any Resonate The One Who Crawled Out of the Abyss, Hajime
+	{
+		*Check4Add1(Tortus)
+	}
+}
+Text Auto: RESONATE [Discard 1 card, Reveal 1 "The One Who Crawled Out of the Abyss, Hajime" from your hand] When this is placed on stage from hand, you may pay cost. If you do, look at up to 4 cards from the top of your deck, choose up to 1 <Tortus> character from among them, show it to your opponent, add it to hand, send the rest to Waiting Room.
+EndCard
+
+Character: ari/s103-051
+Name The Place I Found, Yue
+Color R
+Level 1
+Cost 0
+Power 4500
+Combo Proposal?
+Trait1 Tortus
+Trait2 Vampire Tribe
+Cont: GiveSelf
+{
+	If StageContains 2 Other && HasTrait Tortus
+	{
+		GainPower 1000
+	}
+}
+Text Cont: If you have 2 or more other <Tortus> characters, this gets +1000 power.
+Auto: OnSpecificClimaxPlay Proposal?
+{
+	If InLocation CenterStage && StageContains 1 Other && HasTrait Tortus
+	{
+		PayCost Resonate The One Who Crawled Out of the Abyss, Hajime
+		{
+			RevealUpTo Deck 1
+			ChooseCardsFromTargets 0 1 HasTrait Tortus
+			RevealTargets
+			MoveCard Hand
+			PutTheRestIntoTheWaitingRoom
+			
+			Question Put the top card of your deck into your stock?
+			If Yes
+			{
+				BlindStock
+			}
+		}
+	}
+}
+Text Auto: CxCombo RESONATE [Reveal 1 "The One Who Crawled Out of the Abyss, Hajime" from your hand] When "Proposal?" is placed in your Climax Area, if this is in your center stage, and you have another <Tortus> character, you may pay cost. If you do, look at 1 card from the top of your deck, choose up to 1 <Tortus> character from among them, show it to your opponent, add it to hand, send the rest to Waiting Room, then put up to 1 card from the top of your deck into Stock. 
+EndCard
+
+Character: ari/s103-052
+Name Irregular, Hajime
+Color R
+Level 2
+Cost 2
+Soul 2
+Power 8000
+Trigger Soul
+Trait1 Tortus
+Trait2 Classmate
+Combo Decisive battle at Kamiyama
+Auto: OnPlacedBy Decisive battle at Kamiyama
+{
+	If Phase Climax
+	{
+		PayCost SendClimax WaitingRoom
+		{
+			Stand
+		}
+	}
+}
+Text Auto: CxCombo [Send the Standby CX (069) from your Climax Area to Waiting Room] During your Climax Phase, when this is placed on stage by the effect of the {Standby CX - 069}, you may pay cost. If you do, Stand this.
+*WhenOtherAttackedSacrificeToGivePower(3500, Any)
+EndCard
+
+Character: ari/s103-053
+Name The One Who Crawled Out of the Abyss, Hajime
+Color R
+Level 3
+Cost 2
+Soul 2
+Power 10000
+Trigger Soul
+Trait1 Tortus
+Trait2 Classmate
+Combo Incompetent Warriors
+Auto: OnAttack
+{
+	If Climax Incompetent Warriors
+	{
+		PayCost Discard 1 Any
+		{
+			TargetSentToPayCost
+			SetXValue TotalLevel
+			AddToXValue 1
+			Burn X
+			
+			TargetSelf
+			GainPower 2000
+		}
+	}
+}
+Text Auto: CxCombo [Discard 1 card] When this attacks, if "Incompetent Warriors" in your Climax Area, you may pay cost. If you do, deal X damage to your opponent, and this turn, this gets +2000 power. X is equal to the Level of the card discard for cost +1
+EndCard
+
+Character: ari/s103-054
+Name Common Occupation, Hajime
+Color R
+Level 0
+Cost 0
+Power 500
+Trait1 Tortus
+Trait2 Classmate
+Auto: OnFrontalAttacked
+{
+	RememberSlot
+	PayCost Clock SendSelf Memory
+	{
+		TargetLocation Hand
+		ChooseCardsFromTargets 0 1 NameEquals Absorbed Power, Hajime
+		PlaceOnRememberedSlot
+	}
+}
+Text Auto: [Put the top card of your deck into Clock, Send this to Memory] When this is Front Attacked, you may pay cost. If you do, choose up to 1 "Absorbed Power, Hajime" in your hand, place it on stage in this card's former slot as the defending character.
+Auto: OnOtherReversed
+{
+	If InLocation Backstage
+	{
+		PayCost SendSelf WaitingRoom
+		{
+			TargetLocation Stage
+			NarrowTargets Reversed
+			ChooseCharacterFromTargets
+			Revive
+		}
+	}
+}
+Text Auto: [Send this to Waiting Room] When your other <Tortus> character in battle is Reversed, if this is in your Back Row, you may pay cost. If you do, Rest that character.
+EndCard
+
+Character: ari/s103-055
+Name Records of the Great Labyrinth, Yue
+Color R
+Level 0
+Cost 0
+Power 1000
+Trait1 Tortus
+Trait2 Vampire Tribe
+Auto: OnOpponentsCharacterSentFromStageToElsewhere OpponentMemory
+{
+	TargetLocation Stage
+	ChooseCharacterFromTargets
+	GainPower 2000
+}
+Text Auto: When your opponent's cards are sent to Memory, choose 1 of your characters, this turn, it gets +2000 power.
+Act: 1 RestSelf
+{
+	Brainstorm 5
+	TargetBrainstormed
+	NarrowTargets HasTrigger Door
+	SetXValue TargetCount
+	If Compare X 1 OrMore
+	{
+		SearchLocationForTargets WaitingRoom 0 BrainstormedClimax IsCharacter
+		MoveCard Hand
+	}
+}
+Text Act: BRAINSTORM [(1) Rest this] Flip over the top 5 cards of your deck, then send them to Waiting Room. For each Climax with a Door Trigger among them, choose up to 1 character from your Waiting Room, and add it to hand. 
+EndCard
+
+Character: ari/s103-056
+Name The Sealed Girl, Yue
+Color R
+Level 0
+Cost 0
+Power 2500
+Trait1 Tortus
+Trait2 Vampire Tribe
+Auto: OnAttack
+{
+	TargetLocation Stage
+	Question Send a Hajime to stock?
+	If Yes
+	{
+		NarrowTargets NameContains Hajime
+		ChooseCharacterFromTargets Choose a Hajime to send to stock.
+		MoveCard Stock
+	}
+}
+Text Auto: When this attacks, choose 1 of your other characters with "Hajime" in its name, you may send it to Stock
+EndCard
+
+Character: ari/s103-057
+Name Nice Shot, Hajime
+Color R
+Level 1
+Cost 0
+Power 2500
+Trait1 Tortus
+Trait2 Classmate
+Auto: OnUseThisCardsBackup
+{
+	PayCost Discard 2 Any
+	{
+		TargetLocation OpponentStage
+		SetXValue OpponentsLevel
+		AddToXValue 1
+		NarrowTargets Compare ThatCardsLevel X OrMore
+		ChooseCharacterFromTargets Choose a character to send to memory.
+		MoveCard OpponentMemory
+	}
+}
+Text Auto: [Discard 2 cards] When you use this card's BACKUP, you may pay cost. If you do, choose 1 of your opponent's characters whose Level is higher than your opponent's Level, and send it to Memory.
+Backup 1000
+EndCard
+
+Character: ari/s103-058
+Name Interception Posture, Tio
+Color R
+Level 1
+Cost 1
+Power 4500
+Trigger Soul
+Trait1 Tortus
+Trait2 Dragonkin
+Auto: OnReverse
+{
+	SetXValue OpponentsLevel
+	AddToXValue 1
+	If Compare BattleOpponentsLevel X OrMore
+	{
+		TargetFacing
+		MoveCard OpponentMemory
+	}
+}
+Text Auto: When this is Reversed, if the battle opponent's Level is higher than your opponent's Level, you may send that character to Memory.
+EndCard
+
+Character: ari/s103-059
+Name Absorbed Power, Hajime
+Color R
+Level 1
+Cost 1
+Power 5500
+Trait1 Tortus
+Trait2 Classmate
+Cont: GiveSelf
+{
+	SetXValue MarkersUnderThis
+	MultiplyXValue 1000
+	GainPower X
+}
+Text Cont: For each Marker underneath this card, this gets +1000 power.
+Cont: GiveSelf
+{
+	If StageContains 2 Other && HasTrait Tortus
+	{
+		GainPower 2000
+	}
+}
+Text Cont: If you have 2 or more other <Tortus> character, this gets +2000 power.
+Auto: OnReverseOpponent
+{
+	Question Check the top of your deck to add a marker underneath Absorbed Power, Hajime?
+	If Yes
+	{
+		PeekTop Deck
+		Marker_FaceDown
+	}
+}
+Text Auto: When this card's battle opponent is Reversed, you may look at the top card of your deck. If you do, place it underneath this card face-down as a Marker.
+EndCard
+
+Character: ari/s103-060
+Name Achievement Yue
+Color R
+Level 2
+Cost 1
+Power 6500
+Trigger Soul
+Trait1 Tortus
+Trait2 Vampire Tribe
+*1500Assist
+Auto: OnPlay
+{
+	PayCost 1 Discard 1 Any
+	{
+		SearchDeck IsClimax && HasTrigger Door
+	}
+}
+Text Auto: [(1) Discard 1 card] When this is placed on stage from hand, you may pay cost. If you do, search your deck for up to 1 Climax with a Door Trigger, show it to your opponent, add it to hand, and shuffle your deck afterwards.
+EndCard
+
+Character: ari/s103-061
+Name Yue Wearing the Hide of a Beast
+Color R
+Level 0
+Cost 0
+Power 3500
+Trait1 Tortus
+Trait2 Vampire Tribe
+Cont: GiveSelf
+{
+	If StageContainsOrLess 0 HasTrait Tortus
+	{
+		GainLevel 1
+		GainPower 1500
+	}
+}
+Text Cont: If you don't have another character, this gets +1 Level and +1500 power.
+Cont: GiveAll
+{
+	GainEffect
+	{
+		Auto: OnReverse
+		{
+			MoveCardtoBottom Deck
+		}
+		Text "Auto: When this is Reversed, send this to the bottom of your deck."
+	}
+}
+Text Cont: All of your characters gain the following ability, "Auto: When this is Reversed, send this to the bottom of your deck."
+EndCard
+
+Character: ari/s103-062
+Name Desperate Battle in the Deepest, Hajime
+Color R
+Level 1
+Cost 0
+Power 3500
+Trait1 Tortus
+Trait2 Classmate
+Cont: GiveSelf
+{
+	TargetLocation Stage
+	NarrowTargets Other && NameEquals Desperate Battle in the Deepest, Hajime || Desperate Battle in the Deepest, Yue
+	GainPower 2000
+}
+Text Cont: All of your other "Desperate Battle in the Deepest, Hajime" and "Desperate Battle in the Deepest, Yue" gets +2000 power.
+EndCard
+
+Character: ari/s103-063
+Name Desperate Battle in the Deepest, Yue
+Color R
+Level 1
+Cost 0
+Power 3500
+Trait1 Tortus
+Trait2 Vampire Tribe
+Cont: GiveSelf
+{
+	TargetLocation Stage
+	NarrowTargets Other && NameEquals Desperate Battle in the Deepest, Hajime || Desperate Battle in the Deepest, Yue
+	GainPower 2000
+}
+Text Cont: All of your other "Desperate Battle in the Deepest, Hajime" and "Desperate Battle in the Deepest, Yue" gets +2000 power. 
+EndCard
+
+Character: ari/s103-064
+Name Taking Care of Him, Yue
+Color R
+Level 2
+Cost 1
+Power 7000 
+Trigger Soul
+Trait1 Tortus
+Trait2 Vampire Tribe
+*GainPowerWhenAttackingLevel3(6000)
+Auto: OnReverseOpponent
+{
+	Question_Obvious Send reversed battle opponent into the opponent's memory?
+	If Yes
+	{
+		TargetFacing
+		MoveCard OpponentMemory
+	}
+}
+Text Auto: When this card's battle opponent is Reversed, you may send that character to Memory.
+EndCard
+
+Character: ari/s103-065
+Name Even If You Reject Me... Tio
+Color R
+Level 2
+Cost 1
+Power 7000
+Trigger Soul
+Trait1 Tortus
+Trait2 Dragonkin
+Auto: OnAttack
+{
+	TargetLocation Stage
+	SubtractFromXValue 1
+	SetXValue TargetCount
+	NarrowTargets Other
+	ChooseCharacterFromTargets
+	MultiplyXValue 1000
+	GainPower X
+}
+Text Auto: When this attacks, choose 1 of your other <Tortus> characters, this turn, it gets +X power. X equals the number of your other <Tortus> characters times 1000.
+EndCard
+
+Character: ari/s103-066
+Name Enjoying the Taste, Tio
+Color R
+Level 3
+Cost 2
+Soul 2
+Power 10000
+Trigger Soul
+Trait1 Tortus
+Trait2 Dragonkin
+Auto: OnPlay
+{
+	MultipleChoiceQuestion Choose an effect. /n1. Check up to 3, add a card./n2. Heal |Plus Hand|Heal
+	If Answer 0
+	{
+		Peek Deck 3
+		ChooseCard Choose a card to add to your hand.
+		MoveCard Hand
+		PutTheRestIntoTheWaitingRoom
+	}
+	If Answer 1
+	{
+		If Compare CardsInClock 1 OrMore
+		{
+			Question_Obvious Put the top card of your clock into the waiting room?
+			If Yes
+			{
+				Heal
+			}
+		}
+	}
+}
+Text Auto: When this is placed on stage from hand, choose 1 of the following 2 effects and resolve it, a) "Look at up to 3 cards from the top of your deck, choose up to 1 card among them, add it to hand, and send the rest to Waiting Room." b) "You may Heal 1."
+EndCard
+
+Event: ari/s103-067
+Name Treasure Chest Ring
+Color R
+Level 1
+Cost 0
+Effect: 
+{
+	If StageContains 3 Any
+	{
+		MultipleChoiceQuestion Choose an effect. /n1. Choose an opponent's character to lose 1500 power/n2. Salvage a level X or lower character, where X equals the level of the revealed card |Reduce Power|Salvage
+		If Answer 0
+		{
+			TargetLocation OpponentStage
+			ChooseCharacterFromTargets
+			LosePower 1500
+		}
+		If Answer 1
+		{
+			TargetTop Deck 1
+			Reveal
+			SetXValue TotalLevel
+			SearchWaitingRoom IsCharacter && Compare ThatCardsLevel X OrLess
+		}
+	}
+}
+Text If you have 3 or more <Tortus> characters, Choose 1 of the following 2 effects and resolve it, a) "Choose 1 of your opponent's characters, this turn, it gets -1500 power." b) "Reveal the top card of your deck, then choose 1 Level X or lower character from your Waiting Room, and add it to hand. X equals the Level of the revealed card."
+EndCard
+
+Climax ari/s103-068
+Name Proposal?
+*DoorClimax
+EndCard
+
+Climax ari/s103-069
+Name Decisive battle at Kamiyama
+*StandbyClimax
+EndCard
+
+Climax ari/s103-070
+Name Incompetent Warriors
+*DoorClimax
+EndCard
+
+Character: ari/s103-071
+Name Prepared for Battle Shizuku
+Color B
+Level 1
+Cost 0
+Power 2000
+Trait1 Tortus
+Trait2 Classmate
+Combo The Sword that was Given to Me
+Auto: StartClimaxPhase
+{
+	TargetLocation Stage
+	SetXValue TargetCount
+	MultiplyXValue 1000
+	TargetLocation OpponentCenterStage
+	ChooseCharacterFromTargets
+	LosePower X
+}
+Text Auto: At the start of your Climax Phase, if this is in your Front Row, choose 1 of your opponent's Front Row characters, this turn, it gets -X power. X equals the number of your other <Tortus> characters times 1000.
+Auto: OnAttack
+{
+	If Climax The Sword that was Given to Me && TargetLocation Stage HasTrait Tortus
+	{
+		Peek Deck 4
+		ChooseCardsFromTargets 0 1 HasTrait Tortus
+		RevealTargets
+		MoveCard Hand
+		PutTheRestIntoTheWaitingRoom
+		
+		TargetLocation OpponentStage
+		GainSpecialEffect LoseAllTraits
+	}
+}
+Text Auto: CxCombo When this attacks, if "The Sword that was Given to Me" in your Climax Area, and all of your characters are <Tortus> look at up to 4 cards from the top of your deck, choose up to 1 <Tortus> character from among them, show it to your opponent, add it to hand, send the rest to Waiting Room, then choose 1 of your opponent's characters and 1 of its Traits, this turn, that character loses all of that Trait.
+EndCard
+
+Character: ari/s103-072
+Name Teacher Who Protects Everyone, Aiko
+Color B
+Level 1
+Cost 0
+Power 3500
+Trait1 Tortus
+Trait2 Teacher
+Cont: GiveSelf
+{
+	If StageContains 2 Other && HasTrait Classmate || HasTrait Teacher
+	{
+		GainSpecialEffect CannotReceive1DamageFromAutoEffects
+	}
+}
+Text Cont: If you have 2 or more other <Classmate> or <Teacher> characters, you do not take 1 or less damage from the Auto: effects of your opponent's characters.
+Auto: OnTriggerCheckClimax
+{
+	PayCost Discard 1 IsClimax
+	{
+		SearchWaitingRoom IsCharacter
+	}
+}
+Text Auto: [Discard 1 climax] When your character's Trigger Check reveals a Climax, you may pay cost. If you do, choose 1 character from your Waiting Room, and add it to hand.
+EndCard
+
+Character: ari/s103-073
+Name Nice to Meet You, Shea
+Color B
+Level 3
+Cost 2
+Soul 2
+Power 10000
+Trigger Soul
+Trait1 Tortus
+Trait2 Rabbitman
+Combo Once in a Lifetime Request
+*StockHealer
+Auto: OnAttack
+{
+	If Climax Once in a Lifetime Request
+	{
+		PayCost 1
+		{
+			SetXValue 1
+			Peek OpponentDeck 2
+			If HasTarget
+			{
+				Message Choose which cards and the order to be put back on their deck.
+				ChooseCardsFromTargets 0 2 Any
+				MoveCard Deck
+				PutTheRestIntoTheWaitingRoom
+			}
+		}
+	}
+}
+Text Auto: CxCombo (1) When this attacks, if "Once in a Lifetime Request" in your Climax Area, you may pay cost. If you do, look at up to 2 cards from the top of your opponent's deck, choose up to 2 cards from among them, put them on top of your opponent's deck in any order, and send the rest to Waiting Room, and at the end of this card's attack, if this is on stage, reveal the top card of your deck, and send it to the bottom of your deck. If that card has a Soul trigger, deal 1 damage to your opponent.
+Auto: OnEndOfAttack
+{
+	If Climax Once in a Lifetime Request && Compare X 1 OrMore
+	{
+		RevealExactly Deck 1
+		If Compare TotalSoulTriggers 1 OrMore
+		{
+			Burn 1
+		}
+		MoveCardtoBottom Deck
+	}
+}
+//It's part of the same effect but I'm not sure if theres another way to do this where an abilty activates on attack another activates after while being the "same" ability
+EndCard
+
+Character: ari/s103-074
+Name Love Rivals Kaori & Yue
+Color B
+Level 0
+Cost 0
+Power 500
+Trait1 Tortus
+Trait2 Classmate
+Auto: OnPlay
+{
+	RevealExactly Deck
+	If HasTrait Tortus || IsEvent
+	{
+		MoveCard Hand
+		Discard 1 Any
+	}
+}
+Text Auto: When this is placed on stage from hand, reveal the top card of your deck. If that card is a <Tortus> character or Event, add it to hand and discard 1 card.
+*OnPlayTradeClimaxForCharacter(Tortus)
+EndCard
+
+Character: ari/s103-075
+Name Melusine Undersea Ruins Capture, Kaori
+Color B
+Level 0
+Cost 0
+Power 1000
+Trait1 Tortus
+Trait2 Classmate
+Combo Duties of a Healer
+Auto: OnClimaxPlay
+{
+	If Climax Duties of a Healer && StageContains 2 HasTrait Tortus
+	{
+		Mill 4
+		SetXValue TotalSoulTriggers
+		SearchWaitingRoom HasTrait Tortus && Compare ThatCardsLevel X OrLess
+	}
+}
+Text Auto: CxCombo When "Duties of a Healer" is placed in your Climax Area, if you have 2 or more other <Tortus> characters, put the top 4 cards from your deck to your waiting room, choose up to 1 Level X or lower <Tortus> character from your Waiting Room, add it to hand. X equals the sum of Soul Triggers milled.
+Act: 1
+{
+	Brainstorm 4
+	PerClimax
+	{
+		Peek Deck 3
+		ChooseCard Choose a carrd to add to your hand (Will not be revealed)
+		MoveCard Hand
+		PutTheRestIntoTheWaitingRoom
+		Discard 1 Any
+	}
+}
+Text Act: BRAINSTORM (1) Flip over the top 4 cards of your deck, then send them to Waiting Room. For each Climax among them, resolve the following effect: "Look at up to 3 cards from the top of your deck, choose up to 1 card among them, add it to hand, and send the rest to Waiting Room, and discard 1 card."
+EndCard
+
+Character: ari/s103-076
+Name Sexy Bikini, Yue & Shia
+Color B
+Level 0
+Cost 0
+Power 2500
+Trait1 Tortus
+Trait2 Rabbitman
+Act: Discard 1 Any SendSelf BottomOfClock
+{
+	SearchDeck IsCharacter && HasTrait Tortus
+}
+Text Act: [Discard 1 card, send this to the bottom of your deck] Search your deck for up to 1 <Tortus> character, show it to your opponent, add it to hand, and shuffle your deck afterwards.
+EndCard
+
+Character: ari/s103-077
+Name Feelings that Well Up, Aiko
+Color B
+Level 0
+Cost 0
+Power 2500
+Trait1 Tortus
+Trait2 Teacher
+Auto: OnPlay
+{
+	If Compare CardsInMemory 5 OrMore
+	{
+		TargetLocation Memory
+		ChooseCardsFromTargets 0 4 Any
+		PutTheRestIntoTheWaitingRoom
+	}
+	If Compare CardsInOpponentsMemory 5 OrMore
+	{
+		TargetLocation OpponentMemory
+		OpponentChooseCardsFromTargets 0 4 Any
+		PutTheRestIntoTheWaitingRoom
+	}
+}
+Text Auto: When this is placed on stage from hand, all players resolve the following effect: "If you have 5 or more Memory, choose 4 cards from your Memory, and send all other cards to Waiting Room."
+Auto: OnReverse
+{
+	Peek Deck 3
+	Message Choose up to 1 climax to add to your hand
+	ChooseCardsFromTargets 0 1 IsClimax
+	MoveCard Hand
+	PutTheRestIntoTheWaitingRoom
+	If HasTarget
+	{
+		Discard 1 Any
+	}
+}
+Text Auto: When this is Reversed, look at up to 3 cards from the top of your deck, choose up to 1 Climax from among them, add it to hand, and send the rest to Waiting Room. If you added a card to hand, discard 1 card.
+EndCard
+
+Character: ari/s103-078
+Name Summer Beach, Shea
+Color B
+Level 1
+Cost 0
+Power 4500
+Trait1 Tortus
+Trait2 Rabbitman
+*OnPlayGainPowerForEach(500,Tortus)
+Auto: OnOtherFrontalAttacked
+{
+	PayCost 1 SendSelf WaitingRoom
+	{
+		TargetOther
+		Bounce
+	}
+}
+Text Auto: [(1) Send this to Waiting Room] When your other <Tortus> character is Front Attacked, you may pay cost. If you do, return that character to hand.
+EndCard
+
+Character: ari/s103-079
+Name [Healer] Kaori
+Color B
+Level 3
+Cost 2
+Soul 2
+Power 9000
+Trigger Soul
+Trait1 Tortus
+Trait2 Classmate
+Combo Duties of a Healer
+Cont: InHand
+{
+	If LocationContains Level 2 NameEquals Unwavering Faith, Hajime || NameEquals Teacher Who Protects Everyone, Aiko
+	{
+		LoseLevel 1
+	}
+}
+Text Cont: EXPERIENCE - If you have 2 or more "Unwavering Faith, Hajime" or "Teacher Who Protects Everyone, Aiko" in your Level Zone, this gets -1 Level in hand.
+Cont: GiveAll
+{
+	If InLocation CenterStage
+	{
+	GainPower 1000
+	}
+}
+Text Cont: If this Card is in Center Stage, all of your <Tortus> characters get +1500 power.
+Auto: OnAttack
+{
+	If Climax Duties of a Healer && StageContains 2 Other
+	{
+		GainPower 2000
+		Question_Obvious Put the top card of your clock into the waiting room?
+		If Yes
+		{
+			Heal
+		}
+	}
+}
+Text Auto: CxCombo When this attacks, if "Duties of a Healer" in your Climax Area, and you have 2 or more other <Tortus> characters, heal up to 1, this turn, this gets +2000 power.
+EndCard
+
+Character: ari/s103-080
+Name [Swordsman] Shizuku
+Color B
+Level 3
+Cost 2
+Soul 2
+Power 10500
+Trigger Soul
+Trait1 Tortus
+Trait2 Classmate
+Auto: OnPlay
+{
+	PayCost SendFromLocationToLocation Stage WaitingRoom 1 False IsCharacter
+	{
+		SearchWaitingRoom IsClimax
+	}
+}
+Text Auto: [Send 1 of your characters on stage to Waiting Room] When this is placed on stage from hand, you may pay cost. If you do, choose 1 Climax from your Waiting Room, and add it to hand.
+Auto: OnReverseOpponent
+{
+	If StageContains 2 HasTrait Classmate || Teacher
+	{
+		PayCost 2 Discard 1 Any
+		{
+			Burn 2
+		}
+	}
+}
+Text Auto: [(2) Discard 1 card] When this card's battle opponent is Reversed, if you have 2 or more other <Classmate> or <Teacher> characters, you may pay cost. If you do, deal 2 damage to your opponent.
+EndCard
+
+Character: ari/s103-081
+Name [Farmer] Aiko
+Color B
+Level 0
+Cost 0
+Power 500
+Trait1 Tortus
+Trait2 Teacher
+Auto: OnPlay
+{
+	TargetLocation Hand
+	ChooseCardsFromTargets 0 1 Any
+	MoveCard Stock
+}
+Text Auto: When this is placed on stage from hand, choose 1 card from your hand, you may send it to Stock.
+Auto: OnPlay
+{
+	PayCost HandClock HasTrait Tortus
+	{
+		Peek Deck 4
+		ChooseCardsFromTargets 0 1 Any
+		MoveCard Hand
+		PutTheRestIntoTheWaitingRoom
+	}
+}
+Text Auto: [Put 1 <Tortus> character from hand into Clock] When this is placed on stage from hand, you may pay cost. If you do, look at up to 4 cards from the top of your deck, choose up to 1 card among them, add it to hand, and send the rest to Waiting Room
+EndCard
+
+Character: ari/s103-082
+Name Sorry Rabbit, Shea
+Color B
+Level 0
+Cost 0
+Power 1000
+Trait1 Tortus
+Trait2 Rabbitman
+Auto: OnPlay
+{
+	Peek Deck 1
+	Question Move that card to the bottom of the deck?
+	If Yes
+	{
+		MoveCardtoBottom Deck
+	}
+}
+Text Auto: When this is placed on stage from hand, look at the top card of your deck, and put it on top or bottom of your deck.
+Auto: OnAttack
+{
+	If StageContainsOrLess 0 Other
+	{
+		Mill 1
+		If Compare ThatCardsLevel 0 OrLess
+		{
+			MoveCard Backstage
+			Rest
+		}
+	}
+}
+Text Auto: When this attacks, if you have no other characters in your Backstage, you may mill 1. If that card is a Level 0 or lower character, place it on stage in any Backstage slot.
+EndCard
+
+Character: ari/s103-083
+Name [Hero] Kouki
+Color B
+Level 0
+Cost 0
+Power 5000
+Trait1 Tortus
+Trait2 Classmate
+Cont: GiveAll
+{
+	GainSpecialEffect CannotSideAttack
+}
+Text Cont: All of your characters gain the following ability, "Cont: This cannot Side Attack."
+Cont: Global
+{
+	If InLocation OpponentStage
+	{
+		GainEffect
+		{
+			Auto: Encore Clock
+			{
+			}
+			Text "Auto: ENCORE [Put the top card of your deck into Clock]"
+		}
+	}
+}
+Text Cont: All of your opponent characters gain "Auto: ENCORE [Put the top card of your deck into Clock]"
+EndCard
+
+Character: ari/s103-084
+Name Yaegashi-style Swordsmanship, Shizuku
+Color B
+Level 1
+Cost 0
+Power 2000
+Trait1 Tortus
+Trait2 Classmate
+Auto: OnUseThisCardsBackup
+{
+	TargetMyCharacterInBattle
+	IfTarget HasTrait Tortus
+	{
+		GainPower 1000
+	}
+}
+Text Auto: When you use this card's BACKUP, if you have an <Tortus> character, choose 1 of your battling characters, this turn, it gets +1000 power.
+Backup 1000
+EndCard
+
+Character: ari/s103-085
+Name Firm Determination, Kaori
+Color B
+Level 1
+Cost 0
+Power 4000
+Trait1 Tortus
+Trait2 Classmate
+Auto: OnPlay
+{
+	If Compare MyLevel 1 OrMore && Compare CardsInWaitingRoom 1 OrMore
+	{
+		Message Choose a card in your level to exchange.
+		SearchLocationForTargets Level 1 1 Any
+		SaveTargets
+		Message Choose a card in your waiting room to exchange.
+		SearchLocationForTargets WaitingRoom 1 1 HasTrait Tortus
+		AddSavedToCurrentTargets
+		Exchange
+	}
+}
+Text Auto: When this is placed on stage from hand, choose 1 card from your Level Zone and 1 <Tortus> character from your Waiting Room, you may swap them.
+Act: Discard 2 Any SendSelf WaitingRoom
+{
+	RememberSlot
+	SetXValue MyLevel
+	SearchWaitingRoom HasTrait Tortus &&& Compare ThatCardsLevel X OrLess
+	PlaceOnRememberedSlot
+}
+Text Act: [Discard 2 cards and send this to Waiting Room] Choose 1 <Tortus> character in your Waiting Room who's Level is equal to or lower than your Level, and place it on stage in this card's former slot.
+EndCard
+
+Character: ari/s103-086
+Name Patient Treatment, Kaori
+Color B
+Level 2
+Cost 1
+Power 6000
+Trigger Soul
+Trait1 Tortus
+Trait2 Classmate
+Cont: GiveAll
+{
+	If InLocation MiddleCenterStage
+	{
+		GainEffect
+		{
+			*HandEncore
+		}
+	}
+}
+Text Cont: Your other character in the middle position of your center stage slot gains "Auto: ENCORE [Discard 1 character]"
+*Level3Assist
+EndCard
+
+Character: ari/s103-087
+Name Self-study Shizuku
+Color B
+Level 0
+Cost 0
+Power 500
+Trait1 Tortus
+Trait2 Classmate
+Auto: StartClimaxPhase
+{
+	Question Check the top card of your deck?
+	If Yes
+	{
+		PeekTop Deck
+		MoveCard Deck
+	}
+}
+Text Auto: At the start of your Climax Phase, you may look at the top card of your deck.
+*Act1RestSelfCheck3Add1Brainstorm
+EndCard
+
+Character: ari/s103-088
+Name Everything is Under Control, Kaori
+Color B
+Level 0
+Cost 0
+Power 1500
+Trait1 Tortus
+Trait2 Classmate
+Cont: GiveAll
+{
+	If NameEquals Returning to the Royal Palace, Shizuku
+	{
+		GainLevel 1
+		GainPower 1500
+	}
+}
+Text Cont: All of your other {Returning to the Royal Palace, Shizuku} gets +1 Level and +1500 power.
+Auto: OnPlay
+{
+	PayCost Discard 1 HasTrait Tortus
+	{
+		SearchDeck NameEquals Returning to the Royal Palace, Shizuku
+	}
+}
+Text Auto: [Discard 1 <Tortus> character] When this is placed on stage from hand, you may pay cost. If you do, search your deck for up to 1 {Returning to the Royal Palace, Shizuku}, show it to your opponent, add it to hand, and shuffle your deck afterwards
+EndCard
+
+Character: ari/s103-089
+Name Returning to the Royal Palace, Shizuku
+Color B
+Level 0
+Cost 0
+Power 3000
+Trait1 Tortus
+Trait2 Classmate
+EndCard
+
+Character: ari/s103-090
+Name Swimsuit Kaori
+Color B
+Level 1
+Cost 0
+Power 4000
+Trait1 Tortus
+Trait2 Classmate
+Auto: OnPlay
+{
+	Repeat 3
+	{
+		*ScryToBottom
+	}
+}
+Text Auto: When this is placed on stage from hand, perform the following effect 3 times, "Look at the top card of your deck, and put it on top or bottom of your deck."
+EndCard
+
+Character: ari/s103-091
+Name Royal Capital Defense Shia
+Color B
+Level 1
+Cost 1
+Power 6000
+Trait1 Tortus
+Trait2 Rabbitman
+Auto: OnOtherAttacks
+{
+	IfThatCard HasTrait Tortus
+	{
+		GainPower 500
+	}
+}
+Text Auto: When your other <Tortus> characters attack, this turn, this gets +X power. X equals the number of your other <Tortus> characters times 500.
+Auto: Encore Discard 1 IsCharacter
+{
+}
+Text Auto: ENCORE [Discard 1 character]
+EndCard
+
+Character: ari/s103-092
+Name Princess Liliana
+Color B
+Level 2
+Cost 1
+Power 2500
+Trait1 Tortus
+Trait2 Mankind
+Act: 1 RestSelf
+{
+	*Check3Add1(Any)
+}
+Text Act: [(1) Rest this] Look at up to 3 cards from the top of your deck, choose up to 1 card among them, add it to hand, and send the rest to your waiting room.
+EndCard
+
+Character: ari/s103-093
+Name For Humanity, Shizuku 
+Color B
+Level 2
+Cost 1
+Power 3500
+Trait1 Tortus
+Trait2 Classmate
+Auto: OnAttack
+{
+	RevealExactly Deck 1
+	IfTarget HasTrait Tortus
+	{
+		TargetLocation Stage
+		GainPower 5000
+	}
+}
+Text Auto: When this attacks, reveal the top card of your deck. If that card is a <Tortus> character, this turn, all of your characters get +5000 power.
+EndCard
+
+Character: ari/s103-094
+Name Finishing Blow, Shia
+Color B
+Level 2
+Cost 1
+Power 6500
+Trait1 Tortus
+Trait2 Rabbitman
+Auto: OnPlay
+{
+	GainPower 1500
+}
+Text Auto: When this is placed on stage from hand, this turn, this gets +1500 power.
+*GainPowerWhenAttackingLevel3(4500)
+EndCard
+
+Character: ari/s103-095
+Name Goddess of Fertility, Aiko
+Color B
+Level 2
+Cost 1
+Power 7500
+Trait1 Tortus
+Trait2 Teacher
+Auto: OnPlay
+{
+	If StageContains 4 Other && HasTrait Classmate || Teacher
+	{
+		PayCost Discard 1 Any
+		{
+			OpponentSearchLocationForTargets WaitingRoom 0 1 IsClimax
+			MoveCard OpponentScryArea
+			OpponentRefresh
+			PutTheRestIntoTheWaitingRoom
+		}
+	}
+}
+Text Auto: [Discard 1 card] When this is placed on stage from hand, if you have 4 or more other <Classmate> or <Teacher> characters, you may pay cost. If you do, your opponent chooses 1 Climax from their waiting room, and shuffles all other cards from their waiting room into their deck.
+EndCard
+
+Event: ari/s103-096
+Name Lifesaving
+Color B
+Level 1
+Cost 0
+Counter
+Effect:
+{
+	Question Draw and discard a card?
+	If Yes
+	{
+		DrawCard
+		Discard 1 Any
+	}
+	
+	TargetLocation Stage
+	ChooseCharacterFromTargets Choose a character to give the following effect:\n"Auto: When this is sent from stage to Waiting Room, you may place this on stage in this card's former slot Rested."
+	GainEffect
+	{
+		Auto: OnSentFromStageToWaitingRoom
+		{
+			Revive
+		}
+	}
+}
+Text Choose 1 of your <Tortus> characters, this turn, it gains the following ability, "Auto: When this is sent from stage to Waiting Room, you may place this on stage in this card's former slot Rested."
+EndCard
+
+Climax: ari/s103-097
+Name The Sword that was Given to Me
+*GateClimax
+EndCard
+
+Climax: ari/s103-098
+Name Once in a Lifetime Request
+*GateClimax
+EndCard
+
+Climax: ari/s103-099
+Name Duties of a Healer
+Color B
+Trigger DoubleSoul
+Auto: OnPlay
+{
+	TargetLocation WaitingRoom
+	NarrowTargets Compare ThatCardsLevel 1 OrLess
+	ChooseCardsFromTargets 0 1 Choose a level 1 or lower card to be put into your stock.
+	MoveCard Stock
+	GainSoul 1
+}
+Text Auto: When this is placed in your climax area, choose up to 1 level 1 or lower card in your waiting room and put it into your stock, and all of your characters get +1 soul for the turn.
+EndCard
+
+Climax: ari/s103-100
+Name Benevolence
+*GateClimax
+EndCard
+
+//Arifureta PR Cards
+Character: ari/s103-101
+Name Outfit Exchange, Yue
+Color Y
+Level 1
+Cost 0
+Power 3500
+Trait1 Tortus
+Trait2 Vampire Tribe
+Cont: GiveSelf
+{
+	If MyTurn
+	{
+		GainPower 4000
+	}
+}
+Text Cont: During your turn, this gets +4000 power.
+EndCard
+
+Character: ari/s103-102
+Name Outfit Exchange, Shea
+Color G
+Level 0
+Cost 0
+Power 2000
+Trait1 Tortus
+Trait2 Rabbitman
+Auto: OnPlay
+{
+	PayCost 2
+	{
+		Refresh
+	}
+}
+Text Auto: (2) When this is placed on stage from hand, you may pay cost. If you do, shuffle all cards from your Waiting Room into your deck
+EndCard
+
+Character: ari/s103-103
+Name Outfit Exchange, Myu
+Color G
+Level 2
+Cost 1
+Power 2000
+Trigger Soul
+Trait1 Tortus
+Trait2 Atlantic Tribe
+Auto: OnUseThisCardsBackup
+{
+	TargetMyCharacterInBattle
+	GainPower 1000
+}
+Text Auto: When you use this card's BACKUP, if you have an <Tortus> character, choose 1 of your characters in battle, this turn, it gets +1000 power.
+Backup 2500
+EndCard
+
+Character: ari/s103-104
+Name Outfit Exchange, Tio
+Color R
+Level 1
+Cost 0
+Power 4500
+Trait1 Tortus
+Trait2 Dragonkin
+Auto: OnAttack
+{
+	RevealExactly Deck 1
+	IfThatCard HasTrait Tortus ||| IsEvent
+	{
+		TargetLocation Stage
+		ChooseCharacterFromTargets Choose one of your other <Tortus> characters to gain 3000 power
+		GainPower 3000
+	}
+}
+Text Auto: When this attacks, reveal the top card of your deck. If that card is <Tortus> character or an Event, choose 1 of your other <Tortus> characters, this turn, it gets +3000 power.
+EndCard
+
+Character: ari/s103-105
+Name Outfit Exchange, Kaori
+Color B
+Level 0
+Cost 0
+Power 1000
+Trait1 Tortus
+Trait2 Classmate
+Auto: OnPlay
+{
+	PayCost 2
+	{
+		TargetLocation OpponentStage
+		ChooseCharacterFromTargets Choose a character to return to your opponent's hand
+		MoveCard OpponentHand
+	}
+}
+Text Auto: (2) When this is placed on stage from hand, you may pay cost. If you do, choose 1 of your opponent's characters, return it to hand.
+*StockOnCancel
+EndCard
+
+Event: ari/s103-p01
+Name Gravity Magic
+Color Y
+Level 2
+Cost 0
+Counter
+Effect:
+{
+	GainSpecialEffect IgnoreColorRequirement
+	TargetLocation Stage
+	If NameContains Yue
+	{
+		GainSpecialEffect IgnoreColorRequirement
+		*Scry
+		*Scry
+	}
+}
+Text You cannot play this card if you do not have a character with "Yue" in its card name. This card can be played from your hand without meeting the color requirements. Perform the following action twice. "You look at the top card of your deck and put it in the waiting room or at the top of your deck."
+EndCard
+
+Character: ari/s103-p02
+Name Bath Time Yue
+Color Y
+Level 2
+Cost 1
+Power 2500
+Trait1 Tortus
+Trait2 Vampire Tribe
+Auto: OnUseThisCardsBackup
+{
+	If LocationContains OpponentClimax 1 Any
+	{
+		TargetMyCharacterInBattle
+		GainPower 2000
+	}
+}
+Text Auto: When you use this card's BACKUP, you may pay cost. If you do, choose 1 of your characters in battle, it gains 2000 power until the end of the turn.
+Backup 2500
+EndCard
+
+//Arifureta Trial Deck
+
+Character: ari/s103-t01
+Name After Bath, Kaori
+Color Y
+Level 0
+Cost 0
+Power 500
+Trait1 Tortus
+Trait2 Classmate
+Auto: OnTriggerCheckClimax
+{
+	Peek 1
+	Question Put this card into your wiating room?
+	If Yes
+	{
+		MoveCard WaitingRoom
+	}
+}
+Text Auto: When your character's Trigger Check reveals a Climax, look at the top card of your deck, and put it on top of your deck or into your Waiting Room.
+*Act1RestSelfDrawBrainstorm5
+EndCard
+
+Character: ari/s103-t02
+Name Special Lover, Yue
+Color Y
+Level 0
+Cost 0
+Power 2000
+Trait1 Tortus
+Trait2 Vampire Tribe
+*DropSearch(Tortus)
+Auto: OnReverse
+{
+	If LocationContainsOrLess Memory 2 Any
+	{
+		Question Send this card to memory?
+		If Yes
+		{
+			MoveCard Memory
+		}
+	}
+}
+Text Auto: When this is Reversed, if you have 2 or less Memory, you may send this to Memory.
+EndCard
+
+Character: ari/s103-t03
+Name Kind-hearted Girl Kaori
+Color Y
+Level 0
+Cost 0
+Power 2000
+Trait1 Tortus
+Trait2 Classmate
+Auto: OnSentFromStageToWaitingRoom
+{
+	PayCost Discard 1 Any
+	{
+		Peek Deck 4
+		ChooseCardsFromTargets 0 1 Compare ThatCardsLevel 1 OrMore
+		RevealTargets
+		MoveCard Hand
+		PutTheRestIntoTheWaitingRoom
+	}
+}
+Text Auto: [Discard 1 card] When this is sent from Stage to Waiting Room, you may pay cost. If you do, look at up to 4 cards from the top of your deck, choose up to 1 Level 1 or higher card among them, show it to your opponent, add it to hand, and send the rest to Waiting Room.
+EndCard
+
+Character: ari/s103-t04
+Name Strongest Combination Yue & Hajime
+Color Y
+Level 1
+Cost 0
+Power 3000
+Trait1 Tortus
+Trait2 Classmate
+Combo Thoughts to Convey
+Cont: GiveSelf
+{
+	If MyTurn && StageContains 1 Other
+	{
+		GainPower 3000
+	}
+}
+Text Cont: During your turn, if you have another <Tortus> character, this gets +3000 power.
+Auto: OnReverseOpponent
+{
+	If Climax Thoughts to Convey
+	{
+		RevealUpTo Deck 2
+		NarrowTargets IsCharacter || NameEquals Bottom of the Abyss
+		MoveCard Hand
+		PutTheRestIntoTheWaitingRoom
+	}
+}
+Text Auto: CxCombo When this card's battle opponent is Reversed, if "Thoughts to Convey" in your Climax Area, look at up to 2 cards from the top of your deck, choose up to 2 <Tortus> characters or "Bottom of the Abyss" from among them, show them to your opponent, add them to hand, and send the rest to Waiting Room.
+EndCard
+
+Character: ari/s103-t05
+Name Half-joking Proposal, Kaori
+Color Y
+Level 1
+Cost 1
+Power 1000
+Trigger Soul
+Trait1 Tortus
+Trait2 Classmate
+Backup 2500
+EndCard
+
+Character: ari/s103-t06
+Name Can't Deal with the Heat, Yue
+Color Y
+Level 2
+Cost 1
+Power 8500
+Trigger Soul
+Trait1 Tortus
+Trait2 Vampire Tribe
+EndCard
+
+Character: ari/s103-t07
+Name The Last Vampire, Yue
+Color Y
+Level 3
+Cost 2
+Power 9500
+Trait1 Tortus
+Trait2 Vampire Tribe
+Auto: OnPlay
+{
+	PayCost SendFromLocationToLocation Stage WaitingRoom 1 False IsCharacter
+	{
+		TargetTop Clock 1
+		MoveCard Stock
+	}
+}
+Text Auto: [Send 1 of your other <Tortus> characters on stage to Waiting Room] When this is placed on stage from hand, you may pay cost. If you do, put the top card of your Clock into Stock.
+Auto: OnAttack
+{
+	PayCost 3 Discard 2 Any
+	{
+		Burn 3
+	}
+}
+Text Auto: [(3) Discard 2 cards] When this attacks, you may pay cost. If you do, deal 3 damage to your opponent. 
+EndCard
+
+Event: ari/s103-t08
+Name Bottom of the Abyss
+Color Y
+Level 1
+Cost 0
+Counter
+Effect:
+{
+	RevealUpTo Deck 4
+	ChooseCardsFromTargets 0 1 HasTrait Tortus
+	MoveCard Hand
+	PutTheRestIntoTheWaitingRoom
+}
+Text COUNTER - Look at up to 4 cards from the top of your deck, choose up to 1 <Tortus> character from among them, show it to your opponent, add it to hand, send the rest to Waiting Room. Send this to the bottom of your deck
+EndCard
+
+Climax: ari/s103-t09
+Name Thoughts to Convey
+*ChoiceClimax
+EndCard
+
+Character: ari/s103-t10
+Name Young Dagon Girl, Myu
+Color G
+Level 0
+Cost 0
+Power 500
+Trait1 Tortus
+Trait2 Atlantic Tribe
+*500Assist
+Act: RestSelf
+{
+	TargetLocation Stage
+	ChooseCharacterFromTargets Choose a character to get 1000 power
+	GainPower 1000
+}
+Text Act: [Rest this] Choose 1 of your characters, this turn, it gets +1000 power.
+EndCard
+
+Character: ari/s103-t11
+Name Can't Deal with the Heat, Hajime
+Color G
+Level 0
+Cost 0
+Power 1000
+Trait1 Tortus
+Trait2 Classmate
+Cont: GiveAll
+{
+	If NameEquals Can't Deal with the Heat, Yue
+	{
+		GainPower 2000
+	}
+}
+Text Cont: All of your other {Can't Deal with the Heat, Yue} gets +2000 power.
+*BondDiscard(Can't Deal with the Heat\, Yue)
+EndCard
+
+Character: ari/s103-t12
+Name Important Companion, Shea
+Color G
+Level 0
+Cost 0
+Power 1500
+Trait1 Tortus
+Trait2 Rabbitman
+Auto: OnPlay
+{
+	TargetLocation Stage
+	NarrowTargets HasTrait Tortus
+	ChooseCharacterFromTargets Choose a character to gain 1500 power
+	GainPower 1500
+}
+Text Auto: When this is placed on stage from hand, choose 1 of your <Tortus> characters, this turn, it gets +1500 power.
+*ClimaxExchange
+EndCard
+
+Character: ari/s103-t13
+Name Proud Dragonman, Tio
+Color G
+Level 0
+Cost 0
+Power 2000
+Trait1 Tortus
+Trait2 Dragonkin
+Auto: OnPlay
+{
+	TargetLocation Stage
+	NarrowTargets HasTrait Tortus
+	SetXValue TargetCount
+	MultiplyXValue 1000
+	TargetSelf
+	GainPower X
+}
+Text Auto: When this is placed on stage from hand, this turn, this gets +X power. X equals the number of your <Tortus> characters times 1000.
+EndCard
+
+Character: ari/s103-t14
+Name Important Companion, Tio
+Color G
+Level 1
+Cost 0
+Power 4500
+Trait1 Tortus
+Trait2 Dragonkin
+Cont: GiveSelf
+{
+	GainPower 1000
+}
+Text Cont: If all of your characters are <Tortus>, this gets +1000 power
+Auto: OnAttack
+{
+	If LocationContains Climax 1 IsClimax
+	{
+		RevealExactly Deck 1
+		If Compare ThisCardsLevel 1 OrMore
+		{
+			MoveCard Stock
+		}
+	}
+}
+Text Auto: When this attacks, if you have a Climax in your Climax Area, reveal the top card of your deck. If that card is Level 1 or higher, send it to Stock.
+EndCard
+
+Character: ari/s103-t15
+Name That Pleasure Once More, Tio
+Color G
+Level 2
+Cost 1
+Power 6000
+Trigger Soul
+Trait1 Tortus
+Trait2 Dragonkin
+Cont: GiveAll
+{
+	If Other && HasTrait Tortus
+	{
+		GainPower 1000
+	}
+}
+Text Cont: All of your other <Tortus> characters get +1000 power.
+EndCard
+
+Character: ari/s103-t16
+Name Proud of Her Strength, Shea
+Color G
+Level 2
+Cost 1
+Power 6500
+Trigger Soul
+Trait1 Tortus
+Trait2 Rabbitman
+Cont: GiveSelf
+{
+	If StageContains 2 Other && HasTrait Tortus
+	{
+		GainPower 3000
+	}
+}
+Text Cont: If you have 2 or more other <Tortus> characters, this gets +3000 power.
+Auto: Encore Discard 1 HasTrait Tortus
+{
+}
+Text Auto: ENCORE [Discard 1 <Tortus> character]
+EndCard
+
+Character: ari/s103-t17
+Name Brave Rabbitman, Shea
+Color G
+Level 3
+Cost 2
+Soul 2
+Power 10500
+Trigger Soul
+Trait1 Tortus
+Trait2 Rabbitman
+Combo Now, Here We Go-!
+Auto: OnPlay
+{
+	TargetLocation Hand
+	ChooseCharactersFromTargets 0 1 Choose a character equal to or lower than your level to place on your stage and it gains 2000 power this turn.
+	PlaceOnStage False True True False
+	GainPower 2000
+}
+Text Auto: When this is placed on stage from hand, choose up to 1 character from your hand whose Level is equal or lower than your Level, place it on your stage in any slot, and this turn, it gets +2000 power.
+Auto: OnEndOfAttack
+{
+	If Climax Now, Here We Go-! && StageContains 2 Other && HasTrait Tortus
+	{
+		PayCost 3 Discard 1 Any
+		{
+			Stand
+		}
+	}
+}
+Text Auto: CxCombo [(3) Discard 1 card] This ability can only be activated up to once per turn. At the end of this card's attack, if "Now, Here We Go-!" in your Climax Area, and you have 2 or more other <Tortus> characters, you may pay cost. If you do, Stand this.
+EndCard
+
+Climax: ari/s103-t18
+Name Now, Here We Go-!
+*BarClimax
+EndCard
+
+Climax: ari/s103-t19
+Name Start of the New Journey
+Color G
+*2SoulClimax
+EndCard

@@ -1,0 +1,348 @@
+
+Character: DC/WE20-01
+Name Cherry-Colored Confession, Otome
+Color Y
+Level 0
+Cost 0
+Power 2000
+Trait1 Magic
+Trait2 Student Council
+*OnAttackGivePowerForEachOther(500,Magic|Student Council)
+*HandEncore
+EndCard
+
+Character: DC3/WE20-02
+Name "Magician of Justice" Girl
+Color Y
+Level 0
+Cost 0
+Power 2000
+Trait1 Magic
+*Act1RestSelfSearchBrainstorm(Magic)
+EndCard
+
+Character: DC/WE20-05
+Name Dressed Up, Koko
+Color G
+Level 1
+Cost 0
+Power 2500
+Trait1 Music
+Trait2 Yukata
+Auto: OnPlay
+{
+	PayCost 1 Clock
+	{
+		SearchDeck HasTrait Music
+	}
+}
+Text Auto: [(1) Put the top card of your deck into your clock] When this card is placed on the stage from your hand, you may pay the cost, search your deck for up to 1 <Music> character and add it to your hand.
+Auto: OnUseAct
+{
+	TargetLocation Stage
+	AIChoice GainPower 2000
+	ChooseCharacterFromTargets Choose a character to give +1000 power.
+	GainPower 2000
+}
+TimesPerTurn 1
+Text Auto: Once per turn, when you use an "Act" ability, choose 1 of your characters, it gets +1000 power until end of turn.
+EndCard
+
+Character: DC/WE20-05R
+Clone DC/WE20-05
+Image DC_WE20_05R
+EndCard
+
+Character: DC3/WE20-08
+Name Summer Memories, Himeno
+Color R
+Level 1
+Cost 0
+Power 4000
+Trait1 Newspaper
+Trait2 Swimsuit
+Auto: OnReversed
+{
+	TargetTop Deck 1
+	Reveal
+	If Compare TargetCardsLevel 1 OrHigher
+	{
+		Question Put Summer Memories, Himeno into your stock?
+		If Yes
+		{
+			TargetSelf
+			MoveCard Stock
+		}
+	}
+}
+Text Auto: When this card becomes reversed in battle, reveal the top card of your deck, if it is level 1 or higher, you may put this card into your stock.
+EndCard
+
+Character: DC3/WE20-09
+Name Welcoming New Students, Ricca
+Color R
+Level 3
+Cost 2
+Trigger Soul
+Power 10000
+Soul 2
+Trait1 Newspaper
+Trait2 Student Council
+Cont: GiveSelf
+{
+	If Compare CardsInMemory 2 OrMore
+	{
+		GainPower 1500
+	}
+}
+Text Cont: MEMORY If there are 2 or more cards in your memory, this card gets +1500 power.
+*OnPlayRevealBurnIfTrait(Newspaper|Student Council)
+EndCard
+
+Character: DC3/WE20-10
+Name New Club Member, Sara
+Color B
+Level 0
+Cost 0
+Power 1500
+Trait1 Newspaper
+Trait2 Sports
+Auto: OnAttack
+{
+	PayCost 1 Discard 1 Any
+	{
+		SearchDeck HasTrait Newspaper|Sports
+	}
+}
+Text Auto: [(1) Discard a card] When this card attacks, you may pay the cost, search your deck for up to 1 <Newspaper> or <Sports> character and add it to your hand.
+EndCard
+
+
+Character: DC/WE20-18
+Name By Your Side, Kotori
+Color G
+Level 0
+Cost 0
+Power 2000
+Trait1 Music
+Trait2 Magic
+Act: RestSelf HandClock HasTrait Music
+{
+	SearchLocationForTargets Clock 1 1 IsCharacter
+	MoveCard Hand
+}
+Text Act: [Put a <Music> character from your hand into your clock, Rest this card] Choose a character in your clock and return it to your hand.
+EndCard
+
+Character: DC/WE20-18R
+Clone DC/WE20-18
+Image DC_WE20_18R
+EndCard
+
+Character: DC/WE20-19
+Name Nanaka, Overslept
+Color G
+Level 1
+Cost 0
+Power 6000
+Trait1 Music
+Trait2 Magic
+Cont: GiveFacing
+{
+	GainSoul 1
+}
+Text Cont: The character facing this card gets +1 soul.
+*ClockShift(1,green)
+EndCard
+
+Character: DC3/WE20-20
+Name Autumn of Appetite, Charles
+Color R
+Level 0
+Cost 0
+Power 500
+Trait1 Newspaper
+Trait2 Student Council
+Auto: OnReversed
+{
+	PayCost 1 Discard 1 Any SendSelf Memory
+	{
+		SearchDeck HasTrait Newspaper|Student Council
+	}
+}
+Text Auto: [(1) Discard a card, Put this card into your memory] When this card becomes reversed in battle, you may pay the cost, search your deck for up to 1 <Newspaper> or <Student Council> character and add it to your hand.
+EndCard
+
+Character: DC/WE20-21
+Name Minatsu in Swimsuit
+Color R
+Level 0
+Cost 0
+Power 2000
+Trait1 Mecha
+Trait2 Banana
+*Act1SalvageBrainstorm(Any)
+EndCard
+
+Character: DC3/WE20-22
+Name Shiki in Swimsuit
+Color R
+Level 0
+Cost 0
+Power 2000
+Trait1 Student Council
+Trait2 Judgement
+*ScryOnPlay
+Act: Rest 2 Any
+{
+	*GiveCharacterPower(1500,Student Council)
+}
+Text Act: [Rest 2 of your characters] Choose 1 of your <Student Council> characters, it gets +1500 power until end of turn.
+EndCard
+
+Character: DC3/WE20-23
+Name Mikoto in Swimsuit
+Color R
+Level 0
+Cost 0
+Power 2500
+Trait1 Newspaper
+Trait2 Love
+Auto: OnPlay
+{
+	SetXToNumberOfCharacters HasTrait Newspaper|Lov
+	MultiplyXValue 500
+	GainPower X
+}
+Quick
+Text Auto: When this card is placed on the stage from your hand, this card gets +X power until end of turn. X is 500 times the number of <Newspaper> or <Love> characters you have.
+EndCard
+
+
+
+Character: DC/WE20-24
+Name The Usual Disterbance, Erica
+Color R
+Level 2
+Cost 1
+Trigger Soul
+Power 2000
+Trait1 Student Council
+Trait2 Royalty
+Act: 1 SendSelf Memory Discard 1 Any
+{
+	AIChoice PlaceOnStageStanding
+	SearchLocationForTargets WaitingRoom 1 HasTrait Royalty && Compare ThatCardsLevel MyLevel OrLess
+	PlaceOnStage False True True False
+}
+Text Act: [(1) Discard a card, Put this card into your memory] Choose a <Royalty> character in your waiting room whose level is less than or equal to your level and place it on any position of your stage.
+Backup 3000
+EndCard
+
+Character: DC3/WE20-26
+Name Girl of Many Mysteries, Aoi
+Color B
+Level 0
+Cost 0
+Power 2500
+Trait1 Newspaper
+Trait2 Waitress
+Cont: GiveSelf
+{
+	If Compare CardsInHand 6 OrMore
+	{
+		GainPower 1500
+	}
+}
+Text Cont: If you have 6 or more cards in your hand, this card gets +1500 power.
+EndCard
+
+Character: DC3/WE20-27
+Name Plesant Big Sister, Sakura
+Color B
+Level 1
+Cost 0
+Power 1500
+Trait1 Magic
+Trait2 Sweets
+*500Assist
+Act: Rest 2 HasTrait Magic
+{
+	DrawCard
+	Discard 1 Any
+}
+Text Act: [Rest 2 of your <Magic> characters] Draw a card, then discard a card.
+EndCard
+
+Character: DC3/WE20-28
+Name Cute Club President, Youko
+Color B
+Level 1
+Cost 1
+Trigger Soul
+Power 3000
+Trait1 Sports
+*LevelAssistTrait(Sports)
+Auto: StartAttackPhase
+{
+	TargetLocation Stage
+	NarrowTargets HasTrait Sports && CardPosition Rest
+	AIChoice Stand
+	ChooseCharacterFromTargets_Optional Choose a character to stand.
+	Stand
+}
+Text Auto: At the start of your attack phase, you may choose 1 of your <Sports> characters and stand it.
+EndCard
+
+Character: DC3/WE20-29
+Name For the Smile, Sumomo
+Color B
+Level 1
+Cost 1
+Power 6000
+Trait1 Chairman
+Trait2 Play
+Cont: GiveSelf
+{
+	SetXToNumberOfCharacters Other && Compare ThatCardsLevel 0 OrLower
+	MultiplyXValue 500
+	GainPower X
+}
+Text Cont: For each of your other level 0 or lower characters, this card gets +500 power.
+*ScryToBottomOnPlay
+EndCard
+
+
+Character: DC/WE20-P02
+Name Field Experience! Otome & Erica
+Color R
+Level 1
+Cost 1
+Power 6500
+Trait1 Student Council
+Trait2 Royalty
+Auto: OnClimaxPlay
+{
+	GainPower 1500
+}
+Quick
+Text Auto: When a climax is placed in your climax area, this card gets +1500 power until end of turn.
+EndCard
+
+Character: DC3/WE20-P03
+Name Magic of Love, Ricca
+Color R
+Level 0
+Cost 0
+Power 2000
+Trait1 Newspaper
+Trait2 Student Council
+Cont: GiveAll
+{
+	If Other && NameContains Ricca
+	{
+		GainPower 500
+	}
+}
+Text Cont: Your other characters with "Ricca" in its name get +500 power.
+EndCard

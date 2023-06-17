@@ -1,0 +1,4 @@
+Series: CANAAN
+Folder: Canaan/SE02
+Prefix: CN/SE02
+SetName: SE02

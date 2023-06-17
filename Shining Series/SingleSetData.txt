@@ -1,0 +1,8 @@
+Series: Shining Series
+Folder: Shining Series/S04
+Prefix: SE/S04
+SetName: Shining Force EXA (S04)
+
+Folder: Shining Series/SE25
+Prefix: SR/SE25
+SetName: Shining Resonance (SE25)

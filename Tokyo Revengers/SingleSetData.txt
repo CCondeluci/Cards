@@ -1,0 +1,4 @@
+Series: Tokyo Revengers
+Folder: Tokyo Revengers/S92
+Prefix: TRV/S92
+SetName: S92

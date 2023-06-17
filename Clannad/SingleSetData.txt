@@ -1,0 +1,16 @@
+Series: Clannad
+Folder: Clannad/WE01
+Prefix: CL/WE01
+SetName: Volume 1 (WE01)
+Folder: Clannad/WE04
+Prefix: CL/WE04
+SetName: Volume 2 (WE04)
+Folder: Clannad/WE07
+Prefix: CL/WE07
+SetName: Volume 3 (WE07)
+Folder: Key/Clannad/W78
+Prefix: Kcl/W78
+SetName: Clannad Key 20th
+Folder: Clannad/WP01
+Prefix: CL/WP01
+SetName: Clannad Power Up Set

@@ -1,0 +1,7 @@
+Series: Sora wo Kakeru Shoujo/Mai-Hime & Mai-Otome
+Folder: Otome/WE03
+Prefix: MH/WE03
+SetName: Vol 1. (WE03)
+Folder: Otome/WE05
+Prefix: MH/WE05
+SetName: Vol 2. (WE05)

@@ -1,0 +1,24 @@
+Older sets are hidden in the game resources.
+
+Character: 
+Name 
+Image 
+Color 
+Level 
+Cost 
+Trigger 
+Power 
+Soul 
+Trait1 LycoReco
+Trait2 Weapon
+Combo 
+//effects
+EndCard
+
+Climax: 
+Name 
+Color 
+Combo 
+*
+EndCard
+

@@ -1,0 +1,166 @@
+Character: DC/WE08-06
+Name Kotori in the Choir
+Color G
+Level 1
+Cost 0
+Power 3000
+Trait1 Music
+Trait2 Magic
+Combo Songstress at the Wedding Ceremony
+Cont: GiveAll
+{
+	If Other && InLocation MiddleCenterStage
+	{
+		GainPower 1000
+	}
+}
+Text Cont: Your other character in the middle position of your center stage gets +1000 power.
+Auto: OnSpecificClimaxPlay Songstress at the Wedding Ceremony
+{
+	PayCost Discard 1 Any
+	{
+		SearchDeck HasTrait Music
+	}
+}
+Text Auto: CxCombo [Discard a card] When "Songstress at the Wedding Ceremony" is placed in your climax area, you may pay the cost, search your deck for up to 1 <Music> character and add it to your hand.
+EndCard
+
+
+
+
+
+
+Character: DC/WE08-12
+Name Young Student Council President, Erica
+Color R
+Level 2
+Cost 1
+Trigger Soul
+Power 4500
+Trait1 Student Council
+Trait2 Royalty
+*LevelAssist
+*HandEncore
+EndCard
+
+Character: DC/WE08-23
+Name Enjoying the Date, Erica
+Color R
+Level 1
+Cost 1
+Trigger Soul
+Power 5500
+Trait1 Student Council
+Trait2 Royalty
+Cont: GiveSelf
+{
+	If StageContains 3 Other && HasTrait Student Council
+	{
+		GainPower 1000
+	}
+}
+Text Cont: If you have 3 or more other <Student Council> characters, this card gets +1000 power.
+EndCard
+
+Climax: DC/WE08-26
+Name Songstress at the Wedding Ceremony
+*BarClimax
+EndCard
+
+Character: DC/WE08-34
+Name Koko in Swimsuit
+Color G
+Level 0
+Cost 0
+Power 2000
+Trait1 Music
+Trait2 Swimsuit
+Act: Rest 2 HasTrait Music
+{
+	TargetLocation Stage
+	AIChoice GainPower 2000
+	ChooseCharacterFromTargets Choose a character to give +2000 power.
+	GainPower 2000
+}
+Text Act: [Rest 2 of your <Music> characters] Choose 1 of your characters, it gets +2000 power until end of turn.
+EndCard
+
+Character: DC/WE08-35
+Name Nanaka & Yume in Swimsuits
+Color G
+Level 0
+Cost 0
+Power 2000
+Trait1 Music
+Trait2 Swimsuit
+Auto: OnPlay
+{
+	TargetTop Deck 1
+	Reveal
+	If Compare TargetCardsLevel 1 OrMore
+	{
+		TargetSelf
+		GainPower 2000
+	}
+}
+Text Auto: When this card is placed on the stage from your hand, reveal the top card of your deck. If it is level 1 or higher, this card gets +2000 power until end of turn.
+EndCard
+
+Character: DC/WE08-52
+Name Songstress, Nanaka
+Color G
+Level 1
+Cost 0
+Power 5000
+Trait1 Music
+Trait2 Magic
+Auto: OnAttack
+{
+	TargetTop Deck 1
+	Reveal
+	IfTarget HasTrait Music
+	{
+		TargetSelf
+		GainPower 2000
+	}
+}
+Text Auto: When this card attacks, reveal the top card of your deck, if it is a <Music> character, this card gets +2000 power until end of turn.
+EndCard
+
+Character: DC/WE08-77
+Name New Uniform, Erica
+Color R
+Level 0
+Cost 0
+Power 2000
+Trait1 Student Council
+Trait2 Royalty
+Cont: GiveAll
+{
+	If Other && HasTrait Royalty
+	{
+		GainPower 500
+	}
+}
+Text Cont: Your other <Royalty> characters get +500 power.
+EndCard
+
+Event: DC/WE08-82
+Name On Top of Devil's Palm
+Color G
+Level 1
+Cost 1
+Effect:
+{
+	ForcePayCost Send 1 Clock HasTrait Music|Sweets
+	{
+		SearchLocationForTargets Clock 1 1 HasTrait Sweets|Music && Not ThisIsTargeted
+		MoveCard Hand
+	}
+	SearchLocationForTargets Deck 0 1 HasTrait Sweets|Music && Compare ThatCardsCost 0 OrLess
+	PlaceOnStage False True True False
+	ShuffleLocation Deck
+}
+Text Choose 1 of your <Music> or <Sweets> characters and put it into your clock, if you do, choose a diffent <Music> or <Sweets> chraracter in your clock, and return it to your hand.\nSearch your deck for up to 1 cost 0 <Music> or <Sweets> character, and place it on any position of your stage.
+EndCard
+

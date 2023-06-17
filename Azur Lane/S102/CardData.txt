@@ -1,0 +1,5319 @@
+// Azur Lane Trial Decks
+
+// Eagle Union
+Character: AZL/S102-T01
+Name Helena
+Color B
+Level 0
+Cost 0
+Power 500
+Trait1 Warship
+Trait2 Eagle Union
+Cont: Assist
+{
+	If HasTrait Warship
+	{
+		GainPower 500
+	}
+}
+Text Cont: ASSIST Your 《Warship》 characters in front of this get +500 power.
+*Act1RestSelfDrawBrainstorm5
+EndCard
+
+Character: AZL/S102-T02
+Name Benson
+Color B
+Level 0
+Cost 0
+Power 500
+Trait1 Warship
+Trait2 Eagle Union
+*OnAttackGiveOtherPower(2000,Warship)
+Auto: StartOpponentAttackPhase
+{
+	PayCost 1
+	{
+		MoveToOpenPosition False True
+	}
+}
+Text Auto: [(1)] At the start of your opponent's attack phase, you may pay the cost. If you do, move this to an open position in your backstage. 
+EndCard
+
+Character: AZL/S102-T03
+Name Minneapolis
+Color B
+Level 0
+Cost 0
+Power 500
+Trait1 Warship
+Trait2 Eagle Union
+*BlueLevel0Bomb
+Auto: OnSentFromStageToWaitingRoom
+{
+	PayCost 2
+	{
+		SearchWaitingRoom HasTrait Warship
+	}
+}
+Text Auto: [(2)] When this is sent from stage to waiting room, you may pay the cost. If you do, choose 1 《Warship》 character from your waiting room, add it to hand.
+EndCard
+
+Character: AZL/S102-T04
+Name Craven
+Color B
+Level 0
+Cost 0
+Power 1000
+Trait1 Warship
+Trait2 Eagle Union
+Cont: GiveAll
+{
+	If NameEquals Gridley
+	{
+		GainPower 2000
+	}
+}
+Text Cont: All of your other "Gridley" gets +2000 power.
+*BondDiscard(Gridley)
+EndCard
+
+Character: AZL/S102-T05
+Name Hammann
+Color B
+Level 0
+Cost 0
+Power 1500
+Trait1 Warship
+Trait2 Eagle Union
+*GiveMiddlePower(1500,Warship)
+Act: 1 Discard 1 IsClimax
+{
+	SearchWaitingRoom HasTrait Warship
+}
+Text Act: [(1) Put a climax from your hand into your waiting room] Choose 1 《Warship》 character in your waiting room, add it to hand.
+EndCard
+
+Character: AZL/S102-T06
+Name Laffey
+Color B
+Level 0
+Cost 0
+Power 1500
+Trait1 Warship
+Trait2 Eagle Union
+Auto: OnPlay
+{
+	If StageContains 1 Other && HasTrait Warship
+	{
+		GainPower 2000
+	}
+}
+Quick
+Text Auto: When this is placed on stage from hand, if you have another 《Warship》 character, this turn, this gets +2000 power.
+Auto: OnSentFromStageToWaitingRoom
+{
+	PayCost Discard 1 Any
+	{
+		Peek Deck 4
+		ChooseCardsFromTargets 0 1 Compare ThatCardsLevel 1 OrMore
+		RevealTargets
+		MoveCard Hand
+		PutTheRestIntoTheWaitingRoom
+	}
+}
+Text Auto: [Discard a card] When this is sent from Stage to waiting room, you may pay the cost. If you do, look at up to 4 cards from the top of your deck, choose up to 1 Level 1 or higher card among them, show it to your opponent, add it to hand, and send the rest to waiting room.
+EndCard
+
+Character: AZL/S102-T07
+Name North Carolina
+Color B
+Level 0
+Cost 0
+Power 2000
+Trait1 Warship
+Trait2 Eagle Union
+Cont: GiveSelf
+{
+	If HasMarker
+	{
+		GainPower 2000
+	}
+}
+Text Cont: If this card has a Marker underneath it, this gets +2000 power.
+Auto: OnPlay
+{
+	TargetTop Deck 1
+	Reveal
+	IfTarget HasTrait Warship
+	{
+		Question Put the revealed card as a marker?
+		If Yes
+		{
+			Marker_FaceDown
+		}
+	}
+}
+Text Auto: When this is placed on stage from hand, reveal the top card of your deck. If that card is an 《Warship》 character, you may put it underneath this card Face-down as a Marker.
+EndCard
+
+Character: AZL/S102-T08
+Name San Diego
+Color B
+Level 1
+Cost 0
+Power 4000
+Trait1 Warship
+Trait2 Eagle Union
+Combo Holy Night Festival of Love and Peace
+*OnPlayGainPower(3000)
+EndCard
+Auto: OnReverseOpponent
+{
+	If Climax Holy Night Festival of Love and Peace && Compare Experience 2 OrMore
+	{
+		PayCost Discard 1 Any
+		{
+			Message Choose up to two Warship characters to return to hand.
+			SearchLocationForTargets WaitingRoom 0 2 HasTrait Warship
+			RevealTargets
+			MoveCard Hand
+			TargetLocation Stage
+			ChooseCharacterFromTargets Choose a character to gain +1000 power.
+			GainPower 1000		
+		}
+
+	}
+}
+Text Auto: CxCombo EXPERIENCE [Put 1 card from your hand into your waiting room] When this card's battle opponent is reversed, if you have the "Holy Night Festival of Love and Peace" in your climax area, and the sum of levels of cards in your level zone is 2 or more, you may pay the cost. If you do, choose up to 2 《Warship》 characters in your waiting room, add it them hand, then choose 1 of your characters, this turn, it gets +1000 power. 
+EndCard
+
+Character: AZL/S102-T09
+Name Baltimore
+Color B
+Level 1
+Cost 0
+Power 4000
+Trait1 Warship
+Trait2 Eagle Union
+Auto: OnPlay
+{
+	PayCost Discard 1 Any
+	{
+		TargetTop Deck 1
+		Reveal
+		SetXValue TargetCardsLevel
+		SearchWaitingRoom HasTrait Warship && Compare ThatCardsLevel X OrLower
+	}
+}
+Text Auto: [Put 1 card from your hand into your waiting room] When this is placed on stage from hand, you may pay the cost. If you do, reveal the top card of your deck, then choose 1 Level X or lower 《Warship》 character from your waiting room, and add it to hand. X equals the Level of the revealed card.
+Auto: OnAttack
+{
+	If StageContains 2 Other && HasTrait Warship
+	{
+		TargetLocation Stage
+		ChooseCharacterFromTargets Choose a character to gain +1000 power.
+		GainPower 1000
+	}
+}
+Text Auto: When this attacks, if you have 2 or more other 《Warship》 characters, choose 1 of your characters, this turn, it gets +1000 power.
+EndCard
+
+Character: AZL/S102-T10
+Name Gridley
+Color B
+Level 1
+Cost 0
+Power 5500
+Trait1 Warship
+Trait2 Eagle Union
+EndCard
+
+Character: AZL/S102-T11
+Name Long Island
+Color B
+Level 1
+Cost 1
+Power 500
+Trigger Soul
+Trait1 Warship
+Trait2 Eagle Union
+Backup 2000
+*ScryBackup(Warship)
+EndCard
+
+Character: AZL/S102-T12
+Name South Dakota
+Color B
+Level 1
+Cost 1
+Power 500
+Trait1 Warship
+Trait2 Eagle Union
+*GainPowerWithEnoughCharacters(2000,2,Warship)
+Auto: Encore SendFromWaitingRoomToBottom 1 Clock HasTrait Warship
+{
+}
+Text Auto: ENCORE [Put 1 《Warship》 character from your waiting room on the bottom of your clock] 
+EndCard
+
+Character: AZL/S102-T13
+Name Hornet
+Color B
+Level 2
+Cost 1
+Power 4500
+Trigger Soul
+Trait1 Warship
+Trait2 Eagle Union
+*LevelAssist
+Act: RestSelf
+{
+	Peek Deck 2
+	Reorder
+	EndPeek
+}
+Text Act: [Rest this] Look at up to 2 cards from the top of your deck, and put them back on top in any order.
+EndCard
+
+Character: AZL/S102-T14
+Name Saratoga
+Color B
+Level 2
+Cost 1
+Power 6000
+Trigger Soul
+Trait1 Warship
+Trait2 Eagle Union
+*OnPlayGainPowerForEach(500,Warship)
+*OnAttackGiveOtherPower(3000,Warship)
+EndCard
+
+Character: AZL/S102-T15
+Name Yorktown
+Color B
+Level 3
+Cost 2
+Power 9500
+Soul 2
+Trigger Soul
+Trait1 Warship
+Trait2 Eagle Union
+*Healer
+*OnAttackGivePowerForEachOther(500,Warship)
+EndCard
+
+Character: AZL/S102-T16
+Name Enterprise
+Color B
+Level 3
+Cost 2
+Power 10000
+Trigger Soul
+Soul 2
+Trait1 Warship
+Trait2 Eagle Union
+Combo Grey Ghost
+*OnPlayDraw2Discard1
+Auto: OnAttack
+{
+	If Climax Grey Ghost
+	{
+		PayCost 1
+		{
+			TargetTop Deck 1
+			Reveal
+			IfTarget HasTrait Warship
+			{
+				Burn 3
+				TargetSelf
+				UntilEndOfOpponentsTurn
+				GainEffect
+				{
+					Cont: GiveSelf
+					{
+						GainSpecialEffect CannotBeReversed
+					}
+					Text Cont: This cannot be reversed.
+				}
+			}
+		}
+	}
+}
+Text Auto: CxCombo (1) When this attacks, if you have the "Grey Ghost" in your climax area, you may pay the cost. If you do, reveal the top card of your deck. If that card is a 《Warship》 character, deal 3 damage to your opponent, then until the end of your opponent's next turn, this gains the following ability, "Cont: This cannot be reversed."
+EndCard
+
+Event: AZL/S102-T17
+Name Eagle Union
+Color B
+Level 2
+Cost 1
+Text If you don't have an <Eagle Union> character, this cannot be played from hand.
+Effect:
+{
+	RevealUpTo Deck 6
+	ChooseCardsFromTargets 0 2 HasTrait Eagle Union
+	RevealTargets
+	MoveCard Hand
+	PutTheRestIntoTheWaitingRoom
+}
+ActivationRequirement StageContains 1 HasTrait Eagle Union
+Text Look at up to 6 cards from the top of your deck, choose up to 2 <Eagle Union> character from among them, show them to your opponent, add them to hand, send the rest to waiting room.
+EndCard
+
+Climax: AZL/S102-T18
+Name Gathering with Sensei
+Color B
+*2SoulClimax
+EndCard
+
+Climax: AZL/S102-T19
+Name Grey Ghost
+*GateClimax
+EndCard
+
+Climax: AZL/S102-T20
+Name Holy Night Festival of Love and Peace
+*GateClimax
+EndCard
+
+// Royal Navy
+Character: AZL/S102-T21
+Name Glascow
+Color Y
+Level 0
+Cost 0
+Power 500
+Trait1 Warship
+Trait2 Royal Navy
+Cont: GiveAll
+{
+	If NameEquals Newcastle
+	{
+		GainEffect
+		{
+			*HandEncoreTrait(Warship)
+		}
+		GainEffect
+		{
+			Auto: OnAttack
+			{
+				TargetLocation Stage
+				NarrowTargets Other && HasTrait Warship
+				SetXValue TargetCount
+				MultiplyXValue 500
+				TargetSelf
+				GainPower X
+			}
+			Quick
+			Text Auto: When this attacks, this turn, this gets +X power. X equals the number of your other 《Warship》 characters times 500.
+		}
+	}
+}
+Text Cont: All of your other "Newcastle" gains the following 2 abilities, "Auto: When this attacks, this turn, this gets +X power. X equals the number of your other 《Warship》 characters times 500." "Auto: ENCORE [Put a character from your hand into your waiting room]"
+Auto: OnPlay
+{
+	PayCost SendFromWaitingRoomToBottom 1 Clock HasTrait Warship
+	{
+		Bond Newcastle
+	}
+}
+Text Auto: BOND/ <b>"Newcastle"</b>[Put a 《Warship》 character from your waiting room on the bottom of the clock]
+EndCard
+
+Character: AZL/S102-T22
+Name Hermione
+Color Y
+Level 0
+Cost 0
+Power 500
+Trait1 Warship
+Trait2 Royal Navy
+*OnPlayScry
+*Act1RestSelfDrawBrainstorm5
+EndCard
+
+Character: AZL/S102-T23
+Name Amazon
+Color Y
+Level 0
+Cost 0
+Power 1000
+Trait1 Warship
+Trait2 Royal Navy
+*500Assist
+Act: RestSelf
+{
+	TargetLocation Stage
+	NarrowTargets HasTrait Warship
+	ChooseCharacterFromTargets
+	GainPower 1000
+}
+Text Act: [Rest this] Choose 1 of your 《Warship》 character, this turn, it gets +1000 power.
+EndCard
+
+Character: AZL/S102-T24
+Name Icarus
+Color Y
+Level 0
+Cost 0
+Power 1000
+Trait1 Warship
+Trait2 Royal Navy
+Auto: OnPlay
+{
+	If StageContains 2 Other & HasTrait Warship
+	{
+		Question Draw a card?
+		If Yes
+		{
+			DrawCard
+			Discard 1 Any
+		}
+	}
+}
+Text Auto: When this is placed on stage from hand, if you have 2 or more other 《Warship》 characters, you may draw 1 card. If you do, put a card from your hand into your waiting room.
+*OnAttackGivePower(1500,Warship)
+EndCard
+
+Character: AZL/S102-T25
+Name Eskimo
+Color Y
+Level 0
+Cost 0
+Power 1500
+Trait1 Warship
+Trait2 Royal Navy
+Auto: OnPlay
+{
+	TargetTop Deck 1
+	Reveal
+	IfTarget HasTrait Warship
+	{
+		TargetLocation Stage
+		ChooseCharacterFromTargets
+		GainPower 2000
+	}
+}
+Text Auto: When this is placed on stage from hand, reveal the top card of your deck. If that card is a 《Warship》 character, choose 1 of your characters, this turn, it gets +2000 power.
+Auto: OnCancel
+{
+	If InBattle
+	{
+		Question Bounce this card to hand?
+		If Yes
+		{
+			TargetSelf
+			MoveCard Hand
+		}
+	}
+}
+Text Auto: During this card's battle, when the damage you take is cancelled, you may return this to your hand.
+EndCard
+
+Character: AZL/S102-T26
+Name Javelin
+Color Y
+Level 0
+Cost 0
+Power 1500
+Trait1 Warship
+Trait2 Royal Navy
+Cont: GiveSelf
+{
+	If MyTurn && Compare CardsInHand 5 OrMore
+	{
+		GainPower 2000
+	}
+}
+Text Cont: During your turn, if you have 5 or more hand, this gets +2000 power.
+*FreeRunner
+EndCard
+
+Character: AZL/S102-T27
+Name York
+Color Y
+Level 0
+Cost 0
+Power 2000
+Trait1 Warship
+Trait2 Royal Navy
+Auto: OnPlay
+{
+	Mill 3
+}
+Text Auto: When this is placed on stage from hand, you may Mill 3.
+*DropSalvage
+EndCard
+
+Character: AZL/S102-T28
+Name Aurora
+Color Y
+Level 1
+Cost 0
+Power 3000
+Trait1 Warship
+Trait2 Royal Navy
+*OnPlayGainPower(1500)
+*OnAttackGivePower(2000,Warship)
+EndCard
+
+Character: AZL/S102-T29
+Name Warspite
+Color Y
+Level 1
+Cost 0
+Power 4500
+Trait1 Warship
+Trait2 Royal Navy
+Auto: OnAttack
+{
+	If StageContains 1 Other && HasTrait Warship
+	{
+		GainPower 1500
+	}
+}
+Quick
+Text Auto: When this attacks, if you have another 《Warship》 character, this turn, this gets +1500.
+Auto: OnPlay
+{
+	If Compare Experience 2 OrMore
+	{
+		PayCost 2
+		{
+			TargetLocation WaitingRoom
+			NarrowTargets IsClimax
+			SaveTargets
+			SearchDeck IsClimax && SameNameAsSavedTarget
+		}
+	}
+}
+Text Auto: EXPERIENCE [(2)] When this is placed on stage from hand, if the sum of levels of cards in your level zone is 2 or more, you may pay the cost. If you do, search your deck for up to 1 climax with the same name as a climax in your waiting room, show it to your opponent, add it to hand, and shuffle your deck afterwards.
+EndCard
+
+Character: AZL/S102-T30
+Name Dido
+Color Y
+Level 1
+Cost 0
+Power 4500
+Combo To You Whom I Am Proud of
+Trait1 Warship
+Trait2 Royal Navy
+Cont: GiveSelf
+{
+	If MyTurn
+	{
+		TargetLocation Stage
+		NarrowTargets Other && HasTrait Warship
+		SetXValue TargetCount
+		MultiplyXValue 500
+		GainPower X
+	}
+}
+Text Cont: During your turn, for each of your other 《Warship》 characters, this gets +500 power.
+Auto: OnReverseOpponent
+{
+	If Climax To You Whom I Am Proud of
+	{
+		RevealUpTo Deck 2
+		ChooseCardsFromTargets 0 2 HasTrait Warship || NameEquals Royal Navy
+		RevealTargets
+		MoveCard Hand
+		PutTheRestIntoTheWaitingRoom
+	}
+}
+Text Auto: CxCombo When this card's battle opponent is reversed, if you have "To You Whom I Am Proud of" in your climax area, look at up to 2 cards from the top of your deck, choose up to 2 《Warship》 characters or "Royal Navy" from among them, show them to your opponent, add them to hand, and send the rest to waiting room.
+EndCard
+
+Character: AZL/S102-T31
+Name Newcastle
+Color Y
+Level 1
+Cost 1
+Power 7000
+Trait1 Warship
+Trait2 Royal Navy
+EndCard
+
+Character: AZL/S102-T32
+Name Centaur
+Color Y
+Level 2
+Cost 1
+Power 2500
+Trigger Soul
+Trait1 Warship
+Trait2 Royal Navy
+Backup 2500
+Auto: OnUseThisCardsBackup
+{
+	If AllYourCharacters HasTrait Warship
+	{
+		Message Choose one <Warship> character to put to stock.
+		SearchLocationForTargets WaitingRoom 1 1 HasTrait Warship
+		RevealTargets
+		MoveCard Stock
+	}
+}
+Text Auto: When you use this card's BACKUP, if all of your characters are 《Warship》, choose 1 《Warship》 character in your waiting room, you may send it to stock.
+EndCard
+
+Character: AZL/S102-T33
+Name Duke of York
+Color Y
+Level 2
+Cost 1
+Power 3500
+Trigger Soul
+Trait1 Warship
+Trait2 Royal Navy
+*LevelAssist
+Act: 1 RestSelf Discard 1 Any
+{
+	Peek Deck 3
+	ChooseCard Choose a card to add to your hand.
+	MoveCard Hand
+	PutTheRestIntoTheWaitingRoom
+}
+Text Act: [(1) Put a card from your hand into your waiting room, Rest this] Look at up to 3 cards from the top of your deck, choose up to 1 card among them, add it to hand, and send the rest to waiting room. 
+EndCard
+
+Character: AZL/S102-T34
+Name Nelson
+Color Y
+Level 2
+Cost 1
+Power 7000
+Trigger Soul
+Trait1 Warship
+Trait2 Royal Navy
+*OnAttackGainPowerForEachOther(1000,Warship)
+Auto: OnReverseOpponent
+{
+	TargetBattleOpponent
+	If Compare TargetCardsLevel 2 OrMore
+	{
+		PayCost 1
+		{
+			SearchWaitingRoom IsCharacter
+		}
+	}
+}
+Text Auto: (1) When this card's level 2 or higher battle opponent is reversed, you may pay the cost. If you do, choose 1 character in your waiting room, add it to hand.
+EndCard
+
+Character: AZL/S102-T35
+Name Illustrious
+Color Y
+Level 3
+Cost 2
+Power 9500
+Soul 2
+Trigger Soul
+Trait1 Warship
+Trait2 Royal Navy
+Combo Never-Ending Tea Party
+Auto: OnPlay
+{
+	*OptionalHeal
+	GainPower 1500
+}
+Quick
+Text Auto: When this is placed on stage from hand, you may Heal 1, and this turn, this gets +1500 power.
+Auto: StartMyEncorePhase
+{
+	If InLocation CenterStage && Climax Never-Ending Tea Party
+	{
+		If StageContains 2 Other && HasTrait Warship
+		{
+			PayCost 1
+			{
+				TargetLocation Stage
+				NarrowTargets Other && HasTrait Warship
+				ChooseCharacterFromTargets Choose a character to gain the effect, "Cont: The character across from this gets -3 soul."
+				UntilEndOfOpponentsTurn
+				GainEffect
+				{
+					Cont: GiveFacing
+					{
+						LoseSoul 3
+					}
+					Text Cont: The character across from this gets -3 soul.
+				}
+			}
+		}
+	}
+}
+Text Auto: CxCombo (1) At the start of your encore step, if you have "Never-Ending Tea Party" in your climax area, this is in your center stage, and you have 2 or more other 《Warship》 characters, you may pay the cost. If you do, choose 1 of your other 《Warship》 characters, until the end of your opponent's next turn, it gains the following ability, "Cont: The character across from this gets -3 soul."
+EndCard
+
+Character: AZL/S102-T36
+Name Victorious
+Color Y
+Level 3
+Cost 2
+Power 10000
+Soul 2
+Trigger Soul
+Trait1 Warship
+Trait2 Royal Navy
+Auto: OnPlay
+{
+	SearchDeck HasTrait Warship
+}
+Text Auto: When this is placed on stage from hand, search your deck for up to 1 《Warship》 character, show it to your opponent, add it to hand, and shuffle your deck afterwards.
+Auto: OnAttack
+{
+	PayCost 2 Discard 2 Any
+	{
+		Burn 2
+	}
+}
+Text Auto: [(2) Discard 2 cards] When this attacks, you may pay the cost. If you do, deal 2 damage to your opponent.
+EndCard
+
+Event: AZL/S102-T37
+Name Royal Navy
+Color Y
+Level 1
+Cost 1
+Text If you don't have a 《Royal Navy》 character, this cannot be played from hand.
+Effect:
+{
+	PayCost Send 1 WaitingRoom HasTrait Royal Navy
+	{
+		RevealUpTo Deck 4
+		ChooseCardsFromTargets 0 4 HasTrait Royal Navy
+		RevealTargets
+		MoveCard Hand
+		PutTheRestIntoTheWaitingRoom
+	}
+}
+ActivationRequirement StageContains 1 HasTrait Royal Navy
+Text You may send 1 of your 《Royal Navy》 characters to waiting room. If you do, look at up to 4 cards from the top of your deck, choose up to 4 《Royal Navy》 character from among them, show them to your opponent, add them to hand, send the rest to waiting room.
+EndCard
+
+Climax: AZL/S102-T38
+Name Royal Ships
+Color Y
+*2SoulClimax
+EndCard
+
+Climax: AZL/S102-T39
+Name Never-Ending Tea Party
+*ChoiceClimax
+EndCard
+
+Climax: AZL/S102-T40
+Name To You Whom I Am Proud of
+*ChoiceClimax
+EndCard
+
+Character: AZL/S102-T41
+Name Kawakaze
+Color G
+Level 0
+Cost 0
+Power 500
+Trait1 Warship
+Trait2 Sakura Empire
+Auto: OnClimaxPlay
+{
+	TargetTop Deck 1
+	Reveal
+	IfTarget HasTrait Warship
+	{
+		DrawCard
+		Discard 1 Any
+	}
+}
+Text Auto: When a climax is placed in your climax area, reveal the top card of your deck. If that card is a 《Warship》 character, add it to hand and put a card from your hand into your waiting room.
+*Act1RestSelfDrawBrainstorm5
+EndCard
+
+Character: AZL/S102-T42
+Name Hibiki
+Color G
+Level 0
+Cost 0
+Power 500
+Trait1 Warship
+Trait2 Sakura Empire
+*500Assist
+Auto: OnClimaxPlay
+{
+	TargetLocation Stage
+	ChooseCharactersFromTargets 0 2 Choose up to 2 of your characters, this turn, they get +1000 power.
+	GainPower 1000
+}
+Text Auto: When a climax is placed in your climax area, choose up to 2 of your characters, this turn, they get +1000 power.
+EndCard
+
+Character: AZL/S102-T43
+Name Isuzu
+Color G
+Level 0
+Cost 0
+Power 1000
+Trait1 Warship
+Trait2 Sakura Empire
+Cont: GiveAll
+{
+	If Other && NameEquals Nagara
+	{
+		GainPower 1500
+		GainEffect
+		{
+			*HandEncore
+		}
+	}
+}
+Text Cont: All of your other "Nagara" gets +1500 power and "Auto: ENCORE [Put a character from your hand into your waiting room]".
+*BondDiscard(Nagara)
+EndCard
+
+Character: AZL/S102-T44
+Name Akashi
+Color G
+Level 0
+Cost 0
+Power 1500
+Trait1 Warship
+Trait2 Sakura Empire
+*ClimaxExchange
+Auto: StartClimaxPhase
+{
+	TargetLocation Stage
+	NarrowTargets HasTrait Warship
+	ChooseCharacterFromTargets
+	GainPower 1000
+}
+Text Auto: At the start of your Climax Phase, choose 1 of your 《Warship》 character, this turn, it gets +1000 power.
+EndCard
+
+Character: AZL/S102-T45
+Name Suzutsuki
+Color G
+Level 0
+Cost 0
+Power 1500
+Trait1 Warship
+Trait2 Sakura Empire
+Auto: OnPlay
+{
+	SetXToNumberOfCharacters HasTrait Warship
+	MultiplyXValue 500
+	TargetLocation Stage
+	NarrowTargets HasTrait Warship
+	ChooseCharacterFromTargets
+	GainPower X
+}
+Quick
+Text Auto: When this is placed on stage from hand, choose 1 of your 《Warship》 characters, this turn, it gets +X power. X equals the number of your 《Warship》 characters times 500.
+Auto: OnAttack
+{
+	If StageContains 1 Other && HasTrait Warship
+	{
+		GainPower 1500
+	}
+}
+Quick
+Text Auto: When this attacks, if you have another 《Warship》 character, this turn, this gets +1500 power.
+EndCard
+
+Character: AZL/S102-T46
+Name Takao
+Color G
+Level 0
+Cost 0
+Power 1500
+Trait1 Warship
+Trait2 Sakura Empire
+*OnPlayTradeClimaxForCharacter(Warship)
+*GainPowerWhenOtherAttacks(1000,Warship)
+EndCard
+
+Character: AZL/S102-T47
+Name Inazuma
+Color G
+Level 0
+Cost 0
+Power 4000
+Trait1 Warship
+Trait2 Sakura Empire
+*GiveAllOpponentsEncore2
+EndCard
+
+
+Character: AZL/S102-T48
+Name Yoizuki
+Color G
+Level 1
+Cost 0
+Power 3000
+Trait1 Warship
+Trait2 Sakura Empire
+Auto: OnAttack
+{
+	TargetLocation Stage
+	GainEffect
+	{
+		Auto: OnThisTriggerCheck
+		{
+			IfOther IsClimax
+			{
+				PayCost Discard 1 IsClimax
+				{
+					SearchWaitingRoom HasTrait Warship
+				}
+			}
+		}
+		Text Auto: [Put a climax from your hand into your waiting room] When this card's trigger check reveals a climax, you may pay the cost. If you do, choose 1 《Warship》 character from your waiting room, and add it to hand.
+	}
+}
+Quick
+Text Auto: When this attacks, all of your characters gain the following ability, until the end of the turn: "Auto: [Put a climax from your hand into your waiting room] When this card's trigger check reveals a climax, you may pay the cost. If you do, choose 1 《Warship》 character from your waiting room, and add it to hand."
+*GreenLevel0Bomb
+EndCard
+
+
+Character: AZL/S102-T49
+Name Shigure
+Color G
+Level 1
+Cost 0
+Power 4000
+Trait1 Warship
+Trait2 Sakura Empire
+*OnPlayGivePower(1500, Warship)
+Auto: OnSentFromStageToWaitingRoom
+{
+	Question Reveal up to 3 cards?
+	If Yes
+	{
+		*CheckAndAddOne(3,HasTrait Warship)
+		Discard 1 Any
+	}
+}
+Text Auto: When this is sent from Stage to waiting room, you may reveal up to 3 cards from the top of your deck. If you revealed 1 or more, choose up to 1 《Warship》 character from among them, add it to hand, send the rest to waiting room, and put a card from your hand into your waiting room.
+EndCard
+
+
+Character: AZL/S102-T50
+Name Ayanami
+Color G
+Level 1
+Cost 0
+Power 4500
+Trait1 Warship
+Trait2 Sakura Empire
+Combo Snack Time
+Cont: GiveSelf
+{
+	If MyTurn &&& StageContains 2 Other && HasTrait Warship
+	{
+		GainPower 2000
+	}
+}
+Text Cont: During your turn, if you have 2 or more other 《Warship》 characters, this gets +2000 power.
+Auto: OnAttack
+{
+	If Climax Snack Time &&& StageContains 2 Other && HasTrait Warship
+	{
+		RevealUpTo Deck 4
+		ChooseCardsFromTargets 0 1 HasTrait Warship
+		RevealTargets
+		SaveTargets
+		MoveCard Hand
+		PutTheRestIntoTheWaitingRoom
+		LoadTargets
+		IfTarget Compare ThatCardsLevel 3 OrMore
+		{
+			DrawCard
+			Discard 1 Any
+		}
+	}
+}
+Text Auto: CxCombo When this attacks, if you have "Snack Time" in your climax area, and you have 2 or more other 《Warship》 characters, look at up to 4 cards from the top of your deck, choose up to 1 《Warship》 character from among them, show it to your opponent, add it to hand, send the rest to waiting room, and if you added a Level 3 or higher character, draw 1 card, put a card from your hand into your waiting room.
+EndCard
+
+Character: AZL/S102-T51
+Name Nagara
+Color G
+Level 1
+Cost 1
+Power 7000
+Trait1 Warship
+Trait2 Sakura Empire
+EndCard
+
+Character: AZL/S102-T52
+Name Atago
+Color G
+Level 2
+Cost 1
+Trigger Soul
+Power 2000
+Trait1 Warship
+Trait2 Sakura Empire
+Backup 2500
+Auto: OnUseThisCardsBackup
+{
+	If StageContains 1 HasTrait Warship
+	{
+		TargetMyCharacterInBattle
+		GainPower 1000
+	}
+}
+Text Auto: When you use this card's BACKUP, if you have a 《Warship》 character, choose 1 of your battling characters, this turn, it gets +1000 power.
+EndCard
+
+Character: AZL/S102-T53
+Name Hiei
+Color G
+Level 2
+Cost 1
+Power 2500
+Trigger Soul
+Trait1 Warship
+Trait2 Sakura Empire
+*LevelAssist
+Act: RestSelf
+{
+	DrawCard
+	Discard 1 Any
+}
+Text Act: [Rest this] Draw 1 card, then put a card from your hand into your waiting room.
+EndCard
+
+Character: AZL/S102-T54
+Name Kongou
+Color G
+Level 2
+Cost 1
+Trigger Soul
+Power 5500
+Trait1 Warship
+Trait2 Sakura Empire
+Cont: GiveSelf
+{
+	TargetLocation Backstage
+	NarrowTargets Other && HasTrait Warship
+	SetXValue TargetCount
+	MultiplyXValue 2500
+	GainPower X
+}
+Text Cont: For each of your other 《Warship》 characters in the backstage, this get +2500 power.
+Auto: OnPlay
+{
+	If StageContains 4 Other && HasTrait Warship
+	{
+		SearchLocationForTargets WaitingRoom 1 1 HasTrait Warship
+		RevealTargets
+		MoveCard Stock
+	}
+}
+Text Auto: When this is placed on stage from hand, if you have 4 or more other 《Warship》 characters, choose 1 《Warship》 character in your waiting room, you may send it to stock.
+EndCard
+
+Character: AZL/S102-T55
+Name Akagi
+Color G
+Level 3
+Cost 2
+Power 10000
+Soul 2
+Trigger Soul
+Trait1 Warship
+Trait2 Sakura Empire
+Combo Thoughts and Fireworks
+Auto: OnPlay|PlacedBy Kaga
+{
+	*OptionalHeal
+}
+Text Auto: When this is placed on stage from hand or by the "AUTO" effect of "Kaga", you may put the top card of your clock into the waiting room.
+Auto: OnAttack
+{
+	If Climax Thoughts and Fireworks
+	{
+		PayCost 1 Discard 1 Any
+		{
+			Burn 2
+			GainPower 1000
+		}
+	}
+}
+Text Auto: CxCombo [(1) Put a card from your hand into your waiting room] When this attacks, if you have "Thoughts and Fireworks" in your climax area, you may pay the cost. If you do, deal 2 damage to your opponent, then this turn, this gets +1000 power.
+EndCard
+
+Character: AZL/S102-T56
+Name Kaga
+Color G
+Level 3
+Cost 2
+Power 10000
+Soul 2
+Trigger Soul
+Trait1 Warship
+Trait2 Sakura Empire
+Cont: GiveAll
+{
+	If Other && NameEquals Akagi
+	{
+		GainPower 1000
+	}
+}
+Text Cont: All of your other "Akagi" gets +1000 power
+Auto: OnPlay
+{
+	PayCost 1
+	{
+		SearchLocationForTargets WaitingRoom 1 1 NameEquals Akagi
+		PlaceOnStage False True True False
+	}
+}
+Text Auto: [(1)] When this is placed on stage from hand, you may pay the cost. If you do, choose 1 "Akagi" from your waiting room, and place it on stage in any slot. 
+EndCard
+
+Event: AZL/S102-T57
+Name Sakura Islands
+Color G
+Level 1
+Cost 1
+Text If you don't have a 《Sakura Empire》 character, this cannot be played from hand.
+Effect:
+{
+	SearchDeck HasTrait Sakura Empire
+	DrawCard
+	Discard 1 Any
+}
+ActivationRequirement StageContains 1 HasTrait Sakura Empire
+Text Search your deck for up to 1 《Sakura Empire》 character, show it to your opponent, add it to hand, and shuffle your deck afterwards, then draw 1 card, put a card from your hand into your waiting room.
+EndCard
+
+Climax: AZL/S102-T58
+Name Four Kongou Sisters
+Color G
+*2SoulClimax
+EndCard
+
+Climax: AZL/S102-T59
+Name Thoughts and Fireworks
+*BarClimax
+EndCard
+
+Climax: AZL/S102-T60
+Name Snack Time
+*BarClimax
+EndCard
+
+Character: AZL/S102-T61
+Name Z1
+Color R
+Level 0
+Cost 0
+Power 500
+Trait1 Warship
+Trait2 Iron Blood
+Cont: GiveAll
+{
+	If Other && NameEquals Z2
+	{
+		GainSoul 1
+	}
+}
+Text Cont: All of your other "Z2" gets +1 soul.
+*Bond1(Z2)
+EndCard
+
+Character: AZL/S102-T62
+Name Admiral Hipper
+Color R
+Level 0
+Cost 0
+Power 500
+Trait1 Warship
+Trait2 Iron Blood
+Cont: GiveAll
+{
+	If Not MyTurn &&& Other && HasTrait Warship
+	{
+		GainPower 500
+	}
+}
+Text Cont: During your opponent's turn, all of your other 《Warship》 characters get +500 power.
+*Act1RestSelfDrawBrainstorm5
+EndCard
+
+Character: AZL/S102-T63
+Name Z23
+Color R
+Level 0
+Cost 0
+Power 1500
+Trait1 Warship
+Trait2 Iron Blood
+*MoveOtherWithTraitToBackstageOnReverse(Warship)
+*RedLevel0Bomb
+EndCard
+
+Character: AZL/S102-T64
+Name Z24
+Color R
+Level 0
+Cost 0
+Power 1500
+Trait1 Warship
+Trait2 Iron Blood
+Auto: OnPlay
+{
+	PayCost 1 Discard 1 HasTrait Warship
+	{
+		TargetLocation OpponentStage
+		SetXValue TargetCount
+		Peek Deck X
+		ChooseCard Choose a card to add to your hand.
+		MoveCard Hand
+		PutTheRestIntoTheWaitingRoom
+	}
+}
+Text Auto: [(1) Put a 《Warship》 character from your hand into your waiting room ] When this is placed on stage from hand, you may pay the cost. If you do, look at up to X cards from the top of your deck, choose up to 1 card among them, add it to hand, and send the rest to waiting room. X is equal to the number of your opponent's characters.
+Auto: OnOpponentClimaxPlay
+{
+	Question Move this card to your stock?
+	If Yes
+	{
+		MoveCard Stock
+	}
+}
+Text Auto: When a Climax is placed in your opponent's climax area, you may send this to stock.
+EndCard
+
+Character: AZL/S102-T65
+Name Nürnberg
+Color R
+Level 0
+Cost 0
+Power 1500
+Trait1 Warship
+Trait2 Iron Blood
+Auto: OnPlay
+{
+	TargetLocation Stage
+	ChooseCharacterFromTargets
+	GainPower 1000
+}
+Text Auto: When this is placed on stage from hand, choose 1 of your characters, this turn, it gets +1000 power.
+Act: 1 SendSelf WaitingRoom
+{
+	*Check4Add1(Warship)
+}
+Text Act: [(1) Send this to waiting room] Look at up to 4 cards from the top of your deck, choose up to 1 《Warship》 character from among them, show it to your opponent, add it to hand, and send the rest to waiting room.
+EndCard 
+
+Character: AZL/S102-T66
+Name Leipzig
+Color R
+Level 0
+Cost 0
+Power 1500
+Trait1 Warship
+Trait2 Iron Blood
+*GlobalPower(500,Warship)
+Act: 2 RestSelf
+{
+	SearchWaitingRoom HasTrait Warship
+}
+Text Act: [(2) Rest this] Choose 1 《Warship》 character in your waiting room, add it to hand.
+EndCard
+
+Character: AZL/S102-T67
+Name U-96
+Color R
+Level 0
+Cost 0
+Power 2000
+Trait1 Warship
+Trait2 Iron Blood
+*GainPowerWithEnoughCharacters(1000,2,Warship)
+*ClimaxExchange
+EndCard
+
+Character: AZL/S102-T68
+Name Elbe
+Color R
+Level 1
+Cost 0
+Power 2000
+Trait1 Warship
+Trait2 Iron Blood
+Backup 1000
+*BackupBonus1000(Warship)
+EndCard
+
+Character: AZL/S102-T69
+Name U-556
+Color R
+Level 1
+Cost 0
+Power 4500
+Trait1 Warship
+Trait2 Iron Blood
+*OnPlayGainPowerForEach(500,Warship)
+Auto: OnOpponentReverse
+{
+	If StageContains 1 Other && HasTrait Warship
+	{
+		Question Draw a card?
+		If Yes
+		{
+			DrawCard
+			Discard 1 Any
+		}
+	}
+}
+Text Auto: When this card's battle opponent is reversed, if you have another 《Warship》 character, you may draw 1 card. If you do, put a card from your hand into your waiting room. 
+EndCard
+
+Character: AZL/S102-T70
+Name Prinz Eugen
+Color R
+Level 1
+Cost 0
+Power 4500
+Trait1 Warship
+Trait2 Iron Blood
+Combo Honest Strategy
+Cont: GiveSelf
+{
+	If AllYourCharacters HasTrait Warship
+	{
+		GainPower 1000
+	}
+}
+Text Cont: If all of your characters are 《Warship》, this gets +1000 power.
+Auto: OnAttack
+{
+	If Climax Honest Strategy && Compare Experience 2 OrMore
+	{
+		PayCost Discard 1 Any
+		{
+			SearchWaitingRoom HasTrait Warship
+			UntilEndOfOpponentsTurn
+			GainEffect
+			{
+				Cont: GiveSelf
+				{
+					If Not MyTurn
+					{
+						GainSpecialEffect CannotBeReversed
+					}
+				}
+				Text Cont: During your opponent's turn, this cannot be reversed.
+			}
+		}
+	}
+}
+Text Auto: CxCombo EXPERIENCE [Put 1 card from your hand into your waiting room] When this attacks, if you have "Honest Strategy" in your climax area, and the sum of levels of cards in your level zone is 2 or more, you may pay the cost. If you do, choose 1 《Warship》 character in your waiting room, add it to hand, then until the end of your opponent's next turn, this gains the following ability, "Cont: During your opponent's turn, this cannot be reversed."
+EndCard
+
+Character: AZL/S102-T71
+Name Z2
+Color R
+Level 1
+Cost 0
+Power 5500
+Trait1 Warship
+Trait2 Iron Blood
+EndCard
+
+Character: AZL/S102-T72
+Name Prinz Adalbert
+Color R
+Level 1
+Cost 1
+Power 6000
+Trait1 Warship
+Trait2 Iron Blood
+Cont: GiveSelf
+{
+	If StageContains 2 Other && HasTrait Warship
+	{
+		GainPower 1500
+		GainEffect
+		{
+			*HandEncore
+		}
+	}
+}
+Text Cont: If you have 2 or more other 《Warship》 characters, this gets +1500 power and "Auto: ENCORE [Put 1 character from your hand into your waiting room]".
+EndCard
+
+Character: AZL/S102-T73
+Name Weser
+Color R
+Level 2
+Cost 1
+Power 4500
+Trigger Soul
+Trait1 Warship
+Trait2 Iron Blood
+*LevelAssist
+Act: RestSelf
+{
+	TargetLocation Stage
+	ChooseCharacterFromTargets
+	GainPower 1000
+}
+Text Act: [Rest this] Choose 1 of your characters, this turn, it gets +1000 power.
+EndCard
+
+Character: AZL/S102-T74
+Name Prinz Heinrich
+Color R
+Level 2
+Cost 1
+Power 7500
+Trigger Soul
+Trait1 Warship
+Trait2 Iron Blood
+Cont: GiveSelf
+{
+	If MyTurn && Compare Experience 5 OrMore
+	{
+		TargetLocation Stage
+		NarrowTargets Other && HasTrait Warship
+		SetXValue TargetCount
+		MultiplyXValue 1500
+		GainPower X
+	}
+}
+Text Cont: EXPERIENCE During your turn, if the sum of levels of cards in your level zone is 5 or more, for each of your other 《Warship》 characters, this gets +1500 power.
+*EncoreStepIfNoneRestedPayToRest
+EndCard
+
+Character: AZL/S102-T75
+Name Tirpitz
+Color R
+Level 3
+Cost 2
+Power 9500
+Soul 2
+Trigger Soul
+Trait1 Warship
+Trait2 Iron Blood
+*GainPowerForEachOther(500, Warship)
+*Healer
+EndCard
+
+Character: AZL/S102-T76
+Name Bismarck
+Color R
+Level 3
+Cost 2
+Power 10000
+Soul 2
+Trigger Soul
+Trait1 Warship
+Trait2 Iron Blood
+Combo Darksteel Charisma
+*OnPlayCheck3
+Auto: OnSpecificClimaxPlay Darksteel Charisma
+{
+	If InLocation CenterStage
+	{
+		PayCost 1 Discard 1 Any
+		{
+			TargetLocation Stage
+			NarrowTargets Other
+			GainEffect
+			{
+				Auto: OnAttack
+				{
+					Peek OpponentDeck 2
+					*ChooseCardsToPutIntoWaitingRoomReturnTheRestInAnyOrder(0,2)
+				}
+				Quick
+				Text Auto: When this attacks, look at up to 2 cards from the top of your opponent's deck, choose up to 2 cards from among them, put them on top of your opponent's deck in any order, and send the rest to waiting room.
+			}
+		}
+	}
+}
+Text Auto: CxCombo [(1) Put a card from your hand into your waiting room] When "Darksteel Charisma" is placed in your climax area, if this is in your center stage, you may pay the cost. If you do, this turn, all of your other characters gains the following ability, "Auto: When this attacks, look at up to 2 cards from the top of your opponent's deck, choose up to 2 cards from among them, put them on top of your opponent's deck in any order, and send the rest to waiting room."
+EndCard
+
+Event: AZL/S102-T77
+Name Iron Blood
+Color R
+Level 2
+Cost 0
+Text If you don't have a 《Iron Blood》 character, this cannot be played from hand.
+Effect:
+{
+	Question Discard an 《Iron Blood》 character?
+	If Yes
+	{
+		Discard 1 HasTrait Iron Blood
+		SearchWaitingRoom IsClimax
+		TargetLocation Stage
+		NarrowTargets HasTrait Iron Blood
+		ChooseCharacterFromTargets
+		GainPower 4000
+	}
+}
+ActivationRequirement StageContains 1 HasTrait Iron Blood
+Text You may put 1 《Iron Blood》 character from your hand into your waiting room. If you do, choose 1 climax in your waiting room, add it to hand, then choose 1 of your 《Iron Blood》 characters, this turn, it gets +4000 power. 
+EndCard
+
+Climax: AZL/S102-T78
+Name Army of Bond
+Color R
+*2SoulClimax
+EndCard
+
+Climax: AZL/S102-T79
+Name Darksteel Charisma
+*DoorClimax
+EndCard
+
+Climax: AZL/S102-T80
+Name Honest Strategy
+*DoorClimax
+EndCard
+
+
+// Azur Lane Booster Cards
+Character: AZL/S102-001
+Name Unicorn
+Color Y
+Level 0
+Cost 0
+Power 500
+Trait1 Warship
+Trait2 Royal Navy
+Auto: StartMyEncorePhase
+{
+	If CardPosition Stand &&& StageContains 4 Other && HasTrait Warship
+	{
+		PayCost 3 RestSelf Discard 1 Any
+		{
+			Burn 1
+			*OptionalHeal
+		}
+	}
+}
+Text Auto: [(3) Put a card from your hand into your waiting room, Rest this] At the start of your encore step, if you have 4 or more other 《Warship》 characters, and this is standing, you may pay the cost. If you do, deal 1 damage to your opponent and you may put the top card of your clock into the waiting room.
+*Act1RestSelfSalvageBrainstorm(Any)
+EndCard
+
+Character: AZL/S102-002
+Name Jean Bart
+Color Y
+Level 0
+Cost 0
+Power 2000
+Trait1 Warship
+Trait2 Vichya Dominion
+Cont: GiveSelf
+{
+	TargetLocation Stock
+	SetXValue TargetCount
+	If Compare X 2 OrLess
+	{
+		GainPower 1500
+	}
+}
+Text Cont: If you have 2 or less Stock, this gets +1500 power.
+*DropSearch(Warship)
+EndCard
+
+Character: AZL/S102-003
+Name Belfast
+Color Y
+Level 1
+Cost 0
+Power 3500
+Trait1 Warship
+Trait2 Royal Navy
+Combo Royal Maids' Service
+Cont: GiveSelf
+{
+	If MyTurn &&& StageContains 1 Other && HasTrait Warship
+	{
+		GainPower 3000
+	}
+}
+Text Cont: During your turn, if you have another 《Warship》 character, this gets +3000 power.
+Auto: OnAttack
+{
+	If Climax Royal Maids' Service
+	{
+		TargetTop Deck 1
+		Reveal
+		IfTarget HasTrait Warship
+		{
+			MoveCard Hand
+		}
+	}
+}
+Text Auto: CxCombo When this attacks, if you have "Royal Maids' Service" in your climax area, reveal the top card of your deck. If that card is a 《Warship》 character, add it to hand.
+Auto: OnFrontalAttacked
+{
+	PayCost 1 Discard 1 Any
+	{
+		TargetLocation Stage
+		NarrowTargets Other && HasTrait Warship
+		ChooseCharacterFromTargets Choose another 《Warship》 character to return to hand.
+		AddSelfToTargets
+		MoveCard Hand
+	}
+}
+Text Auto: [(1) Put a card from your hand into your waiting room] When this card is frontal attacked, you may pay the cost. If you do, choose 1 of your other 《Warship》 characters and this card, return them to hand.
+EndCard
+
+Character: AZL/S102-004
+Name Cheshire
+Color Y
+Level 3
+Cost 2
+Power 10000
+Soul 2
+Trigger Soul
+Trait1 Warship
+Trait2 Royal Navy
+Combo Owner's Favorite?
+*Healer
+Auto: OnSpecificClimaxPlay Owner's Favorite?
+{
+	If InLocation CenterStage && Climax Owner's Favorite?
+	{
+		If Compare Experience 6 OrMore
+		{
+			Mill 1
+			SetXValue TargetCardsLevel
+			AddToXValue 1
+			Burn X
+		}
+	}
+}
+Text Auto: CxCombo EXPERIENCE When "Owner's Favorite?" is placed in your climax area, if this is in the center stage, and the sum of levels of cards in your level zone is 6 or more, mill 1, then deal X damage to your opponent. X is equal to the card's level + 1.
+EndCard
+
+Character: AZL/S102-005
+Name Sheffield
+Color Y
+Level 0
+Cost 0
+Power 500
+Trait1 Warship
+Trait2 Royal Navy
+Auto: OnPlay|OnSentFromStageToWaitingRoom
+{
+	PayCost 1 Discard 1 Any
+	{
+		Peek Deck 3
+		ChooseCard Choose a card to add to your hand.
+		MoveCard Hand
+		PutTheRestIntoTheWaitingRoom
+	}
+}
+Text Auto: [(1) Put a 《Warship》 character from your hand into your waiting room] When this is placed on stage from hand or sent from stage to waiting room, you may pay the cost. If you do, look at up to 3 cards from the top of your deck, choose up to 1 card among them, add it to hand, and send the rest to waiting room.
+Auto: OnPlay
+{
+	PayCost Discard 1 HasTrait Warship
+	{
+		DrawCard
+	}
+}
+Text Auto: [Put a 《Warship》 character from your hand into your waiting room] When this is placed on stage from hand, you may pay the cost. If you do, draw 1 card.
+EndCard
+
+Character: AZL/S102-006
+Name Ying Swei
+Color Y
+Level 0
+Cost 0
+Power 1500
+Trait1 Warship
+Trait2 Dragon Empery
+Auto: OnPlay
+{
+	If StageContains 1 Other && HasTrait Warship
+	{
+		UntilEndOfOpponentsTurn
+		GainPower 2000
+	}
+}
+Quick
+Text Auto: When this is placed on stage from hand, if you have another 《Warship》 character, until the end of your opponent's next turn, this gets +2000 power.
+Auto: OnPlay
+{
+	PayCost 1 Discard 1 Any
+	{
+		TargetLocation OpponentStage
+		ChooseCharacterFromTargets
+		MoveCard OpponentHand
+	}
+}
+Text Auto: [(1) Put a card from your hand into your waiting room] When this is placed on stage from hand, you may pay the cost. If you do, choose 1 of your opponent's characters, return it to hand.
+EndCard
+
+Character: AZL/S102-007
+Name Formidable
+Color Y
+Level 0
+Cost 0
+Power 1500
+Trait1 Warship
+Trait2 Royal Navy
+Cont: GiveSelf
+{
+	TargetLocation Stock
+	SetXValue TargetCount
+	If Compare X 2 OrLess
+	{
+		GainPower 1500
+	}
+}
+Text Cont: If you have 2 or less stock, this gets +1500 power.
+Auto: OnPlay
+{
+	TargetLocation OpponentStage
+	ChooseCharacterFromTargets
+	UntilEndOfOpponentsTurn
+	GainSpecialEffect CannotMove
+}
+Text Auto: When this is placed on stage from hand, choose 1 of your opponent's characters, until the end of your opponent's next turn, it gains the following ability: "Cont: This card cannot move to another position on the stage." 
+EndCard
+
+Character: AZL/S102-008
+Name Sirius
+Color Y
+Level 0
+Cost 0
+Power 2000
+Trait1 Warship
+Trait2 Royal Navy
+Combo Afternoon Tea
+*OnPlayGainPowerForEach(500,Warship)
+Auto: OnReverseOpponent
+{
+	If Climax Afternoon Tea
+	{
+		*OptionalBlindStock
+		TargetTop Deck 1
+		Reveal
+		IfTarget HasTrait Warship
+		{
+			MoveCard Hand
+		}
+	}
+}
+Text Auto: CxCombo When this card's battle opponent is reversed, if you have "Afternoon Tea" in your climax area, put up to 1 card from the top of your deck to stock, then reveal the top card of your deck. If that card is a 《Warship》 character, add it to hand.
+EndCard
+
+Character: AZL/S102-009
+Name Drake
+Color Y
+Level 3
+Cost 2
+Power 10000
+Trigger Soul
+Soul 2
+Trait1 Warship
+Trait2 Royal Navy
+Cont: GiveSelf
+{
+	If Compare Experience 8 OrMore
+	{
+		GainPower 1500
+		GainEffect
+		{
+			Auto: OnReverseOpponent
+			{
+				PayCost 2 Discard 2 Any
+				{
+					Burn 4
+				}
+			}
+			Text Auto: Auto: [(2) Put 2 cards from your hand into your waiting room] When this card's battle opponent is reversed, you may pay the cost. If you do, deal 4 damage to your opponent.
+		}
+	}
+}
+Text Cont: EXPERIENCE If the sum of levels of cards in your level zone is 8 or more, this gets +1500 power and the following ability, "Auto: [(2) Put 2 cards from your hand into your waiting room] When this card's battle opponent is reversed, you may pay the cost. If you do, deal 4 damage to your opponent."
+*Healer 
+EndCard
+
+Character: AZL/S102-010
+Name Perseus
+Color Y
+Level 3
+Cost 2
+Power 10000
+Soul 2
+Trigger Soul
+Trait1 Warship
+Trait2 Royal Navy
+*Healer
+Auto: StartAttackPhase
+{
+	If InLocation CenterStage
+	{
+		PayCost 2 RestSelf Discard 2 Any
+		{
+			Burn 2
+			Burn 2
+			*OptionalHeal
+		}
+	}
+}
+Text Auto: [(2) Put 2 cards from your hand into your waiting room, Rest this] At the start of your attack phase, if this is in your center stage, you may pay the cost. If you do, deal 2 damage to your opponent twice, and you may put the top card of your clock into the waiting room. 
+EndCard
+
+Character: AZL/S102-011
+Name Le Malin
+Color Y
+Level 3
+Cost 2
+Trigger Soul
+Soul 2
+Power 10000
+Combo Knight Princess's Daydream
+Trait1 Warship
+Trait2 Vichya Dominion
+*OnPlayCheck3
+Auto: OnAttack
+{
+	If Climax Knight Princess's Daydream
+	{
+		GainEffect
+		{
+			Auto: OnDamageCancel
+			{
+				*OptionalBurn(2)
+			}
+			TimesPerTurn 1
+			Text Auto: This ability can only be activated up to once per turn. When this card's damage is cancelled, you may deal 2 damage to your opponent.
+		}
+	}
+}
+Quick
+Text Auto: CxCombo When this attacks, if you have "Knight Princess's Daydream" in your climax area, this turn, this gains the following ability, "Auto: This ability can only be activated up to once per turn. When this card's damage is cancelled, you may deal 2 damage to your opponent."
+EndCard
+
+Character: AZL/S102-012
+Name Rodney
+Color Y
+Level 0
+Cost 0
+Power 500
+Trait1 Warship
+Trait2 Royal Navy
+Auto: OnAttack
+{
+	TargetTop Deck 1
+	Reveal
+	IfTarget HasTrait Warship
+	{
+		TargetLocation OpponentCenterStage
+		NarrowTargets Compare ThatCardsLevel 0 OrLess
+		ChooseCharacterFromTargets
+		Question Move the card to the waiting room?
+		If Yes
+		{
+			MoveCard OpponentWaitingRoom
+		}
+	}
+}
+Text Auto: When this attacks, reveal the top card of your deck. If that card is a 《Warship》 character, choose 1 of your opponent's center stage level 0 or lower character, you may send it to waiting room.
+*YellowLevel0Bomb
+EndCard
+
+Character: AZL/S102-013
+Name Cygnet
+Color Y
+Level 0
+Cost 0
+Power 1000
+Trait1 Warship
+Trait2 Royal Navy
+Auto: OnPlay
+{
+	TargetLocation OpponentCenterStage
+	SetXValue TargetCount
+	If Compare X 1 OrLess
+	{
+		ChooseCharacterFromTargets Choose a cost 0 or lower character.
+		Question Move card to bottom deck?
+		If Yes
+		{
+			MoveCard BottomOfOpponentDeck
+		}
+	}
+}
+Text Auto: When this is placed on stage from hand, if your opponent has 1 or less characters in their center stage, choose 1 cost 0 or lower character in your opponent's center stage, you may send it to the bottom of your opponent's deck.
+Auto: StartOpponentDrawPhase
+{
+	TargetTop Deck 1
+	Reveal
+	IfTarget Compare ThatCardsLevel 1 OrMore
+	{
+		Question Put this card back into your hand?
+		If Yes
+		{
+			TargetSelf
+			MoveCard Hand
+		}
+	}
+}
+Text Auto: At the start of your opponent's draw phase, reveal the top card of your deck. If that card is level 1 or higher, you may return this card to hand.
+EndCard
+
+Character: AZL/S102-014
+Name Ajax
+Color Y
+Level 0
+Cost 0
+Power 2000
+Trait1 Warship
+Trait2 Royal Navy
+Auto: OnClimaxPlay
+{
+	IfOther HasTrigger Choice
+	{
+		GainPower 1000
+		GainEffect
+		{
+			*OnAttackPay1ToDoubleTrigger
+		}
+	}
+}
+Quick
+Text Auto: When a climax with a Choice Trigger is placed in your climax area, this turn, this gets +1000 power and the following ability, "Auto: [(1)] When this card attacks, you may pay the cost, perform the trigger check twice during this attack."
+Auto: OnThisTriggerCheck
+{
+	IfOther HasTrigger Choice
+	{
+		SearchWaitingRoom IsCharacter
+	}
+}
+Text Auto: When this card's trigger check reveals a Choice Trigger, choose 1 character in your waiting room, you may add it to hand.
+EndCard
+
+Character: AZL/S102-015
+Name Ark Royal
+Color Y
+Level 1
+Cost 0
+Power 4000
+Combo A Side Too Reliable
+Trait1 Warship
+Trait2 Royal Navy
+Cont: GiveSelf
+{
+	If StageContains 1 Other && HasTrait Warship
+	{
+		GainPower 1500
+	}
+}
+Text Cont: If you have another 《Warship》 character, this gets +1500 power.
+Auto: OnSpecificClimaxPlay A Side Too Reliable
+{
+	If StageContains 1 Other && HasTrait Warship
+	{
+		GainEffect
+		{
+			Cont: GiveFacing
+			{
+				GainSpecialEffect CannotMove
+				GainSpecialEffect CannotGoToMemory
+			}
+			Text Cont: The character across from this cannot return to hand, move to other slots or go to memory.
+		}
+		GainEffect
+		{
+			Auto: OnReverseOpponent
+			{
+				SearchWaitingRoom HasTrait Warship
+			}
+			Text Auto: When this card's battle opponent is reversed, choose up to 1 《Warship》 character from your waiting room, you may add it to hand.
+		}
+	}
+}
+Quick
+Text Auto: CxCombo When "A Side Too Reliable" is placed in your climax area, if you have another 《Warship》 character, this turn, this gains the following 2 abilities, "Cont: The character across from this cannot return to hand, move to other slots or go to memory." "Auto: When this card's battle opponent is reversed, choose up to 1 《Warship》 character from your waiting room, you may add it to hand."
+EndCard
+
+Character: AZL/S102-016
+Name Chao Ho
+Color Y
+Level 1
+Cost 0
+Power 4000
+Trait1 Warship
+Trait2 Dragon Empery
+Auto: OnPlay
+{
+	If StageContains 1 Other && HasTrait Warship
+	{
+		UntilEndOfOpponentsTurn
+		GainPower 2000
+	}
+}
+Quick
+Text Auto: When this is placed on stage from hand, if you have another 《Warship》 character, until the end of your opponent's next turn, this gets +2000 power.
+Auto: OnPlay
+{
+	PayCost 1 Discard 1 Any
+	{
+		TargetLocation OpponentStage
+		ChooseCharacterFromTargets
+		MoveToOpenPosition True True
+	}
+}
+Text Auto: [(1) Put a card from your hand into your waiting room] When this is placed on stage from hand, you may pay the cost. If you do, choose 1 of your opponent's characters, move it to an opponent's empty slot.
+EndCard
+
+Character: AZL/S102-017
+Name Prince of Wales
+Color Y
+Level 1
+Cost 0
+Power 4000
+Trait1 Warship
+Trait2 Royal Navy
+Cont: InHand
+{
+	GainSpecialEffect IgnoreColorRequirement
+}
+Text Cont: This card can be played without meeting the color requirement.
+Cont: GiveSelf
+{
+	If MyTurn
+	{
+		TargetLocation Stage
+		NarrowTargets Other && HasTrait Eagle Union
+		SetXValue TargetCount
+		MultiplyXValue 500
+		GainPower X
+	}
+}
+Text Cont: During your turn, for each of your other <Eagle Union> characters, this gets +500 power.
+Cont: GiveAll
+{
+	If MyTurn
+	{
+		If StageContains 3 Other && HasTrait Eagle Union
+		{
+			If Other && HasTrait Eagle Union
+			{
+				GainPower 1000
+			}
+			If Not Other
+			{
+				GainPower 500
+			}
+		}
+	}
+}
+Text Cont: During your turn, if you have 3 or more other <Eagle Union> characters, all of your other <Eagle Union> characters get +1000 power, and this gets +500 power.
+EndCard
+
+Character: AZL/S102-018
+Name Saint Louis
+Color Y
+Level 1
+Cost 0
+Power 4500
+Trait1 Warship
+Trait2 Iris Libre
+Cont: GiveSelf
+{
+	If Compare Experience 2 OrMore
+	{
+		TargetLocation Stage
+		NarrowTargets Other && HasTrait Warship
+		SetXValue TargetCount
+		MultiplyXValue 500
+		GainPower X
+	}
+}
+Text Cont: EXPERIENCE If the sum of levels of cards in your level zone is 2 or more, for each of your other 《Warship》 characters, this gets +500 power.
+*HandEncore
+EndCard
+
+Character: AZL/S102-019
+Name Neptune
+Color Y
+Level 0
+Cost 1
+Power 5000
+Trait1 Warship
+Trait2 Royal Navy
+Auto: OnPlay
+{
+	If Compare Experience 2 OrMore
+	{
+		PayCost Discard 1 HasTrait Warship
+		{
+			Message Choose up to 1 cost 0 or lower character.
+			SearchLocationForTargets WaitingRoom 0 1 Compare ThatCardsCost 0 OrLess
+			RevealTargets
+			PlaceOnStage False True True False
+		}
+	}
+}
+Text Auto: EXPERIENCE [Put a 《Warship》 character from your hand into your waiting room] When this is placed on stage from hand, if the sum of levels of cards in your level zone is 2 or more, you may pay the cost. If you do, choose 1 cost 0 or lower character in your waiting room, place it on stage in any slot.
+EndCard
+
+Character: AZL/S102-020
+Name Jervis
+Color Y
+Level 1
+Cost 1
+Power 4500
+Trigger Soul
+Trait1 Warship
+Trait2 Royal Navy
+Auto: OnPlay
+{
+	If StageContains 4 Other && HasTrait Warship
+	{
+		Message Choose up to 1 《Warship》 character to put to stock.
+		SearchLocationForTargets WaitingRoom 0 1 HasTrait Warship
+		MoveCard Stock
+	}
+}
+Text Auto: When this is placed on stage from hand, if you have 4 or more other 《Warship》 characters, choose 1 《Warship》 character in your waiting room, you may send it to stock.
+Auto: OnAttack
+{
+	If StageContains 2 Other && HasTrait Warship
+	{
+		GainPower 4000
+	}
+}
+Quick
+Text Auto: When this attacks, if you have 2 or more other 《Warship》 characters, this turn, this gets +4000 power.
+EndCard
+
+Character: AZL/S102-021
+Name Queen Elizabeth
+Color Y
+Level 2
+Cost 1
+Trigger Soul
+Power 5500
+Trait1 Warship
+Trait2 Royal Navy
+*LevelAssistTrait(Royal Navy)
+Auto: OnClimaxPlay
+{
+	IfOther HasTrigger Choice
+	{
+		TargetLocation Stage
+		GainPower 1500
+	}
+}
+Quick
+Text Auto: When a climax with a Choice Trigger is placed in your climax area, this turn, all of your characters get +1500 power. 
+EndCard
+
+Character: AZL/S102-022
+Name Richelieu
+Color Y
+Level 2
+Cost 1
+Trigger Soul
+Power 6500
+Trait1 Warship
+Trait2 Iris Libre
+Cont: GiveSelf
+{
+	If InLocation MiddleCenterStage
+	{
+		TargetLocation Stage
+		NarrowTargets Other && HasTrait Warship
+		SetXValue TargetCount
+		MultiplyXValue 1500
+		GainPower X
+	}
+}
+Text Cont: If this is in your center stage center slot, for each of your other 《Warship》 characters, this gets +1500 power.
+Auto: OnReverseOpponent
+{
+	TargetBattleOpponent
+	If Compare TargetCardsLevel 2 OrMore
+	{
+		TargetTop Deck 1
+		Reveal
+		IfTarget HasTrait Warship
+		{
+			SearchWaitingRoom HasTrait Warship
+		}
+	}
+}
+Text Auto: When this card's Level 2 or higher battle opponent is reversed, reveal the top card of your deck. If that card is a 《Warship》 character, choose 1 《Warship》 character in your waiting room, you may add it to hand.
+EndCard
+
+Character: AZL/S102-023
+Name Monarch
+Color Y
+Level 2
+Cost 1
+Trigger Soul
+Power 7000
+Trait1 Warship
+Trait2 Royal Navy
+Cont: GiveSelf
+{
+	If Compare Experience 5 OrMore
+	{
+		GainPower 5500
+		GainEffect
+		{
+			Auto: OnReverseOpponent
+			{
+				Question Send the battle opponent into their stock?
+				If Yes
+				{
+					TargetBattleOpponent
+					MoveCard OpponentStock
+					TargetBottom OpponentStock 1
+					MoveCard OpponentWaitingRoom
+				}
+			}
+			Text Auto: When this card's battle opponent is reversed, you may send that character to stock. If you do, put the bottom card of your opponent's stock into waiting room.
+		}
+	}
+}
+Text Cont: EXPERIENCE If the sum of levels of cards in your level zone is 5 or more, this gets +5500 power and the following ability, "Auto: When this card's battle opponent is reversed, you may send that character to stock. If you do, put the bottom card of your opponent's stock into waiting room."
+Auto: OnPlay
+{
+	PayCost 1 Discard 1 Any
+	{
+		SearchDeck IsClimax && HasTrigger Choice
+	}
+}
+Text Auto: [(1) Put a card from your hand into your waiting room] When this is placed on stage from hand, you may pay the cost. If you do, search your deck for up to 1 climax with a Choice Trigger, show it to your opponent, add it to hand, and shuffle your deck afterwards.
+EndCard
+
+Character: AZL/S102-024
+Name Howe
+Color Y
+Level 3
+Cost 2
+Power 9500
+Trigger Soul
+Soul 2
+Trait1 Warship
+Trait2 Royal Navy
+Cont: InHand
+{
+	TargetLocation OpponentStage
+	NarrowTargets Compare ThatCardsLevel 3 OrMore
+	If HasTarget
+	{
+		LoseLevel 1
+	}
+}
+Text Cont: If your opponent has a level 3 or higher character, this gets -1 level in hand.
+Cont: GiveSelf
+{
+	If MyTurn &&& StageContains 2 Other && HasTrait Warship
+	{
+		GainPower 2000
+	}
+}
+Text Cont: During your turn, if you have 2 or more other 《Warship》 characters, this gets +2000 power.
+Auto: OnPlay
+{
+	DrawCard
+	DrawCard
+	Discard 2 Any
+	Question Choose one of your opponent's level 1 or higher characters?
+	If Yes
+	{
+		TargetLocation OpponentStage
+		NarrowTargets Compare ThatCardsLevel 1 OrMore
+		ChooseCharacterFromTargets
+		*Downgrade
+	}
+}
+Text Auto: When this is placed on stage from hand, draw up to 2 cards, put 2 cards from your hand into your waiting room, then perform the following effect, "You may choose 1 of your opponent's level 1 or higher characters. If you do, your opponent chooses 1 level X or lower character from their waiting room, and swaps the two characters. X equals the level of the character chosen by you - 1."
+EndCard
+
+Character: AZL/S102-025
+Name Erebus
+Color Y
+Level 0
+Cost 0
+Power 1000
+Trait1 Warship
+Trait2 Royal Navy
+Auto: OnTriggerCheckClimax
+{
+	IfOther HasTrigger Choice
+	{
+		TargetLocation Stage
+		ChooseCharacterFromTargets
+		UntilEndOfOpponentsTurn
+		GainPower 1000
+	}
+}
+Text Auto: When your character's trigger check reveals a climax with a Choice Trigger, choose 1 of your characters, until the end of your opponent's next turn, it gets +1000 power.
+Act: RestSelf
+{
+	TargetLocation Stage
+	NarrowTargets HasTrait Warship
+	ChooseCharacterFromTargets
+	UntilEndOfOpponentsTurn
+	GainPower 1000
+}
+Text Act: [Rest this] Choose 1 of your 《Warship》 characters, until the end of your opponent's next turn, it gets +1000 power.
+EndCard
+
+Character: AZL/S102-026
+Name Glorious
+Color Y
+Level 0
+Cost 0
+Power 1500
+Trait1 Warship
+Trait2 Royal Navy
+Cont: GiveSelf
+{
+	If MyTurn
+	{
+		GainPower 1000
+	}
+}
+Text Cont: During your turn, this gets +1000 power.
+Auto: OnAttack
+{
+	If AllYourCharacters HasTrait Warship
+	{
+		TargetLocation Stage
+		ChooseCharacterFromTargets
+		GainPower 2000
+	}
+}
+Text Auto: When this attacks, if all of your characters are 《Warship》, choose 1 of your characters, this turn, it gets +2000 power.
+EndCard
+
+Character: AZL/S102-027
+Name Hood
+Color Y
+Level 1
+Cost 0
+Power 4500
+Trait1 Warship
+Trait2 Royal Navy
+Auto: OnClimaxPlay
+{
+	IfOther HasTrigger Choice
+	{
+		TargetLocation Stage
+		GainPower 500
+	}
+}
+Quick
+Text Auto: When a climax with a Choice Trigger is placed in your climax area, this turn, all of your characters gets +500 power.
+*OnAttackGivePowerForEachOther(500,Warship)
+EndCard
+
+Character: AZL/S102-028
+Name Black Prince
+Color Y
+Level 1
+Cost 1
+Power 500
+Trait1 Warship
+Trait2 Royal Navy
+Backup 2000
+*YellowLevel1Bomb
+EndCard
+
+Character: AZL/S102-029
+Name Swiftsure
+Color Y
+Level 2
+Cost 1
+Power 6000
+Trigger Soul
+Trait1 Warship
+Trait2 Royal Navy
+Cont: GiveSelf
+{
+	TargetLocation Backstage
+	NarrowTargets Other && HasTrait Warship
+	SetXValue TargetCount
+	MultiplyXValue 2000
+	GainPower X
+}
+Text Cont: For each of your other 《Warship》 characters in the backstage, this gets +2000 power.
+Auto: OnReverseOpponent
+{
+	TargetLocation Climax
+	If HasTarget
+	{
+		IfTarget HasTrigger Choice
+		{
+			TargetTop Deck 1
+			Reveal
+			IfTarget HasTrait Warship
+			{
+				*OptionalDraw
+				*OptionalDraw
+				Discard 1 Any
+			}
+		}
+	}
+	
+}
+Text Auto: When this card's battle opponent is reversed, if you have a climax with a Choice Trigger in your climax area, reveal the top card of your deck. If that card is a 《Warship》 character, draw up to 2 cards, then put a card from your hand into your waiting room.
+EndCard
+
+Event: AZL/S102-030
+Name Universal Bulin
+Color Y
+Level 1
+Cost 0
+Effect:
+{
+	MultipleChoiceQuestion Choose 1 of the following effects and resolve it,\n"Choose 1 of your 《Warship》 characters, until the end of your opponent's next turn, it gets +1 level and +X power. X is equal to that character's level times 1000."\n"Reveal the top card of your deck. If that card is a 《Warship》 character, add it to hand."|Choice 1|Choice 2
+	If Answer 0
+	{
+		TargetLocation Stage
+		NarrowTargets HasTrait Warship
+		ChooseCharacterFromTargets
+		UntilEndOfOpponentsTurn
+		GainLevel 1
+		SetXValue ThatCardsLevel
+		MultiplyXValue 1000
+		UntilEndOfOpponentsTurn
+		GainPower X
+	}
+	If Answer 1
+	{
+		TargetTop Deck 1
+		Reveal
+		IfTarget HasTrait Warship
+		{
+			MoveCard Hand
+		}
+	}
+}
+Text Choose 1 of the following 2 effects and resolve it,
+Text "Choose 1 of your 《Warship》 characters, until the end of your opponent's next turn, it gets +1 level and +X power. X is equal to that character's level times 1000."
+Text "Reveal the top card of your deck. If that card is a 《Warship》 character, add it to hand."
+EndCard
+
+Climax: AZL/S102-031
+Name Royal Maids' Service
+*ChoiceClimax
+EndCard
+
+Climax: AZL/S102-032
+Name Owner's Favorite?
+*ChoiceClimax
+EndCard
+
+Climax: AZL/S102-033
+Name Afternoon Tea
+*ChoiceClimax
+EndCard
+
+Climax: AZL/S102-034
+Name Knight Princess's Daydream
+*ChoiceClimax
+EndCard
+
+Climax: AZL/S102-035
+Name A Side Too Reliable
+*ChoiceClimax
+EndCard
+
+Character: AZL/S102-036
+Name Shimakaze
+Color G
+Level 1
+Cost 0
+Power 4000
+Trait1 Warship
+Trait2 Sakura Empire
+Combo Wind Blowing on the Azure Sea
+Auto: OnAttack
+{
+	If StageContains 1 Other && HasTrait Warship
+	{
+		GainPower 3000
+	}
+}
+Quick
+Text Auto: When this attacks, if you have another 《Warship》 character, this turn, this gets +3000 power.
+Auto: OnEndOfAttack
+{
+	If Compare Experience 2 OrMore && Climax Wind Blowing on the Azure Sea
+	{
+		If FacingIsEmptyOrReversed &&& StageContains 1 Other && HasTrait Warship
+		{
+			SearchDeck HasTrait Warship
+			TargetSelf
+			UntilEndOfOpponentsTurn
+			GainPower 1000
+		}
+	}
+}
+Text Auto: CxCombo EXPERIENCE At end of this card's attack, if you have "Wind Blowing on the Azure Sea" in the climax area, and the sum of levels of cards in your level zone is 2 or more, and you have another 《Warship》 characters, and the slot across from this is either empty or has a reversed character, search your deck for up to 1 《Warship》 character, show it to your opponent, add it to hand, and shuffle your deck afterwards, until the end of your opponent's next turn, this gets +1000 power.
+EndCard
+
+Character: AZL/S102-037
+Name Nagato
+Color G
+Level 3
+Cost 2
+Trigger Soul
+Soul 2
+Power 9000
+Trait1 Warship
+Trait2 Sakura Empire
+*EarlyPlay4OrMore(Warship)
+Cont: GiveAll
+{
+	If MyTurn &&& StageContains 4 Other && HasTrait Warship
+	{
+		IfOwner InLocation MiddleCenterStage
+		{
+			If HasTrait Sakura Empire
+			{
+				GainPower 2000
+			}
+		}
+	}
+}
+Text Cont: During your turn, if this is in the center stage center slot, and you have 4 or more other 《Warship》 characters, all of your 《Sakura Empire》 characters get +2000 power.
+*Healer
+EndCard
+
+Character: AZL/S102-038
+Name Shinano
+Color G
+Level 3
+Cost 2
+Power 10000
+Trigger Soul
+Soul 2
+Trait1 Warship
+Trait2 Sakura Empire
+Combo Ephemeral Dream
+Auto: StartMyEncorePhase
+{
+	If PlayedThisTurn
+	{
+		*OptionalHeal
+	}
+}
+Text Auto: During the turn that this card is placed on the stage from your hand, at the beginning of the encore step, you may put the top card of your clock into your waiting room.
+Auto: OnAttack
+{
+	If Climax Ephemeral Dream && Compare Experience 6 OrMore
+	{
+		PayCost Discard 2 Any
+		{
+			Mill 9
+			NarrowTargets IsClimax
+			SetXValue TargetCount
+			Repeat X
+			{
+				Burn 1
+			}
+		}
+	}
+}
+Text Auto: CxCombo EXPERIENCE [Put 2 cards from your hand into your waiting room] When this attacks, if you have "Ephemeral Dream" in your climax area, and the sum of levels of cards in your level zone is 6 or more, you may pay the cost. If you do, mill 9, then deal 1 damage X times. X is equal to the number of climaxes milled.
+EndCard
+
+Character: AZL/S102-039
+Name Taihou
+Color G
+Level 0
+Cost 0
+Power 500
+Trait1 Warship
+Trait2 Sakura Empire
+Combo Phoenix's Spring Song
+Auto: OnSpecificClimaxPlay Phoenix's Spring Song
+{
+	PayCost SendSelf Hand
+	{
+		SearchLocationForTargets WaitingRoom 1 1 HasTrait Warship
+		RevealTargets
+		MoveCard Stock
+	}
+} 
+Text Auto: CxCombo [Return this to hand] When "Phoenix's Spring Song" is placed in your climax area, you may pay the cost. If you do, choose 1 《Warship》 character in your waiting room, send it to stock.
+Act: 1 RestSelf
+{
+	Brainstorm 4
+	PerClimax
+	{
+		Peek Deck 3
+		ChooseCard Choose a card to add to your hand (Will not be revealed)
+		MoveCard Hand
+		PutTheRestIntoTheWaitingRoom
+	}
+}
+Text Act: BRAINSTORM [(1) Rest this] Flip over 4 cards from the top of your deck, and put them into the waiting room, for each climax revealed perform the following action. "Look at up to 3 cards from the top of your deck, choose up to 1 to add to your hand, and put the rest into the waiting room."
+EndCard
+
+Character: AZL/S102-040
+Name Amagi
+Color G
+Level 0
+Cost 0
+Power 1000
+Trait1 Warship
+Trait2 Sakura Empire
+*GlobalPower(500,Warship)
+Auto: OnClimaxPlay
+{
+	IfOther HasTrigger Bar
+	{
+		TargetLocation OpponentCenterStage
+		ChooseCharactersFromTargets 0 2 Choose up to two characters to get -1000 power.
+		LosePower 1000
+	}
+}
+Text Auto: When a climax with a Bar Trigger is placed in your climax area, choose up to 2 of your opponent's center stage characters, this turn, they get -1000 power. 
+EndCard
+
+Character: AZL/S102-041
+Name Hanazuki
+Color G
+Level 0
+Cost 0
+Power 1500
+Trait1 Warship
+Trait2 Sakura Empire
+Auto: OnOtherOpponentReversed
+{
+	If MyTurn
+	{
+		GainPower 2000
+	}
+}
+Quick
+Text Auto: During your turn, when your other character's battle opponent is reversed, this turn, this gets +2000 power.
+Auto: OnSentFromStageToWaitingRoom
+{
+	PayCost 1 SendFromWaitingRoomToBottom 1 Clock HasTrait Warship
+	{
+		*SearchDeckToPlaceOnStage(HasTrait Warship && Compare ThatCardsCost 0 OrLess, True)
+	}
+}
+Text Auto: [(1) Put 1 《Warship》 character from your waiting room on the bottom of your clock] When this is sent from stage to waiting room, you may pay the cost. If you do, search your deck for up to 1 cost 0 《Warship》 character whose level is equal or lower than your level, place it on stage in any slot rested, and shuffle your deck afterwards.
+EndCard
+
+Character: AZL/S102-042
+Name Kashino
+Color G
+Level 1
+Cost 0
+Power 1500
+Trait1 Warship
+Trait2 Sakura Empire
+Backup 1000
+Auto: OnUseThisCardsBackup
+{
+	PayCost Discard 2 Any
+	{
+		Question Put the top card of your opponent's clock into their waiting room?
+		If Yes
+		{
+			TargetTop OpponentClock 1
+			MoveCard OpponentWaitingRoom
+			TargetLocation OpponentStage
+			NarrowTargets EarlyPlay
+			ChooseCharacterFromTargets Choose a card to put into their clock.
+			MoveCard OpponentClock
+		}
+	}
+}
+Text Auto: [Put 2 cards from your hand into your waiting room] When you use this card's <b>"Backup"</b>, you may pay the cost. If you do, you may send the top card of your opponent's clock to waiting room. If you do, choose 1 of your opponent's characters whose level is higher than your opponent's level, and send it to clock.
+EndCard
+
+Character: AZL/S102-043
+Name Noshiro
+Color G
+Level 1
+Cost 0
+Power 4000
+Trait1 Warship
+Trait2 Sakura Empire
+Auto: OnClimaxPlay
+{
+	IfOther HasTrigger Bar
+	{
+		TargetLocation Stage
+		ChooseCharacterFromTargets
+		GainPower 1000
+		GainEffect
+		{
+			Auto: OnReverseOpponent
+			{
+				Question Put the top card of your opponent's clock into their waiting room?
+				If Yes
+				{
+					TargetTop OpponentClock 1
+					MoveCard OpponentWaitingRoom
+					TargetBattleOpponent
+					MoveCard OpponentClock
+				}
+			}
+			Text Auto: When this card's battle opponent is reversed, you may send the top card of your opponent's clock to waiting room. If you do, send that character to clock.
+		}
+	}
+}
+Text Auto: When a climax with a Bar Trigger is placed in your climax area, choose 1 of your characters, this turn, it gets +1000 power and the following ability, "Auto: When this card's battle opponent is reversed, you may send the top card of your opponent's clock to waiting room. If you do, send that character to clock."
+Auto: OnAttack
+{
+	TargetLocation Stage
+	NarrowTargets Other && HasTrait Warship
+	SetXValue TargetCount
+	MultiplyXValue 500
+	TargetLocation Stage
+	ChooseCharacterFromTargets
+	GainPower X
+}
+Quick
+Text Auto: When this attacks, choose 1 of your characters, this turn, it gets +X power. X equals the number of your other 《Warship》 characters times 500.
+EndCard
+
+Character: AZL/S102-044
+Name Ibuki
+Color G
+Level 2
+Cost 1
+Power 7000
+Trigger Soul
+Trait1 Warship
+Trait2 Sakura Empire
+Cont: GiveSelf
+{
+	If Compare Experience 5 OrMore
+	{
+		GainPower 2500
+		GainEffect
+		{
+			Auto: OnTriggerCheckClimax
+			{
+				IfOther HasTrigger Bar
+				{
+					PayCost Discard 1 Any
+					{
+						*OptionalBlindStock
+						*OptionalBlindStock
+					}
+				}
+			}
+			Text Auto: [Put 1 card from your hand into your waiting room] When your character's trigger check reveals a climax with Gold Bar in its trigger icon, you may pay the cost. If you do, put up to 2 cards from the top card of your deck into stock.
+		}
+	}
+}
+Text Cont: EXPERIENCE If the sum of levels of cards in your level zone is 5 or more, this gets +2500 power and the following ability, "Auto: [Put 1 card from your hand into your waiting room] When your character's trigger check reveals a climax with Gold Bar in its trigger icon, you may pay the cost. If you do, put up to 2 cards from the top card of your deck into stock."
+Auto: OnAttack
+{
+	Peek Deck 1
+	Question Put the card into your waiting room?
+	If Yes
+	{
+		MoveCard WaitingRoom
+	}
+}
+Text Auto: When this attacks, look at the top card of your deck, and put it on top of your deck or into your waiting room.
+EndCard
+
+Character: AZL/S102-045
+Name Hakuryuu
+Color G
+Level 3
+Cost 2
+Power 9500
+Trigger Soul
+Soul 2
+Trait1 Warship
+Trait2 Sakura Empire
+Cont: GiveSelf
+{
+	If Compare Experience 8 OrMore
+	{
+		GainPower 1500
+		GainEffect
+		{
+			Auto: OnAttack
+			{
+				PayCost 3 Discard 1 Any
+				{
+					Burn 2
+				}
+			}
+			Text Auto: [(3) Put a card from your hand into your waiting room] When this attacks, you may pay the cost. If you do, deal 2 damage to your opponent.
+		}
+	}
+}
+Text Cont: EXPERIENCE If the sum of levels of cards in your level zone is 8 or more, this gets +1500 power and the following ability, "Auto: [(3) Put a card from your hand into your waiting room] When this attacks, you may pay the cost. If you do, deal 2 damage to your opponent." 
+*StockHealer
+EndCard
+
+Character: AZL/S102-046
+Name Azuma
+Color G
+Level 3
+Cost 2
+Power 10000
+Trigger Soul
+Soul 2
+Trait1 Warship
+Trait2 Sakura Empire
+Cont: GiveSelf
+{
+	If Compare Experience 8 OrMore
+	{
+		GainPower 500
+		GainEffect
+		{
+			*HandEncore
+		}
+	}
+}
+Text Cont: EXPERIENCE 8 If the sum of levels of cards in your level zone is 8 or more, this gets +500 and "Auto: ENCORE [Put a character from your hand into your waiting room]".
+Auto: OnDirectAttack
+{
+	PayCost 1 Discard 1 Any
+	{
+		Burn 1
+	}
+}
+Text Auto: [(1) Put a card from your hand into your waiting room] When this card direct attacks, you may pay the cost. If you do, deal 1 damage to your opponent.
+Auto: OnPlay
+{
+	If Compare Experience 8 OrMore
+	{
+		TargetLocation OpponentStage
+		ChooseCharactersFromTargets 0 2 Choose up to two characters to return to your opponent's hand.
+		MoveCard OpponentHand
+	}
+}
+Text Auto: EXPERIENCE When this is placed on stage from hand, if the sum of levels of cards in your level zone is 8 or more, choose up to 2 of your opponent's characters, return them to hand.
+EndCard
+
+Character: AZL/S102-047
+Name Katsuragi
+Color G
+Level 0
+Cost 0
+Power 1000
+Trait1 Warship
+Trait2 Sakura Empire
+Auto: OnPlay
+{
+	Question Put a card from your hand into stock?
+	If Yes
+	{
+		SearchLocationForTargets Hand 1 1 Any
+		MoveCard Stock
+	}
+}
+Text Auto: When this is placed on stage from hand, choose 1 card from your hand, you may send it to stock.
+Auto: OnAttack
+{
+	TargetLocation Stage
+	NarrowTargets Other && HasTrait Warship
+	SetXValue TargetCount
+	MultiplyXValue 500
+	TargetLocation OpponentCenterStage
+	ChooseCharacterFromTargets
+	LosePower X
+}
+Text Auto: When this attacks, choose 1 of your opponent's center stage characters, this turn, it gets -X power. X equals the number of your other 《Warship》 characters times 500.
+EndCard
+
+Character: AZL/S102-048
+Name Asashio
+Color G
+Level 0
+Cost 0
+Power 2000
+Trait1 Warship
+Trait2 Sakura Empire
+Auto: OnPlay
+{
+	If StageContains 1 Other && HasTrait Warship
+	{
+		GainPower 2000
+	}
+}
+Quick
+Text Auto: When this is placed on stage from hand, if you have another 《Warship》 character, this turn, this gets +2000 power.
+Auto: OnReverseOpponent
+{
+	TargetLocation Climax
+	If HasTarget
+	{
+		IfTarget HasTrigger Bar
+		{
+			Question Draw 2 cards?
+			If Yes
+			{
+				DrawCard
+				DrawCard
+				Discard 2 Any
+			}
+		}
+	}
+}
+Text Auto: When this card's battle opponent is reversed, if you have a climax with a Bar Trigger in your climax area, you may draw 2. if you do, put 2 cards from your hand into your waiting room.
+EndCard
+
+Character: AZL/S102-049
+Name I-168
+Color G
+Level 0
+Cost 0
+Power 2000
+Trait1 Warship
+Trait2 Sakura Empire
+Auto: OnPlay
+{
+	PayCost 2
+	{
+		Refresh
+	}
+}
+Text Auto: (2) When this is placed on stage from hand, you may pay the cost. If you do, shuffle all cards from your waiting room into your deck.
+EndCard
+
+Character: AZL/S102-050
+Name Kasumi
+Color G
+Level 0
+Cost 0
+Power 2000
+Trait1 Warship
+Trait2 Sakura Empire
+Cont: GiveSelf
+{
+	If StageContains 2 Other && HasTrait Warship
+	{
+		GainPower 1000
+	}
+}
+Text Cont: If you have 2 or more other 《Warship》 characters, this gets +1000 power.
+Auto: OnPlay
+{
+	PayCost Discard 1 IsClimax && HasTrigger Bar
+	{
+		RevealUpTo Deck 6
+		ChooseCardsFromTargets 0 1 HasTrait Warship
+		RevealTargets
+		MoveCard Hand
+		PutTheRestIntoTheWaitingRoom
+	}
+}
+Text Auto: [Discard 1 climax with a Bar Trigger] When this is placed on stage from hand, you may pay the cost. If you do, look at up to 6 cards from the top of your deck, choose up to 1 《Warship》 character from among them, show it to your opponent, add it to hand, send the rest to waiting room.
+EndCard
+
+Character: AZL/S102-051
+Name Yuudachi
+Color G
+Level 1
+Cost 0
+Power 4000
+Trait1 Warship
+Trait2 Sakura Empire
+Cont: GiveSelf
+{
+	If MyTurn && Compare Experience 2 OrMore
+	{
+		GainPower 1000
+		GainEffect
+		{
+			Auto: OnTriggerCheckClimax
+			{
+				IfOther HasTrigger Bar
+				{
+					PayCost Discard 1 Any
+					{
+						SearchLocationForTargets Clock 1 1 Any
+						MoveCard Hand
+						TargetTop Deck 1
+						MoveCard Clock
+					}
+				}
+			}
+			Text Auto: [Put 1 card from your hand into your waiting room] When your character's trigger check reveals a climax with Gold Bar in its trigger icon, you may pay the cost. If you do, choose 1 card from your clock, add it to hand, and put the top card of your deck into clock.
+		}	
+	}
+}
+Text Cont: EXPERIENCE During your turn, if the sum of levels of cards in your level zone is 2 or more, this gets +1000 power and the following ability, "Auto: [Put 1 card from your hand into your waiting room] When your character's trigger check reveals a climax with Gold Bar in its trigger icon, you may pay the cost. If you do, choose 1 card from your clock, add it to hand, and put the top card of your deck into clock."
+*OnAttackGivePower(1000,Any)
+EndCard
+
+Character: AZL/S102-052
+Name Kitakaze
+Color G
+Level 1
+Cost 0
+Power 4500
+Trait1 Warship
+Trait2 Sakura Empire
+Cont: GiveSelf
+{
+	If Compare Experience 2 OrMore
+	{
+		GainPower 1000
+	}
+}
+Text Cont: EXPERIENCE If the sum of levels of cards in your level zone is 2 or more, this gets +1000 power.
+Auto: OnClimaxPlay
+{
+	IfOther HasTrigger Bar
+	{
+		GainPower 500
+		GainEffect
+		{
+			Auto: OnAttack
+			{
+				TargetTop Deck 1
+				Reveal
+				If Compare TargetCardsLevel 1 OrMore
+				{
+					MoveCard Stock
+				}
+			}
+			Text Auto: When this attacks, reveal the top card of your deck. If that card is level 1 or higher, send it to stock.
+		}
+	}
+}
+Quick
+Text Auto: When a climax with a Bar Trigger is placed in your climax area, this turn, this gets +500 power and the following ability, "Auto: When this attacks, reveal the top card of your deck. If that card is level 1 or higher, send it to stock."
+EndCard
+
+Character: AZL/S102-053
+Name Yukikaze
+Color G
+Level 1
+Cost 0
+Power 4500
+Trait1 Warship
+Trait2 Sakura Empire
+Cont: GiveSelf
+{
+	If MyTurn && AllYourCharacters HasTrait Warship
+	{
+		GainPower 2000
+	}
+}
+Text Cont: During your turn, if all of your characters are 《Warship》, this gets +2000 power.
+Auto: OnReversed
+{
+	TargetTop Deck 1
+	Reveal
+	If Compare TargetCardsLevel 2 OrMore
+	{
+		Question Rest this card?
+		If Yes
+		{
+			TargetSelf
+			Rest
+		}
+	}
+}
+TimesPerTurn 1
+Text Auto: This ability activates up to once per turn. When this is reversed, reveal the top card of your deck. If that card is level 2 or higher, you may rest this.
+EndCard
+
+Character: AZL/S102-054
+Name Suruga
+Color G
+Level 2
+Cost 1
+Trigger Soul
+Power 3000
+Trait1 Warship
+Trait2 Sakura Empire
+Cont: GiveAll
+{
+	If StageContains 1 Other && NameEquals Kii
+	{
+		If Other && HasTrait Warship
+		{
+			GainPower 500
+		}
+	}
+}
+Text Cont: If you have another "Kii", all of your other 《Warship》 characters get +500 power.
+*LevelAssist
+Act: 1 RestSelf Discard 2 Any
+{
+	SearchLocationForTargets Hand 0 1 NameEquals Kii
+	PlaceOnStage False True True False
+}
+Text Act: [(1) Discard 2 cards. Rest this] Choose up to 1 "Kii" in your hand, place it on stage in any slot.
+EndCard
+
+Character: AZL/S102-055
+Name Kii
+Color G
+Level 3
+Cost 2
+Power 9500
+Trigger Soul
+Soul 2
+Trait1 Warship
+Trait2 Sakura Empire
+Cont: GiveSelf
+{
+	TargetLocation Backstage
+	NarrowTargets Other && NameEquals Suruga
+	If HasTarget
+	{
+		GainPower 2000
+	}
+}
+Text Cont: If you have another "Suruga" in your backstage, this gets +2000 power.
+Auto: OnPlay
+{
+	SearchWaitingRoom HasTrait Warship
+}
+Text Auto: When this is placed on stage from hand, choose 1 《Warship》 character from your waiting room, you may add it to hand.
+Auto: OnAttack
+{
+	PayCost 1 Discard 1 Any
+	{
+		TargetLocation Stage
+		NarrowTargets HasTrait Warship
+		ChooseCharactersFromTargets 0 3 Choose up to three 《Warship》 characters to get +500 power and +1 soul.
+		GainPower 500
+		GainSoul 1
+	}
+}
+Text Auto: [(1) Put a card from your hand into your waiting room] When this attacks, you may pay the cost. If you do, choose up to 3 of your 《Warship》 characters, this turn, they get +500 power and +1 soul.
+EndCard
+
+Character: AZL/S102-056
+Name Fusou
+Color G
+Level 0
+Cost 0
+Power 500
+Trait1 Warship
+Trait2 Sakura Empire
+Cont: GiveSelf
+{
+	TargetLocation CenterStage
+	NarrowTargets Other && NameEquals Yamashiro
+	If HasTarget
+	{
+		GainPower 3000
+		GainSoul 1
+	}
+}
+Text Cont: If you have another "Yamashiro" in your center stage, this gets +3000 power and +1 soul.
+Cont: GiveAll
+{
+	If Other && NameEquals Yamashiro
+	{
+		GainPower 1000
+		GainSoul 1
+	}
+}
+Text Cont: All of your other "Yamashiro" gets +1000 power and +1 soul.
+Auto: OnPlay
+{
+	PayCost Discard 1 HasTrait Warship
+	{
+		SearchDeck NameEquals Yamashiro
+	}
+}
+Text Auto: [Discard 1 《Warship》 character] When this is placed on stage from hand, you may pay the cost. If you do, search your deck for up to 1 "Yamashiro", show it to your opponent, add it to hand, and shuffle your deck afterwards.
+EndCard
+
+Character: AZL/S102-057
+Name Mutsu
+Color G
+Level 0
+Cost 0
+Power 500
+Trait1 Warship
+Trait2 Sakura Empire
+Auto: OnPlay
+{
+	PayCost Discard 1 Any
+	{
+		SearchLocationForTargets Clock 1 1 HasTrait Warship
+		MoveCard Hand
+		TargetTop Deck 1
+		MoveCard Clock
+	}
+}
+Text Auto: [Put 1 card from your hand into your waiting room] When this is placed on stage from hand, you may pay the cost. If you do, choose 1 《Warship》 character from your clock, add it to hand, and put the top card of your deck into clock.
+*GreenLevel0Bomb
+EndCard
+
+Character: AZL/S102-058
+Name Naganami
+Color G
+Level 0
+Cost 0
+Power 1000
+Trait1 Warship
+Trait2 Sakura Empire
+Cont: GiveAll
+{
+	IfOwner InLocation MiddleCenterStage
+	{
+		If HasTrait Warship
+		{
+			GainPower 1000
+		}
+	}
+}
+Text Cont: If this is in your center stage center slot, all of your 《Warship》 characters gets +1000 power.
+Auto: OnPlay
+{
+	GainPower 1500
+}
+Text Auto: When this is placed on stage from hand, this turn, this gets +1500 power. 
+EndCard
+
+Character: AZL/S102-059
+Name Agano
+Color G
+Level 0
+Cost 0
+Power 1500
+Trait1 Warship
+Trait2 Sakura Empire
+Auto: StartMainPhase
+{
+	*Scry
+}
+Text Auto: At the start of your main phase, look at the top card of your deck, and put it on top of your deck or into your waiting room.
+Auto: OnTriggerCheckClimax
+{
+	IfOther HasTrigger Bar
+	{
+		TargetLocation Stage
+		ChooseCharacterFromTargets
+		UntilEndOfOpponentsTurn
+		GainPower 1000
+	}
+}
+Text Auto: When your character's trigger check reveals a climax with a Bar Trigger, choose 1 of your characters, until the end of your opponent's next turn, it gets +1000 power.
+EndCard
+
+Character: AZL/S102-060
+Name Fubuki
+Color G
+Level 0
+Cost 0
+Power 1500
+Trait1 Warship
+Trait2 Sakura Empire
+Auto: OnPlay
+{
+	Mill 2
+	NarrowTargets IsClimax
+	If HasTarget
+	{
+		PayCost Discard 1 Any
+		{
+			SearchWaitingRoom IsCharacter
+		}
+	}
+}
+Text Auto: [Put 1 card from your hand into your waiting room] When this card is placed on the stage from your hand, put the top 2 cards of your deck into your waiting room. If there is a climax among those cards, you may pay the cost. If you do, choose 1 character from your waiting room, add it to hand.
+Auto: OnAttack
+{
+	If StageContains 1 Other && HasTrait Warship
+	{
+		TargetLocation Stage
+		ChooseCharacterFromTargets
+		GainPower 1500
+	}
+}
+Text Auto: When this attacks, if you have another 《Warship》 character, choose 1 of your characters, this turn, it gets +1500 power.
+EndCard
+
+Character: AZL/S102-061
+Name Yamashiro
+Color G
+Level 0
+Cost 0
+Power 3000
+Trait1 Warship
+Trait2 Sakura Empire 
+EndCard
+
+Character: AZL/S102-062
+Name Souryuu
+Color G
+Level 1
+Cost 0
+Power 3500
+Trait1 Warship
+Trait2 Sakura Empire
+Cont: GiveSelf
+{
+	If LocationContains CenterStage 1 Other && NameEquals Hiryuu
+	{
+		GainPower 3500
+		GainEffect
+		{
+			Auto: OnAttack
+			{
+				TargetLocation Stage
+				NarrowTargets Other && HasTrait Warship
+				ChooseCharacterFromTargets
+				GainPower 1000
+			}
+			Text Auto: When this attacks, choose 1 of your other 《Warship》 characters, this turn, it gets +1000 power.
+		}
+	}
+}
+Text Cont: If you have another "Hiryuu" in your center stage, this gets +3500 power and the following ability, "Auto: When this attacks, choose 1 of your other 《Warship》 characters, this turn, it gets +1000 power."
+Auto: OnPlay
+{
+	PayCost 1
+	{
+		*SearchDeckToPlaceOnStage(NameEquals Hiryuu, False)
+	}
+}
+Text Auto: (1) When this is placed on stage from hand, you may pay the cost. If you do, search your deck for up to 1 "Hiryuu", show it to your opponent, place it on stage in any slot, and shuffle your deck afterwards.
+EndCard
+
+Character: AZL/S102-063
+Name Hiryuu
+Color G
+Level 1
+Cost 0
+Power 3500
+Trait1 Warship
+Trait2 Sakura Empire
+Cont: GiveSelf
+{
+	If LocationContains CenterStage 1 Other && NameEquals Souryuu
+	{
+		GainPower 3500
+		GainEffect
+		{
+			Auto: OnReversed
+			{
+				If Not MyTurn
+				{
+					PayCost Discard 1 Any
+					{
+						Rest
+						ScheduleEffect StartMyEncorePhase
+						{
+							Effect:
+							{
+								TargetSelf
+								MoveCard WaitingRoom
+							}
+						}
+					}
+				}
+			}
+			Text Auto: [Put a card from your hand into your waiting room] During your opponent's turn, when this card becomes reversed in battle, you may pay the cost. If you do, rest this card, and at the beginning of your next encore step, put this card into your waiting room.
+		}
+	}
+}
+Text Cont: If you have another "Souryuu" in your center stage, this gets +3500 power and the following ability, "Auto: [Put a card from your hand into your waiting room] During your opponent's turn, when this card becomes reversed in battle, you may pay the cost. If you do, rest this card, and at the beginning of your next encore step, put this card into your waiting room."
+Auto: OnPlay
+{
+	PayCost 1
+	{
+		*SearchDeckToPlaceOnStage(NameEquals Souryuu, False)
+	}
+} 
+Text Auto: (1) When this is placed on stage from hand, you may pay the cost. If you do, search your deck for up to 1 "Souryuu", show it to your opponent, place it on stage in any slot, and shuffle your deck afterwards.
+EndCard
+
+Character: AZL/S102-064
+Name Kinu
+Color G
+Level 1
+Cost 0
+Power 4500
+Trait1 Warship
+Trait2 Sakura Empire
+*PowerOnMyTurn(1000)
+*OnPlayMill2GainPowerForEachCharacter(1000,Warship)
+EndCard
+
+Character: AZL/S102-065
+Name I-19
+Color G
+Level 1
+Cost 1
+Power 4000
+Trigger Soul
+Trait1 Warship
+Trait2 Sakura Empire
+*LevelAssist
+Auto: OnClimaxPlay
+{
+	IfOther HasTrigger Bar
+	{
+		TargetLocation OpponentCenterStage
+		ChooseCharacterFromTargets
+		LosePower 1000
+	}
+}
+Text Auto: When a climax with a Bar Trigger is placed in your climax area, choose 1 of your opponent's center stage characters, this turn, it gets -1000 power.
+Auto: OnTriggerCheckClimax
+{
+	IfOther HasTrigger Bar
+	{
+		Question Draw a card?
+		If Yes
+		{
+			DrawCard
+			Discard 1 Any
+		}
+	}
+}
+Text Auto: When your character's trigger check reveals a climax with Gold Bar in its trigger icon, you may draw 1 card. If you do, put a card from your hand into your waiting room.
+EndCard
+
+Character: AZL/S102-066
+Name Shoukaku
+Color G
+Level 2
+Cost 1
+Power 5000
+Trigger Soul
+Trait1 Warship
+Trait2 Sakura Empire
+Cont: GiveSelf
+{
+	If StageContains 1 Other && NameEquals Zuikaku
+	{
+		GainPower 2000
+		GainEffect
+		{
+			*PowerOnMyTurn(4000)
+		}
+	}
+}
+Text Cont: If you have another "Zuikaku", this gets +2000 power and the following ability, "Cont: During your turn, this gets +4000 power."
+Auto: OnPlay
+{
+	PayCost Discard 1 HasTrait Warship
+	{
+		SearchLocationForTargets WaitingRoom 1 1 NameEquals Zuikaku
+		PlaceOnStage False True True False
+	}
+}
+Text Auto: [Put a 《Warship》 character from your hand into your waiting room] When this is placed on stage from hand, you may pay the cost. If you do, choose 1 "Zuikaku" in your waiting room, place it on stage in any slot.
+Auto: StartOpponentAttackPhase
+{
+	Question Swap positions with a Zuikaku?
+	If Yes
+	{
+		TargetLocation Stage
+		NarrowTargets Other && NameEquals Zuikaku && CanMove
+		ChooseCharacterFromTargets
+		If HasTarget
+		{
+			AddSelfToTargets
+			Exchange
+			Stand
+		}
+	}
+}
+Text Auto: At the start of your opponent's attack phase, choose 1 of your "Zuikaku" and this card, you may exchange them as standing.
+EndCard
+
+Character: AZL/S102-067
+Name Zuikaku
+Color G
+Level 2
+Cost 1
+Power 6000
+Trigger Soul
+Trait1 Warship
+Trait2 Sakura Empire
+Combo Honest Cynic
+Cont: GiveSelf
+{
+	If StageContains 1 Other && NameEquals Shoukaku
+	{
+		GainPower 4000
+	}
+}
+Text Cont: If you have another "Shoukaku", this gets +4000 power.
+Auto: OnSpecificClimaxPlay Honest Cynic
+{
+	If InLocation CenterStage &&& StageContains 1 Other && NameEquals Shoukaku
+	{
+		SearchWaitingRoom HasTrait Warship
+		SearchLocationForTargets WaitingRoom 0 1 HasTrait Warship
+		If HasTarget
+		{
+			RevealTargets
+			MoveCard Stock
+		}
+		
+	}
+}
+Text Auto: CxCombo When "Honest Cynic" is placed in your climax area, if this is in your center stage, and you have another "Shoukaku", choose up to 1 《Warship》 character in your waiting room, add it to hand, then choose up to 1 《Warship》 character in your waiting room, send it to stock.
+EndCard
+
+Event: AZL/S102-068
+Name Bombing Ship
+Color G
+Level 3
+Cost 2
+Effect:
+{
+	If StageContains 5 HasTrait Warship
+	{
+		Burn 4
+	}	
+}
+Text If you have 5 or more 《Warship》 characters, deal 4 damage to your opponent.
+EndCard
+
+Climax: AZL/S102-069
+Name Ephemeral Dream
+*BarClimax
+EndCard
+
+Climax: AZL/S102-070
+Name Wind Blowing on the Azure Sea
+*BarClimax
+EndCard
+
+Climax: AZL/S102-071
+Name Phoenix's Spring Song
+*BarClimax
+EndCard
+
+Climax: AZL/S102-072
+Name Honest Cynic
+*BarClimax
+EndCard
+
+Character: AZL/S102-073
+Name Zara
+Color R
+Level 0
+Cost 0
+Power 1500
+Trait1 Warship
+Trait2 Sardegna Empire
+Auto: OnAttack
+{
+	If AllYourCharacters HasTrait Warship
+	{
+		TargetLocation Stage
+		ChooseCharactersFromTargets 0 2 Choose up to 2 of your characters, this turn, they get +1000 power.
+		GainPower 1000
+	}
+}
+Text Auto: When this attacks, if all of your characters are 《Warship》, choose up to 2 of your characters, this turn, they get +1000 power.
+Auto: OnOtherFrontalAttacked
+{
+	IfOther HasTrait Warship
+	{
+		PayCost 1 SendSelf WaitingRoom
+		{
+			TargetOther
+			MoveCard Hand
+		}
+	}
+}
+Text Auto: [(1) Send this to waiting room] When your other 《Warship》 character is front attacked, you may pay the cost. If you do, return that character to hand.
+EndCard
+
+Character: AZL/S102-074
+Name August von Parseval
+Color R
+Level 2
+Cost 2
+Power 7000
+Trigger Soul
+Soul 2
+Trait1 Warship
+Trait2 Iron Blood
+Combo Feast of the Unhulde?
+Cont: GiveSelf
+{
+	If Compare Experience 3 OrMore
+	{
+		GainPower 2500
+		GainEffect
+		{
+			*HandEncoreTrait(Warship)
+		}
+	}
+}
+Text Cont: EXPERIENCE If the sum of levels of cards in your level zone is 3 or more, this gets +2500 power and "Auto: ENCORE [Put a 《Warship》 character from your hand into your waiting room]".
+Auto: PlacedBy Feast of the Unhulde?
+{
+	If Phase Climax && Compare Experience 3 OrMore
+	{
+		PayCost SendClimax WaitingRoom
+		{
+			Stand
+			TargetLocation OpponentStage
+			ChooseCharactersFromTargets 0 2 Choose up to two characters, they cannot move until the end of your opponent's next turn.
+			UntilEndOfOpponentsTurn
+			GainSpecialEffect CannotMove
+		}
+	}
+}
+Text Auto: CxCombo EXPERIENCE 3 [Send 1 "Feast of the Unhulde?" from your climax area into your waiting room] During your climax phase, when this is placed on stage from your waiting room by the effect of the "Feast of the Unhulde?", if the sum of levels of cards in your level zone is 3 or more, you may pay the cost. If you do, stand this, choose up to 2 of your opponent's characters, until the end of your opponent’s next turn, they gain the following ability: "Cont: This cannot move to another position on stage."
+EndCard
+
+Character: AZL/S102-075
+Name Roon
+Color R
+Level 3
+Cost 2
+Power 9500
+Soul 2
+Trigger Soul
+Trait1 Warship
+Trait2 Iron Blood
+Cont: GiveSelf
+{
+	If Compare Experience 6 OrMore
+	{
+		GainPower 1500
+		GainEffect
+		{
+			Auto: StartOpponentAttackPhase
+			{
+				PayCost 2 Discard 1 Any
+				{
+					TargetLocation OpponentStage
+					ChooseCharacterFromTargets
+					LoseSoul 2
+				}
+			}
+			Text Auto: [(2) Put a card from your hand into your waiting room] At the start of your opponent's attack phase, you may pay the cost. If you do, choose 1 of your opponent's character, this turn, it gets -2 soul.
+		}
+	}
+}
+Text Cont: EXPERIENCE If the sum of levels of cards in your level zone is 6 or more, this gets +1500 power and the following ability, "Auto: [(2) Put a card from your hand into your waiting room] At the start of your opponent's attack phase, you may pay the cost. If you do, choose 1 of your opponent's character, this turn, it gets -2 soul."
+*Healer
+EndCard
+
+Character: AZL/S102-076
+Name Friedrich der Grosse
+Color R
+Level 3
+Cost 2
+Power 10000
+Trigger Soul
+Soul 2
+Trait1 Warship
+Trait2 Iron Blood
+Combo Rhapsody of Darkness
+*Healer
+Auto: OnAttack
+{
+	If Climax Rhapsody of Darkness && Compare Experience 8 OrMore
+	{
+		MultipleChoiceQuestion Choose one of the following effects to resolve:\n1.) Choose up to 3 cards from your opponent's waiting room, and shuffle them into your opponent's deck, then this turn, this gets +3000 power.\n2. (2) You may pay the cost. If you do, deal 4 damage to your opponent.|Choice 1|Choice 2
+		If Answer 0
+		{
+			SearchLocationForTargets OpponentWaitingRoom 0 3 Any
+			MoveCard OpponentDeck
+			ShuffleLocation OpponentDeck
+			TargetSelf
+			GainPower 3000
+		}
+		If Answer 1
+		{
+			PayCost 2
+			{
+				Burn 4
+			}
+		}
+	}
+}
+Text Auto: CxCombo EXPERIENCE When this attacks, if you have "Rhapsody of Darkness" in your climax area, and the sum of levels of cards in your level zone is 8 or more, choose 1 of the following 2 effects and resolve it, "Choose up to 3 cards from your opponent's waiting room, and shuffle them into your opponent's deck, then this turn, this gets +3000 power." "(2) You may pay the cost. If you do, deal 4 damage to your opponent."
+EndCard
+
+Character: AZL/S102-077
+Name Peter Strasser
+Color R
+Level 0
+Cost 0
+Power 2000
+Trait1 Warship
+Trait2 Iron Blood
+Auto: OnPlay
+{
+	Mill 2
+	NarrowTargets IsClimax
+	If HasTarget
+	{
+		TargetLocation Stage
+		ChooseCharacterFromTargets
+		GainPower 1500
+	}
+}
+Text Auto: When this card is placed on the stage from your hand, put the top 2 cards of your deck into your waiting room. If there is a climax among those cards, choose 1 of your characters, this turn, it gets +1500 power.
+Act: SendSelf WaitingRoom Discard 1 Any
+{
+	SearchWaitingRoom HasTrait Warship
+}
+Text Act: [Put a card from your hand into your waiting room, send this to waiting room] Choose 1 《Warship》 character in your waiting room, add it to hand.
+EndCard
+
+Character: AZL/S102-078
+Name Ulrich von Hutten
+Color R
+Level 1
+Cost 0
+Power 4000
+Trait1 Warship
+Trait2 Iron Blood
+Cont: GiveSelf
+{
+	If Compare Experience 2 OrMore
+	{
+		GainPower 2000
+	}
+}
+Text Cont: EXPERIENCE If the sum of levels of cards in your level zone is 2 or more, this gets +2000 power.
+Auto: OnOpponentReverse
+{
+	If PlayedThisTurn
+	{
+		PayCost 1
+		{
+			TargetTop Deck 2
+			RevealTargets
+			OpponentChooseCardsFromTargets 1 1 IsCharacter || IsEvent
+			MoveCard Hand
+			PutTheRestIntoTheWaitingRoom
+		}
+	}
+}
+Text Auto: (1) During the turn this was placed on stage from hand, when this card's battle opponent is reversed, you may pay the cost. If you do, reveal the top 2 cards of your deck. Your opponent chooses 1 character or event from among them, add it to your hand, and send the rest to waiting room.
+EndCard
+
+Character: AZL/S102-079
+Name Libeccio
+Color R
+Level 1
+Cost 1
+Power 5500
+Trait1 Warship
+Trait2 Sardegna Empire
+Combo Prestigious Daily Life
+Cont: GiveSelf
+{
+	If AllYourCharacters HasTrait Warship
+	{
+		GainPower 2000
+	}
+}
+Text Cont: If all of your characters are 《Warship》, this gets +2000 power.
+Auto: OnSpecificClimaxPlay Prestigious Daily Life
+{
+	If InLocation CenterStage &&& StageContains 1 Other && HasTrait Warship
+	{
+		SearchLocationForTargets WaitingRoom 1 1 Compare ThatCardsCost 0 OrLess && HasTrait Warship
+		PlaceOnStage False True True False
+	}
+}
+Text Auto: CxCombo When "Prestigious Daily Life" is placed in your climax area, if this is in your center stage, and you have another 《Warship》 character, choose 1 cost 0 or lower 《Warship》 character in your waiting room, you may place it on stage in any slot.
+EndCard
+
+Character: AZL/S102-080
+Name Admiral Graf Spee
+Color R
+Level 3
+Cost 2
+Power 10000
+Soul 2
+Trigger Soul
+Trait1 Warship
+Trait2 Iron Blood
+Combo This Time, Until the End
+*GiveAll1500OnCenterStage(Warship)
+Auto: PlacedBy This Time, Until the End
+{
+	If Phase Climax
+	{
+		PayCost 1 SendClimax WaitingRoom
+		{
+			Stand
+			TargetLocation Stage
+			GainPower 500
+			GainEffect
+			{
+				Auto: OnReverseOpponent
+				{
+					Question Put the battle opponent onto the top of opponent's deck?
+					If Yes
+					{
+						IfOther OnStage
+						{
+							TargetOther
+							MoveCard OpponentDeck
+						}
+					}
+				}
+				Text Auto: When this card's battle opponent is reversed, you may send that character to the top of your opponent's deck.
+			}
+		}
+	}
+}
+Text Auto: CxCombo [(1) Send 1 "This Time, Until the End" from your climax area into your waiting room] During your climax phase, when this is placed on stage from waiting room by the effect of the "This Time, Until the End", you may pay the cost. If you do, stand this, then this turn, all of your characters get +500 power and the following ability, "Auto: When this card's battle opponent is reversed, you may send that character to the top of your opponent's deck."
+EndCard
+
+Character: AZL/S102-081
+Name U-110
+Color R
+Level 0
+Cost 0
+Power 1500
+Trait1 Warship
+Trait2 Iron Blood
+Act: Rest 1 HasTrait Warship
+{
+	*ExchangeCardInLevelWithWaitingRoom(HasTrait Warship, HasTrait Warship)
+}
+Text Act: [Rest 1 of your 《Warship》 characters] Choose 1 《Warship》 character from your level zone and 1 《Warship》 character from your waiting room, swap them.
+*Act1SalvageBrainstorm(Any)
+EndCard
+
+Character: AZL/S102-082
+Name Elbing
+Color R
+Level 0
+Cost 0
+Power 1500
+Trait1 Warship
+Trait2 Iron Blood
+Auto: OnPlay
+{
+	TargetTop Deck 1
+	Reveal
+	IfTarget HasTrait Warship
+	{
+		TargetLocation Stage
+		ChooseCharacterFromTargets
+		GainPower 1000
+	}
+}
+Text Auto: When this is placed on stage from hand, reveal the top card of your deck. If that card is a 《Warship》 character, choose 1 of your characters, this turn, it gets +1000 power.
+Auto: OnPlay|OnSentFromStageToWaitingRoom
+{
+	PayCost Discard 1 Any
+	{
+		DrawCard
+	}
+}
+Text Auto: [Put a 《Warship》 character from your hand into your waiting room] When this is placed on stage from hand or sent from stage to waiting room, you may pay the cost. If you do, draw 1 card.
+EndCard
+
+Character: AZL/S102-083
+Name Vittorio Veneto
+Color R
+Level 0
+Cost 0
+Power 2000
+Trait1 Warship
+Trait2 Sardegna Empire
+Auto: OnOtherPlacedOnStageFromHand
+{
+	IfOther HasTrait Warship
+	{
+		GainPower 1000
+	}
+	Else
+	{
+		RefundTimesPerTurn
+	}
+}
+Quick
+TimesPerTurn 2
+Text Auto: This ability can only be activated up to twice per turn. When your other 《Warship》 characters are placed on stage from hand, this turn, this gets +1000 power.
+Auto: OnAttack
+{
+	PayCost Discard 1 Any
+	{
+		TargetLocation Stage
+		NarrowTargets Other && HasTrait Warship
+		ChooseCharacterFromTargets
+		MoveCard Hand
+	}
+}
+Text Auto: [Put 1 card from your hand into your waiting room] When this attacks, you may pay the cost. If you do, choose 1 of your other 《Warship》 characters, and return it to hand.
+EndCard
+
+Character: AZL/S102-084
+Name Odin
+Color R
+Level 1
+Cost 0
+Power 4500
+Trait1 Warship
+Trait2 Iron Blood
+Cont: GiveSelf
+{
+	If MyTurn && Compare Experience 2 OrMore
+	{
+		GainPower 2000
+	}
+}
+Text Cont: EXPERIENCE During your turn, if the sum of levels of cards in your level zone is 2 or more, this gets +2000 power.
+Auto: StartOpponentAttackPhase
+{
+	PayCost 1
+	{
+		TargetLocation Stage
+		NarrowTargets Other && HasTrait Warship && CanMove && InLocation MiddleCenterStage
+		ChooseCharacterFromTargets
+		If HasTarget
+		{
+			AddSelfToTargets
+			Exchange
+			Stand
+			TargetSelf
+			GainPower 1500
+		}
+	}
+}
+Text Auto: (1) At the start of your opponent's attack phase, you may pay the cost. If you do, choose 1 of your other 《Warship》 characters in the center stage center slot and this card, stand and exchange them, and this turn, this gets +1500 power.
+EndCard
+
+Character: AZL/S102-085
+Name Aquila
+Color R
+Level 2
+Cost 1
+Power 6000
+Trigger Soul
+Trait1 Warship
+Trait2 Sardegna Empire
+Auto: OnAttack
+{
+	If StageContains 2 Other && HasTrait Warship
+	{
+		MultipleChoiceQuestion Choose 1 of the following effects and resolve it,\n1. This turn, this gets +6000 power.\n2. Choose 1 of your other 《Warship》 characters, until the end of your opponent's next turn, it gets +3000 power.|Choice 1|Choice 2
+		If Answer 0
+		{
+			GainPower 6000
+		}
+		If Answer 1
+		{
+			TargetLocation Stage
+			NarrowTargets Other && HasTrait Warship
+			ChooseCharacterFromTargets
+			UntilEndOfOpponentsTurn
+			GainPower 3000
+		}
+	}
+}
+Text Auto: When this attacks, if you have 2 or more other 《Warship》 characters, choose 1 of the following 2 effects and resolve it, "This turn, this gets +6000 power." "Choose 1 of your other 《Warship》 characters, until the end of your opponent's next turn, it gets +3000 power."
+Auto: OnReverseOpponent
+{
+	TargetLocation Stage
+	NarrowTargets HasTrait Warship
+	ChooseCharacterFromTargets
+	GainPower 2000
+}
+Text Auto: When this card's battle opponent is reversed, choose 1 of your 《Warship》 characters, this turn, it gets +2000 power.
+EndCard
+
+Character: AZL/S102-086
+Name Aegir
+Color R
+Level 3
+Cost 2
+Trigger Soul
+Soul 2
+Power 10500
+Trait1 Warship
+Trait2 Iron Blood
+Auto: OnPlay
+{
+	If Compare Experience 8 OrMore
+	{
+		MultipleChoiceQuestion Choose 1 of the following effects and resolve it,\n1. (1) You may pay the cost. If you do, choose up to 1 climax in your waiting room, add it to hand, then until the end of your opponent's next turn, this gets +1500 power.\n2. Until the end of your opponent's next turn, this gains the following ability, "Cont: The character across from this gets -2 soul."|Choice 1|Choice 2
+		If Answer 0
+		{
+			PayCost 1
+			{
+				SearchWaitingRoom IsClimax
+				TargetSelf
+				UntilEndOfOpponentsTurn
+				GainPower 1500
+			}
+		}
+		If Answer 1
+		{
+			UntilEndOfOpponentsTurn
+			GainEffect
+			{
+				Cont: GiveFacing
+				{
+					LoseSoul 2
+				}
+				Text Cont: The character across from this gets -2 Soul.
+			}
+		}
+	}
+}
+Text Auto: EXPERIENCE When this is placed on stage from hand, if the sum of levels of cards in your level zone is 8 or more, choose 1 of the following 2 effects and resolve it, "(1) You may pay the cost. If you do, choose up to 1 climax in your waiting room, add it to hand, then until the end of your opponent's next turn, this gets +1500 power." "Until the end of your opponent's next turn, this gains the following ability, "Cont: The character across from this gets -2 soul.""
+EndCard
+
+Character: AZL/S102-087
+Name Deutschland
+Color R
+Level 0
+Cost 0
+Power 500
+Trait1 Warship
+Trait2 Iron Blood
+*Level0Assist
+Act: 1 Rest 2 Any
+{
+	Brainstorm 5
+	If Compare BrainstormedClimax 1 OrMore
+	{
+		SetXValue BrainstormedClimax
+		Repeat X
+		{
+			SearchDeck IsCharacter && HasTrait Warship
+		}
+		ShuffleLocation Deck
+	}
+}
+Text Act: BRAINSTORM [(1) Rest 2 of your characters] Flip over 5 cards from the top of your deck and put them into the waiting room, for each climax revealed, search your deck for up to 1 《Warship》 character and add it to your hand.
+EndCard
+
+Character: AZL/S102-088
+Name Graf Zeppelin
+Color R
+Level 0
+Cost 0
+Power 1500
+Trait1 Warship
+Trait2 Iron Blood
+Combo Iron Blood Wings
+Auto: OnPlay
+{
+	GainPower 3000
+}
+Quick
+Text Auto: When this is placed on stage from hand, this turn, this gets +3000 power.
+Auto: OnAttack
+{
+	If Climax Iron Blood Wings && Compare CardsInHand 6 OrLess
+	{
+		Mill 1
+		SetXValue ThatCardsLevel
+		SearchWaitingRoom HasTrait Warship && Compare ThatCardsLevel X OrLess
+	}
+}
+Text Auto: CxCombo When this attacks, if you have "Iron Blood Wings" in your climax area, and your hand has 6 or less cards, put the top card of your deck into your waiting room, then choose up to 1 level X or lower 《Warship》 character from your waiting room, and add it to hand. X equals the level of the card put into the waiting room by this effect.
+EndCard
+
+Character: AZL/S102-089
+Name Z46
+Color R
+Level 0
+Cost 0
+Power 1500
+Trait1 Warship
+Trait2 Iron Blood
+Cont: GiveSelf
+{
+	If Compare CardsInHand 5 OrMore
+	{
+		GainPower 2000
+	}
+}
+Text Cont: If you have 5 or more hand, this gets +2000 power.
+Auto: OnPlay
+{
+	If Compare Experience 2 OrMore
+	{
+		PayCost Discard 1 Any
+		{
+			TargetLocation OpponentStage
+			NarrowTargets Compare ThatCardsLevel 1 OrMore
+			ChooseCharacterFromTargets
+			*Downgrade
+		}
+	}
+}
+Text Auto: EXPERIENCE [Put 1 card from your hand into your waiting room] When this is placed on stage from hand, if the sum of levels of cards in your level zone is 2 or more, you may pay the cost. If you do, choose 1 of your opponent's level 1 or higher characters. If you do, your opponent chooses 1 level X or lower character from their waiting room, and exchanges the two characters. X equals the level of the character chosen by you -1.
+EndCard
+
+Character: AZL/S102-090
+Name Emden
+Color R
+Level 1
+Cost 0
+Power 3000
+Trait1 Warship
+Trait2 Iron Blood
+Auto: StartClimaxPhase
+{
+	If StageContains 1 Other && HasTrait Warship
+	{
+		MultipleChoiceQuestion Choose 1 of the following effects and this gains the effect until the end of your opponent's next turn,\n1. During your turn, this gets +3000 power.\n2. During your opponent's turn, this gets +3000 power.|Choice 1|Choice 2
+		If Answer 0
+		{
+			UntilEndOfOpponentsTurn
+			GainEffect
+			{
+				Cont: GiveSelf
+				{
+					If MyTurn
+					{
+						GainPower 3000
+					}
+				}
+				Text Cont: During your turn, this gets +3000 power.
+			}
+		}
+		If Answer 1
+		{
+			UntilEndOfOpponentsTurn
+			GainEffect
+			{
+				Cont: GiveSelf
+				{
+					If Not MyTurn
+					{
+						GainPower 3000
+					}
+				}
+				Text Cont: During your opponent's turn, this gets +3000 power.
+			}
+		}
+	}
+}
+Text Auto: At the start of your climax phase, if you have another 《Warship》 character, until the end of your opponent's next turn, this gains 1 of the following 2 abilities of your choice, "Cont: During your turn, this gets +3000 power." "Cont: During your opponent's turn, this gets +3000 power."
+EndCard
+
+Character: AZL/S102-091
+Name Seydlitz
+Color R
+Level 1
+Cost 0
+Power 4000
+Trait1 Warship
+Trait2 Iron Blood
+*GainPowerWithEnoughCharacters(2000,2,Warship)
+*OnOtherAttackedSacrificeToGivePower(1500,Warship)
+EndCard
+
+Character: AZL/S102-092
+Name U-47
+Color R
+Level 1
+Cost 1
+Trigger Soul
+Power 4000
+Trait1 Warship
+Trait2 Iron Blood
+*LevelAssistTrait(Warship)
+Auto: OnClimaxPlay
+{
+	TargetLocation Stage
+	ChooseCharacterFromTargets
+	GainEffect
+	{
+		*OnAttackCheck2ChooseTrigger
+	}
+}
+Text Auto: When a Climax is placed in your climax area, choose 1 of your characters, this turn, it gains the following ability, "Auto: When this attacks, look at up to 2 cards from the top of your deck, choose 1 card among them, put it back on top of your deck, and send the rest to waiting room."
+Act: RestSelf
+{
+	*Scry
+}
+Text Act: [Rest this] Look at the top card of your deck, and put it on top of your deck or into your waiting room.
+EndCard
+
+Event: AZL/S102-093
+Name Wisdom Cube
+Color R
+Level 1
+Cost 0
+Effect:
+{
+	TargetTop Deck 1
+	Reveal
+	SetXValue ThatCardsLevel
+	EndPeek
+	SearchDeck Compare ThatCardsLevel X OrLess && HasTrait Warship
+}
+Text Reveal the top card of your deck, then search your deck for up to 1 level X or lower 《Warship》 character, show it to your opponent, add it to hand, and shuffle your deck afterwards. X equals the level of the revealed card.
+EndCard
+
+Climax: AZL/S102-094
+Name Feast of the Unhulde?
+*StandbyClimax
+EndCard
+
+Climax: AZL/S102-095
+Name Rhapsody of Darkness
+*DoorClimax
+EndCard
+
+Climax: AZL/S102-096
+Name Prestigious Daily Life
+*StandbyClimax
+EndCard
+
+Climax: AZL/S102-097
+Name This Time, Until the End
+*StandbyClimax
+EndCard
+
+Climax: AZL/S102-098
+Name Iron Blood Wings
+*DoorClimax
+EndCard
+
+Character: AZL/S102-099
+Name Pamiat Merkuria
+Color B
+Level 0
+Cost 0
+Power 500
+Trait1 Warship
+Trait2 Northern Parliament
+Auto: OnAttack
+{
+	If StageContains 2 Other && HasTrait Warship
+	{
+		GainPower 4000
+	}
+}
+Quick
+Text Auto: When this attacks, if you have 2 or more other 《Warship》 characters, this turn, this gets +4000 power.
+Auto: OnReversed
+{
+	If OnStage
+	{
+		TargetTop Deck 1
+		Reveal
+		If Compare ThatCardsLevel 1 OrMore
+		{
+			Question Bounce this card to hand?
+			If Yes
+			{
+				TargetSelf
+				MoveCard Hand
+			}
+		}
+	}
+}
+Text Auto: When this is reversed, reveal the top card of your deck. If that card is level 1 or higher, you may return this to hand. 
+EndCard
+
+Character: AZL/S102-100
+Name Cleveland
+Color B
+Level 0
+Cost 0
+Power 2000
+Trait1 Warship
+Trait2 Eagle Union
+Auto: OnPlay
+{
+	PayCost 1 SendFromWaitingRoomToBottom 1 Clock HasTrait Warship
+	{
+		SearchDeck IsCharacter && Compare ThatCardsLevel 1 OrLess
+	}
+}
+Text Auto: [(1) Put 1 《Warship》 character from your waiting room on the bottom of your clock] When this is placed on stage from hand, you may pay the cost. If you do, search your deck for up to 1 level 1 or lower character, show it to your opponent, add it to hand, and shuffle your deck afterwards.
+Auto: StartClimaxPhase
+{
+	TargetTop Deck 1
+	Reveal
+	If Compare TargetCardsLevel 2 OrMore
+	{
+		TargetLocation Stage
+		NarrowTargets HasTrait Warship
+		GainPower 500
+	}
+}
+Text Auto: At the start of your climax phase, reveal the top card of your deck. If that card is a level 2 or higher, this turn, all of your 《Warship》 characters get +500 power.
+EndCard
+
+Character: AZL/S102-101
+Name Bremerton
+Color B
+Level 1
+Cost 0
+Power 4500
+Trait1 Warship
+Trait2 Eagle Union
+Combo Ace After Class
+Auto: OnPlay
+{
+	If StageContains 1 Other && HasTrait Warship
+	{
+		GainPower 2000
+	}
+}
+Quick
+Text Auto: When this is placed on stage from hand, if you have another 《Warship》 character, this turn, this gets +2000 power.
+Auto: OnAttack
+{
+	If Climax Ace After Class &&& StageContains 2 Other && HasTrait Warship
+	{
+		Mill 2
+		SetXValue TotalLevel
+		SearchWaitingRoom HasTrait Warship && Compare ThatCardsLevel X OrLower
+		If Compare X 2 OrMore
+		{
+			TargetSelf
+			GainSoul 1
+		}
+	}
+}
+Text Auto: CxCombo When this attacks, if "Ace After Class" is in your climax area, and you have 2 or more other 《Warship》 characters, put the top 2 cards of your deck into the waiting room, then choose up to 1 level X or lower 《Warship》 character from your waiting room, and add it to hand. If X is 2 or more, this turn, this gets +1 soul. X equals the sum of levels of cards put into the waiting room by this effect.
+EndCard
+
+Character: AZL/S102-102
+Name New Jersey
+Color B
+Level 3
+Cost 2
+Soul 2
+Trigger Soul
+Power 9000
+Trait1 Warship
+Trait2 Eagle Union
+Combo Don'tcha Just Love It?
+Cont: GiveAll
+{
+	If Compare Experience 6 OrMore && HasTrait Eagle Union
+	{
+		GainPower 1000
+	}
+}
+Text Cont: EXPERIENCE If the sum of levels of cards in your level zone is 6 or more, all of your 《Eagle Union》 characters get +1000 power.
+*Healer
+Auto: OnAttack
+{
+	If Climax Don'tcha Just Love It? && Compare Experience 6 OrMore
+	{
+		PayCost 1
+		{
+			TargetLocation Stage
+			NarrowTargets NameEquals New Jersey
+			SetXValue TargetCount
+			Burn X
+		}
+	}
+}
+Text Auto: CxCombo EXPERIENCE (1) When this attacks, if you have "Don'tcha Just Love It?" in your climax area, and the sum of levels of cards in your level zone is 6 or more, you may pay the cost. If you do, deal X damage to your opponent. X is equal to the number of "New Jersey" you have.
+EndCard
+
+Character: AZL/S102-103
+Name Elridge
+Color B
+Level 0
+Cost 0
+Power 1000
+Trait1 Warship
+Trait2 Eagle Union
+Auto: OnPlay
+{
+	TargetTop Deck 1
+	Reveal
+	IfTarget HasTrait Warship
+	{
+		TargetSelf
+		GainSpecialEffect FreeSideAttack
+	}
+}
+Text Auto: When this is placed on stage from hand, reveal the top card of your deck. If that card is a 《Warship》 character, this turn, this does not suffer soul penalty when side attacking.
+Auto: OnFrontalAttacked
+{
+	TargetTop Deck 1
+	Reveal
+	IfTarget IsClimax
+	{
+		TargetLocation CenterStage
+		MoveCard Hand
+	}
+}
+Text Auto: When this card is frontal attacked, reveal the top card of your deck. If that card is a climax, return all of your characters in the center stage to hand.
+EndCard
+
+Character: AZL/S102-104
+Name Nicholas
+Color B
+Level 0
+Cost 0
+Power 2000
+Trait1 Warship
+Trait2 Eagle Union
+Auto: OnPlay|OnAttack
+{
+	Mill 2
+	NarrowTargets IsClimax
+	If HasTarget
+	{
+		TargetSelf
+		GainPower 3000
+	}
+}
+Text Auto: When this is placed on stage from hand or when this attacks, put the top 2 cards of your deck into the waiting room. If there is a climax among those cards, this turn, this gets +3000 power.
+EndCard
+
+Character: AZL/S102-105
+Name Reno
+Color B
+Level 0
+Cost 0
+Power 2000
+Trait1 Warship
+Trait2 Eagle Union
+Auto: OnPlay
+{
+	TargetTop Deck 1
+	Reveal
+	IfTarget HasTrait Warship
+	{
+		TargetSelf
+		GainPower 2000
+	}
+}
+Text Auto: When this is placed on stage from hand, reveal the top card of your deck. If that card is a 《Warship》 character, this turn, this gets +2000 power.
+Auto: OnPlay
+{
+	PayCost 1 Discard 1 Any
+	{
+		SearchWaitingRoom HasTrait Warship
+		TargetLocation Stage
+		NarrowTargets Other && HasTrait Warship
+		ChooseCharacterFromTargets
+		GainPower 1000
+	}
+}
+Text Auto: [(1) Put a card from your hand into your waiting room] When this is placed on stage from hand, you may pay the cost. If you do, choose 1 《Warship》 character from your waiting room, add it to hand, then choose 1 of your other 《Warship》 characters, this turn, it gets +1000 power.
+EndCard
+
+Character: AZL/S102-106
+Name Independence
+Color B
+Level 1
+Cost 0
+Power 4500
+Trait1 Warship
+Trait2 Eagle Union
+Auto: OnReverseOpponent
+{
+	TargetLocation Climax
+	If HasTarget
+	{
+		*OptionalBlindStock
+	}
+}
+Text Auto: When this card's battle opponent is reversed, if you have a climax in your climax area, you may put the top card of your deck into stock.
+Auto: StartClimaxPhase
+{
+	PayCost Resonate New Jersey
+	{
+		GainPower 2000
+	}
+}
+Text Auto: RESONATE [Reveal 1 "New Jersey" from your hand] At the start of your climax phase, you may pay the cost. If you do, this turn, this gets +2000 power.
+EndCard
+
+Character: AZL/S102-107
+Name Massachusetts
+Color B
+Level 1
+Cost 1
+Power 5500
+Trait1 Warship
+Trait2 Eagle Union
+Cont: GiveSelf
+{
+	If AllYourCharacters HasTrait Warship
+	{
+		GainPower 1500
+		GainEffect
+		{
+			*HandEncore
+		}
+	}
+}
+Text Cont: If all of your characters are 《Warship》 characters, this gets +1500 power and "Auto: ENCORE [Put a character from your hand into your waiting room]".
+Auto: OnReverseOpponent
+{
+	TargetLocation Climax
+	If HasTarget
+	{
+		IfTarget HasTrigger Gate
+		{
+			Peek Deck 3
+			ChooseCard Choose a card to add to your hand.
+			MoveCard Hand
+			PutTheRestIntoTheWaitingRoom
+			Discard 1 Any
+		}
+	}
+}
+Text Auto: When this card's battle opponent is reversed, if you have a climax with a Gate Trigger in your climax area, look at up to 3 cards from the top of your deck, choose up to 1 card among them, show it to your opponent, add it to hand, and send the rest to waiting room, then put a card from your hand into your waiting room.
+EndCard
+
+Character: AZL/S102-108
+Name Shangri-La
+Color B
+Level 2
+Cost 1
+Trigger Soul
+Power 6500
+Trait1 Warship
+Trait2 Eagle Union
+Combo Observer of the Sky and Sea
+Auto: OnEndOfAttack
+{
+	If Climax Observer of the Sky and Sea
+	{
+		PayCost 2
+		{
+			TargetTop Deck 1
+			Reveal
+			IfTarget HasTrait Warship
+			{
+				TargetSelf
+				Stand
+			}
+		}
+	}
+}
+TimesPerTurn 1
+Text Auto: CxCombo (2) This ability can only be activated up to once per turn. At the end of this card's battle, if you have "Observer of the Sky and Sea" in your climax area, you may pay the cost. If you do, reveal the top card of your deck. If that card is a 《Warship》 character, stand this.
+Auto: StartClimaxPhase
+{
+	PayCost Resonate New Jersey
+	{
+		GainPower 6000
+	}
+}
+Text Auto: RESONATE [Reveal 1 "New Jersey" from your hand] At the start of your climax phase, you may pay the cost. If you do, this turn, this gets +6000 power.
+EndCard
+
+Character: AZL/S102-109
+Name Georgia
+Color B
+Level 2
+Cost 1
+Trigger Soul
+Power 7000
+Trait1 Warship
+Trait2 Eagle Union
+Cont: GiveSelf
+{
+	If Compare Experience 5 OrMore
+	{
+		GainPower 500
+		GainEffect
+		{
+			*HandEncore
+		}
+	}
+}
+Text Cont: EXPERIENCE If the sum of levels of cards in your level zone is 5 or more, this gets +500 power and "Auto: ENCORE [Put a character from your hand into your waiting room]".
+*GainPowerWhenAttackingLevel3(6000) 
+EndCard
+
+Character: AZL/S102-110
+Name Essex
+Color B
+Level 3
+Cost 2
+Power 9500
+Trigger Soul
+Soul 2
+Trait1 Warship
+Trait2 Eagle Union
+*EarlyPlay2OrLessClimax
+*OnPlayDraw2Discard2BlindStock
+Auto: StartClimaxPhase
+{
+	PayCost Resonate New Jersey
+	{
+		UntilEndOfOpponentsTurn
+		GainPower 2000
+	}
+}
+Text Auto: RESONATE [Reveal 1 "New Jersey" from your hand] At the start of your climax phase, you may pay the cost. If you do, until the end of your opponent's next turn, this gets +2000 power.
+EndCard
+
+Character: AZL/S102-111
+Name Kronshtadt
+Color B
+Level 3
+Cost 2
+Power 10000
+Trigger Soul
+Soul 2
+Trait1 Warship
+Trait2 Northern Parliament
+Auto: OnEndOfAttack
+{
+	If PlayedThisTurn &&& StageContains 4 Other && HasTrait Warship
+	{
+		PayCost 2 Discard 1 Any Send 1 WaitingRoom Other
+		{
+			Stand
+		}
+	}
+}
+TimesPerTurn 1
+Text Auto: [(2) Put a card from your hand into your waiting room, send 1 of your other characters on stage to waiting room] This ability can only be activated up to once per turn. During the turn this was placed on stage from hand, at the end of this card's attack, if you have 4 or more other 《Warship》 characters, you may pay the cost. If you do, stand this.
+Auto: OnAttack
+{
+	If Compare Experience 6 OrMore
+	{
+		GainPower 3000
+	}
+}
+Quick
+Text Auto: EXPERIENCE When this attacks, if the sum of levels of cards in your level zone is 6 or more, this turn, this gets +3000 power.
+EndCard
+
+Character: AZL/S102-112
+Name Tashkent
+Color B
+Level 0
+Cost 0
+Power 1500
+Trait1 Warship
+Trait2 Northern Parliament
+*CharacterFacingThisCannotMove
+Auto: OnPlay
+{
+	GainPower 3000
+}
+Quick
+Text Auto: When this is placed on stage from hand, this turn, this gets +3000 power.
+EndCard
+
+Character: AZL/S102-113
+Name Bataan
+Color B
+Level 0
+Cost 0
+Power 2000
+Trait1 Warship
+Trait2 Eagle Union
+Auto: OnUseResonate
+{
+	PayCost Discard 1 IsClimax
+	{
+		DrawCard
+	}
+}
+TimesPerTurn 1
+Text Auto: [Put a climax from your hand into your waiting room] This ability can only be activated up to once per turn. When you use RESONATE, you may pay the cost. If you do, draw 1 card.
+Act: 1 RestSelf Resonate New Jersey
+{
+	RevealUpTo Deck 3
+	ChooseCardsFromTargets 0 1 HasTrait Warship && IsCharacter
+	RevealTargets
+	MoveCard Hand
+	PutTheRestIntoTheWaitingRoom
+}
+Text Act: RESONATE [(1) Reveal 1 "New Jersey" from your hand, Rest this] Look at up to 3 cards from the top of your deck, choose up to 1 《Warship》 character from among them, show it to your opponent, add it to your hand, and put the rest into the waiting room.
+EndCard
+
+Character: AZL/S102-114
+Name Sovetskaya Rossiya
+Color B
+Level 1
+Cost 0
+Power 3500
+Trait1 Warship
+Trait2 Northern Parliament
+Auto: OnPlay
+{
+	TargetTop Deck 1
+	Reveal
+	IfTarget HasTrait Warship
+	{
+		TargetLocation Stage
+		ChooseCharacterFromTargets
+		GainPower 3000
+	}
+}
+Text Auto: When this is placed on stage from hand, reveal the top card of your deck. If that card is a 《Warship》 character, choose 1 of your characters, this turn, it gets +3000 power.
+Auto: OnPlay
+{
+	PayCost Discard 1 Any
+	{
+		SearchLocationForTargets WaitingRoom 1 1 Compare ThatCardsLevel 0 OrLess && HasTrait Warship
+		PlaceOnStage False True True False
+	}
+}
+Text Auto: [Put 1 card from your hand into your waiting room] When this is placed on stage from hand, you may pay the cost. If you do, choose 1 level 0 or lower 《Warship》 character in your waiting room, place it on stage in any slot.
+EndCard
+
+Character: AZL/S102-115
+Name Ingraham
+Color B
+Level 1
+Cost 0
+Power 4000
+Trait1 Warship
+Trait2 Eagle Union
+*GainPowerForEachOther(500,Warship)
+Auto: OnAttack
+{
+	PayCost Discard 1 IsClimax && HasTrigger Gate
+	{
+		GainPower 1500
+		GainEffect
+		{
+			Auto: OnReverseOpponent
+			{
+				*OptionalDraw
+			}
+			Text Auto: When this card's battle opponent is reversed, you may draw 1 card.
+		}
+	}
+}
+Text Auto: [Put a climax with a Gate Trigger from your hand into your waiting room] When this attacks, you may pay the cost. If you do, this turn, this gets +1500 power and the following ability, "Auto: When this card's battle opponent is reversed, you may draw 1 card."
+EndCard
+
+Character: AZL/S102-116
+Name Ticonderoga
+Color B
+Level 1
+Cost 0
+Power 4000
+Trait1 Warship
+Trait2 Eagle Union
+Auto: OnAttack
+{
+	TargetLocation Stage
+	GainEffect
+	{
+		Auto: OnTriggerCheckClimax
+		{
+			PayCost Discard 1 IsClimax
+			{
+				SearchWaitingRoom HasTrait Warship
+			}
+		}
+		Text Auto: [Put a climax from your hand into your waiting room] When this card's trigger check reveals a climax, you may pay the cost. If you do, choose 1 《Warship》 character from your waiting room, and add it to hand.
+	}
+}
+Quick
+Text Auto: When this attacks, all of your characters gain the following ability, until the end of the turn: "Auto: [Put a climax from your hand into your waiting room] When this card's trigger check reveals a climax, you may pay the cost. If you do, choose 1 《Warship》 character from your waiting room, and add it to hand."
+Auto: StartClimaxPhase
+{
+	If InLocation CenterStage
+	{
+		PayCost Resonate New Jersey
+		{
+			TargetLocation Stage
+			NarrowTargets Other
+			ChooseCharacterFromTargets
+			AddSelfToTargets
+			GainPower 2000
+		}
+	}
+
+}
+Text Auto: RESONATE [Reveal 1 "New Jersey" from your hand] At the start of your climax phase, if this is in your center stage, you may pay the cost. If you do, choose 1 of your other characters and this card, this turn, they get +2000 power.
+EndCard
+
+Character: AZL/S102-117
+Name St. Louis
+Color B
+Level 1
+Cost 0
+Power 4500
+Trait1 Warship
+Trait2 Eagle Union
+Combo You're So Spoiled...
+*OnAttackGainPowerForEachOther(500,Warship)
+Auto: OnAttack
+{
+	If Climax You're So Spoiled...
+	{
+		SearchLocationForTargets WaitingRoom 0 1 HasTrait Warship
+		RevealTargets
+		MoveCard Stock
+	}
+}
+Text Auto: CxCombo When this attacks, if you have "You're So Spoiled..." in your climax area, choose 1 《Warship》 character in your waiting room, you may send it to stock.
+EndCard
+
+Character: AZL/S102-118
+Name San Francisco
+Color B
+Level 3
+Cost 2
+Power 8500
+Trigger Soul
+Soul 2
+Trait1 Warship
+Trait2 Eagle Union
+Auto: OnPlay
+{
+	MultipleChoiceQuestion Choose 1 of the following effects and resolve it,\n1. [Put 1 card from your hand into your waiting room] You may pay the cost. If you do, put the top card of your clock into stock.\n2. Until the end of your opponent's next turn, this gets +4500 power.\n3. This turn, all of your characters get +1000 power and +1 soul.|Choice 1|Choice 2|Choice 3
+	If Answer 0
+	{
+		PayCost Discard 1 Any
+		{
+			TargetTop Clock 1
+			MoveCard Stock
+		}
+	}
+	If Answer 1
+	{
+		UntilEndOfOpponentsTurn
+		GainPower 4500
+	}
+	If Answer 2
+	{
+		TargetLocation Stage
+		GainPower 1000
+		GainSoul 1
+	}
+}
+Text Auto: When this is placed on stage from hand, Choose 1 of the following 3 effects and resolve it, "[Put 1 card from your hand into your waiting room] You may pay the cost. If you do, put the top card of your clock into stock." "Until the end of your opponent's next turn, this gets +4500 power." "This turn, all of your characters get +1000 power and +1 soul."
+EndCard
+
+Character: AZL/S102-119
+Name Allen M. Sumner
+Color B
+Level 3
+Cost 2
+Trigger Soul
+Soul 2
+Power 10000
+Trait1 Warship
+Trait2 Eagle Union
+*StockHealer
+Auto: OnTriggerCheckClimax
+{
+	IfOther HasTrigger Gate
+	{
+		MillOpponent 4
+	}
+}
+Text Auto: When your character's trigger check reveals a climax with Gate in its trigger icon, your opponent puts the top 4 cards of their deck into the waiting room. 
+EndCard
+
+Character: AZL/S102-120
+Name Washington
+Color B
+Level 3
+Cost 2
+Trigger Soul
+Soul 2
+Power 10000
+Trait1 Warship
+Trait2 Eagle Union
+Auto: OnPlay
+{
+	PayCost Rest 1 CardPosition Stand
+	{
+		//OpponentSearchLocationForTargets WaitingRoom 1 1 IsClimax
+		//ReverseTargets OpponentWaitingRoom
+		//MoveCard OpponentDeck
+		//ShuffleLocation OpponentDeck
+		OpponentSearchLocationForTargets WaitingRoom 1 1 IsClimax
+		MoveCard OpponentRevealed
+		OpponentRefresh
+		TargetLocation OpponentRevealed
+		MoveCard OpponentWaitingRoom
+	}
+}
+Text Auto: [Rest 1 of your Standing characters] When this is placed on stage from hand, you may pay the cost. If you do, your opponent chooses 1 climax from their waiting room, and shuffles all other cards from their waiting room into their deck. 
+*OnAttackGainPowerForEachOther(1000,Warship)
+EndCard
+
+Character: AZL/S102-121
+Name Cavalla
+Color B
+Level 0
+Cost 0
+Power 500
+Trait1 Warship
+Trait2 Eagle Union
+Auto: OnTriggerCheckClimax
+{
+	IfOther HasTrigger Gate
+	{
+		PayCost Discard 1 Any
+		{
+			Peek Deck 2
+			ChooseCard Choose a card to add to your hand.
+			MoveCard Hand
+			PutTheRestIntoTheWaitingRoom
+		}
+	}
+}
+Text Auto: [Put 1 card from your hand into your waiting room] When your character's trigger check reveals a climax with Gate in its trigger icon, you may pay the cost. If you do, look at up to 2 cards from the top of your deck, choose up to 1 card from among them, add it to hand, and send the rest to waiting room.
+Act: RestSelf
+{
+	TargetLocation Stage
+	NarrowTargets HasTrait Warship
+	ChooseCharacterFromTargets
+	GainPower 1500
+}
+Text Act: [Rest this] Choose 1 of your 《Warship》 characters, this turn, it gets +1500 power.
+EndCard
+
+Character: AZL/S102-122
+Name Bache
+Color B
+Level 0
+Cost 0
+Power 500
+Trait1 Warship
+Trait2 Eagle Union
+Cont: GiveAll
+{
+	If Other && NameEquals Stephen Potter
+	{
+		GainEffect
+		{
+			Cont: GiveSelf
+			{
+				TargetLocation OpponentBackstage
+				SetXValue TargetCount
+				MultiplyXValue 2000
+				GainPower X
+			}
+			Text Cont: For each of your opponent's characters in the backstage, this gets +2000 power.
+		}
+	}
+}
+Text Cont: All of your other "Stephen Potter" gains the following ability, "Cont: For each of your opponent's characters in the backstage, this gets +2000 power."
+Auto: OnOtherPlacedOnStageFromHand
+{
+	IfOther NameEquals Stephen Potter
+	{
+		TargetTop Deck 1
+		Reveal
+		IfTarget HasTrait Warship
+		{
+			MoveCard Hand
+		}
+	}
+	Else
+	{
+		RefundTimesPerTurn
+	}
+}
+TimesPerTurn 1
+Text Auto: This ability can only be activated up to once per turn. When your other "Stephen Potter" is placed on stage from hand, reveal the top card of your deck. If that card is a 《Warship》 character, add it to hand.
+EndCard
+
+Character: AZL/S102-123
+Name Concord
+Color B
+Level 0
+Cost 0
+Power 1000
+Trait1 Warship
+Trait2 Eagle Union
+*OnPlayReorderTop2
+*OnPlayTradeClimaxForCharacter(Warship) 
+EndCard
+
+Character: AZL/S102-124
+Name Marblehead
+Color B
+Level 0
+Cost 0
+Power 1000
+Trait1 Warship
+Trait2 Eagle Union
+*OnPlayGivePower(1500,Warship)
+*OnAttackGivePower(1500,Warship)
+EndCard
+
+Character: AZL/S102-125
+Name Casablanca
+Color B
+Level 0
+Cost 0
+Power 1500
+Trait1 Warship
+Trait2 Eagle Union
+Auto: OnUseResonate
+{
+	TargetLocation Stage
+	ChooseCharacterFromTargets
+	GainPower 1000
+}
+TimesPerTurn 1
+Text Auto: This ability can only be activated up to once per turn. When you use RESONATE, choose 1 of your characters, this turn, it gets +1000 power.
+Auto: StartClimaxPhase
+{
+	PayCost RestSelf Resonate New Jersey
+	{
+		DrawCard
+		Discard 1 Any
+	}
+}
+Text Auto: RESONATE [Reveal 1 "New Jersey" from your hand, Rest this] At the start of the climax phase, you may pay the cost. If you do, draw 1 card, then put a card from your hand into your waiting room.
+EndCard
+
+Character: AZL/S102-126
+Name Princeton
+Color B
+Level 0
+Cost 0
+Power 1500
+Trait1 Warship
+Trait2 Eagle Union
+Auto: OnReverseOpponent
+{
+	SearchWaitingRoom HasTrait Warship
+	Discard 1 Any
+}
+Text Auto: When this card's battle opponent is reversed, choose 1 《Warship》 character in your waiting room, add it to hand, then put a card from your hand into your waiting room.
+Auto: StartClimaxPhase
+{
+	PayCost Resonate New Jersey
+	{
+		GainPower 4000
+	}
+}
+Text Auto: RESONATE [Reveal 1 "New Jersey" from your hand] At the start of your climax phase, you may pay the cost. If you do, this turn, this gets +4000 power.
+EndCard
+
+Character: AZL/S102-127
+Name Vincennes
+Color B
+Level 0
+Cost 0
+Power 2000
+Trait1 Warship
+Trait2 Eagle Union
+*GainPowerWhenOtherAttacks(1000,Warship)
+Auto: OnReverseOpponent
+{
+	TargetLocation Climax
+	If HasTarget
+	{
+		IfTarget HasTrigger Gate
+		{
+			SearchLocationForTargets WaitingRoom 1 1 Compare ThatCardsLevel 0 OrLess && IsCharacter
+			PlaceOnStage False True True True
+		}
+	}
+}
+Text Auto: When this card's battle opponent is reversed, if you have a climax with a Gate Trigger in your climax area, choose 1 Level 0 or lower character in your waiting room, place it on stage in any slot rested.
+EndCard
+
+Character: AZL/S102-128
+Name Cassin
+Color B
+Level 0
+Cost 0
+Power 2000
+Trait1 Warship
+Trait2 Eagle Union
+Auto: OnAttack
+{
+	If Compare CardsInHand 5 OrMore
+	{
+		GainPower 2000
+	}
+}
+Quick
+Text Auto: When this attacks, if you have 5 or more hand, this turn, this gets +2000 power.
+*EncoreStepIfNoneRestedPayToRest 
+EndCard
+
+Character: AZL/S102-129
+Name Albacore
+Color B
+Level 1
+Cost 0
+Power 4000
+Trait1 Warship
+Trait2 Eagle Union
+Auto: OnPlay
+{
+	If StageContains 2 Other && HasTrait Warship
+	{
+		Question Draw a card?
+		If Yes
+		{
+			DrawCard
+			Discard 1 Any
+		}
+	}
+}
+Text Auto: When this is placed on stage from hand, if you have 2 or more other 《Warship》 characters, you may draw 1 card, if you do, put a card from your hand into your waiting room.
+*DropSearch(Warship)
+EndCard
+
+Character: AZL/S102-130
+Name Honolulu
+Color B
+Level 1
+Cost 0
+Power 4000
+Trait1 Warship
+Trait2 Eagle Union
+Auto: OnOtherPlacedOnStageFromHand
+{
+	IfOther HasTrait Warship
+	{
+		GainPower 1000
+	}
+	Else
+	{
+		RefundTimesPerTurn
+	}
+}
+Quick
+TimesPerTurn 2
+Text Auto: This ability can only be activated up to 2 times per turn. When your other 《Warship》 characters are placed on stage from hand, this turn, this gets +1000 power.
+*GainPowerWhenAttackingLevel2(6000)
+EndCard
+
+Character: AZL/S102-131
+Name Boise
+Color B
+Level 1
+Cost 0
+Power 4000
+Trait1 Warship
+Trait2 Eagle Union
+Cont: GiveAll
+{
+	If Not MyTurn
+	{
+		If Other && HasTrait Warship
+		{
+			GainPower 1000
+		}
+	}
+}
+Text Cont: During your turn, all of your other 《Warship》 characters get +1000 power.
+Act: 1 RestSelf Discard 1 Any
+{
+	SearchWaitingRoom IsCharacter
+}
+Text Act: [(1) Put a card from your hand into your waiting room, Rest this] Choose 1 character in your waiting room, add it to hand.
+EndCard
+
+Character: AZL/S102-132
+Name Bailey
+Color B
+Level 1
+Cost 1
+Trigger Soul
+Power 3500
+Trait1 Warship
+Trait2 Eagle Union
+*OnPlayScryToBottom
+*BlueEarlyPlayBomb 
+EndCard
+
+Character: AZL/S102-133
+Name Birmingham
+Color B
+Level 2
+Cost 1
+Trigger Soul
+Power 2500
+Trait1 Warship
+Trait2 Eagle Union
+Backup 3000
+*MemoryBackup
+EndCard
+
+Character: AZL/S102-134
+Name Portland
+Color B
+Level 2
+Cost 1
+Power 5500
+Trigger Soul
+Trait1 Warship
+Trait2 Eagle Union
+*Level3Assist
+Auto: OnTriggerCheckClimax
+{
+	IfOther HasTrigger Gate
+	{
+		PayCost Discard 1 Any
+		{
+			SearchWaitingRoom IsCharacter
+		}
+	}
+}
+Text Auto: [Put 1 card from your hand into your waiting room] When your character's trigger check reveals a climax with Gate in its trigger icon, you may pay the cost. If you do, choose 1 character from your waiting room, and add it to hand. 
+EndCard
+
+Character: AZL/S102-135
+Name Stephen Potter
+Color B
+Level 2
+Cost 1
+Trigger Soul
+Power 8500
+Trait1 Warship
+Trait2 Eagle Union
+EndCard
+
+Event: AZL/S102-136
+Name Meowfficer
+Color B
+Level 1
+Cost 0
+Effect:
+{
+	Mill 2
+	SetXValue TotalLevel
+	SearchWaitingRoom HasTrait Warship && Compare ThatCardsLevel X OrLower
+}
+Text Put the top 2 cards of your deck into the waiting room, then choose up to 1 level X or lower 《Warship》 character from your waiting room, and add it to hand. X equals the sum of levels of cards put into the waiting room by this effect.
+EndCard
+
+Climax: AZL/S102-137
+Name Ace After Class
+*GateClimax 
+EndCard
+
+Climax: AZL/S102-138
+Name Don'tcha Just Love It?
+*GateClimax 
+EndCard
+
+Climax: AZL/S102-139
+Name Observer of the Sky and Sea
+*GateClimax 
+EndCard
+
+Climax: AZL/S102-140
+Name You're So Spoiled...
+*GateClimax 
+EndCard

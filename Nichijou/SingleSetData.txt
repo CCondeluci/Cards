@@ -1,0 +1,4 @@
+Series: Nichijou
+Folder: Nichijou/WE11
+Prefix: NJ/WE11
+SetName: Nichijou

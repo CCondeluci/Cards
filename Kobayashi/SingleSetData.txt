@@ -1,0 +1,4 @@
+Series: Miss Kobayashi's Dragon Maid
+Folder: Kobayashi/W96
+Prefix: KMD/W96
+SetName: Miss Kobayashi's Dragon Maid
