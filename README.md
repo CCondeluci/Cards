@@ -1,6 +1,6 @@
 # Cards
 
-This is a self-managed database of programmed card effects for use with the Automated Weiss Schwarz Simulator project. Unlike the card data distributed with the application itself, this database will be kept immediately up to date with new sets as they are cretaed (even if they are not fully tested or validated by the original development team). This is not meant to undermine the work that group does to develop cards, but rather provide (mostly) working card effects for new sets as quickly as possible so that the simulator can be used for rapid testing of sets before they release in paper (or in English). This repository also doesn't aim to reword/rewrite effects and leverages community TLs for Japanese sets, since card gamers never read their cards anyway.
+This is a self-managed database of programmed card effects for use with the Automated Weiss Schwarz Simulator project. Unlike the card data distributed with the application itself, this database will be kept immediately up to date with new sets as they are cretaed (even if they are not fully tested or validated by the original development team). This is not meant to undermine the work that group does to develop cards, but rather provide (mostly) working card effects for new sets as quickly as possible so that the simulator can be used for rapid testing of sets before they release in paper (or in English).
 
 ## Instructions
 
