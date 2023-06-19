@@ -857,7 +857,7 @@ Auto: OnPlay
 	PayCost Discard 1 Any
 	{
 		TargetLocation OpponentStage
-		ChooseCharacterFromTargets_Optional Choose up to 1 character to return to your opponent's hand.
+		ChooseCharacterFromTargets Choose 1 character to return to your opponent's hand.
 		MoveCard OpponentHand
 	}
 }

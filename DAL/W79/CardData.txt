@@ -3347,7 +3347,7 @@ Auto: OnAttack
 		{
 			PayCost Discard 2 Any
 				{
-					TargetLocation OpponentBackStage
+					TargetLocation OpponentBackstage
 					NarrowTargets Compare ThatCardsLevel 1 OrLess
 					ChooseCharacterFromTargets_Optional Choose a character to put on the bottom of your opponent's deck.
 					MoveCardToBottom OpponentDeck

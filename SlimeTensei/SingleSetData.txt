@@ -5,3 +5,6 @@ SetName: Volume 1 (S70)
 Folder: SlimeTensei/S82
 Prefix: TSK/S82
 SetName: Volume 2 (S82)
+Folder: SlimeTensei/S101
+Prefix: TSK/S101
+SetName: Volume 3 (S101)

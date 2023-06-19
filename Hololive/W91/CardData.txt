@@ -3290,7 +3290,7 @@ Auto: OnPlay
 Text Auto: [(1)] When this card is placed on the stage from your hand, you may pay the cost. If you do, your opponent puts all of their stock into their waiting room, and puts the same number of cards from the top of their deck into their stock.
 Auto: OnUseAct
 {
-	TargetLocation OpponentBackStage
+	TargetLocation OpponentBackstage
 	SetXToNumberOfCharacters
 	MultiplyXValue 1000
 	TargetSelf

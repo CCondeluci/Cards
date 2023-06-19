@@ -1,0 +1,2575 @@
+Character: TSK/S101-001
+Name Shion, Pride as Secretary
+Color Y
+Level 0
+Cost 0
+Power 2000
+Soul 1
+Trait1 Demon Continent
+Trait2 Secretary
+Auto: OnClimaxPlay
+{
+    PayCost 1
+	{
+		Peek Deck 4
+		AIChoice AddToHand
+		Message Choose a card to add to your hand.
+		ChooseCardsFromTargets 0 1 IsCharacter && HasTrait Demon Continent
+		RevealTargets
+		MoveCard Hand
+		PutTheRestIntoTheWaitingRoom
+	}
+}
+Text Auto:  (1) When your Climax is placed on the Climax Area, you may pay cost. If you do, look at up to 4 cards from the top of your deck, choose up to 1 <Demon Continent> character from among them, show it to your opponent, add it to hand, and send the rest to Waiting Room.
+Auto: OnClimaxPlay
+{
+    PayCost SendSelf Hand
+	{
+		*GiveCharacterPower(2000,Any)
+	}
+}
+Text Auto:  [Return this to hand] When your Climax is placed on the Climax Area, you may pay cost. If you do, choose 1 of your characters, this turn, it gets +2000 power.
+EndCard
+
+Character: TSK/S101-002
+Name Rimuru, Light That Pierces All
+Color Y
+Level 3
+Cost 2
+Trigger Soul 
+Power 10000
+Soul 2
+Trait1 Demon Continent
+Trait2 Slime
+*Healer
+Auto: OnAttack
+{
+    If Climax Rain of Light on a Sunny Day &&& StageContains 1 Other && HasTrait Demon Continent
+    {
+        Burn 1
+        TargetLocation CenterStage
+        NarrowTargets NameEquals 全てを穿つ光 リムル
+        SetXValue TargetCount
+        Repeat X
+        {
+            PayCost Discard 1 Any
+            {
+                TargetSelf
+                GainPower 1000
+                MillOpponent 1
+                IfTarget Compare ThatCardsLevel 0 OrLower && IsCharacter
+                {
+                    Burn 1
+                } 
+            }
+        }
+    }
+}
+Text Auto:  {CX Combo} When this attacks, if you have the Choice CX (022) in your Climax Area, and you have another <Demon Continent> character, deal 1 damage to your opponent, then discard up to X cards. For each card discarded by this effect, perform the following effect, "This turn, this gets +1000 power, then your opponent mills 1. If that card is a Level 0 or lower character, deal 1 damage to your opponent." X is equal to the number of {this card} in your Front Row. 
+
+EndCard
+
+Character: TSK/S101-003
+Name Shion, Heart-Thumping Cooking
+Color Y
+Level 0
+Cost 0
+Power 500
+Soul 1
+Trait1 Demon Continent
+Trait2 Secretary
+*PowerOnMyTurn(4000)
+Auto: OnReverseOpponent
+{
+    If Climax Genius-Level Cooking Creativity
+    {
+        RevealUpTo Deck 3
+        ChooseCardsFromTargets 0 1 IsColor Yellow && IsCharacter
+        RevealTargets
+        MoveCard Hand
+        TargetLocation Revealed
+        ChooseCardsFromTargets 0 1 IsColor Red && IsCharacter
+        RevealTargets
+        MoveCard Hand
+        TargetLocation Revealed
+        ChooseCardsFromTargets 0 1 IsColor Blue && IsCharacter
+        RevealTargets
+        MoveCard Hand
+        PutTheRestIntoTheWaitingRoom
+        TargetLocation Stage
+        ChooseCharacterFromTargets Choose a character to give +1500 power.
+        GainPower 1500
+    }
+}
+Text Auto:  {CX Combo} [Discard 1 <Demon Continent> character] When this card's battle opponent is Reversed, if you have the Choice CX (023) in your Climax Area, you may pay cost. If you do, look at up to 3 cards from the top of your deck, choose up to 1 Yellow character, up to 1 Red character, and up to 1 Blue character from among them, show them to your opponent, add them to hand, and send the rest to Waiting Room, then choose 1 of your <Demon Continent> characters, this turn, it gets +1500 power.
+EndCard
+
+Character: TSK/S101-004
+Name Rimuru, Hope of 3.14%
+Color Y
+Level 0
+Cost 0
+Power 1000
+Soul 1
+Trait1 Demon Continent
+Trait2 Slime
+Auto: OnPlay
+{
+	RevealUpTo Deck 3
+	AIChoice AddToHand
+	ChooseCardsFromTargets 0 1 IsEvent
+	If HasTarget
+	{
+		RevealTargets
+		MoveCard Hand
+		PutTheRestIntoTheWaitingRoom
+		CheckForEmptyDeck
+		Discard 1 Any
+	}
+	PutTheRestIntoTheWaitingRoom
+}
+Text Auto:  When this is placed on stage from hand, look at up to 3 cards from the top of your deck, choose up to 1 Event from among them, show it to your opponent, add it to hand, and send the rest to Waiting Room. If you added a card to hand, discard 1 card.
+Auto: OnOtherCharacterAttacks
+{
+    TargetOther
+	IfThatCard HasTrait Demon Continent
+	{
+		TargetSelf
+		GainPower 2000
+	}
+}
+Text Auto:  When your other <Demon Continent> character attacks, this turn, this gets +2000 power.
+EndCard
+
+Character: TSK/S101-005
+Name Diablo, Loyal Subordinate
+Color Y
+Level 1
+Cost 0
+Power 4000
+Soul 1
+Trait1 Demon Continent
+Trait2 Demon
+Cont: GiveSelf
+{
+    If MyTurn && StageContains 1 Other NameContains Rimuru
+    {
+        GainPower 3000
+    }
+}
+Text Cont:  During your turn, if you have another character with "Rimuru" in its name, this gets +3000 power.
+Auto: OnOpponentReverse
+{
+    If Climax Joy of Becoming Subordinate
+    {
+        RevealUpTo Deck 4
+        ChooseCardsFromTargets 0 2 HasTrait Demon Continent
+        RevealTargets
+        Message Choose up to 1 card to add to hand.
+        ChooseCardsFromTargets 0 1 Any
+        MoveCardHand
+        TargetLocation Revealed
+        ChooseCardsFromTargets 0 1 Any
+        MoveCard Stock
+    }
+}
+Text Auto:  {CX Combo} When this card's battle opponent is Reversed, if you have the Wind CX (024) in your Climax Area, look at up to 4 cards from the top of your deck, choose up to 2 <Demon Continent> characters from among them, choose 1 and add it to hand, then choose 1 and send it to Stock, send the rest to your Waiting Room.
+EndCard
+
+Character: TSK/S101-006
+Name Shion in Danger
+Color Y
+Level 1
+Cost 0
+Power 4500
+Soul 1
+Trait1 Demon Continent
+Trait2 Secretary
+*OnPlayGainPower(1500)
+Auto: OnSentFromStageToWaitingRoom
+{
+    RevealUpTo Deck 3
+    If HasTarget
+    {
+        ChooseCardsFromTargets 0 1 HasTrait Demon Continent
+		RevealTargets
+		MoveCard Hand
+		PutTheRestIntoTheWaitingRoom
+		Discard 1 Any
+    }
+}
+Text Auto:  When this is sent from Stage to Waiting Room, you may reveal up to 3 cards from the top of your deck. If you revealed 1 or more, choose up to 1 <Demon Continent> character from among them, add it to hand, send the rest to Waiting Room, and discard 1 card.
+EndCard
+
+Character: TSK/S101-007
+Name Shion, Battlethirsty
+Color Y
+Level 3
+Cost 2
+Trigger Soul 
+Power 10500
+Soul 2
+Trait1 Demon Continent
+Trait2 Secretary
+Auto: OnAttack
+{
+    PayCost 2 Discard 2 Any
+    {
+        TargetLocation Stock
+		MoveCard WaitingRoom
+        Burn 4
+    }
+}
+Text Auto:  [(2) Discard 2 cards] When this attacks, you may pay cost. If you do, send all of your Stock to Waiting Room, deal 4 damage to your opponent.
+Auto: OnDamageCancel
+{
+    If PlayedThisTurn
+    {
+        *OptionalBurn(1)
+    }
+}
+TimesPerTurn 1
+Text Auto:  This ability activates up to once per turn. During the turn this is placed on stage from hand, when this card's damage is cancelled, you may deal 1 damage to your opponent.
+EndCard
+
+Character: TSK/S101-008
+Name Rimuru, Driven into a Corner
+Color Y
+Level 0
+Cost 0
+Power 1500
+Soul 1
+Trait1 Demon Continent
+Trait2 Demon Lord
+Auto: OnPlay
+{
+	PayCost 2
+	{
+		TargetLocation WaitingRoom
+		MoveCard Deck
+		ShuffleLocation Deck
+	}
+}
+Text Auto:  (2) When this is placed on stage from hand, you may pay cost. If you do, shuffle all cards from your Waiting Room into your deck.
+Act: Discard 1 NameEquals Shion's Home Cooking RestSelf
+{
+    TargetLocation Stage
+    GainPower 2000
+}
+Text Act: [Discard 1 "Shion's Home Cooking - TSK/S70-026", Rest this] This turn, all of your characters get +2000 power.
+EndCard
+
+Character: TSK/S101-009
+Name Rimuru, Regret Beyond Salvage
+Color Y
+Level 0
+Cost 0
+Power 2000
+Soul 1
+Trait1 Demon Continent
+Trait2 Slime
+*OnPlayMill2GainPowerForEachCharacter(1000,Demon Continent)
+Auto: OnSentFromStageToWaitingRoom
+{
+    Mill 2
+    If TargetsContain 1 IsClimax
+    {
+        PayCost Discard 1 Any
+        {
+            SearchWaitingRoom IsCharacter
+        }
+    }
+}
+Text Auto:  [Discard 1 card] When this is sent from Stage to Waiting Room, mill 2 cards, if you milled a Climax, you may pay cost. If you do, choose 1 character from your Waiting Room, add it to hand.
+EndCard
+
+Character: TSK/S101-010
+Name Elen, Placing Her Hopes On a Prayer
+Color Y
+Level 0
+Cost 0
+Power 2000
+Soul 1
+Trait1 Demon Continent
+Trait2 Adventurer
+*DropSearch(Demon Continent)
+Text Auto:  [(1) Discard 1 card] When this is placed on stage from hand, you may pay cost. If you do, search your deck for up to 1 <Demon Continent> character, show it to your opponent, add it to hand, and shuffle your deck afterwards
+Auto: StartClimaxPhase
+{
+    TargetLocation Stage
+    ChooseCharacterFromTargets Choose a character to give +500 power.
+    GainPower 500
+}
+Text Auto:  At the start of your Climax Phase, choose 1 of your <Demon Continent> characters, this turn, it gets +500 power.
+EndCard
+
+Character: TSK/S101-011
+Name Hakurou, Unescapable Sharpness
+Color Y
+Level 1
+Cost 0
+Power 1500
+Soul 1
+Trait1 Demon Continent
+Trait2 Swordsmanship
+Cont: GiveSelf
+{
+    If LocationContains Level 1 IsColor Yellow
+    {
+        GainPower 4500
+    }
+}
+Text Cont:  EXPERIENCE - If you have a Yellow Card in your Level Zone, this gets +4500 power.
+Auto: OnPlay
+{
+    PayCost Discard 1 Any
+    {
+        SearchLocationForTargets WaitingRoom 1 1 Compare ThatCardsLevel 0 OrLower
+		PlaceOnStage False True True False
+    }
+}
+Text Auto:  [Discard 1 Card] When this card is placed from your hand to the stage, you may pay the cost, if you do, choose 1 Level 0 or lower character in your waiting room, place it on the stage in any slot.
+EndCard
+
+Character: TSK/S101-012
+Name Diablo, Overwhelming Difference in Skills
+Color Y
+Level 1
+Cost 0
+Power 4500
+Soul 1
+Trait1 Demon Continent
+Trait2 Demon
+Cont: GiveSelf
+{
+    If StageContains 2 Other && HasTrait Demon Continent
+    {
+        GainPower 2000
+    }
+}
+Text Cont:  During your turn, if you have 2 or more other <Demon Continent> characters, this gets +2000 power.
+Auto: OnCancel
+{
+    If InBattle && OnStage
+	{
+        Question Return this card to your hand?
+        If Yes
+        {
+            TargetSelf
+            MoveCard Hand
+        }
+    }
+}
+Text Auto:  During this card's battle, when the damage you take is cancelled, you may return this to your hand.
+EndCard
+
+Character: TSK/S101-013
+Name Ramiris, Eating
+Color Y
+Level 2
+Cost 1
+Trigger Soul 
+Power 2500
+Soul 1
+Trait1 Demon Continent
+Trait2 Demon Lord
+Auto: OnUseThisCardsBackup
+{
+    TargetBattleOpponent
+	SaveTargets
+	TargetMyCharacterInBattle
+	AddCurrentToSavedTargets
+	LoadTargets
+	Message Choose a character in battle to gain +6 soul.
+	ChooseCharacterFromTargets
+    GainSoul 6
+}
+Text Auto:  [(1) Discard 2 cards] When you use this card's BACKUP, you may pay cost. if you do, choose 1 battling character, this turn, it gets +6 Soul.
+Backup 2500
+EndCard
+
+Character: TSK/S101-014
+Name Shion, Sudden Assault
+Color Y
+Level 2
+Cost 1
+Trigger Soul 
+Power 4500
+Soul 1
+Trait1 Demon Continent
+Trait2 Secretary
+*LevelAssist
+Act: RestSelf
+{
+    Peek Deck 2
+	Reorder
+	EndPeek
+}
+Text Act: [Rest this] Look at up to 2 cards from the top of your deck, and put them back on top in any order.
+
+EndCard
+
+Character: TSK/S101-015
+Name Geld, Expecting the Next
+Color Y
+Level 0
+Cost 0
+Power 1000
+Soul 1
+Trait1 Demon Continent
+Trait2 Earnest
+Auto: OnPlay|OnAttack
+{
+    TargetLocation OpponentCenterStage
+    ChooseCharacterFromTargets Choose a character to give -500 power.
+    GainPower -500
+}
+Text Auto:  When this is placed on stage from hand or attacks, choose 1 of your opponent's front row characters, this turn, it gets -500 power.
+EndCard
+
+Character: TSK/S101-016
+Name Diablo, Overflowing Charisma
+Color Y
+Level 0
+Cost 0
+Power 1000
+Soul 1
+Trait1 Demon Continent
+Trait2 Demon
+*GlobalPower(500,Demon Continent)
+Auto: StartClimaxPhase
+{
+    TargetLocation Stage
+    NarrowTargets NameContains Rimuru
+    ChooseCharacterFromTargets Choose a "Rimuru" to gain +1000 power.
+    GainPower 1000
+}
+Text Auto:  At the start of your Climax Phase, choose 1 of your character with "Rimuru" in its name, this turn, it gets +1000 power.
+EndCard
+
+Character: TSK/S101-017
+Name Shion, Spoiled
+Color Y
+Level 1
+Cost 0
+Power 4000
+Soul 1
+Trait1 Demon Continent
+Trait2 Secretary
+*GainPowerForEachOther(500,Demon Continent)
+Auto: OnPlay
+{
+    If LocationContains Level 1 IsColor Yellow &&& LocationContains Level 1 IsColor Red
+    {
+        RevealUpTo Deck 4
+        ChooseCardsFromTargets 0 1 IsClimax
+        MoveCard Hand
+        PutTheRestIntoTheWaitingRoom
+    }
+}
+Text Auto:  EXPERIENCE - When this is placed on stage from hand, if you have a Yellow card and a Red card in your Level Zone, look at up to 4 cards from the top of your deck, choose up to 1 Climax from among them, add it to hand, and send the rest to Waiting Room. If you added a card to hand, discard 1 card.
+EndCard
+
+Character: TSK/S101-018
+Name "Sword of Flowing Water" Hakurou
+Color Y
+Level 2
+Cost 1
+Trigger Soul 
+Power 3000
+Soul 1
+Trait1 Demon Continent
+Trait2 Swordsmanship
+Auto: OnAttack
+{
+    GainPower 10000
+}
+Text Auto:  When this attacks, this turn, this gets +10000 power.
+Auto: OnOpponentReverse
+{
+    Question Send the battle opponent into their stock?
+    If Yes
+    {
+        TargetBattleOpponent
+        MoveCard OpponentStock
+        TargetBottom OpponentStock 1
+        MoveCard OpponentWaitingRoom
+    }
+}
+Text Auto:  When this card's battle opponent is Reversed, you may send that character to Stock. If you do, put the bottom card of your opponent's Stock into Waiting Room.
+EndCard
+
+Character: TSK/S101-019
+Name Yuuki, Unknown Power
+Color Y
+Level 2
+Cost 1
+Trigger Soul 
+Power 6000
+Soul 1
+Trait1 Demon Continent
+*GainPowerForEachOther(1000,Demon Continent)
+*HandEncoreTrait(Demon Continent)
+EndCard
+
+Character: TSK/S101-020
+Name Diablo, Skilled Second Secretary
+Color Y
+Level 3
+Cost 2
+Trigger Soul 
+Power 10500
+Soul 2
+Trait1 Demon Continent
+Trait2 Demon
+Auto: OnPlay
+{
+    PayCost Discard 1 Any
+    {
+        TargetLocation OpponentBackstage
+        NarrowTargets Compare ThatCardsLevel 2 OrLower
+        ChooseCharacterFromTargets Choose a character to put on the top of your opponent's deck.
+		MoveCard OpponentDeck
+    }
+}
+Text Auto:  [Discard 1 card] When this is placed on stage from hand, you may pay cost. If you do, choose 1 of your opponent's Level 2 or lower Back Row characters, place it on top of their deck.
+EndCard
+
+Event: TSK/S101-021
+Name Normal Life Broken into Pieces
+Color Y
+Level 1
+Cost 0
+Effect:
+{
+    RevealUpTo Deck 4
+    ChooseCardsFromTargets 0 1 HasTrait Demon Continent
+    RevealTargets
+    MoveCard Hand
+    PutTheRestIntoTheWaitingRoom
+    TargetLocation Stage
+    NarrowTargets NameEquals 3 Rules, Rimuru
+    If HasTarget
+    {
+        Stand
+    }
+}
+ActivationRequirement StageContains 1 HasTrait Demon Continent
+Text If you don't have a <Demon Continent> character, this cannot be played from hand.
+Text Look at up to 4 cards from the top of your deck, choose up to 1 <Demon Continent> character from among them, show it to your opponent, add it to hand, send the rest to Waiting Room, then choose 1 of your "3 Rules, Rimuru - TSK/S82-016", Stand it.
+EndCard
+
+Event: TSK/S101-022
+Name Rain of Light on a Sunny Day
+Color Y
+*ChoiceClimax
+EndCard
+
+Event: TSK/S101-023
+Name Genius-Level Cooking Creativity
+Color Y
+*ChoiceClimax
+EndCard
+
+Event: TSK/S101-024
+Name Joy of Becoming Subordinate
+Color Y
+*WindClimax
+EndCard
+
+Character: TSK/S101-025
+Name Rimuru, Happily Embarrassed
+Color G
+Level 0
+Cost 0
+Power 2000
+Soul 1
+Trait1 Demon Continent
+Trait2 Demon Lord
+Act: Discard 2 Any RestSelf
+{
+    SearchLocationForTargets WaitingRoom 0 1 NameContains Veldora && Compare ThatCardsLevel 1 OrLower
+    PlaceOnStage False True True False
+}
+Text Act: [Discard 2 cards, Rest this] Choose 1 Cost 1 or lower character with "Veldora" in its name whose Level is equal to or lower than your Level in your Waiting Room, place it on stage in any slot.
+*Act1RestSelfSalvageBrainstorm(Demon Continent)
+EndCard
+
+Character: TSK/S101-026
+Name Veldora, Seal Unleashed
+Color G
+Level 1
+Cost 0
+Power 4500
+Soul 1
+Trait1 Demon Continent
+Trait2 Dragon
+Cont: GiveSelf
+{
+    If Not StageContains 1 Not HasTrait Demon Continent
+	{
+		GainPower 1000
+	}
+}
+Text Cont:  If all of your characters are <Demon Continent>, this gets +1000 power.
+Auto: OnAttack
+{
+    If Climax Encounter After 2 Years
+    {
+        If LocationContains Hand 6 OrLess && StageContains_Other HasTrait Demon Continent
+        {
+            RevealUpTo Deck 3
+            ChooseCardsFromTargets 0 1 HasTrait Demon Continent || NameEquals Ally Declaration!
+            MoveCard Hand
+            PutTheRestIntoTheWaitingRoom
+            Peek Deck 2
+            If HasTarget
+            {
+                Message Choose a card to put back on top. 
+                ChooseCardsFromTargets 1 1 Any
+                MoveCard Deck
+                PutTheRestIntoTheWaitingRoom
+            }
+        }
+    }
+}
+Text Auto:  {CX Combo} When this attacks, if you have the Bar CX (042) in your Climax Area, you have 6 or less hand, and you have another <Demon Continent> character, look at up to 3 cards from the top of your deck, choose up to 1 <Demon Continent> character or {2/0 Event - 040} from among them, show it to your opponent, add it to hand, send the rest to Waiting Room, then look at up to 2 cards from the top of your deck, choose 1 card among them, put it back on top of your deck, and send the rest to Waiting Room. 
+EndCard
+
+Character: TSK/S101-027
+Name Veldora, Heart-Thumping First Meeting
+Color G
+Level 0
+Cost 0
+Power 2000
+Soul 1
+Trait1 Demon Continent
+Trait2 Dragon
+Auto: OnUseResonate
+{
+    TargetLocation Stage
+    ChooseCharacterFromTargets Choose a character to gain +1000 power.
+    GainPower 1000
+}
+Text Auto:  This ability can only be activated up to once per turn. When you use RESONATE, choose 1 of your characters, this turn, it gets +1000 power.
+Act: 1 Resonate Rimuru, Light That Pierces All
+{
+    RevealUpTo Deck 3
+    ChooseCardsFromTargets 0 1 HasTrait Demon Continent
+    MoveCard Hand
+    PutTheRestIntoTheWaitingRoom
+}
+Text Act: RESONATE [(1) Reveal {New Yellow RR 3/2 Rimuru - 002} from your hand, Rest this] Look at up to 3 cards from the top of your deck, choose up to 1 <Demon Continent> character from among them, show it to your opponent, add it to your hand, and put the rest into the Waiting Room.
+EndCard
+
+Character: TSK/S101-028
+Name Luminous, Elegant Transformation
+Color G
+Level 0
+Cost 0
+Power 2000
+Soul 1
+Trait1 Demon Continent
+Trait2 Demon Lord
+Auto: OnSentFromStageToWaitingRoom
+{
+    PayCost 1 Clock Discard 1 Any
+    {
+        RevealUpTo Deck 6
+        ChooseCardsFromTargets 0 2 HasTrait Demon Lord
+        MoveCard Hand
+        PutTheRestIntoTheWaitingRoom
+    }
+}
+Text Auto:  [(1) Put the top card of your deck into Clock, discard 1 card] When this is sent from Stage to Waiting Room, you may pay cost. If you do, look at up to 6 cards from the top of your deck, choose up to 2 <Demon Lord> characters from among them, show them to your opponent, add them to hand, send the rest to Waiting Room.
+EndCard
+
+Character: TSK/S101-029
+Name Rimuru, Friendship Through Time
+Color G
+Level 1
+Cost 1
+Trigger Soul 
+Power 4000
+Soul 1
+Trait1 Demon Continent
+Trait2 Demon Lord
+*LevelAssistTrait(Demon Continent)
+*BondDiscard(Veldora\, Seal Unleashed)
+EndCard
+
+Character: TSK/S101-030
+Name Veldora, Solid Friendship
+Color G
+Level 3
+Cost 2
+Trigger Soul 
+Power 10000
+Soul 2
+Trait1 Demon Continent
+Trait2 Dragon
+Auto: OnPlay
+{
+    TargetLocation OpponentStage
+    ChooseCharacterFromTargets_Optional Choose a character to return to your opponent's hand.
+    MoveCard OpponentHand
+    PayCost Discard 1 Any
+    {
+        TargetLocation OpponentStage
+        ChooseCharacterFromTargets Choose a character to return to your opponent's hand.
+        MoveCard OpponentHand
+    }
+}
+Text Auto:  When this is placed on stage from hand. choose up to 1 of your opponent's characters. return it to hand. You may discard 1 card. If you do. choose 1 of your opponent's character, return it to hand.
+Auto: OnAttack
+{
+    PayCost 1 Discard 1 Any
+    {
+        TargetLocation OpponentCenterStage
+        ChooseCharacterFromTargets Choose a character to return to your opponent's hand.
+        MoveCard OpponentHand
+        TargetSelf
+        GainPower 1000
+    }
+}
+Text Auto:  [(1) Discard 1 card] When this attacks, you may pay cost. If you do, choose 1 of your opponent's front row characters, return it to hand, then this turn, this gets +1000 power.
+EndCard
+
+Character: TSK/S101-031
+Name Hinata, Calm and Cool Female Swordsman
+Color G
+Level 3
+Cost 2
+Trigger Soul 
+Power 10500
+Soul 2
+Trait1 Demon Continent
+Trait2 Knight
+Auto: OnPlay
+{
+    *OptionalBlindStock
+    TargetLocation OpponentStage
+    NarrowTargets Compare ThatCardsLevel 1 OrMore
+    ChooseCharacterFromTargets_Optional Choose a character to level down.
+    If HasTarget
+    {
+        *Downgrade
+    }
+}
+Text Auto:  When this is placed on stage from hand, put up to 1 card from the top of your deck into Stock, then perform the following effect, "You may choose 1 of your opponent's Level 1 or higher characters. If you do, your opponent chooses 1 Level X or lower character from their Waiting Room, and swaps the two characters. X equals the Level of the character chosen by you -1."
+Auto: OnOpponentReverse
+{
+    PayCost Discard 2 Any
+    {
+        TargetLocation OpponentCenterStage
+        NarrowTargets CardPosition Reversed
+        SetXValue TargetCount
+        Burn X
+    }
+}
+Text Auto:  [Discard 2 cards] When this card's battle opponent is Reversed, you may pay cost. if you do, deal X damage to your opponent. X is equal to the number of your opponent's Reversed characters.
+EndCard
+
+Character: TSK/S101-032
+Name Veldora, High Tension!
+Color G
+Level 0
+Cost 0
+Power 1500
+Soul 1
+Trait1 Demon Continent
+Trait2 Dragon
+Cont: GiveSelf
+{
+    If Compare CardsInHand 5 OrMore
+	{
+		GainPower 2000
+	}
+}
+Text Cont:  If you have 5 or more hand, this gets +2000 power.
+Act: Discard 1 Any SendSelf WaitingRoom
+{
+    SearchWaitingRoom IsCharacter && HasTrait Demon Continent
+}
+Text Act: [Discard 1 card, send this to Waiting Room] Choose 1 <Demon Continent> character in your Waiting Room, add it to hand.
+EndCard
+
+Character: TSK/S101-033
+Name Rimuru, Vassal Given to Friend
+Color G
+Level 2
+Cost 1
+Trigger Soul 
+Power 3500
+Soul 1
+Trait1 Demon Continent
+Trait2 Demon Lord
+Auto: OnPlay
+{
+    If StageContains 4 Other && HasTrait Demon Continent
+	{
+		*OptionalBlindStock
+	}
+}
+Text Auto:  When this is placed on stage from hand, if you have 4 or more other <Demon Continent> characters, choose 1 <Demon Continent> character in your Waiting Room, you may send it to Stock.
+Auto: StartClimaxPhase
+{
+    PayCost 2 SendSelf WaitingRoom
+    {
+        SearchLocationForTargets WaitingRoom 1 1 NameEquals Veldora, Friendship Through Time
+		Change
+    }
+}
+Text Auto:  [(2) Send this to Waiting Room] At the start of your Climax Phase, you may pay cost. if you do, choose 1 {U 3/2 Veldora - 034} in your Waiting Room, place it on stage in this card's former slot.
+EndCard
+
+Character: TSK/S101-034
+Name Veldora, Friendship Through Time
+Color G
+Level 3
+Cost 2
+Trigger Soul 
+Power 10000
+Soul 2
+Trait1 Demon Continent
+Trait2 Dragon
+Cont: GiveSelf
+{
+    SetXToNumberOfCharacters InLocation Backstage && HasTrait Demon Continent && Other
+	MultiplyXValue 500
+	GainPower X
+}
+Text Cont:  For each of your other back row <Demon Continent> characters, this gets +500 power.
+Auto: OnPlay|PlacedBy Rimuru, Vassal Given to Friend
+{
+    SearchWaitingRoom IsCharacter && HasTrait Demon Continent
+}
+Text Auto:  When this is placed on stage from hand or by the AUTO effect of {2/1 Rimuru - 033}, choose 1 <Demon Continent> character from your Waiting Room, you may add it to hand.
+EndCard
+
+Character: TSK/S101-035
+Name Veldora, Hidden Talent
+Color G
+Level 0
+Cost 0
+Power 2000
+Soul 1
+Trait1 Demon Continent
+Trait2 Dragon
+Auto: OnOtherCharacterAttacks
+{
+    TargetOther
+	IfThatCard HasTrait Demon Continent
+	{
+		TargetSelf
+		GainPower 1000
+	}
+}
+Text Auto:  When your other <Demon Continent> character attacks, this turn, this gets +1000 power.
+Auto: OnReverseOpponent
+{
+	TargetLocation OpponentClock
+	If HasTarget
+	{
+		TargetBattleOpponent
+		Question Put the top card of the opponent's clock into the waiting room to put the battle opponent into clock?
+		If Yes
+		{
+			TargetTop OpponentClock 1
+			MoveCard OpponentWaitingRoom
+			TargetBattleOpponent
+			MoveCard OpponentClock
+		}
+	}
+}
+Text Auto:  When this character's battle opponent is Reversed, you may send the top card of your opponent's Clock to Waiting Room. If you do, send that character to Clock.
+EndCard
+
+Character: TSK/S101-036
+Name Rimuru, Unexpected Help
+Color G
+Level 1
+Cost 0
+Power 3500
+Soul 1
+Trait1 Demon Continent
+Trait2 Demon Lord
+Auto: OnPlay
+{
+    GainPower 3000
+}
+Text Auto:  When this is placed on stage from hand, this turn, this gets +3000 power.
+Auto: OnFrontalAttacked
+{
+    Question Would you like to change into "Veldora, Sudden Intrusion"?
+    SearchLocationForTargets Hand 0 1 NameEquals Veldora, Sudden Intrusion
+    If HasTarget
+    {
+	    Change
+    }
+}
+Text Auto:  When this is Front Attacked, choose 1 {1/1 Veldora - 037} in your Hand, you may swap it with this card as a defending character.
+EndCard
+
+Character: TSK/S101-037
+Name Veldora, Sudden Intrusion
+Color G
+Level 1
+Cost 1
+Trigger Soul 
+Power 4000
+Soul 1
+Trait1 Demon Continent
+Trait2 Dragon
+Cont: GiveSelf
+{
+    If StageContains 2 Other && HasTrait Demon Continent
+    {
+        GainPower 4000
+    }
+}
+Text Cont:  If you have 2 or more other <Demon Continent> characters, this gets +4000 power.
+EndCard
+
+Character: TSK/S101-038
+Name Veldora, Deep in Manga
+Color G
+Level 2
+Cost 1
+Trigger Soul 
+Power 6000
+Soul 1
+Trait1 Demon Continent
+Trait2 Dragon
+Cont: GiveSelf
+{
+    If Compare Experience 5 OrMore
+    {
+        GainPower 4500
+    }
+}
+Text Cont:  EXPERIENCE 5 - If the sum of Levels of cards in your Level Zone is 5 or more, this gets +4500 power.
+Auto: OnPlay
+{
+    If Compare Experience 5 OrMore
+    {
+        PayCost Discard 1 Any
+        {
+            MultipleChoiceQuestion Would you like to move one of your opponent's characters to an open slot, or swap it with another one of your opponent's characters?|Move to an open position|Swap with another character
+            If Answer 0
+            {
+                TargetLocation OpponentStage
+                ChooseCharacterFromTargets Choose a character to move.
+                MoveToOpenPosition True True
+            }
+            If Answer 1
+            {
+                *Exchange2OfOpponentsCharacters
+            }
+        }
+    }
+}
+Text Auto:  EXPERERINCE 5 - [Discard 1 card] When this is placed on stage from hand, if the sum of Levels of cards in your Level Zone is 5 or more, you may pay cost. if you do, choose 1 of your opponent's characters, Stand it and move it to an opponent's empty slot or choose another 1 of your opponent's characters, stand them and swap them.
+EndCard
+
+Character: TSK/S101-039
+Name Rimuru, On the Defense
+Color G
+Level 2
+Cost 1
+Trigger Soul 
+Power 6500
+Soul 1
+Trait1 Demon Continent
+Trait2 Slime
+Cont: GiveSelf
+{
+    If MyTurn
+    {
+        *GainPowerForEachOther(1500,Demon Continent)
+    }
+}
+Text Cont:  During your turn, for each of your other <Demon Continent> characters, this gets +1500 power.
+Auto: OnAttack
+{
+    If Climax Last Ditch Effort Secret Strategy
+    {
+        SearchLocationForTargets WaitingRoom 0 1 IsCharacter && HasTrait Demon Continent
+        MoveCard Stock
+        TargetSelf
+        UntilEndOfOpponentsTurn
+        GainEffect
+        {
+            Auto: OnFrontalAttacked
+            {
+                Question Return this card to your hand?
+                If Yes
+                {
+                    TargetSelf
+                    MoveCard Hand
+                }
+            }
+            Text Auto: When this is Front Attacked, you may return this to your hand.
+        }
+    }
+}
+Text Auto:  {CX Combo} When this attacks, if you have the Bar CX (043) in your Climax Area, choose up to 1 <Demon Continent> character in your Waiting Room, send it to Stock, then until the end of your opponent's next turn, this gains the following ability, "AUTO - When this is Front Attacked, you may return this to hand."
+EndCard
+
+Event: TSK/S101-040
+Name Ally Declaration!
+Color G
+Level 2
+Cost 0
+Effect:
+{
+    TargetLocation Stage
+    ChooseCharacterFromTargets Choose a character to gain the ability.
+    GainEffect
+    {
+        Auto: OnReverseOpponent
+        {
+            SearchWaitingRoom IsCharacter && HasTrait Demon Continent
+        }
+        Text Auto: When this card's battle opponent is Reversed, choose 1 <Demon Continent> character in your Waiting Room, you may add it to hand.
+    }
+    TargetSelf
+    MoveCard Stock
+}
+Text Choose 1 of your characters, this turn, it gains the following ability, "AUTO - When this card's battle opponent is Reversed, choose 1 <Demon Continent> character in your Waiting Room, you may add it to hand."
+Text Send this to Stock.
+EndCard
+
+Event: TSK/S101-041
+Name Ultimate Skill "Raphael"
+Color G
+Level 2
+Cost 1
+Effect:
+{
+    TargetSelf
+    MoveCard Memory
+    Peek Deck 4
+	ChooseCardsFromTargets 0 1 Any
+	MoveCard Hand
+	PutTheRestIntoTheWaitingRoom
+}
+ActivationRequirement StageContains 1 NameContains Rimuru
+Text If you don't have a character with "Rimuru" in its name, this cannot be played from hand.
+Text Send this to Memory. Look at up to 4 cards from the top of your deck, choose 1 card from among them, add it to hand, put the rest back on top of your deck in any order.
+Auto: StartMainPhase
+{
+    PayCost Discard 1 IsClimax
+	{
+		MoveCard Hand
+	}
+}
+InMemory
+Text AUTO - MEMORY [Discard 1 Climax] While this is in your Memory, at the start of your Main Phase, you may pay cost. If you do, add this to hand.
+EndCard
+
+Event: TSK/S101-042
+Name Encounter After 2 Years
+Color G
+*BarClimax
+EndCard
+
+Event: TSK/S101-043
+Name Last Ditch Effort Secret Strategy
+Color G
+*BarClimax
+EndCard
+
+Character: TSK/S101-044
+Name 薄紅色の慈悲 シュナ
+Color R
+Level 0
+Cost 0
+Power 1000
+Soul 1
+Trait1 Demon Continent
+Trait2 Shrine Maiden
+Auto: OnAttack
+{
+    TargetLocation Stage
+    NarrowTargets Other
+    ChooseCharacterFromTargets Choose a character to gain +1500 power.
+    GainPower 1500
+}
+Text Auto:  When this attacks, choose 1 of your other characters, this turn, it gets +1500 power.
+Auto: OnSentFromStageToWaitingRoom
+{
+    PayCost 1 Clock
+	{
+		RevealUpTo Deck 2
+		NarrowTargets HasTrait Demon Continent
+		MoveCard Hand
+		PutTheRestIntoTheWaitingRoom
+	}
+}
+Text Auto:  [(1) Put the top card of your deck into Clock] When this is sent from stage to Waiting Room, you may pay cost. If you do, look at up to 2 cards from the top of your deck, choose up to 2 <Demon Continent> characters from among them, show them to your opponent, add them to hand, and send the rest to Waiting Room.
+EndCard
+
+Character: TSK/S101-045
+Name Milim, Otherworldly Strength
+Color R
+Level 1
+Cost 0
+Power 4000
+Soul 1
+Trait1 Demon Continent
+Trait2 Demon Lord
+Cont: GiveSelf
+{
+    If MyTurn && Not StageContains 1 Not HasTrait Demon Continent
+    {
+        GainPower 2000
+    }
+}
+Text Cont:  During your turn, if all of your characters are <Demon Continent>, this gets +2000 power.
+Auto: OnAttack
+{
+    If Climax Occasionally Seen Serious Side
+    {
+        TargetLocation OpponentBackstage
+		NarrowTargets Compare ThatCardsLevel 0 OrLess
+		ChooseCharacterFromTargets Choose an opponent's level 0 or lower character to send to the waiting room.
+		MoveCard OpponentWaitingRoom
+		TargetTop Deck 1
+		Reveal
+		IfTarget HasTrait Demon Continent || NameEquals Octogram
+		{
+			MoveCard Hand
+		}
+    }
+}
+Text Auto:  {CX Combo} When this attacks, if you have the Door CX (073) in your Climax Area, choose up to 1 of your Opponent's Level 0 or lower Back Row characters, send it to Waiting Room, then reveal the top card of your deck. If that card is a <Demon Continent> character or {1/1 Red Event - 071}, add it to hand. 
+
+EndCard
+
+Character: TSK/S101-046
+Name Benimaru, Disaster-Burning Black Flame
+Color R
+Level 2
+Cost 1
+Trigger Soul 
+Power 5500
+Soul 1
+Trait1 Demon Continent
+Trait2 Flame
+Cont: GiveSelf
+{
+    If Not StageContains 1 Not HasTrait Demon Continent
+    {
+        GainPower 4500
+        GainEffect
+        {
+            *HandEncoreTrait(Demon Continent)
+        }
+    }
+}
+Text Cont:  If all of your characters are <Demon Continent>, this gets +4500 power and "AUTO - ENCORE [Discard 1 <Demon Continent> character]"
+Auto: OnSpecificClimaxPlay Black Flame Lighting in the Dark
+{
+    If InLocation CenterStage
+    {
+        If LocationContains Level 1 IsColor Yellow && LocationContains Level 1 IsColor Red
+        {
+            MultipleChoiceQuestion Choose 1 of the two following effects and perform it:\n1. Choose 1 of your other Demon Continent characters and Stand it.\n2.You may put the top card of your stock in the waiting room. If you do, deal 1 damage to your opponent.|Stand a character|Pay 1 Burn 1
+            If Answer 0
+            {
+                TargetLocation Stage
+                NarrowTargets Other
+                ChooseCharacterFromTargets Choose a character to stand.
+                Stand
+            }
+            If Answer 1
+            {
+                PayCost 1
+                {
+                    Burn 1
+                }
+            }
+        }
+    }
+}
+Text Auto:  {CX Combo} EXPERIENCE - When the Standby CX (074) is placed in your Climax Area, if this is in your Front Row, and you have a Yellow card and a Red card in your Level Zone, choose 1 of the following 2 effects and resolve it,
+EndCard
+
+Character: TSK/S101-047
+Name "Newbie" Demon Lord Rimuru
+Color R
+Level 3
+Cost 2
+Trigger Soul 
+Power 10000
+Soul 2
+Trait1 Demon Continent
+Trait2 Demon Lord
+*Healer
+Auto: OnAttack
+{
+    If Climax Secret Art of Revival
+    {
+        If StageContains_Other 3 HasTrait Demon Lord
+        {
+            PayCost Discard 1 HasTrait Demon Continent
+            {
+                Burn 2
+                TargetSelf
+                GainPower 1500
+            }
+        }
+    }
+}
+Text Auto:  {CX Combo} [Discard 1 <Demon Continent> character] When this attacks, if you have the Door CX (072) in your Climax Area, and you have 3 or more other <Demon Lord> characters, you may pay cost. If you do, deal 2 damage to your opponent and this turn, this gets +1500 power.
+EndCard
+
+Character: TSK/S101-048
+Name Milim, As the Operation Goes
+Color R
+Level 0
+Cost 0
+Power 2000
+Soul 1
+Trait1 Demon Continent
+Trait2 Demon Lord
+Auto: OnPlay
+{
+	TargetLocation Hand
+	ChooseCardFromTargets 0 1 Any
+	MoveCard Stock
+}
+Text Auto:  When this is placed on stage from hand, choose 1 card from your hand, you may send it to Stock.
+Act: 1 SendSelf WaitingRoom
+{
+    RevealUpTo Deck 4
+    ChooseCardsFromTargets 0 1 HasTrait Demon Continent
+    RevealTargets
+    MoveCard Hand
+    PutTheRestIntoTheWaitingRoom
+}
+Text Act: [(1) Send this to Waiting Room] Look at up to 4 cards from the top of your deck, choose up to 1 <Demon Continent> character from among them, show it to your opponent, add it to hand, and send the rest to Waiting Room.
+EndCard
+
+Character: TSK/S101-049
+Name Rimuru, Awaken Towards True Demon Lord
+Color R
+Level 1
+Cost 0
+Power 2000
+Soul 1
+Trait1 Demon Continent
+Trait2 Slime
+Cont: GiveAll
+{
+    If MyTurn
+    {
+        GainPower 500
+    }
+}
+Text Cont:  During your turn, all of your other <Demon Continent> characters get +500 power.
+Auto: StartClimaxPhase
+{
+    PayCost 1 SendSelf Memory
+    {
+        SearchLocationForTargets WaitingRoom 1 1 NameEquals Rimuru, End of the Long Rivalry
+		Change
+    }
+}
+Text Auto:  [(1) Send this to Memory] At the start of your Climax Phase, if you are Level 2 or higher, you may pay cost. If you do, choose 1 {2/1 Rimuru - 058} in your Waiting Room, place it on stage in this card's former slot.
+Act: 1 Rest 2 Any
+{
+    RevealUpTo Deck 4
+    ChooseCardsFromTargets 0 1 Compare ThatCardsLevel 1 OrHigher
+    RevealTargets
+    MoveCard Hand
+    PutTheRestIntoTheWaitingRoom
+}
+Text Act: [(1) Rest 2 of your characters] Look at up to 4 cards from the top of your deck, choose up to 1 Level 1 or higher card among them, show it to your opponent, add it to hand, and send the rest to Waiting Room.
+EndCard
+
+Character: TSK/S101-050
+Name Rimuru, New Departure
+Color R
+Level 1
+Cost 0
+Power 4500
+Soul 1
+Trait1 Demon Continent
+Trait2 Demon Lord
+Cont: GiveSelf
+{
+    If MyTurn && StageContains_Other 2 HasTrait Demon Continent
+    {
+        GainPower 2000
+    }
+}
+Text Cont:  During your turn, if you have 2 or more other <Demon Continent> characters, this gets +2000 power.
+Auto: OnAttack
+{
+    If Climax Uncontrollable Anger
+    {
+        If StageContains_Other 1 HasTrait Demon Continent
+        {
+            TargetLocation Stage
+            ChooseCharacterFromTargets Choose a character to gain the ability.
+            GainEffect
+            {
+                Auto: OnReverseOpponent
+                {
+                    SearchDeck HasTrait Demon Continent
+                }
+                Text Auto: When this card's battle opponent is Reversed, search your deck for up to 1 <Demon Continent> character, show it to your opponent, add it to hand, and shuffle your deck afterwards.
+            }
+        }
+    }
+}
+Text Auto:  {CX Combo} When this attacks, if you have the Door CX (075) in your Climax Area, and you have another <Demon Continent> character, choose 1 of your characters, this turn, it gains the following ability, "AUTO - When this card's battle opponent is Reversed, search your deck for up to 1 <Demon Continent> character, show it to your opponent, add it to hand, and shuffle your deck afterwards."
+EndCard
+
+Character: TSK/S101-051
+Name Shuna, Sudden Request
+Color R
+Level 1
+Cost 0
+Power 5000
+Soul 1
+Trait1 Demon Continent
+Trait2 Shrine Maiden
+Auto: OnPlay
+{
+    If LocationContains Level 1 IsColor Yellow
+    {
+        RevealUpTo Deck 4
+        ChooseCardsFromTargets 0 1 Compare ThatCardsLevel 1 OrHigher
+        RevealTargets
+        MoveCard Hand
+        PutTheRestIntoTheWaitingRoom
+    }
+}
+Text Auto:  EXPERIENCE [Discard 1 card] When this is placed on stage from hand, if you have a Yellow card in your Level Zone , you may pay cost. If you do, look at up to 4 cards from the top of your deck, choose up to 1 Level 1 or higher card among them, show it to your opponent, add it to hand, and send the rest to Waiting Room.
+EndCard
+
+Character: TSK/S101-052
+Name Shuna, Silent Anger
+Color R
+Level 2
+Cost 1
+Trigger Soul 
+Power 6000
+Soul 1
+Trait1 Demon Continent
+Trait2 Shrine Maiden
+Cont: GiveAll
+{
+    If HasTrait Demon Continent
+    {
+        GainPower 1000
+    }
+}
+Text Cont:  All of your other <Demon Continent> characters get +1000 power.
+Cont: GiveAll
+{
+    If StageContains_Other 1 NameEquals Myulan, Imprisoned Wizard
+    {
+        If HasTrait Demon Continent
+        {
+            GainEffect
+            {
+                *HexProof
+            }
+        }
+    }
+}
+Text Cont:  If you have another {0/0 Mjurann - 090}, all of your other <Demon Continent> characters gain the following ability, "CONT - This cannot be targeted by your opponent's effects."
+EndCard
+
+Character: TSK/S101-053
+Name Milim, Forced to Choose
+Color R
+Level 3
+Cost 2
+Trigger Soul 
+Power 8000
+Soul 2
+Trait1 Demon Continent
+Trait2 Demon Lord
+*EarlyPlay4OrMore(Demon Lord)
+Cont: GiveSelf
+{
+    If StageContains 2 Other && HasTrait Demon Lord
+    {
+        GainPower 2500
+        GainEffect
+        {
+            *HandEncoreTrait(Demon Lord)
+        }
+    }
+}
+Text Cont:  If you have 2 or more other <Demon Lord> characters, this gets +2500 power and "AUTO - ENCORE [Discard 1 <Demon Lord> character]"
+*OnPlayCheckX(Demon Lord)
+EndCard
+
+Character: TSK/S101-054
+Name Benimaru, To the Side of the Strong
+Color R
+Level 3
+Cost 2
+Trigger Soul 
+Power 10000
+Soul 2
+Trait1 Demon Continent
+Trait2 Flame
+*Healer
+Auto: OnAttack
+{
+    If LocationContains Level 1 IsColor Yellow && LocationContains Level 1 IsColor Red && LocationContains Level 1 IsColor Blue
+    {
+        PayCost 1 Discard 1 HasTrait Demon Continent
+        {
+            TargetTop Deck 1
+            Reveal
+            SetXValue TargetCardsLevel
+            AddToXValue 1
+            Burn X
+        }
+    }
+}
+Text Auto:  EXPERIENCE [(1) Discard 1 <Demon Continent> character] When this attacks, if you have a Yellow card, a Red card and a Blue Card in your Level Zone, you may pay cost. If you do, reveal the top card of your deck, deal X damage to your opponent. X is equal to the Level of the revealed card +1.
+EndCard
+
+Character: TSK/S101-055
+Name Milim, Age When She Wants to Gloat
+Color R
+Level 0
+Cost 0
+Power 500
+Soul 1
+Trait1 Demon Continent
+Trait2 Demon Lord
+Cont: GiveAll
+{
+    If StageContains_Other 1 HasTrait Demon Continent
+    {
+        If NameEquals Rimuru, Last Push
+        {
+             GainPower 1000
+            GainEffect
+            {
+                Auto: OnAttack
+                {
+                    PayCost 1 Discard 1 Any
+                    {
+                        SearchWaitingRoom IsCharacter
+                    }
+                }
+                Text Auto: [(1) Discard 1 card] When this attacks, you may pay cost. If you do, choose 1 character in your Waiting Room, add it to hand.
+            }
+        }
+    }
+}
+Text Cont:  If you have another <Demon Continent> character, all of your other "Final Push, Rimuru - TSK/S82-080" gets +1000 power and the following ability, "AUTO - [(1) Discard 1 card] When this attacks, you may pay cost. If you do, choose 1 character in your Waiting Room, add it to hand."
+*Bond1(Rimuru\, Last Push)
+EndCard
+
+Character: TSK/S101-056
+Name Milim, A Little Forgetful
+Color R
+Level 0
+Cost 0
+Power 3500
+Soul 1
+Trait1 Demon Continent
+Trait2 Demon Lord
+Cont: Global
+{
+	If InLocation OpponentStage
+	{
+		GainEffect
+		{
+			Auto: Encore 2
+			{
+			}
+			Text Auto: ENCORE [(2)]
+		}
+	}
+}
+Auto: OnPlay
+{
+    PayCost Discard 1 HasTrait Demon Continent
+    {
+        DrawCard
+    }
+}
+Text Auto:  [Discard 1 <Demon Continent> character] When this is placed on stage from hand, you may pay cost. If you do, draw 1 card.
+EndCard
+
+Character: TSK/S101-057
+Name Leon, Goal He Wants to Accomplish
+Color R
+Level 1
+Cost 0
+Power 5000
+Soul 1
+Trait1 Demon Continent
+Trait2 Demon Lord
+Auto: OnSentFromStageToWaitingRoom
+{
+    RevealUpTo Deck 4
+    ChooseCardsFromTargets 0 1 IsClimax && HasTrigger Door
+    RevealTargets
+    MoveCard Hand
+    PutTheRestIntoTheWaitingRoom
+}
+Text Auto:  When this is sent from Stage to Waiting Room, look at up to 4 cards from the top of your deck, choose up to 1 Climax with a Door Trigger from among them, add it to hand, and send the rest to Waiting Room. If you added a card to hand, discard 1 card.
+EndCard
+
+Character: TSK/S101-058
+Name Rimuru, End of the Long Rivalry
+Color R
+Level 2
+Cost 1
+Trigger Soul 
+Power 4000
+Soul 1
+Trait1 Demon Continent
+Trait2 Demon Lord
+*LevelAssist
+Auto: StartClimaxPhase
+{
+    If Compare MyLevel 3 OrHigher
+    {
+        PayCost 1 SendSelf Memory
+        {
+            SearchLocationForTargets WaitingRoom 0 1 NameEquals Rimuru, To the Side of Important Allies
+            Change
+        }   
+    }
+}
+Text Auto:  [(1) Send this to Memory] At the start of your Climax Phase, if you are Level 3 or higher, you may pay cost. If you do, choose 1 {3/2 Rimuru - 082} in your Waiting Room, place it on stage in this card's former slot.
+EndCard
+
+Character: TSK/S101-059
+Name Guy, Oldest Demon Lord
+Color R
+Level 2
+Cost 1
+Trigger Soul 
+Power 6500
+Soul 1
+Trait1 Demon Continent
+Trait2 Demon Lord
+Cont: GiveAll
+{
+    If NameEquals "Newbie" Demon Lord Rimuru
+    {
+        GainPower 1000
+        GainSpecialEffect NoBackupOnAttack
+    }
+
+}
+Text Cont:  All of your other {Red RR 3/2 Rimuru CXC - 047} gets +1000 power and the following ability, "CONT - During this card's battle, all players cannot play BACKUPs from hand."
+Cont: Assist
+{
+    If HasTrait Demon Lord
+    {
+        GainPower 1500
+    }
+}
+Text Cont:  ASSIST +1500 to <Demon Lord> characters.
+EndCard
+
+Character: TSK/S101-060
+Name Rimuru, Moment of Assuring
+Color R
+Level 0
+Cost 0
+Power 1000
+Soul 1
+Trait1 Demon Continent
+Trait2 Demon Lord
+*OnPlayFlicker
+Auto: OnPlay
+{
+    TargetLocation Stage
+    NarrowTargets Other
+    ChooseCharacterFromTargets Choose another character to gain +2000 power.
+    GainPower 2000
+}
+Text Auto:  When this is placed on stage from hand, choose 1 of your other <Demon Continent> characters, this turn, it gets +2000 power.
+EndCard
+
+Character: TSK/S101-061
+Name Frey, Seductive Looks
+Color R
+Level 0
+Cost 0
+Power 1000
+Soul 1
+Trait1 Demon Continent
+Trait2 Demon Lord
+*GlobalPower(500,Demon Lord)
+Act: 1 Rest 2 Any
+{
+    Brainstorm 5
+	TargetBrainstormed
+	NarrowTargets HasTrigger Door
+	SetXValue TargetCount
+	If Compare X 1 OrMore
+	{
+		SearchLocationForTargets WaitingRoom 0 BrainstormedClimax IsCharacter
+		MoveCard Hand
+	}
+}
+Text Act: BRAINSTORM [(1) Rest 2 of your characters] Flip over the top 5 cards of your deck, then send them to Waiting Room. For each Climax with a Door Trigger among them, choose up to 1 character from your Waiting Room, and add it to hand.
+EndCard
+
+Character: TSK/S101-062
+Name Rimuru, Battle to Become a Demon Lord
+Color R
+Level 0
+Cost 0
+Power 1500
+Soul 1
+Trait1 Demon Continent
+Trait2 Demon Lord
+*GlobalPower(500,Demon Lord)
+Auto: OnClimaxPlay
+{
+    TargetLocation OpponentStage
+    NarrowTargets Compare ThatCardsLevel 1 OrLower
+    ChooseCharacterFromTargets Choose a character to gain -1 level.
+    GainLevel -1
+}
+Text Auto:  When a Climax is placed in your Climax Area, choose 1 of your opponent's Level 1 or lower characters, this turn, it gets -1 Level. 
+
+EndCard
+
+Character: TSK/S101-063
+Name Benimaru, Leader of the Emissaries
+Color R
+Level 0
+Cost 0
+Power 2000
+Soul 1
+Trait1 Demon Continent
+Trait2 Flame
+*OnPlayScry
+*ClimaxExchange
+EndCard
+
+Character: TSK/S101-064
+Name Milim, Marionette Victim of Strategies
+Color R
+Level 0
+Cost 0
+Power 2000
+Soul 1
+Trait1 Demon Continent
+Trait2 Demon Lord
+Auto: OnOpponentReverse
+{
+    TargetLocation Stock
+    SetXValue TargetCount
+    If Compare X 3 OrLess
+    {
+        TargetOther
+        MoveCard OpponentDeck
+    }
+}
+Text Auto:  When this card's battle opponent is Reversed, if you have 3 or less Stock, you may send that character to the top of their deck.
+Auto: OnSentFromStageToWaitingRoom
+{
+    *Scry
+}
+Text Auto:  When this is sent from Stage to Waiting Room, look at the top card of your deck, and put it on top of your deck or into your Waiting Room.
+EndCard
+
+Character: TSK/S101-065
+Name Shuna, Talking About the Future
+Color R
+Level 0
+Cost 0
+Power 3000
+Soul 1
+Trait1 Demon Continent
+Trait2 Shrine Maiden
+EndCard
+
+Character: TSK/S101-066
+Name Shuna, Pressure That Couldn't Be Hidden
+Color R
+Level 0
+Cost 0
+Power 3500
+Soul 1
+Trait1 Demon Continent
+Trait2 Shrine Maiden
+Cont: GiveSelf
+{
+	GainSpecialEffect CannotUseBackup
+	GainSpecialEffect CannotUseEvents
+}
+Text Cont:  You cannot play Events or BACKUPs from hand.
+Auto: OnPlay
+{
+    TargetLocation OpponentStage
+    ChooseCharacterFromTargets Choose a character to gain the effects.
+    GainEffect
+    {
+        Cont: GiveSelf
+        {
+            GainSpecialEffect CannotReturnToHand
+            GainSpecialEffect CannotMove
+            GainSpecialEffect CannotGoToMemory
+        }
+        Text Cont: This character cannot be returned to hand, move to another stage position, or be put into memory.
+    }
+}
+Text Auto:  When this is placed on stage from hand, choose 1 of your opponent's characters, this turn, it gains "CONT - This cannot be returned to hand, nor sent to Memory."
+
+EndCard
+
+Character: TSK/S101-067
+Name Clayman, Pulling Strings Behind the Scenes
+Color R
+Level 1
+Cost 0
+Power 5000
+Soul 1
+Trait1 Demon Continent
+Trait2 Demon Lord
+Auto: OnPlay
+{
+    PayCost Discard 1 HasTrait Demon Continent
+    {
+        SearchLocationForTargets WaitingRoom 1 1 Compare ThatCardsLevel 0 OrLower
+        PlaceOnStage False True True False
+        GainPower 3000
+        ScheduleEffectForTargets EndOfTurn
+		{
+			Effect:
+			{
+				IfTarget OnStage
+				{
+					MoveCard WaitingRoom
+				}
+			}
+		}
+    }
+}
+Text Auto:  [Discard 1 <Demon Continent> character] When this is placed on stage from hand, you may pay cost. If you do, choose 1 Level 0 or lower <Demon Continent> character from your Waiting Room, place it on stage in any slot, this turn, it gets +3000 power, and at the end of the turn, send that character to Waiting Room.
+EndCard
+
+Character: TSK/S101-068
+Name Benimaru, Precious Place to Return to
+Color R
+Level 1
+Cost 1
+Power 5500
+Soul 1
+Trait1 Demon Continent
+Trait2 Flame
+Cont: GiveSelf
+{
+    If Not StageContains 1 Not HasTrait Demon Continent
+	{
+		GainPower 1000
+	}
+}
+Text Cont:  If all of your characters are <Demon Continent>, this gets +2000 power.
+Auto: OnOtherFrontalAttacked
+{
+    IfOther HasTrait Demon Continent
+    {
+        PayCost SendSelf WaitingRoom
+        {
+            TargetMyCharacterInBattle
+			GainPower 2500
+        }
+    }
+    
+}
+Text Auto:  [Send this to Waiting Room] When your other <Demon Continent> character is Front Attacked, you may pay cost. If you do, choose 1 of your battling characters, this turn, it gets +2500 power.
+EndCard
+
+Character: TSK/S101-069
+Name Shuna, Preparation for Counterattack
+Color R
+Level 2
+Cost 2
+Trigger Soul 
+Power 5500
+Soul 2
+Trait1 Demon Continent
+Trait2 Shrine Maiden
+Cont: GiveAll
+{
+    If HasTrait Demon Continent
+    {
+        GainPower 1000
+    }
+}
+Text Cont:  All of your other <Demon Continent> characters get +1000 power.
+*OnAttackGainPowerForEachOther(1500,Demon Continent)
+EndCard
+
+Event: TSK/S101-070
+Name Miracle of 3.14%
+Color R
+Level 1
+Cost 0
+Counter
+Effect:
+{
+    DrawCard
+    Discard 1 Any
+    TargetLocation Stage
+    ChooseCharacterFromTargets Choose a character to give the effect to.
+	GainEffect
+	{
+		Auto: OnSentFromStageToWaitingRoom
+		{
+			Question Return this card to its previous stage position as rest?
+			If Yes
+			{
+				Revive
+			}
+		}
+		Text Auto: When this card is put into your waiting room from the stage, you may return this card to its previous stage position as rest."
+	}
+}
+Text COUNTER - Draw 1 card, discard 1 card.
+Text Choose 1 of your <Demon Continent> characters, this turn, it gains the following ability, "AUTO - When this is sent from stage to Waiting Room, you may place this on stage in this card's former slot Rested."
+EndCard
+
+Event: TSK/S101-071
+Name Octogram
+Color R
+Level 1
+Cost 1
+Effect:
+{
+    SearchLocationForTargets WaitingRoom 0 2 IsCharacter
+    MoveCard Hand
+    Discard 1 Any
+}
+ActivationRequirement StageContains 3 HasTrait Demon Lord
+Text If you have 2 or less <Demon Lord> characters, this cannot be played from hand.
+Choose up to 2 characters in your Waiting Room, add them to hand, then discard 1 card.
+EndCard
+
+Event: TSK/S101-072
+Name Secret Art of Revival
+Color R
+*DoorClimax
+EndCard
+
+Event: TSK/S101-073
+Name Occasionally Seen Serious Side
+Color R
+*DoorClimax
+EndCard
+
+Event: TSK/S101-074
+Name Black Flame Lighting in the Dark
+Color R
+*StandbyClimax
+EndCard
+
+Event: TSK/S101-075
+Name Uncontrollable Anger
+Color R
+*DoorClimax
+EndCard
+
+Character: TSK/S101-076
+Name Rimuru, For the Sake of a World Where We Can Live Happily
+Color B
+Level 0
+Cost 0
+Power 1500
+Soul 1
+Trait1 Demon Continent
+Trait2 Demon Lord
+Cont: GiveSelf
+{
+    If Not StageContains 1 Not HasTrait Demon Continent
+    {
+        GainPower 1500
+        GainEffect
+        {
+            *RunToCenter
+        }
+    }
+}
+Text Cont:  If all of your characters are <Demon Continent>, this gets +1500 power and the following ability, "AUTO - At the start of your opponent's Attack Phase, you may move this to your empty Front Row Center Slot."
+Auto: OnCancel
+{
+	If InBattle && OnStage
+	{
+		Question Send this card to your stock?
+		If Yes
+		{
+			TargetSelf
+			MoveCard Stock
+		}
+	}
+}
+Text Auto:  During this card's battle, when the damage you take is cancelled, you may send this to Stock.
+EndCard
+
+Character: TSK/S101-077
+Name Myulan, Freedom-Boding Beating
+Color B
+Level 2
+Cost 1
+Trigger Soul 
+Power 5500
+Soul 1
+Trait1 Demon Continent
+Cont: GiveSelf
+{
+    If StageContains_Other 2 HasTrait Demon Continent
+    {
+        GainPower 5000
+    }
+}
+Text Cont:  If you have 2 or more other <Demon Continent> characters, this get +5000 power.
+Auto: OnSpecificClimaxPlay Words of Love for Life
+{
+    If StageContains_Other 4 HasTrait Demon Continent
+    {
+        SearchDeck HasTrait Demon Continent
+        SearchLocationForTargets WaitingRoom 0 1 HasTrait Demon Continent
+        MoveCard Stock 
+    }
+}
+Text Auto:  {CX Combo} When the Pants CX (098) is placed in your Climax Area, if this is in the Front Row, and you have 4 or more other <Demon Continent> characters, search your deck for up to 1 <Demon Continent> character, show it to your opponent, add it to hand, and shuffle your deck afterward, then choose up to 1 <Demon Continent> in your Waiting Room, send it to Stock. 
+EndCard
+
+Character: TSK/S101-078
+Name Souei, Precious Place to Return to
+Color B
+Level 0
+Cost 0
+Power 1000
+Soul 1
+Trait1 Demon Continent
+Trait2 Shinobi
+Auto: OnPlay
+{
+    If Compare MyLevel 1 OrMore && Compare CardsInWaitingRoom 1 OrMore
+	{
+		Message Choose a card in your level to exchange.
+		SearchLocationForTargets Level 1 1 Any
+		SaveTargets
+		Message Choose a card in your waiting room to exchange.
+		SearchLocationForTargets WaitingRoom 1 1 Any
+		AddSavedToCurrentTargets
+		Exchange
+	}
+}
+Text Auto:  When this is placed on stage from hand, choose 1 card from your Waiting Room and 1 card from your Level Zone, you may swap them.
+*DropSearch(Demon Continent)
+EndCard
+
+Character: TSK/S101-079
+Name Rimiru, Clothing Change Operation
+Color B
+Level 0
+Cost 0
+Power 1500
+Soul 1
+Trait1 Demon Continent
+Trait2 Slime
+*SacrificeToSave(HasTrait Demon Continent)
+Text Auto:  [Send this to Waiting Room] When your other <Demon Continent> character is sent from stage to Waiting Room, if this is in your Back Row, you may pay cost. If you do, return that character to stage in its former slot Rested.
+*RestGivePower(1500,Demon Continent)
+EndCard
+
+Character: TSK/S101-080
+Name Youm & Myulan, Hot Relationship
+Color B
+Level 1
+Cost 0
+Power 3500
+Soul 1
+Trait1 Demon Continent
+Auto: GiveSelf
+{
+    If Not StageContains 1 Not HasTrait Demon Continent
+    {
+        GainPower 2500
+        GainEffect
+        {
+            Auto: Encore SendFromWaitingRoomToBottom 1 Clock HasTrait Demon Continent
+            {
+            }
+            Text Auto: ENCORE [Put 1 <Demon Continent> character from your waiting room at the bottom of your clock]
+        }
+    }
+}
+Text Auto:  If all of your characters are <Demon Continent>, this gets +2500 power and "AUTO - ENCORE [Put 1 <Demon Continent> character from your Waiting Room on the bottom of your Clock]"
+Auto: OnPlay
+{
+    PayCost Discard 1 HasTrait Demon Continent
+	{
+		SearchDeck NameEquals Myulan, Freedom-Boding Beating
+	}
+}
+Text Auto:  [Discard 1 <Demon Continent> character] When this is placed on stage from hand, you may pay cost. If you do, search your deck for up to 1 {New RR 2/1 Mjurran - 077}, show it to your opponent, add it to hand, and shuffle your deck afterwards. 
+
+EndCard
+
+Character: TSK/S101-081
+Name Ranga, Shadow-Diving Bodyguard
+Color B
+Level 1
+Cost 0
+Power 4500
+Soul 1
+Trait1 Demon Continent
+Trait2 Shadow
+Auto: OnPlay
+{
+    If StageContains_Other 1 HasTrait Demon Continent
+    {
+        GainPower 2000
+    }
+}
+Text Auto:  When this is placed on stage from hand, if you have another <Demon Continent> character, this turn, this gets +2000 power.
+Auto: OnOpponentReverse
+{
+    If PlayedThisTurn
+    {
+        PayCost 1 Rest 1 HasTrait Demon Continent
+        {
+            SearchDeck HasTrait Demon Continent
+        }
+    }
+}
+Text Auto:  [(1) Rest 1 of your other Standing <Demon Continent> characters] During the turn this is placed on stage from hand, when this card's battle opponent is Reversed, you may pay cost. If you do, search your deck for up to 1 <Demon Continent> character, show it to your opponent, add it to hand, and shuffle your deck afterwards.
+EndCard
+
+Character: TSK/S101-082
+Name Rimuru, To the Side of Important Allies
+Color B
+Level 3
+Cost 2
+Trigger Soul 
+Power 10000
+Soul 2
+Trait1 Demon Continent
+Trait2 Demon Lord
+Auto: OnPlay|OnPlacedBy Rimuru, End of the Long Rivalry
+{
+    *OnPlayCheck3
+}
+Text Auto:  When this is placed on stage from hand or by the AUTO effect of {2/1 Rimuru - 058}, look at up to 3 cards from the top of your deck, choose up to 1 card among them, add it to hand, and send the rest to Waiting Room.
+Auto: OnEndOfAttack
+{
+    If Climax To the Side of Important Allies Waiting for His Return
+    {
+        If LocationContains Memory 1 NameEquals Rimuru, Awaken Towards True Demon Lord && LocationContains Memory 1 NameEquals Rimuru, End of the Long Rivalry
+        {
+            PayCost 2
+            {
+                Burn 3
+            }
+        }
+    }
+}
+Text Auto:  {CX Combo} MEMORY (2) At the end of this card's attack, if you have the Pants CX (099) in your Climax Area, and you have {1/0 Rimuru - 049} and {2/1 Rimuru - 058} in your Memory, you may pay cost. If you do, deal 3 damage to your opponent.
+EndCard
+
+Character: TSK/S101-083
+Name Soka, Great Right Hand
+Color B
+Level 0
+Cost 0
+Power 1000
+Soul 1
+Trait1 Demon Continent
+Trait2 Ninja
+Auto: OnPlay
+{
+    PayCost Discard 1 Compare ThatCardsLevel 2 OrHigher
+    {
+        SearchDeckToPlaceOnStage(IsCharacter && Compare ThatCardsLevel 0 OrLower, False)
+    }
+}
+Text Auto:  [Discard 1 Level 2 or higher character] When this is placed on stage from hand, you may pay cost. If you do, search your deck for up to 1 Level 0 or lower character, place it on stage in any slot, and shuffle your deck afterwards.
+EndCard
+
+Character: TSK/S101-084
+Name Carrion, Skill Cap That Can't Be Scaled
+Color B
+Level 0
+Cost 0
+Power 1500
+Soul 1
+Trait1 Demon Continent
+Trait2 Demon Lord
+Auto: GiveAll
+{
+    If NameEquals Milim, Otherworldly Strength
+    {
+        GainPower 1000
+        GainEffect
+        {
+            *OnAttackCheck2ChooseTrigger
+        }
+    }
+}
+Text Auto:  All of your other {1/0 Milim CXC - 045} gets +1000 power and the following ability, "AUTO - When this attacks, look at up to 2 cards from the top of your deck, choose 1 card among them, put it back on top of your deck, and send the rest to Waiting Room."
+Auto: OnPlay
+{
+    PayCost Discard 1 HasTrait Demon Continent
+    {
+        SearchDeck NameEquals Milim, Otherworldly Strength
+    }
+}
+Text Auto:  [Discard 1 <Demon Continent> continent] When this is placed on stage from hand, you may pay cost. If you do, search your deck for up to 1 {1/0 Milim CXC - 045}, show it to your opponent, add it to hand, and shuffle your deck afterwards.
+EndCard
+
+Character: TSK/S101-085
+Name Rimuru, Aiming for Paradise!
+Color B
+Level 1
+Cost 0
+Power 2500
+Soul 1
+Trait1 Demon Continent
+Trait2 Slime
+*OnPlayReorderTop2
+Auto: OnOtherPlacedOnStageFromHand
+{
+    IfOther NameEquals "Dragonoid Milim"
+    {
+        TargetOther
+        GainPower 1500
+        TargetSelf
+        MoveCard Stock
+    }
+}
+Text Auto:  When you other ""Dragonoid" Milim - TSK/S70-033" is placed on stage from hand, this turn, it gets +1500 power, then send this to Stock.
+*BondDiscard("Dragonoid Milim")
+EndCard
+
+Character: TSK/S101-086
+Name Souei, Telling of Crisis
+Color B
+Level 2
+Cost 1
+Trigger Soul 
+Power 2500
+Soul 1
+Trait1 Demon Continent
+Trait2 Shinobi
+Auto: OnUseThisCardsBackup
+{
+    If LocationContains Level 1 IsColor Yellow && LocationContains Level 1 IsColor Red
+    {
+        PayCost 1 Send 1 WaitingRoom HasTrait Demon Continent
+        {
+            *SendEarlyPlayToWaitingRoom
+        }
+    }
+}
+Text Auto:  EXPERIENCE [(1) Send 1 of your <Demon Continent> characters from stage to Waiting Room] When you use this card's BACKUP, if you have a Yellow card and a Red card in your Level Zone, you may pay cost. If you do, choose 1 of your opponent's characters whose Level is higher than your opponent's Level, and send it to Waiting Room.
+Backup 2500
+EndCard
+
+Character: TSK/S101-087
+Name Rimuru, Precursor to Disaster Filled with Desire
+Color B
+Level 2
+Cost 1
+Trigger Soul 
+Power 4000
+Soul 1
+Trait1 Demon Continent
+Trait2 Slime
+*LevelAssist
+*RestGivePower(1000,Any)
+Auto: 4 RestSelf
+{
+    TargetLocation Stage
+    NarrowTargets NameEquals Shizu Resolutely Facing Off
+    ChooseCharacterFromTargets Choose a character to gain the effect.
+    GainPower 2000
+    GainEffect
+    {
+        Auto: OnDamageCancel
+        {
+            Stand
+        }
+        TimesPerTurn 1
+        Text Auto: This ability can only be activated up to once per turn. When this card's damage is cancelled, you may Stand this.
+    }
+}
+Text Auto: [(4) Rest this] Choose 1 of your {3/2 Shizu CXC from vol. 2 - TSK/S82-071}, this turn, it gets +2000 power and the following ability, "AUTO - This ability can only be activated up to once per turn. When this card's damage is cancelled, you may Stand this."
+
+EndCard
+
+Character: TSK/S101-088
+Name Gobta, Rare Battle Sense
+Color B
+Level 2
+Cost 1
+Trigger Soul 
+Power 7000
+Soul 1
+Trait1 Demon Continent
+*GainPowerWhenAttackingLevel3(6000)
+*EncoreStepIfNoneRestedPayToRest
+EndCard
+
+Character: TSK/S101-089
+Name Souei, Battle in the Heavy Fog
+Color B
+Level 3
+Cost 2
+Trigger Soul 
+Power 9500
+Soul 2
+Trait1 Demon Continent
+Trait2 Shinobi
+Auto: OnPlay
+{
+    GainPower 1500
+    *Healer
+}
+Text Auto:  When this is placed on stage from hand, Heal up to 1, this turn, this gets +1500 power. 
+Auto: OnOpponentReverse
+{
+    If Climax Soul-Rending Thread
+    {
+        TargetLocation Stock
+        If Compare TargetCount 5 OrLess
+        {
+            PayCost 1 Discard 1 Any
+            {
+                Burn 4
+                TargetBattleOpponent
+                MoveCard BottomOfOpponentDeck
+            }
+        }
+    }
+}
+Text Auto:  {CX Combo} [(1) Discard 1 card] When this card's battle opponent is Reversed, if you have the Pants CX (100) in your Climax Area, you may pay cost. if you do, deal 4 damage to your opponent, and send that character to the bottom of their deck.
+EndCard
+
+Character: TSK/S101-090
+Name Myulan, Imprisoned Wizard
+Color B
+Level 0
+Cost 0
+Power 1000
+Soul 1
+Trait1 Demon Continent
+Cont: GiveSelf
+{
+    If StageContains_Other 1 NameEquals Shuna, Silent Anger
+    {
+        GainPower 1000
+    }
+}
+Text Cont:  If you have another {2/1 Shuna - 052}, all of your other <Demon Continent> characters get +1000 power.
+*Act1RestSelfSearchBrainstorm(Demon Continent)
+EndCard
+
+Character: TSK/S101-091
+Name Ranga, Slice of Daily Life
+Color B
+Level 0
+Cost 0
+Power 1500
+Soul 1
+Trait1 Demon Continent
+Trait2 Shadow
+Auto: OnPlay
+{
+    GainPower 1500
+}
+Text Auto:  When this is placed on stage from hand, this turn, this gets +1500 power.
+Auto: StartOpponentDrawPhase
+{
+    TargetTop Deck 1
+	Reveal
+	If Compare TargetCardsLevel 1 OrMore
+	{
+		Question Return this card to your hand?
+		If Yes
+		{
+			TargetSelf
+			Bounce
+		}
+	}
+}
+Text Auto:  At the start of your opponent's Draw Phase, reveal the top card of your deck. If that card is Level 1 or higher, you may return this card to hand.
+EndCard
+
+Character: TSK/S101-092
+Name Rigurd, Reliable Mediator of the Nation
+Color B
+Level 1
+Cost 0
+Power 500
+Soul 1
+Trait1 Demon Continent
+Auto: OnUseThisCardsBackup
+{
+    Mill 3
+}
+Text Auto:  When you use this card's BACKUP, mill 3.
+Backup 1500
+EndCard
+
+Character: TSK/S101-093
+Name Gabil, Reliable Leader of the "Hiryuu"
+Color B
+Level 1
+Cost 0
+Power 1500
+Soul 1
+Trait1 Demon Continent
+Act: Rest 1 HasTrait Demon Continent
+{
+    TargetSelf
+    GainPower 4500
+}
+Text Act: [Rest 1 of your <Demon Continent> characters] This turn, this gets +4500 power.
+EndCard
+
+Character: TSK/S101-094
+Name Rimuru, Talking About the Future
+Color B
+Level 1
+Cost 0
+Power 3500
+Soul 1
+Trait1 Demon Continent
+Trait2 Demon Lord
+Cont: GiveSelf
+{
+    If HasMarker
+	{
+		GainPower 4000
+        GainEffect
+        {
+            *OnAttackPay1ToDoubleTrigger
+        }
+	}
+}
+Text Cont:  During your turn, if this card has a Marker underneath it, this gets +4000 power and the following ability, "AUTO - (1) When this attacks, you may pay cost. If you do, during the Trigger Step of this attack, perform Trigger Check twice."
+*OnPlayChooseMarker_FaceUp(Shuna\, Talking About the Future)
+EndCard
+
+Character: TSK/S101-095
+Name Gobta, Charmed
+Color B
+Level 1
+Cost 0
+Power 3500
+Soul 1
+Trait1 Demon Continent
+Auto: OnPlay
+{
+    TargetLocation Stage
+    ChooseCharacterFromTargets Choose a character to gain +1500 power.
+    GainPower 1500
+}
+Text Auto:  When this is placed on stage from hand, choose 1 of your <Demon Continent> characters, this turn, it gets +1500 power.
+Auto: OnAttack
+{
+    TargetLocation Stage
+    ChooseCharacterFromTargets Choose a character to gain +1500 power.
+    GainPower 1500
+}
+Text Auto:  When this attacks, choose 1 of your <Demon Continent> characters, this turn, it gets +1500 power.
+EndCard
+
+Character: TSK/S101-096
+Name Rimuru, Spreading Friendship
+Color B
+Level 3
+Cost 2
+Trigger Soul 
+Power 9500
+Soul 2
+Trait1 Demon Continent
+Trait2 Demon Lord
+Cont: GiveAll
+{
+    If InLocation CenterStage
+    {
+        GainPower 1500
+    }
+}
+Text Cont:  If this is in the Front Row, all of your <Demon Continent> characters get +1500 power.
+Auto: OnAttack
+{
+    TargetTop Deck 1
+	Reveal
+	IfTarget HasTrait Demon Continent
+	{
+		TargetLocation Stage
+        NarrowTargets Other
+        GainSoul 1
+	}
+}
+Text Auto:  When this attacks, reveal the top card of your deck. If that card is a <Demon Continent> character, this turn, all of your other characters get +1 Soul.
+EndCard
+
+Event: TSK/S101-097
+Name 希望と災厄の結界
+Color B
+Level 1
+Cost 0
+Effect:
+{
+    TargetLocation OpponentStage
+    ChooseCharactersFromTargets 0 5 Choose up to 5 of your opponent's characters to gain the effect.
+    GainEffect
+    {
+        Cont: GiveSelf
+        {
+            GainSpecialEffect CannotReturnToHand
+            GainSpecialEffect CannotGoToMemory
+        }
+        Text Cont: This cannot be returned to hand, nor sent to Memory.
+    }
+    UntilEndOfOpponentsTurn
+	BlockOpponentEvents
+}
+Text Choose up to 5 of your opponent's characters, this turn, they gain the following ability, "CONT - This cannot be returned to hand, nor sent to Memory."
+Text Until the end of your opponent's next turn, your opponent cannot play Events.
+EndCard
+
+Event: TSK/S101-098
+Name Words of Love for Life
+Color B
+*GateClimax
+EndCard
+
+Event: TSK/S101-099
+Name To the Side of Important Allies Waiting for His Return
+Color B
+*GateClimax
+EndCard
+
+Event: TSK/S101-100
+Name Soul-Rending Thread
+Color B
+*GateClimax
+EndCard
+
+Character: TSK/S101-101
+Name Shion, Talented Secretary?
+Color Y
+Level 2
+Cost 2
+Trigger Soul 
+Power 7000
+Soul 2
+Trait1 Demon Continent
+Trait2 Secretary
+*GainPowerWhenOtherAttacks(2000,Demon Continent)
+*HandEncoreTrait(Demon Continent)
+EndCard
+
+Character: TSK/S101-102
+Name Veldora, A Word Too Many
+Color G
+Level 0
+Cost 0
+Power 1000
+Soul 1
+Trait1 Demon Continent
+Trait2 Dragon
+Auto: OnPlay
+{
+    PayCost HandClock HasTrait Demon Continent
+	{
+		Peek Deck 4
+		ChooseCardsFromTargets 0 1 Any
+		MoveCard Hand
+		PutTheRestIntoTheWaitingRoom
+	}
+}
+Text Auto:  [Put 1 <Demon Continent> character from hand into Clock] When this is placed on stage from hand, you may pay cost. If you do, look at up to 4 cards from the top of your deck, choose up to 1 card among them, add it to hand, and send the rest to Waiting Room.
+EndCard
+
+Character: TSK/S101-103
+Name Shuna, Asking to Try On
+Color R
+Level 0
+Cost 0
+Power 1000
+Soul 1
+Trait1 Demon Continent
+Trait2 Shrine Maiden
+*CheckTopAddDiscard(Demon Continent)
+*RedLevel0Bomb
+EndCard
+
+Character: TSK/S101-104
+Name Milim, Lively Energy
+Color R
+Level 2
+Cost 1
+Trigger Soul 
+Power 7000
+Soul 1
+Trait1 魔大陸
+Trait2 魔王
+Auto: OnPlay
+{
+    TargetTop Deck 1
+	Reveal
+    IfTarget Compare ThatCardsLevel 0 OrLower && IsCharacter
+    {
+        MoveCard Stock
+    }
+}
+Text Auto: When this is placed from hand to the Stage, reveal the top card of your Library. If it's a Level 0 or lower Character, put it in your Stock. (Otherwise put it back where it was)
+*GainPowerWhenAttackingLevel3(6000)
+EndCard
+
+Character: TSK/S101-105
+Name Rimuru, Victory Due to Everyone's Effort
+Color B
+Level 0
+Cost 0
+Power 1000
+Soul 1
+Trait1 Demon Continent
+Trait2 Demon Lord
+*OnPlayTradeClimaxForCharacter(Demon Continent)
+Auto: OnDamageCancel
+{
+    Question Send this card to stock?
+    If Yes
+    {
+        MoveCard Stock
+    }
+}
+Text Auto:  When damage dealt by this is Cancelled, you may send this to Stock.
+EndCard
+
+Character: TSK/S101-P01
+Name Rimuru & Diablo, Moment Under the Tree
+Color Y
+Level 1
+Cost 1
+Trigger Soul 
+Power 500
+Soul 1
+Trait1 Demon Continent
+*ScryBackup(Demon Continent)
+Backup 2000
+EndCard
+
