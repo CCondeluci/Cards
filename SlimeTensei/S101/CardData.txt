@@ -83,22 +83,28 @@ Auto: OnReverseOpponent
 {
     If Climax Genius-Level Cooking Creativity
     {
-        RevealUpTo Deck 3
-        ChooseCardsFromTargets 0 1 IsColor Yellow && IsCharacter
-        RevealTargets
-        MoveCard Hand
-        TargetLocation Revealed
-        ChooseCardsFromTargets 0 1 IsColor Red && IsCharacter
-        RevealTargets
-        MoveCard Hand
-        TargetLocation Revealed
-        ChooseCardsFromTargets 0 1 IsColor Blue && IsCharacter
-        RevealTargets
-        MoveCard Hand
-        PutTheRestIntoTheWaitingRoom
-        TargetLocation Stage
-        ChooseCharacterFromTargets Choose a character to give +1500 power.
-        GainPower 1500
+        PayCost Discard 1 HasTrait Demon Continent
+        {
+            RevealUpTo Deck 3
+            Message Choose a yellow character from among the revealed cards.
+            ChooseCardsFromTargets 0 1 IsColor Yellow && IsCharacter
+            RevealTargets
+            MoveCard Hand
+            TargetLocation Revealed
+            Message Choose a red character from among the revealed cards.
+            ChooseCardsFromTargets 0 1 IsColor Red && IsCharacter
+            RevealTargets
+            MoveCard Hand
+            TargetLocation Revealed
+            Message Choose a blue character from among the revealed cards.
+            ChooseCardsFromTargets 0 1 IsColor Blue && IsCharacter
+            RevealTargets
+            MoveCard Hand
+            PutTheRestIntoTheWaitingRoom
+            TargetLocation Stage
+            ChooseCharacterFromTargets Choose a character to give +1500 power.
+            GainPower 1500
+        }
     }
 }
 Text Auto:  {CX Combo} [Discard 1 <Demon Continent> character] When this card's battle opponent is Reversed, if you have the Choice CX (023) in your Climax Area, you may pay cost. If you do, look at up to 3 cards from the top of your deck, choose up to 1 Yellow character, up to 1 Red character, and up to 1 Blue character from among them, show them to your opponent, add them to hand, and send the rest to Waiting Room, then choose 1 of your <Demon Continent> characters, this turn, it gets +1500 power.
@@ -167,7 +173,7 @@ Auto: OnOpponentReverse
         RevealTargets
         Message Choose up to 1 card to add to hand.
         ChooseCardsFromTargets 0 1 Any
-        MoveCardHand
+        MoveCard Hand
         TargetLocation Revealed
         ChooseCardsFromTargets 0 1 Any
         MoveCard Stock
@@ -559,19 +565,19 @@ Text If you don't have a <Demon Continent> character, this cannot be played from
 Text Look at up to 4 cards from the top of your deck, choose up to 1 <Demon Continent> character from among them, show it to your opponent, add it to hand, send the rest to Waiting Room, then choose 1 of your "3 Rules, Rimuru - TSK/S82-016", Stand it.
 EndCard
 
-Event: TSK/S101-022
+Climax: TSK/S101-022
 Name Rain of Light on a Sunny Day
 Color Y
 *ChoiceClimax
 EndCard
 
-Event: TSK/S101-023
+Climax: TSK/S101-023
 Name Genius-Level Cooking Creativity
 Color Y
 *ChoiceClimax
 EndCard
 
-Event: TSK/S101-024
+Climax: TSK/S101-024
 Name Joy of Becoming Subordinate
 Color Y
 *WindClimax
@@ -1068,13 +1074,13 @@ InMemory
 Text AUTO - MEMORY [Discard 1 Climax] While this is in your Memory, at the start of your Main Phase, you may pay cost. If you do, add this to hand.
 EndCard
 
-Event: TSK/S101-042
+Climax: TSK/S101-042
 Name Encounter After 2 Years
 Color G
 *BarClimax
 EndCard
 
-Event: TSK/S101-043
+Climax: TSK/S101-043
 Name Last Ditch Effort Secret Strategy
 Color G
 *BarClimax
@@ -1363,7 +1369,7 @@ Trait1 Demon Continent
 Trait2 Shrine Maiden
 Cont: GiveAll
 {
-    If HasTrait Demon Continent
+    If HasTrait Demon Continent && Other
     {
         GainPower 1000
     }
@@ -1373,7 +1379,7 @@ Cont: GiveAll
 {
     If StageContains_Other 1 NameEquals Myulan, Imprisoned Wizard
     {
-        If HasTrait Demon Continent
+        If HasTrait Demon Continent && Other
         {
             GainEffect
             {
@@ -1857,28 +1863,28 @@ Effect:
 }
 ActivationRequirement StageContains 3 HasTrait Demon Lord
 Text If you have 2 or less <Demon Lord> characters, this cannot be played from hand.
-Choose up to 2 characters in your Waiting Room, add them to hand, then discard 1 card.
+Text Choose up to 2 characters in your Waiting Room, add them to hand, then discard 1 card.
 EndCard
 
-Event: TSK/S101-072
+Climax: TSK/S101-072
 Name Secret Art of Revival
 Color R
 *DoorClimax
 EndCard
 
-Event: TSK/S101-073
+Climax: TSK/S101-073
 Name Occasionally Seen Serious Side
 Color R
 *DoorClimax
 EndCard
 
-Event: TSK/S101-074
+Climax: TSK/S101-074
 Name Black Flame Lighting in the Dark
 Color R
 *StandbyClimax
 EndCard
 
-Event: TSK/S101-075
+Climax: TSK/S101-075
 Name Uncontrollable Anger
 Color R
 *DoorClimax
@@ -1997,7 +2003,7 @@ Cost 0
 Power 3500
 Soul 1
 Trait1 Demon Continent
-Auto: GiveSelf
+Cont: GiveSelf
 {
     If Not StageContains 1 Not HasTrait Demon Continent
     {
@@ -2011,7 +2017,7 @@ Auto: GiveSelf
         }
     }
 }
-Text Auto:  If all of your characters are <Demon Continent>, this gets +2500 power and "AUTO - ENCORE [Put 1 <Demon Continent> character from your Waiting Room on the bottom of your Clock]"
+Text Cont:  If all of your characters are <Demon Continent>, this gets +2500 power and "AUTO - ENCORE [Put 1 <Demon Continent> character from your Waiting Room on the bottom of your Clock]"
 Auto: OnPlay
 {
     PayCost Discard 1 HasTrait Demon Continent
@@ -2097,7 +2103,7 @@ Auto: OnPlay
 {
     PayCost Discard 1 Compare ThatCardsLevel 2 OrHigher
     {
-        SearchDeckToPlaceOnStage(IsCharacter && Compare ThatCardsLevel 0 OrLower, False)
+        *SearchDeckToPlaceOnStage(IsCharacter && Compare ThatCardsLevel 0 OrLower, False)
     }
 }
 Text Auto:  [Discard 1 Level 2 or higher character] When this is placed on stage from hand, you may pay cost. If you do, search your deck for up to 1 Level 0 or lower character, place it on stage in any slot, and shuffle your deck afterwards.
@@ -2112,7 +2118,7 @@ Power 1500
 Soul 1
 Trait1 Demon Continent
 Trait2 Demon Lord
-Auto: GiveAll
+Cont: GiveAll
 {
     If NameEquals Milim, Otherworldly Strength
     {
@@ -2123,7 +2129,7 @@ Auto: GiveAll
         }
     }
 }
-Text Auto:  All of your other {1/0 Milim CXC - 045} gets +1000 power and the following ability, "AUTO - When this attacks, look at up to 2 cards from the top of your deck, choose 1 card among them, put it back on top of your deck, and send the rest to Waiting Room."
+Text Cont:  All of your other {1/0 Milim CXC - 045} gets +1000 power and the following ability, "AUTO - When this attacks, look at up to 2 cards from the top of your deck, choose 1 card among them, put it back on top of your deck, and send the rest to Waiting Room."
 Auto: OnPlay
 {
     PayCost Discard 1 HasTrait Demon Continent
@@ -2270,11 +2276,15 @@ Cost 0
 Power 1000
 Soul 1
 Trait1 Demon Continent
-Cont: GiveSelf
+Cont: GiveAll
 {
     If StageContains_Other 1 NameEquals Shuna, Silent Anger
     {
-        GainPower 1000
+        If Other
+        {
+    
+            GainPower 1000
+        }
     }
 }
 Text Cont:  If you have another {2/1 Shuna - 052}, all of your other <Demon Continent> characters get +1000 power.
@@ -2449,19 +2459,19 @@ Text Choose up to 5 of your opponent's characters, this turn, they gain the foll
 Text Until the end of your opponent's next turn, your opponent cannot play Events.
 EndCard
 
-Event: TSK/S101-098
+Climax: TSK/S101-098
 Name Words of Love for Life
 Color B
 *GateClimax
 EndCard
 
-Event: TSK/S101-099
+CLimax: TSK/S101-099
 Name To the Side of Important Allies Waiting for His Return
 Color B
 *GateClimax
 EndCard
 
-Event: TSK/S101-100
+Climax: TSK/S101-100
 Name Soul-Rending Thread
 Color B
 *GateClimax
@@ -2512,7 +2522,7 @@ Power 1000
 Soul 1
 Trait1 Demon Continent
 Trait2 Shrine Maiden
-*CheckTopAddDiscard(Demon Continent)
+*OnPlayCheckTopAddDiscard(Demon Continent)
 *RedLevel0Bomb
 EndCard
 

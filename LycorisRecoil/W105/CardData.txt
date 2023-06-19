@@ -1109,6 +1109,7 @@ Act: Discard 1 Any SendSelf BottomOfDeck
 {
     SearchWaitingRoom HasTrait LycoReco|Weapon
 }
+Text Act: [Discard 1 card, send this to the bottom of your deck] Choose 1 character in your Waiting Room, add it to hand.
 EndCard
 
 Character: LRC/W105-047	
@@ -1145,7 +1146,7 @@ Act: 2 RestSelf
 {
     SearchWaitingRoom IsCharacter
 }
-Text Act: Choose 1 character in your Waiting Room, add it to hand.
+Text Act: [(2) REST this card] Choose 1 character in your Waiting Room, add it to hand.
 EndCard
 
 Character: LRC/W105-048
