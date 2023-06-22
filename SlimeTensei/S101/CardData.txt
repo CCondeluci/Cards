@@ -1199,7 +1199,7 @@ Auto: OnSpecificClimaxPlay Black Flame Lighting in the Dark
         }
     }
 }
-Text Auto:  {CX Combo} EXPERIENCE - When the Standby CX (074) is placed in your Climax Area, if this is in your Front Row, and you have a Yellow card and a Red card in your Level Zone, choose 1 of the following 2 effects and resolve it,
+Text Auto:  {CX Combo} EXPERIENCE - When the Standby CX (074) is placed in your Climax Area, if this is in your Front Row, and you have a Yellow card and a Red card in your Level Zone, choose 1 of the following 2 effects and resolve it, 1. "Choose 1 of your other <Demon Continent> characters, you may Stand it." 2. "You may put the top card of your Stock to Waiting Room. If you do, deal 1 damage to your opponent."
 EndCard
 
 Character: TSK/S101-047
@@ -1347,11 +1347,14 @@ Auto: OnPlay
 {
     If LocationContains Level 1 IsColor Yellow
     {
-        RevealUpTo Deck 4
-        ChooseCardsFromTargets 0 1 Compare ThatCardsLevel 1 OrHigher
-        RevealTargets
-        MoveCard Hand
-        PutTheRestIntoTheWaitingRoom
+        PayCost Discard 1 Any
+        {
+            RevealUpTo Deck 4
+            ChooseCardsFromTargets 0 1 Compare ThatCardsLevel 1 OrHigher
+            RevealTargets
+            MoveCard Hand
+            PutTheRestIntoTheWaitingRoom
+        }
     }
 }
 Text Auto:  EXPERIENCE [Discard 1 card] When this is placed on stage from hand, if you have a Yellow card in your Level Zone , you may pay cost. If you do, look at up to 4 cards from the top of your deck, choose up to 1 Level 1 or higher card among them, show it to your opponent, add it to hand, and send the rest to Waiting Room.

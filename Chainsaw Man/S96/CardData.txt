@@ -1169,7 +1169,7 @@ Cont: GiveSelf
 		{
 			Auto: OnReverseOpponent
 			{
-				Question_Obvious clock bomb?
+				Question Send reversed card to your opponent's clock?
 				If Yes
 				{
 					TargetTop OpponentClock 1
@@ -1184,6 +1184,7 @@ Cont: GiveSelf
 					}
 				}
 			}
+			Text Auto: When this card's battle opponent is Reversed, you may send the top card of your opponent's Clock to Waiting Room. If you do, send that character to Clock.
 		}
 	}
 }
@@ -2469,7 +2470,7 @@ Auto: OnPlay
 	{
 		Auto: OnReverseOpponent
 		{
-			PayCost 1 Discard 1 Any Rest 1 Other && HasTrait Devil Hunter|Devil
+			PayCost 1 Discard 1 Any Rest 1 Other && HasTrait Devil Hunter|Devil && CardPosition Stand
 			{
 				SearchLocationForTargets WaitingRoom 0 2 HasTrait Devil Hunter|Devil
 				MoveCard Hand
