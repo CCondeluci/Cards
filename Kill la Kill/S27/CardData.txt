@@ -1294,21 +1294,10 @@ Trait1 Clothes
 Trait2 Weapon
 Auto: OnPlay
 {
-    SetXValue 0
-	PushX
-	TargetLocation Stage
-	ForEachTarget
-	{
-		PopX
-		If Compare ThatCardsLevel X GreaterThan
-		{
-			SetXValue ThatCardsLevel
-		}
-		PushX
-	}
-	PopX
-	NarrowTargets Compare ThatCardsLevel X Exactly && Other
-	ChooseCharacterFromTargets Choose a character to send to the waiting room
+    TargetLocation Stage
+	NarrowTargets Other
+	NarrowToHighestLevel
+	ChooseCharacterFromTargets Choose a character to put into your waiting room
 	MoveCard WaitingRoom
 }
 Text Auto: When this card is placed on stage from your hand, choose one of your other characters with the highest level, and put it into your waiting room.

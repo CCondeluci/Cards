@@ -2458,6 +2458,13 @@ Cont: GiveSelf
 			}
 			Text Cont: The character facing this card and this card cannot side attack.
 		}
+		GainEffect
+		{
+			Cont: GiveSelf
+			{
+				GainSpecialEffect CannotSideAttack
+			}
+		}
 	}
 }
 Text Cont: If your hand has 5 or more cards, this card gets +2000 power and the following ability. "Cont: The character facing this card and this card cannot side attack."

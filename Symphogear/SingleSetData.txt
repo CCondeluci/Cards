@@ -1,0 +1,5 @@
+Series: Senki Zesshou Symphogear
+
+Folder: Symphogear/W19
+Prefix: SG/W19
+SetName: Senki Zesshou Symphogear (W19)

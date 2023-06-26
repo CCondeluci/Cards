@@ -599,6 +599,28 @@ Trait1 Fleet Girl
 Trait2 Light Aircraft Carrier
 *GlobalPower(1000,Fleet Girl)
 *ClockShift(2,yellow)
+Text <color=red> * This card is exclusive to the EN format. </color>
+EndCard
+
+Character: KC/S25-028
+Name 2nd Hiyo-class Light Aircraft Carrier, Junyo
+Color Y
+Level 2
+Cost 1
+Trigger Soul
+Power 6000
+Trait1 Fleet Girl
+Trait2 Light Aircraft Carrier
+*HexProof
+Cont: GiveAll
+{
+	If Other && HasTrait Fleet Girl
+	{
+		GainSoul 1
+	}
+}
+Text Cont: All of your other 《Fleet Girl》 characters gets +1 soul.
+Text <color=red> * This card is exclusive to the JP format, and is currently limited to 2 copies. </color>
 EndCard
 
 Character: KC/S25-E029
@@ -1729,12 +1751,14 @@ Auto: OnReversed
 		PayCost Discard 1 Any
 		{
 			Rest
-			ScheduleEffect StartMyEncorePhase
+			ScheduleEffectForTargets StartMyEncorePhase
 			{
 				Effect:
 				{
-					TargetSelf
-					MoveCard WaitingRoom
+					If OnStage
+					{
+						MoveCard WaitingRoom
+					}
 				}
 			}
 		}
@@ -3413,44 +3437,4 @@ Climax: KC/S25-E164
 Name Well then, let's have a great party!
 Color B
 *DrawClimax
-EndCard
-
-Character: KC/S25-E001SP
-Clone KC/S25-E001
-Image KC_S25_E001SSP
-EndCard
-
-Character: KC/S25-E002S
-Clone KC/S25-E002
-Image KC_S25_E002S
-EndCard
-
-Character: KC/S25-E003S
-Clone KC/S25-E003
-Image KC_S25_E003S
-EndCard
-
-Character: KC/S25-E003SP
-Clone KC/S25-E003
-Image KC_S25_E003SSP
-EndCard
-
-Character: KC/S25-E038S
-Clone KC/S25-E038
-Image KC_S25_E038S
-EndCard
-
-Character: KC/S25-E080SP
-Clone KC/S25-E080
-Image KC_S25_E080SP
-EndCard
-
-Character: KC/S25-E082SP
-Clone KC/S25-E082
-Image KC_S25_E082SSP
-EndCard
-
-Character: KC/S25-E128SP
-Clone KC/S25-E128
-Image KC_S25_E128SSP
 EndCard

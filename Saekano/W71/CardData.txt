@@ -3,7 +3,6 @@ Name Overcoming Barriers, Eriri
 Color Y
 Level 1
 Cost 0
-Trigger Soul
 Power 4500
 Trait1 Game
 Trait2 Manga
@@ -106,7 +105,6 @@ Name Reason for Being in a Slump, Eriri
 Color Y
 Level 0
 Cost 0
-Trigger Soul
 Power 1000
 Trait1 Game
 Trait2 Manga
@@ -134,7 +132,6 @@ Name Provocation by the Pool, Izumi
 Color Y
 Level 1
 Cost 0
-Trigger Soul
 Power 4500
 Trait1 Game
 Trait2 Manga
@@ -168,7 +165,6 @@ Name An Answer to the Autograph Board, Izumi
 Color Y
 Level 1
 Cost 0
-Trigger Soul
 Power 5000
 Trait1 Game
 Trait2 Manga
@@ -273,7 +269,6 @@ Name A New Autograph Board, Eriri
 Color Y
 Level 0
 Cost 0
-Trigger Soul
 Power 500
 Trait1 Game
 Trait2 Manga
@@ -293,7 +288,6 @@ Name Shift in Attitude, Eriri
 Color Y
 Level 0
 Cost 0
-Trigger Soul
 Power 500
 Trait1 Game
 Trait2 Manga
@@ -323,7 +317,6 @@ Name Villainous Image, Iori
 Color Y
 Level 0
 Cost 0
-Trigger Soul
 Power 500
 Trait1 Game
 Trait2 Otaku
@@ -344,7 +337,6 @@ Name Time to Make a Decision, Tomoya
 Color Y
 Level 0
 Cost 0
-Trigger Soul
 Power 2000
 Trait1 Game
 Trait2 Otaku
@@ -356,7 +348,6 @@ Name Absolute Commitment, Eriri
 Color Y
 Level 0
 Cost 0
-Trigger Soul
 Power 2000
 Trait1 Game
 Trait2 Manga
@@ -379,7 +370,6 @@ Name Time for Canned Food, Eriri
 Color Y
 Level 1
 Cost 0
-Trigger Soul
 Power 5000
 Trait1 Game
 Trait2 Manga
@@ -491,7 +481,6 @@ Name Exposed Hostility, Izumi
 Color Y
 Level 0
 Cost 0
-Trigger Soul
 Power 500
 Trait1 Game
 Trait2 Manga
@@ -523,7 +512,6 @@ Name Where I Can Exert My Best, Izumi
 Color Y
 Level 0
 Cost 0
-Trigger Soul
 Power 1500
 Trait1 Game
 Trait2 Manga
@@ -543,7 +531,6 @@ Name Admiration and Determination, Izumi
 Color Y
 Level 0
 Cost 0
-Trigger Soul
 Power 1500
 Trait1 Game
 Trait2 Manga
@@ -572,7 +559,6 @@ Name Eriri in Trouble
 Color Y
 Level 0
 Cost 0
-Trigger Soul
 Power 2000
 Trait1 Game
 Trait2 Manga
@@ -584,7 +570,6 @@ Name rouge en rouge Representative, Akane
 Color Y
 Level 0
 Cost 0
-Trigger Soul
 Power 2500
 Trait1 Game
 Trait2 Manga
@@ -612,7 +597,6 @@ Name Creativity in the Air, Izumi
 Color Y
 Level 0
 Cost 0
-Trigger Soul
 Power 4000
 Trait1 Game
 Trait2 Manga
@@ -625,7 +609,6 @@ Name Sudden Reunion, Izumi
 Color Y
 Level 1
 Cost 0
-Trigger Soul
 Power 5500
 Trait1 Game
 Trait2 Manga
@@ -648,7 +631,6 @@ Name Outcome of the Battle, Izumi
 Color Y
 Level 1
 Cost 1
-Trigger Soul
 Power 1000
 Trait1 Game
 Trait2 Manga
@@ -707,7 +689,6 @@ Name Betrayal and Farewell, Utaha
 Color G
 Level 0
 Cost 0
-Trigger Soul
 Power 500
 Trait1 Game
 Trait2 Novel
@@ -728,7 +709,6 @@ Name Growth and Departure, Eriri
 Color G
 Level 0
 Cost 0
-Trigger Soul
 Power 1000
 Trait1 Game
 Trait2 Manga
@@ -748,7 +728,6 @@ Name Wavering Sentiments, Megumi
 Color G
 Level 1
 Cost 0
-Trigger Soul
 Power 4500
 Trait1 Game
 Combo The Girl Who Didn't Break the Flag
@@ -771,7 +750,6 @@ Name First-Time Feelings, Megumi
 Color G
 Level 0
 Cost 0
-Trigger Soul
 Power 1000
 Trait1 Game
 Act: SendSelf WaitingRoom
@@ -791,7 +769,6 @@ Name Developing Duo, Megumi
 Color G
 Level 1
 Cost 0
-Trigger Soul
 Power 2000
 Trait1 Game
 *BackupBonus1000(Game)
@@ -803,7 +780,6 @@ Name Fueled by Defeat, Eriri
 Color G
 Level 1
 Cost 0
-Trigger Soul
 Power 4000
 Trait1 Game
 Trait2 Manga
@@ -927,7 +903,6 @@ Name Time to Set Off, Utaha
 Color G
 Level 0
 Cost 0
-Trigger Soul
 Power 1500
 Trait1 Game
 Trait2 Novel
@@ -951,7 +926,6 @@ Name A New Determination, Tomoya
 Color G
 Level 0
 Cost 0
-Trigger Soul
 Power 2000
 Trait1 Game
 Trait2 Otaku
@@ -974,7 +948,6 @@ Name Seeking Treasure, Megumi
 Color G
 Level 1
 Cost 0
-Trigger Soul
 Power 4500
 Trait1 Game
 *OnAttackGivePowerForEachOther(500,Game)
@@ -1032,7 +1005,6 @@ Name Fashion Coordinator, Megumi
 Color G
 Level 0
 Cost 0
-Trigger Soul
 Power 1000
 Trait1 Game
 *OnPlayGivePower(1000,Any)
@@ -1054,7 +1026,6 @@ Name Rematch at Rokutenba Mall, Megumi
 Color G
 Level 0
 Cost 0
-Trigger Soul
 Power 1500
 Trait1 Game
 Combo A Different Gift
@@ -1085,7 +1056,6 @@ Name Path of a Creator, Eriri
 Color G
 Level 0
 Cost 0
-Trigger Soul
 Power 1000
 Trait1 Game
 Trait2 Manga
@@ -1102,7 +1072,6 @@ Name Fantasies in Poor Taste, Utaha
 Color G
 Level 1
 Cost 0
-Trigger Soul
 Power 5000
 Trait1 Game
 Trait2 Novel
@@ -1184,7 +1153,6 @@ Name Girlfriend Who's Not Monotonous, Megumi
 Color R
 Level 0
 Cost 0
-Trigger Soul
 Power 2000
 Trait1 Game
 Auto: OnReversed
@@ -1317,7 +1285,6 @@ Name Squandered Spendings, Utaha
 Color R
 Level 0
 Cost 0
-Trigger Soul
 Power 500
 Trait1 Game
 Trait2 Novel
@@ -1344,7 +1311,6 @@ Name Determined Duo, Utaha
 Color R
 Level 0
 Cost 0
-Trigger Soul
 Power 500
 Trait1 Game
 Trait2 Novel
@@ -1364,7 +1330,6 @@ Name Negotiation Between Boy and Girl, Utaha
 Color R
 Level 0
 Cost 0
-Trigger Soul
 Power 1500
 Trait1 Game
 Trait2 Novel
@@ -1389,7 +1354,6 @@ Name Explosion of Emotion, Megumi
 Color R
 Level 1
 Cost 0
-Trigger Soul
 Power 2000
 Trait1 Game
 Cont: Assist
@@ -1420,7 +1384,6 @@ Name Expressing Determination, Utaha
 Color R
 Level 1
 Cost 0
-Trigger Soul
 Power 5500
 Trait1 Game
 Trait2 Novel
@@ -1466,7 +1429,6 @@ Name Refrain, Megumi
 Color R
 Level 0
 Cost 0
-Trigger Soul
 Power 2000
 Trait1 Game
 *FreeRunner
@@ -1477,7 +1439,6 @@ Name Recalling Past Meetings, Utaha
 Color R
 Level 0
 Cost 0
-Trigger Soul
 Power 2500
 Trait1 Game
 Trait2 Novel
@@ -1499,7 +1460,6 @@ Name Developing Relationship, Megumi
 Color R
 Level 1
 Cost 0
-Trigger Soul
 Power 3000
 Trait1 Game
 Auto: OnPlay
@@ -1604,7 +1564,6 @@ Name Friendship of a Schoolmate, Sonoko
 Color R
 Level 0
 Cost 0
-Trigger Soul
 Power 500
 Trait1 Novel
 Auto: OnPlay
@@ -1629,7 +1588,6 @@ Name Director's Pride, Tomoya
 Color R
 Level 0
 Cost 0
-Trigger Soul
 Power 1500
 Trait1 Game
 Trait2 Otaku
@@ -1649,7 +1607,6 @@ Name What She Wanted, Megumi
 Color R
 Level 0
 Cost 0
-Trigger Soul
 Power 1500
 Trait1 Game
 Auto: OnPlay
@@ -1671,7 +1628,6 @@ Name After the Festival, Megumi
 Color R
 Level 0
 Cost 0
-Trigger Soul
 Power 2500
 Trait1 Game
 *Act1SalvageBrainstorm(Game)
@@ -1682,7 +1638,6 @@ Name In the Art Room at Dusk, Utaha
 Color R
 Level 1
 Cost 0
-Trigger Soul
 Power 2500
 Trait1 Game
 Trait2 Novel
@@ -1703,7 +1658,6 @@ Name Overlooked Measures, Utaha
 Color R
 Level 1
 Cost 0
-Trigger Soul
 Power 5500
 Trait1 Game
 Trait2 Novel
@@ -1780,7 +1734,6 @@ Name Game Development Training Camp, Michiru
 Color B
 Level 0
 Cost 0
-Trigger Soul
 Power 1500
 Trait1 Game
 Trait2 Music
@@ -1793,7 +1746,6 @@ Name Late-Night Invitation? Michiru
 Color B
 Level 0
 Cost 0
-Trigger Soul
 Power 3000
 Trait1 Game
 Trait2 Music
@@ -1810,7 +1762,6 @@ Name Band's Future in Crisis, Tokino & Echika & Ranko
 Color B
 Level 1
 Cost 0
-Trigger Soul
 Power 4000
 Trait1 Game
 Trait2 Music
@@ -1892,7 +1843,6 @@ Name Unexpected Reinforcement? Michiru
 Color B
 Level 0
 Cost 0
-Trigger Soul
 Power 1000
 Trait1 Game
 Trait2 Music
@@ -1922,7 +1872,6 @@ Name Assisting All Night, Ranko
 Color B
 Level 0
 Cost 0
-Trigger Soul
 Power 1500
 Trait1 Game
 Trait2 Music
@@ -1943,7 +1892,6 @@ Name Assisting All Night, Echiko
 Color B
 Level 1
 Cost 0
-Trigger Soul
 Power 4000
 Trait1 Game
 Trait2 Music
@@ -1966,7 +1914,6 @@ Name Assisting All Night, Tokino
 Color B
 Level 1
 Cost 0
-Trigger Soul
 Power 4500
 Trait1 Game
 Trait2 Music
@@ -2009,7 +1956,6 @@ Name Scapegoat, Michiru
 Color B
 Level 0
 Cost 0
-Trigger Soul
 Power 500
 Trait1 Game
 Trait2 Music
@@ -2043,7 +1989,6 @@ Name Reversal Move, Tomoya
 Color B
 Level 0
 Cost 0
-Trigger Soul
 Power 3000
 Trait1 Game
 Trait2 Otaku
@@ -2054,7 +1999,6 @@ Name Uncontrollable Crowd, Michiru
 Color B
 Level 1
 Cost 0
-Trigger Soul
 Power 5000
 Trait1 Game
 Trait2 Music
@@ -2148,7 +2092,6 @@ Name A New Start, Izumi
 Color Y
 Level 0
 Cost 0
-Trigger Soul
 Power 1000
 Trait1 Game
 Trait2 Manga
@@ -2169,7 +2112,6 @@ Name A New Start, Eriri
 Color Y
 Level 1
 Cost 0
-Trigger Soul
 Power 4500
 Trait1 Game
 Trait2 Manga
@@ -2189,7 +2131,6 @@ Name A New Start, Megumi
 Color G
 Level 0
 Cost 0
-Trigger Soul
 Power 2500
 Trait1 Game
 Auto: OnAttack
@@ -2207,7 +2148,6 @@ Name A New Start, Utaha
 Color R
 Level 1
 Cost 1
-Trigger Soul
 Power 5500
 Trait1 Game
 Trait2 Novel

@@ -573,7 +573,14 @@ Cost 2
 Trigger Soul
 Power 3000
 Combo Germinal
-//FixMe Add in effect if confirmed I can do it
+Cont: GiveSelf
+{
+	CopyTraitsFrom Other
+	SetXValue TraitsOnThisCard
+	MultiplyXValue 1000
+	GainPower X
+}
+Text Cont: This card gains all traits from all other characters on either player's stage. For each trait this card has, this card gains +1000 power.
 Auto: OnSpecificClimaxPlay Germinal 
 {
 	TargetLocation Clock
