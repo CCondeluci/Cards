@@ -1,0 +1,433 @@
+Character: JJ/SE41-06
+Name 亜空の瘴気ヴァニラ・アイス
+Color Y
+Level 0
+Cost 0
+Power 4000
+Trait1 Stand User
+Trait2 Stand
+Cont: GiveSelf
+{
+    If InBattle
+	{
+        GainSpecialEffect CannotUseEvents
+        GainSpecialEffect CannotUseBackup
+    }
+}
+Text Cont: During this card's battle, you cannot play Events or BACKUPs from hand.
+Auto: OnOpponentReverse
+{
+    TargetBattleOpponent
+    If OnStage
+    {
+        MoveCard OpponentMemory
+    }
+}
+Text Auto: When this card's battle opponent is Reversed, send that character to Memory.
+EndCard
+
+Character: JJ/SE41-07
+Name 銃は剣よりも強しホル・ホース
+Color Y
+Level 1
+Cost 0
+Power 3500
+Trait1 Stand User
+Trait2 Stand
+Auto: StartAttackPhase
+{
+    TargetLocation Stage
+    ChooseCharacterFromTargets Choose a character to gain +1500 power.
+    GainSoul 1
+}
+Text Auto: At the start of your Attack Phase, choose 1 of your <Stand User> or <Stand> characters, this turn, it gets +1500 power.
+Auto: OnSpecificClimaxPlay (Choice CX)
+{
+    TargetLocation Stage
+    NarrowTargets Other
+    ChooseCardsFromTargets Choose a character to gain the ability - When this card's battle opponent is Reversed, choose 1 <Stand User> or <Stand> character in your Waiting Room, you may add it to hand.
+    GainEffect
+    {
+        Auto: OnOpponentReverse
+        {
+            SearchWaitingRoom IsCharacter && HasTrait Stand User|Stand
+        }
+        Text Auto: When this card's battle opponent is Reversed, choose 1 <Stand User> or <Stand> character in your Waiting Room, you may add it to hand.
+    }
+}
+Text Auto: {CX COMBO} When the Choice CX (???) is placed in your climax area, choose 1 of your other <Stand User> or <Stand> characters, this turn, it gains the following ability, "AUTO - When this card's battle opponent is Reversed, choose 1 <Stand User> or <Stand> character in your Waiting Room, you may add it to hand.”
+EndCard
+
+Character: JJ/SE41-14	
+Name 絶対的存在 DIO
+Color Y
+Level 2
+Cost 0
+Power 6000
+Trait1 Stand User
+*1500Assist
+*OnPlayChooseMarker_FaceUp(完全なる存在 DIO&ザ・ワールド)
+Text Auto: When this is placed on stage from hand, choose 1 {3/2 DIO & The World - 17} in your Waiting Room, you may put it underneath this card Face-up as a Marker.
+Act: 2 Discard 1 IsCharacter
+{
+    TargetLocation Marker
+	NarrowTargets NameEquals 完全なる存在 DIO&ザ・ワールド
+	FirstTarget
+	If HasTarget
+	{
+		PlaceOnStage False True True False
+		RememberTargets
+		TargetSelf
+		ScheduleEffectForTargets EndOfTurn
+		{
+			Effect:
+			{
+				TargetRemembered
+				IfTarget OnStage
+				{
+					Question Return "完全なる存在 DIO&ザ・ワールド" to the marker area of "絶対的存在 DIO"
+					If Yes
+					{
+						Marker_FaceUp
+					}
+				}
+			}
+		}
+	}
+}
+Text Act: [(2) Discard 1 character] If you are Level 3 or higher, choose 1 {3/2 DIO & The World - 17} underneath this card as a Marker, place it on stage in any slot. At the end of your turn, you may put that character underneath this card Face-up as a Marker.
+EndCard
+
+Character: JJ/SE41-17
+Name 完全なる存在 DIO&ザ・ワールド
+Color Y
+Level 3
+Cost 2
+Power 3500
+Trait1 Stand User
+Trait2 Stand
+*PowerOnMyTurn(2000)
+*Healer
+Auto: StartMyEncoreStep
+{
+    If Climax (Choice CX)
+    {   
+        TargetSelf
+        If InLocation CenterStage
+        {
+            TargetLocation OpponentCenterStage
+            SetXValue TargetCount
+            NarrowTargets Not CardPosition Reversed
+            If Compare TargetCount 0 Exactly
+            {
+                PayCost 2 Discard 2 Any
+                {	
+                    TargetTop OpponentDeck 2
+                    MoveCard OpponentClock
+                }
+            }
+        }
+    }
+}
+EndCard
+
+Character: JJ/SE41-22
+Name 熱くクールに承太郎
+Color R
+Level 0
+Cost 0
+Power 1500
+Trait1 Stand User
+Auto: OnPlay
+{
+	PayCost 1 Discard 1 Any
+	{
+		Peek Deck 3
+		ChooseCard Choose a card to add to your hand (Will not be revealed).
+		MoveCard Hand
+		PutTheRestIntoTheWaitingRoom
+	}
+}
+Text Auto: [(1) Discard 1 card] When this is placed on stage from hand, you may pay cost. If you do, look at up to 3 cards from the top of your deck, choose up to 1 card among them, add it to hand, and send the rest to Waiting Room.
+Auto: OnPlay
+{
+    PayCost Discard 1 HasTrait Stand User|Stand
+    {
+        DrawCard
+    }
+}
+Text Auto: [Discard 1 <Stand User> or <Stand> character] When this is placed on stage from hand, you may pay cost. If do, draw 1 card.
+EndCard
+
+Character: JJ/SE41-22
+Name 焼き尽くす炎 アヴドゥル
+Color R
+Level 0
+Cost 0
+Power 500
+Trait1 Stand User
+*RunToCenter
+Auto: OnSentFromStageToWaitingRoom
+{
+    PayCost Discard 1 Any
+    {
+        *Check4Add1Level1OrHigher
+    }
+}
+Text Auto: [Discard 1 card] When this is sent from Stage to Waiting Room, you may pay cost. If you do, look at up to 4 cards from the top of your deck, choose up to 1 Level 1 or higher card among them, show it to your opponent, add it to hand, and send the rest to Waiting Room.
+EndCard
+
+Character: JJ/SE41-31
+Name 打開の一手 花京院
+Color R
+Level 0
+Cost 0
+Power 2000
+Trait1 Stand User
+Auto: OnClimaxPlay
+{
+    PayCost Clock
+    {
+        *Check4Add1Level1OrHigher
+    }
+}
+Text Auto: [Put the top card of your deck into Clock] When a Climax is placed in your Climax Area, you may pay cost. If you do, look at up to 4 cards from the top of your deck, choose up to 1 Level 1 or higher card among them, show it to your opponent, add it to hand, and send the rest to Waiting Room.
+Auto: StartAttackPhase
+{
+    If Climax エメラルド・スプラッシュ
+    {
+        PayCost SendSelf Hand SendClimax WaitingRoom
+        {
+            TargetLocation Stage
+            NarrowTargets HasTrait Stand User|Stand
+            ChooseCharacterFromTargets Choose a character to stand.
+            Stand
+        }
+    }
+}
+Text Auto: {CX Combo} [Return this to hand, send the Standby CX (57) in your Climax Area to Waiting Room] At the start of your Attack Phase, you may pay cost. If you do, choose 1 of your other <Stand User> or <Stand> character, Stand it.
+EndCard
+
+Character: JJ/SE41-38
+Name 勝利をその手にポルナレフ&シルバーチャリオッツ
+Color R
+Level 1
+Cost 0
+Power 4000
+Trait1 Stand User
+Trait2 Stand
+Cont: GiveSelf
+{
+    If MyTurn && StageContains 1 Other HasTrait Stand User|Stand
+    {
+        GainPower 3000
+    }
+}
+Text Cont: During your turn, if you have another <Stand User> or <Stand> character, this gets +3000 power.
+Auto: OnOpponentReverse
+{
+    If Climax (Door CX) && StageContains 2 Other HasTrait Stand User|Stand
+    {
+        PayCost Discard 1 Any
+        {
+            SearchLocationForMultipleTargets Deck 0 2 HasTrait Stand User|Stand
+            RevealTargets
+            MoveCards Hand
+            ShuffleLocation Deck
+        }
+    }
+}
+Text Auto: {CX Combo} [Discard 1 card] When this card's battle opponent is Reversed, if you have the Door CX (???) in your Climax Area, and you have 2 or more other <Stand User> or <Stand> characters, you may pay cost. If you do, search your deck for up to 2 <Stand User> or <Stand> characters, show it to your opponent, add it to hand, and shuffle your deck afterwards.
+EndCard
+
+Character: JJ/SE41-45
+Name 遠隔地の念写ジョセフ
+Color R
+Level 2
+Cost 1
+Power 5000
+Trait1 Stand User
+*Level3Assist
+Act: RestSelf
+{
+    TargetTop OpponentDeck 2
+    If Compare TargetCount 2 OrMore
+    {
+        Reorder
+    }
+    Else
+    {
+        View
+    }
+}
+Text Act: [Rest this] Look at up to 2 cards from the top of your opponent's deck, and put them back on top in any order.
+EndCard
+
+Character: JJ/SE41-49
+Name 火炎の創造アヴドゥル&マジシャンズレッド
+Color R
+Level 2
+Cost 2
+Power 7000
+Trait1 Stand User
+Trait2 Stand
+Cont: GiveSelf
+{
+    If MyTurn && Not StageContains 1 Not HasTrait Stand User|Stand
+    {
+        GainPower 6000
+    }
+}
+Text Cont: During your turn, if all of your characters are <Stand User> or <Stand> this gets +6000 power.
+Auto: OnReversed
+{
+    PayCost Discard 1 HasTrait Stand User|Stand SendSelf Memory
+    {
+        ScheduleEffect StartDrawPhase
+        {
+            Effect:
+            {
+                TargetLocation Memory
+                NarrowTargets NameEquals 火炎の創造アヴドゥル&マジシャンズレッド
+                FirstTarget
+                If HasTarget
+                {
+                    Message 火炎の創造アヴドゥル&マジシャンズレッド returns from memory.
+                    PlaceOnStage False True True False
+                }
+            }
+        }
+    }
+}
+Text Auto: [Discard 1 <Stand User> or <Stand> character, Send this to Memory] When this is Reversed, you may pay cost. If you do, at the start of your next Draw Phase, choose 1 {this card} from your Memory, and place it on stage in any slot.
+EndCard
+
+Character: JJ/SE41-51
+Name 強固な精神 花京院&ハイエロファントグリーン
+Color R
+Level 3
+Cost 2
+Power 9000
+Trait1 Stand User
+Trait2 Stand
+*GainPowerWithEnoughCharacters(2000,2,Stand User|Stand)
+*Healer
+Auto: OnAttack
+{
+    PayCost Discard 2 Any
+    {
+        MillOpponentBottom 4
+		NarrowTargets IsClimax
+		SetXValue TargetCount
+		Burn X
+    }
+}
+Text Auto: [Discard 2 cards] When this attacks, you may pay cost. If you do, send the bottom 4 cards of your opponent's deck to Waiting Room, then deal X damage to your opponent. X equals the number of Climaxes sent to Waiting Room by this effect.
+EndCard
+
+Character: JJ/SE41-52
+Name 自由な生き様 イギー&ザ・フール
+Color R
+Level 3
+Cost 2
+Power 9500
+Trait1 Stand User
+Trait2 Stand
+Cont: GiveAll
+{
+    IfOwner InLocation CenterStage
+    {
+        If HasTrait Stand User|Stand
+        {
+            GainPower 1500
+        }
+    }
+}
+Text Cont: If this is in the Front Row, all of your <Stand User> and <Stand> characters get +1500 power.
+Auto: OnAttack
+{
+    PayCost 2 Discard 2 Any
+    {
+        Burn 2
+    }
+}
+Text Auto: [(2) Discard 2 cards] When this attacks, you may pay cost. If you do, deal 2 damage to your opponent.
+*HandEncoreTrait(Stand User|Stand)
+EndCard
+
+Character: JJ/SE41-53
+Name 自由な生き様 イギー&ザ・フール
+Color R
+Level 3
+Cost 2
+Power 10000
+Trait1 Stand User
+Trait2 Stand
+Auto: OnPlay 
+{
+	PayCost Send 1 WaitingRoom Other && HasTrait Stand User|Stand
+	{
+		TargetTop Clock 1
+		MoveCard Stock
+	}
+}
+Text Auto: [Send 1 of your other <Stand User> or <Stand> character from your stage to Waiting Room] When this is placed on stage from hand, you may pay cost. If you do, send the top card of your Clock to Stock.
+Auto: StartAttackPhase
+{
+    If Climax (Door CX) && LocationContainsOrLess CenterStage 0 Other
+    {
+        GainPower 11000
+        GainEffect
+        {
+            Auto: OnEndOfAttack
+            {
+                PayCost Discard 2 NameEquals 自由な生き様 イギー&ザ・フール Discard 4 Any
+                {
+                    Repeat 7
+                    {
+                        Burn 1
+                    }
+                    Burn 7
+                }
+            }
+            Text Auto: [Discard 2 {Copies of this}, and discard 4 cards] At the end of this card’s attack, you may pay cost. If you do, deal 1 damage to your opponent 7 times, then deal 7 damage to your opponent.
+        }
+    }
+}
+Text Auto: {CX Combo} At the start of your Attack Phase, if you have the Door CX (???) in your Climax Area, and you have no other characters in your front row, this turn, this gets +11000 power and the following ability, “AUTO - [Discard 2 {Copies of this}, and discard 4 cards] At the end of this card’s attack, you may pay cost. If you do, deal 1 damage to your opponent 7 times, then deal 7 damage to your opponent.”
+EndCard
+
+Character: JJ/SE41-54
+Name 騎士道精神 ポルナレフ
+Color R
+Level 3
+Cost 2
+Power 11000
+Trait1 Stand User
+*EarlyPlay2OrLessClimax
+Cont: GiveSelf
+{
+    If Not StageContains 1 Other && HasTrait Stand User|Stand
+	{
+		GainSpecialEffect CannotStand
+	}
+}
+Text Cont: If you do not have another <Stand User> or <Stand> character, this does not Stand during your Stand Phase.
+Auto: OnPlay
+{
+    TargetLocation Clock
+    NarrowTargets HasTrait Stand User|Stand
+    ChooseCharacterFromTargets Choose a character to heal to the bottom of your deck.
+    Question Heal chosen character to the bottom of your deck?
+    If Yes
+    {
+        MoveCard BottomOfDeck
+    }
+}
+Text Auto: When this is placed on stage from hand, choose 1 <Stand User> or <Stand> character from your Clock, you may put it on the bottom of your deck.
+EndCard
+
+Climax: JJ/SE41-57
+Name エメラルド・スプラッシュ
+*StandbyClimax
+EndCard

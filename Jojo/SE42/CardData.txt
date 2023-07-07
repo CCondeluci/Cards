@@ -1,0 +1,33 @@
+Character: JJ/SE42-01
+Name 2枚のDISC Ws
+Color Y
+Level 0
+Cost 0
+Power 500
+Trait1 Stand
+Auto: OnPlay
+{
+    TargetLocation OpponentStage
+    ChooseCharacterFromTargets Choose a character to remove markers and select a trait from.
+	ChooseTraitFromTarget
+	LoseTrait CHOSEN_TRAIT
+    TargetLocation Marker
+    FirstTarget
+	If HasTarget
+    {
+
+    }
+}
+Text Auto: When this is placed on stage from hand, choose 1 of your opponent's characters and 1 of its Traits, send all Markers underneath that character to Waiting Room, and this turn, that character loses that Trait.
+Auto: OnPlay
+{
+    PayCost Discard 1 Any
+	{
+		TargetTop Deck 1
+		Reveal
+		SetXValue TargetCardsLevel
+		SearchWaitingRoom IsCharacter && Compare ThatCardsLevel X OrLess
+	}
+}
+Text Auto: [Discard 1 card] When this is placed on stage from hand, you may pay cost. If you do, reveal the top card of your deck, then choose 1 Level X or lower <Stand User> or <Stand> character from your Waiting Room, and add it to hand. X equals the Level of the revealed card.
+EndCard
